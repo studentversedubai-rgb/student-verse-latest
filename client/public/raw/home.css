@@ -105,3 +105,45 @@ select {
   font-family: "Geist", Helvetica, Arial, sans-serif;
   font-weight: 400;
 }
+
+
+/* ================================
+   Custom Overrides for How it Works Section
+   ================================ */
+
+#Features-homepage .section-center-text {
+  margin-top: 0 !important;
+  margin-bottom: 32px;
+}
+
+#Features-homepage .container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Ensure custom styles override default alignment */
+#Features-homepage * {
+  text-align: inherit;
+}
+
+
+/* ================================
+   CTA Section - Remove Extra Spacing
+   ================================ */
+
+.section.overflow-hidden[data-w-id="8ed71055-6ae7-5324-a6d4-54fc76e0e2d9"] {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+/* Footer Section - Remove Extra Spacing */
+.section.overflow-hidden+.section {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}

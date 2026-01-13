@@ -1,3 +1,128 @@
+<style>
+   .brand-name {
+        font-family: "Geist", sans-serif;
+        font-weight: 700;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        pointer-events: none;
+        display: flex;
+        gap: 0.2em;
+    }
+    
+    .brand-name h1 {
+        font-size: clamp(60px, 12vw, 160px);
+        font-weight: 900;
+        letter-spacing: -0.05em;
+      
+        margin: 0;
+        background: linear-gradient(135deg, 
+            #8b2390 0%, 
+            #0cafe5 50%, 
+            #f7990e 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        white-space: nowrap;
+    }
+    
+    .brand-name .word-left {
+        animation: slideInFromLeft 1.2s ease-out forwards;
+    }
+    
+    .brand-name .word-right {
+        animation: slideInFromRight 1.2s ease-out forwards;
+    }
+    
+    @keyframes slideInFromLeft {
+        0% {
+            transform: translateX(-100vw);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 0.7;
+        }
+    }
+    
+    @keyframes slideInFromRight {
+        0% {
+            transform: translateX(100vw);
+            opacity: 0;
+        }
+        100% {
+            transform: translateX(0);
+            opacity: 0.7;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .brand-name h1 {
+            font-size: clamp(40px, 10vw, 100px);
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .brand-name h1 {
+            font-size: clamp(30px, 8vw, 70px);
+        }
+    }
+    
+    /* Navbar animation
+    .navbar {
+        animation: slideDownNavbar 0.8s ease-out forwards;
+    } */
+    
+    @keyframes slideDownNavbar {
+        0% {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    /* Phone mockup animation */
+    .hero-v3-app {
+        animation: slideUpPhone 1s ease-out 0.3s forwards;
+        opacity: 0;
+    }
+    
+    @keyframes slideUpPhone {
+        0% {
+            transform: translateY(100vh);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    /* Circles animation */
+    .hero-circles-wrapper-v3 {
+        animation: slideUpCircles 1.2s ease-out 0.5s forwards;
+        opacity: 0;
+    }
+    
+    @keyframes slideUpCircles {
+        0% {
+            transform: translateY(100vh);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+</style>
+
+
+
 <div class="navbar w-nav navbar-glass" data-animation="default" data-collapse="medium" data-duration="400"
    data-easing="ease" data-easing2="ease" role="banner">
    <div class="container navbar-container">
@@ -23,7 +148,7 @@
                               <div class="mega-menu-content">
                                  <div class="menu-title">Main Pages</div>
                                  <div class="menu-link-wrapper">
-                                    <div class="menu-links-holder"><a class="grey-link" href="/">Home (Sales)</a><a
+                                    <div class="menu-links-holder "><a class="grey-link" href="/">Home (Sales)</a><a
                                           class="grey-link" href="/home-pages/home-v1">Home V1</a><a aria-current="page"
                                           class="grey-link w--current" href="/home-pages/home-v2">Home V2</a><a
                                           class="grey-link" href="/home-pages/home-v3">Home V3</a><a class="grey-link"
@@ -208,6 +333,10 @@
 <div class="section">
    <div class="container">
       <div class="home-v3-hero-section">
+         <div class="brand-name">
+            <h1 class="word-left">STUDENT</h1>
+            <h1 class="word-right">VERSE</h1>
+         </div>
          <div class="hero-v3-app">
             <div class="animate-on-load-01"
                style="-webkit-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 30px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0">
@@ -216,8 +345,8 @@
                      <img alt="" class="hero-section-phone-image" loading="lazy"
                         src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde227_Apple%20Iphone%2014%20pro.png" />
                      <div class="hero-section-phone-screenshot-holder"><img 1080w,="" 1179w"="" 500w,="" 800w,="" alt=""
-                           class="hero-section-phone-screenshot-image" loading="lazy" src="/assets/UIs.png"
-                           uis.png="" /></div>
+                           class="hero-section-phone-screenshot-image" loading="lazy" src="/assets/Uis.jpeg"
+                           uis.="" /></div>
                   </div>
                   <!-- <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde22b_Main%20Cart.jpg" loading="lazy" alt="" class="card-image-on-app" /> -->
                </div>
@@ -229,7 +358,7 @@
                   style="-webkit-transform:translate3d(0, 140px, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 140px, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 140px, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 140px, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);filter:blur(20px);opacity:0" />
             </div>
             <div class="w-layout-vflex hero-circle-wrapper _02 center-circle"><img alt="" class="hero-circle-02"
-                  loading="lazy"
+                  loading="lazy" 
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938ca8d17e84d6ed8613e_Circles%20(3).png"
                   style="-webkit-transform:translate3d(0, 213px, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 213px, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 213px, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 213px, 0) scale3d(0, 0, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0;filter:blur(20px)" />
             </div>
@@ -464,12 +593,10 @@
 <div id="Features-homepage">
    <div class="section">
       <div class="container">
-         <div class="section-center-text">
-            <div class="section-center-text">
-               <div class="section-title xl">
-                  <div class="fade-in-on-scroll">
-                     <h2 class="title medium"> How it Works</h2>
-                  </div>
+         <div class="section-center-text" style="margin-top: 0 !important;">
+            <div class="section-title xl">
+               <div class="fade-in-on-scroll">
+                  <h2 class="title medium"> How it Works</h2>
                </div>
             </div>
             <div class="feature-section">
@@ -1023,7 +1150,7 @@
                   </div>
                </div>
             </div> -->
-            <div class="section overflow-hidden" data-w-id="8ed71055-6ae7-5324-a6d4-54fc76e0e2d9">
+            <div class="section overflow-hidden" data-w-id="8ed71055-6ae7-5324-a6d4-54fc76e0e2d9" style="margin-top: 0 !important; margin-bottom: 0 !important;">
                <div class="container">
                   <div class="cta-container">
                      <div class="cta-form-holder">
@@ -1060,7 +1187,7 @@
                               <img alt="" class="hero-section-phone-image" loading="lazy"
                                  src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde227_Apple%20Iphone%2014%20pro.png" />
                               <div class="hero-section-phone-screenshot-holder"><img alt=""
-                                    class="hero-section-phone-screenshot-image" loading="lazy" src="/assets/UI.png" />
+                                    class="hero-section-phone-screenshot-image" loading="lazy" src="/assets/UI.jpeg" />
                               </div>
                            </div>
                            <div class="card-image-on-app-holder">
@@ -1074,53 +1201,51 @@
                      </div>
                   </div>
                </div>
-               <div class="section">
-                  <div class="container">
-                     <div class="footer-wrapper">
-                        <a class="footer-brand w-inline-block" href="/home-pages/home-v1">
-                           <img alt="" class="footer-brand-image" loading="lazy" src="/assets/svlogo.png" />
-                           <div class="footer-heading">Simplify your student life with StudentVerse. </div>
-                           <div class="footer-paragraph-holder">
-                              <!-- <p>Aliquam et tellus urna. Phasellus egetadipiscing elit. Mauris id nunc odio. Aliquam et tellus urna.</p> -->
-                           </div>
-                        </a>
-                        <div class="footer-content">
-                           <div class="footer-block" id="w-node-e92bf484-a605-4132-f141-4518468af7e2-468af7d9">
-                              <div class="title-small">Main Pages</div>
-                              <div class="menu-link-wrapper">
-                                 <div class="menu-links-holder"><a class="grey-link" href="/page">Home page</a><a
-                                       aria-current="page" class="grey-link w--current"
-                                       href="#brands-homepage">Brands</a><a class="grey-link"
-                                       href="#Features-homepage">Features</a><a class="grey-link" href="/about">About
-                                       page</a><a class="grey-link" href="/contact">Contact page</a></div>
-                                 <!-- <div class="menu-links-holder"><a href="https://ovo-submit.webflow.io/post/how-to-build-strong-relationships-in-a-digital-age" class="grey-link">Blog Post</a><a href="/contact/contact-v1" class="grey-link">Contact V1</a><a href="/contact/contact-v2" class="grey-link">Contact V2</a><a href="/contact/contact-v3" class="grey-link">Contact V3</a><a href="/pricing" class="grey-link">Pricing</a><a href="https://ovo-submit.webflow.io/product/enterprise-plan" class="grey-link">Pricing Single</a><a href="/checkout" class="grey-link">Checkout</a></div> -->
-                              </div>
-                           </div>
-                           <div class="footer-block" id="w-node-e92bf484-a605-4132-f141-4518468af7ef-468af7d9">
-                              <div class="title-small">Social media</div>
-                              <a class="footer-link"
-                                 href="https://www.instagram.com/studentverse.ae?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw=="
-                                 target="_blank">Instagram</a><a class="footer-link"
-                                 href="https://www.linkedin.com/company/studentverseofficial/"
-                                 target="_blank">Linkedin</a>
-                           </div>
-                           <div class="footer-block" id="w-node-e92bf484-a605-4132-f141-4518468af7fa-468af7d9">
-                              <div class="title-small">Student &amp; Support</div>
-                              <a class="footer-link" href="/about.html#faq-about">FAQs</a><a class="footer-link"
-                                 href="/contact.html#connect-contact">Connect with US</a>
-                           </div>
-                        </div>
-                     </div>
-                     <!-- <div class="footer-divider">
-            <div class="footer-copyright-holder">
-               <div class="footer-copyright-center">Created by <a href="http://madebyoversight.com/" target="_blank" class="white-link">OVERSIGHT</a></div>
+             <div class="section">
+   <div class="container">
+      <div class="footer-wrapper">
+         <a class="footer-brand w-inline-block" href="/home-pages/home-v1">
+            <img alt="" class="footer-brand-image" loading="lazy" src="/assets/svlogo.png" />
+            <div class="footer-heading">Simplify your student life with StudentVerse. </div>
+            <div class="footer-paragraph-holder">
+               <!-- <p>Aliquam et tellus urna. Phasellus egetadipiscing elit. Mauris id nunc odio. Aliquam et tellus urna.</p> -->
             </div>
-            <div class="footer-copyright-holder">
-               <div class="footer-copyright-center">Powered by <a href="https://webflow.com/" target="_blank" class="white-link">WEBFLOW</a></div>
-            </div>
-         </div> -->
-                  </div>
+         </a>
+         <div class="footer-content">
+            <div class="footer-block" id="w-node-e92bf484-a605-4132-f141-4518468af7e2-468af7d9">
+               <div class="title-small">Main Pages</div>
+               <div class="menu-link-wrapper">
+                  <div class="menu-links-holder"><a class="grey-link" href="/page">Home page</a><a aria-current="page"
+                        class="grey-link w--current" href="/page.html#brands-homepage">Brands</a><a class="grey-link"
+                        href="/page.html#Features-homepage">Features</a><a class="grey-link" href="/about">About
+                        page</a><a class="grey-link" href="/contact">Contact page</a></div>
+                  <!-- <div class="menu-links-holder"><a href="https://ovo-submit.webflow.io/post/how-to-build-strong-relationships-in-a-digital-age" class="grey-link">Blog Post</a><a href="/contact/contact-v1" class="grey-link">Contact V1</a><a href="/contact/contact-v2" class="grey-link">Contact V2</a><a href="/contact/contact-v3" class="grey-link">Contact V3</a><a href="/pricing" class="grey-link">Pricing</a><a href="https://ovo-submit.webflow.io/product/enterprise-plan" class="grey-link">Pricing Single</a><a href="/checkout" class="grey-link">Checkout</a></div> -->
                </div>
+            </div>
+            <div class="footer-block" id="w-node-e92bf484-a605-4132-f141-4518468af7ef-468af7d9">
+               <div class="title-small">Social media</div>
+               <a class="footer-link"
+                  href="https://www.instagram.com/studentverse.ae?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw=="
+                  target="_blank">Instagram</a><a class="footer-link"
+                  href="https://www.linkedin.com/company/studentverseofficial/" target="_blank">Linkedin</a>
+            </div>
+            <div class="footer-block" id="w-node-e92bf484-a605-4132-f141-4518468af7fa-468af7d9">
+               <div class="title-small">Student &amp; Support</div>
+               <a class="footer-link" href="/about.html#faq-about">FAQs</a><a class="footer-link"
+                  href="/contact">Connect with US</a>
+            </div>
+         </div>
+      </div>
+      <!-- <div class="footer-divider">
+               <div class="footer-copyright-holder">
+                  <div class="footer-copyright-center">Created by <a href="http://madebyoversight.com/" target="_blank" class="white-link">OVERSIGHT</a></div>
+               </div>
+               <div class="footer-copyright-holder">
+                  <div class="footer-copyright-center">Powered by <a href="https://webflow.com/" target="_blank" class="white-link">WEBFLOW</a></div>
+               </div>
+            </div> -->
+   </div>
+</div>
                <script crossorigin="anonymous" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
                   src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=66a92b76e1155b1f28fde0f0"
                   type="text/javascript"></script>
