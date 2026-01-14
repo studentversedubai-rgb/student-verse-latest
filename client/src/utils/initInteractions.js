@@ -115,11 +115,148 @@ export function initPhoneFloat(root = document) {
   });
 }
 
+export function initNavbarMenu(root = document) {
+  // Find the hamburger button and nav menu
+  const menuButton = root.querySelector('.menu-button.w-nav-button, #mobile-menu-btn');
+  const navMenu = root.querySelector('.nav-menu.w-nav-menu');
+  const navbar = root.querySelector('.navbar');
+  
+  if (!menuButton || !navMenu) {
+    console.warn('[initNavbarMenu] Menu button or nav menu not found');
+    return;
+  }
+  
+  // Prevent double-binding
+  if (menuButton.dataset.svNavBound === '1') {
+    return;
+  }
+  menuButton.dataset.svNavBound = '1';
+  
+  console.log('[initNavbarMenu] Initializing mobile menu');
+  
+  // Add mobile CTA buttons to the menu if not already added AND on mobile viewport
+  function addMobileCTA() {
+    // Only add on mobile viewport
+    if (window.innerWidth > 991) {
+      console.log('[initNavbarMenu] Skipping mobile CTA - desktop viewport');
+      return;
+    }
+    
+    // Check if already added
+    if (navMenu.querySelector('.mobile-menu-cta')) {
+      console.log('[initNavbarMenu] Mobile CTA already exists');
+      return;
+    }
+    
+    const ctaContainer = document.createElement('div');
+    ctaContainer.className = 'mobile-menu-cta';
+    ctaContainer.style.cssText = 'padding: 20px 30px 30px 30px; display: flex; flex-direction: column; gap: 0;';
+    
+    // Create Join Waitlist button (only this one, no Sign In)
+    const waitlistBtn = document.createElement('a');
+    waitlistBtn.href = '/waitlist';
+    waitlistBtn.className = 'nav-cta-button mobile-cta-btn';
+    waitlistBtn.textContent = 'JOIN THE WAITLIST';
+    waitlistBtn.style.cssText = 'width: 100%; text-align: center; padding: 16px 28px; background: linear-gradient(90deg, #2962FF, #7B2CBF, #FFB800); background-size: 200% 200%; color: #fff; font-size: 16px; font-weight: bold; text-transform: uppercase; text-decoration: none; border-radius: 100px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; border: none; display: block;';
+    
+    // Add click handler to close menu
+    waitlistBtn.addEventListener('click', closeMenu);
+    
+    ctaContainer.appendChild(waitlistBtn);
+    navMenu.appendChild(ctaContainer);
+    
+    console.log('[initNavbarMenu] Added mobile CTA button');
+  }
+  
+  // Remove mobile CTA if it exists
+  function removeMobileCTA() {
+    const mobileCTA = navMenu.querySelector('.mobile-menu-cta');
+    if (mobileCTA) {
+      mobileCTA.remove();
+      console.log('[initNavbarMenu] Removed mobile CTA button');
+    }
+  }
+  
+  // Add CTA on init if mobile
+  addMobileCTA();
+  
+  // Toggle menu function
+  function toggleMenu(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const isOpen = navMenu.classList.contains('sv-open');
+    
+    if (isOpen) {
+      navMenu.classList.remove('sv-open');
+      menuButton.classList.remove('sv-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      console.log('[initNavbarMenu] Menu closed');
+    } else {
+      navMenu.classList.add('sv-open');
+      menuButton.classList.add('sv-open');
+      menuButton.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden'; // Prevent scroll when menu open
+      console.log('[initNavbarMenu] Menu opened');
+    }
+  }
+  
+  // Close menu function
+  function closeMenu() {
+    navMenu.classList.remove('sv-open');
+    menuButton.classList.remove('sv-open');
+    menuButton.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    console.log('[initNavbarMenu] Menu closed');
+  }
+  
+  // Add click handler to menu button
+  menuButton.addEventListener('click', toggleMenu);
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.setAttribute('aria-label', 'Toggle navigation menu');
+  
+  // Close menu when clicking nav links
+  const navLinks = navMenu.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+  
+  // Close menu when clicking outside
+  document.addEventListener('click', function(e) {
+    if (navbar && !navbar.contains(e.target) && navMenu.classList.contains('sv-open')) {
+      closeMenu();
+    }
+  });
+  
+  // Close menu on window resize to desktop
+  let resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      if (window.innerWidth > 991) {
+        // Close menu if open
+        if (navMenu.classList.contains('sv-open')) {
+          closeMenu();
+        }
+        // Remove mobile CTA on desktop
+        removeMobileCTA();
+      } else {
+        // Add mobile CTA if resized to mobile
+        addMobileCTA();
+      }
+    }, 250);
+  });
+  
+  console.log('[initNavbarMenu] Mobile menu initialized successfully');
+}
+
 export function initAllInteractions(root = document) {
   initWebflowFallback(root);
   initFaqAccordions(root);
   initPhoneFloat(root);
   initCardPointerFollow(root);
+  initNavbarMenu(root);
 }
 
 // Backwards-compatible name used by our page components.

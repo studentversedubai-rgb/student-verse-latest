@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="partnership-badge">
           <div className="badge-glow" aria-hidden="true" />
           <div className="badge-inner">
-            <span className="partnership-label">Proudly Partnered By</span>
+            <span className="partnership-label">Proudly Partnered With</span>
             <h3 className="partnership-brand">
               <span className="purple-symbol" aria-hidden="true">
                 <img src="/assets/teachmecode.png" alt="TeachMeCode logo" />

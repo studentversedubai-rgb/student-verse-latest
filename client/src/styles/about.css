@@ -3919,10 +3919,8 @@ transform: translateX(-20px); /* Move the nav-links 30px to the left */
   font-size: 15px;
 }
 
-.brand-image {
-  width: 250px; /* Set a reasonable width */
-  height: auto; /* Maintain aspect ratio */
-  max-width: 500%; /* Ensure it doesn't exceed the container */
+.footer-brand-image {
+  width: 2000px;
 }
 
 .white-link {
