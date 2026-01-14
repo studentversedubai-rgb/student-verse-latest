@@ -2,7 +2,9 @@
    html, body {
       overflow-x: hidden !important;
       max-width: 100vw !important;
+      
    }
+
 
    .brand-name {
       font-family: "Geist", sans-serif;
@@ -170,169 +172,34 @@
       padding-left: 0 !important;
    }
 
-   /* ================================
-       Footer Styles (EXACT match from contact.css)
-       ================================ */
-
-   .section {
-      position: relative;
-   }
-
-   .container {
-      z-index: 2;
-      max-width: 1270px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 2em;
-      position: relative;
-   }
-
-   .footer-wrapper {
-      justify-content: space-between;
-      align-items: flex-start;
-      padding-top: 2em;
-      display: flex;
-   }
-
-   .footer-brand {
-      grid-row-gap: 18px;
-      flex-direction: column;
-      align-items: flex-start;
-      max-width: 430px;
-      display: flex;
-   }
-
-   .footer-heading {
-      font-size: 40px;
-      font-weight: 500;
-      text-align: left;
-   }
-
-   .footer-paragraph-holder {
-      display: block;
-   }
-
-   .footer-content {
-      grid-column-gap: 70px;
-      grid-row-gap: 40px;
-      grid-template-rows: auto;
-      grid-template-columns: auto auto 1fr;
-      grid-auto-columns: 1fr;
-      display: grid;
-   }
-
-   .footer-block {
-      grid-row-gap: 10px;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-start;
-      display: flex;
-   }
-
-   .title-small {
-      letter-spacing: 0;
-      text-transform: uppercase;
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.2;
-   }
-
-   .footer-link {
-      color: #7d7d7d;
-      font-size: 15px;
-      line-height: 1.2;
-      text-decoration: none;
-      transition: color .475s;
-   }
-
-   .footer-link:hover {
-      color: #fff;
-   }
-
-   .footer-brand-image {
-      width: 2000px;
-   }
-
-   .grey-link {
-      color: #fff9;
-      font-size: 16px;
-      transition: color .4s;
-   }
-
-   .grey-link:hover,
-   .grey-link.w--current {
-      color: #fff;
-   }
-
-   .grey-link.white {
-      color: #fff;
-      font-weight: 500;
-   }
-
-   .menu-link-wrapper {
-      grid-column-gap: 42px;
-      grid-row-gap: 82px;
-      display: flex;
-   }
-
-   .menu-link-wrapper.last {
-      border-right-style: none;
-   }
-
-   .menu-links-holder {
-      display: flex;
-      flex-direction: column;
-   }
-
-   .footer-divider {
-      border-top: 1px solid #2b2b2b;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      margin-top: 60px;
-      padding-top: 40px;
-      display: flex;
-   }
-
-   .footer-copyright-center {
-      text-transform: uppercase;
-      font-size: 15px;
-   }
-
-   .white-link {
-      color: #fff;
-      text-decoration: underline;
-      transition: color .375s;
-   }
-
-   .white-link:hover {
-      color: #a1a1a1;
-   }
-
-   .white-text {
-      color: #fff;
-   }
-
    /* Mobile responsiveness */
    @media (max-width: 768px) {
       .footer-wrapper {
-         flex-direction: column;
-         gap: 40px;
+         flex-direction: column !important;
+         gap: 40px !important;
       }
 
       .footer-content {
-         grid-template-columns: 1fr;
-         gap: 30px;
+         grid-template-columns: 1fr !important;
+         gap: 30px !important;
       }
 
       .container {
-         width: 100%;
-         padding-left: 1em;
-         padding-right: 1em;
+         width: 100% !important;
+         padding-left: 1em !important;
+         padding-right: 1em !important;
       }
 
       .grey-link {
          font-size: 14px;
+      }
+      .brand-name{
+         display: none !important;
+      }
+      .navbar-container{
+         padding-left: 10px !important;
+         padding-right: 10px !important;
+         
       }
    }
 
@@ -345,6 +212,7 @@
       padding: 0 10px !important;
    }
 
+  
    .trustbar-inner {
       width: 100% !important;
       flex-direction: column !important;
@@ -357,6 +225,8 @@
       justify-content: center !important;
       flex-wrap: wrap !important;
    }
+
+
 </style>
 
 
@@ -375,10 +245,6 @@
                         <a class="nav-link w-nav-link" href="/page">Home</a>
                         <a class="nav-link w-nav-link" href="/about">About</a>
                         <a class="nav-link w-nav-link" href="/contact">Contact</a>
-                        <!-- <div data-hover="true" data-delay="600" data-w-id="04f83e17-5d34-2d13-6041-b83d513a5b93" class="dropdown w-dropdown"> -->
-                        <!-- <div class="dropdown-toggle w-dropdown-toggle"> -->
-                        <!-- <div class="nav-link">Pages</div> -->
-                        <!-- <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde123_Dropdown%20Icon.svg" loading="lazy" alt="" class="dropdown-icon" /> -->
                      </div>
                      <nav class="mega-menu-holder w-dropdown-list">
                         <div class="mega-menu-wrapper">
@@ -393,15 +259,13 @@
                                           class="grey-link" href="/blog-pages/blog-v1">Blog V1</a><a class="grey-link"
                                           href="/blog-pages/blog-v2">Blog V2</a><a class="grey-link"
                                           href="/blog-pages/blog-v3">Blog V3</a></div>
-                                    <!-- <div class="menu-links-holder"><a href="https://ovo-submit.webflow.io/post/how-to-build-strong-relationships-in-a-digital-age" class="grey-link">Blog Post</a><a href="/contact/contact-v1" class="grey-link">Contact V1</a><a href="/contact/contact-v2" class="grey-link">Contact V2</a><a href="/contact/contact-v3" class="grey-link">Contact V3</a><a href="/pricing" class="grey-link">Pricing</a><a href="https://ovo-submit.webflow.io/product/enterprise-plan" class="grey-link">Pricing Single</a><a href="/checkout" class="grey-link">Checkout</a></div> -->
                                  </div>
                               </div>
                               <div class="divider-vertical"></div>
                               <div class="mega-menu-content">
                                  <div class="menu-title">Utility pages</div>
                                  <div class="menu-link-wrapper last">
-                                    <!-- <div class="menu-links-holder"><a class="grey-link" href="/log-in">Sign In</a><a class="grey-link" href="/sign-up">Sign Up</a><a class="grey-link" href="/404">404 Not Found</a><a class="grey-link" href="/401">Password Protected</a><a class="grey-link" href="/template/change-log">Change Log</a><a class="grey-link white" href="https://madebyoversight.com/">More Templates</a></div> -->
-                                 </div>
+                              </div>
                               </div>
                            </div>
                         </div>
@@ -698,135 +562,7 @@
       </div>
    </div>
 </div>
-<!--
-<div class="section">
-<div class="container">
-<div class="section-center-text">
-<div class="section-title">
-<div class="fade-in-on-scroll">
-<h2 class="fading-title">Our Vision</h2>
-</div>
-</div>
-<div class="section-paragraph">
-<div class="fade-in-on-scroll">
-<p>Discover a world of possibilities with Submit's exceptional features tailored to enhance your coding journey.</p>
-</div>
-</div>
-</div>
-<div class="bento-grid-holder">
-<div class="w-layout-grid bento-grid-02">
-<div class="bento-grid-container">
-<div class="bento-box blue">
-<h1 class="bento-box-header">Unified Task Management</h1>
-<p class="bento-box-text">Lorem ipsum dolor sit amet consectetur. Convallis gravida congue in lorem imperdiet sit. Fringilla mattis semper cursus volutpat mi.</p>
-</div>
-</div>
-<div class="bento-grid-container">
-<div class="bento-box pink">
-<h1 class="bento-box-header">Unified Task Management</h1>
-<p class="bento-box-text">Lorem ipsum dolor sit amet consectetur. Convallis gravida congue in lorem imperdiet sit. Fringilla mattis semper cursus volutpat mi.</p>
-</div>
-</div>
-<div class="bento-grid-container">
-<div class="bento-box yellow">
-<h1 class="bento-box-header">Unified Task Management</h1>
-<p class="bento-box-text">Lorem ipsum dolor sit amet consectetur. Convallis gravida congue in lorem imperdiet sit. Fringilla mattis semper cursus volutpat mi.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 
-<div class="section">
-<div class="container">
-<div class="section-center-text">
-<div class="section-title">
-<div class="fade-in-on-scroll">
-<h2 class="fading-title"> Features</h2>
-</div>
-<div class="section-paragraph">
-<div class="fade-in-on-scroll">
-<p>Discover a world of possibilities with Submit's exceptional features tailored to enhance your coding journey.</p>
-</div>
-</div>
-</div>
-<div class="features-grid">
-<div class="feature-item" data-w-id="75e9b244-580a-9036-1ea4-e1472936ae0a" id="w-node-_75e9b244-580a-9036-1ea4-e1472936ae0a-28fde156" style="opacity:0">
-<div class="feature-icon-holder">
-  <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M12 2l7 4v6c0 5-3 9-7 10C8 21 5 17 5 12V6l7-4z" fill="none" stroke="currentColor" stroke-width="2"/>
-    <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</div>
-<div class="feature-text-holder">
-<div class="feature-text">SV Orbit</div>
-</div>
-<div class="feature-paragraph">Revolutionize your coding speed with Labyrinth's intelligent autocomplete feature. </div>
-</div>
-<div class="feature-item" data-w-id="75e9b244-580a-9036-1ea4-e1472936ae12" id="w-node-_75e9b244-580a-9036-1ea4-e1472936ae12-28fde156" style="opacity:0">
-<div class="feature-icon-holder">
-  <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M13 2L3 14h8l-1 8 11-14h-8l0-6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-  </svg>
-</div>
-<div class="feature-text-holder">
-<div class="feature-text">SV Pay</div>
-</div>
-<div class="feature-paragraph">Enhance team productivity with Labyrinth's real-time collaboration. Seamlessly code togethe.</div>
-</div>
-<div class="feature-item" data-w-id="75e9b244-580a-9036-1ea4-e1472936ae1a" id="w-node-_75e9b244-580a-9036-1ea4-e1472936ae1a-28fde156" style="opacity:0">
-<div class="feature-icon-holder">
-  <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M12 3a9 9 0 1 0 9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    <path d="M12 3v9l6.5 3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>
-</div>
-<div class="feature-text-holder">
-<div class="feature-text">Freshers Passports</div>
-</div>
-<div class="feature-paragraph">Tailor your coding environment with Labyrinth's customizable themes. From vibrant palettes to soothing tones, personalize your workspace</div>
-</div>
-<div class="feature-item" data-w-id="75e9b244-580a-9036-1ea4-e1472936ae22" id="w-node-_75e9b244-580a-9036-1ea4-e1472936ae22-28fde156" style="opacity:0">
-<div class="feature-icon-holder">
-  <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
-    <path d="M3 10h18" fill="none" stroke="currentColor" stroke-width="2"/>
-    <path d="M7 15h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  </svg>
-</div>
-<div class="feature-text-holder">
-<div class="feature-text">Influencer Affiliate Program</div>
-</div>
-<div class="feature-paragraph">Troubleshoot with ease using Labyrinth's intuitive debugging tools. Identify and fix issues swiftly, improving code reliability and ensuring a smooth development process.</div>
-</div>
-<div class="feature-item" data-w-id="75e9b244-580a-9036-1ea4-e1472936ae2a" id="w-node-_75e9b244-580a-9036-1ea4-e1472936ae2a-28fde156" style="opacity:0">
-<div class="feature-icon-holder">
-  <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
-    <rect x="7" y="2" width="10" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
-    <path d="M11 19h2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  </svg>
-</div>
-<div class="feature-text-holder">
-<div class="feature-text">Multi-language Support</div>
-</div>
-<div class="feature-paragraph">Dive into versatile coding experiences with Labyrinth's extensive language support. From Python to JavaScript, our tool adapts to your need.</div>
-</div>
-<div class="feature-item" data-w-id="75e9b244-580a-9036-1ea4-e1472936ae32" id="w-node-_75e9b244-580a-9036-1ea4-e1472936ae32-28fde156" style="opacity:0">
-<div class="feature-icon-holder">
-  <svg class="feature-icon" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M12 22s7-4 7-10V6l-7-4-7 4v6c0 6 7 10 7 10z" fill="none" stroke="currentColor" stroke-width="2"/>
-    <path d="M12 8v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    <path d="M12 16h.01" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-  </svg>
-</div>
-<div class="feature-text-holder">
-<div class="feature-text">Cloud Integration</div>
-</div>
-<div class="feature-paragraph">Elevate your workflow with Labyrinth's seamless cloud integration. Access your projects anytime, anywhere, and collaborate effortlessly.</div>
-</div>
-</div>
-</div>-->
 <div id="Features-homepage">
    <div class="section">
       <div class="container">
@@ -925,8 +661,7 @@
 
                   const show = () => el.classList.add('is-visible');
 
-                  // If you want it to animate immediately on page load, just call show() and return.
-                  // show(); return;
+
 
                   const io = new IntersectionObserver((entries) => {
                      entries.forEach((e) => {
@@ -940,453 +675,7 @@
                   io.observe(el);
                })();
             </script>
-            <!-- <div class="section overflow-hidden">
-      <div class="container">
-         <div class="section-center-text">
-            <div class="section-title xl">
-               <div class="fade-in-on-scroll">
-                  <h2 class="fading-title">Voices of Innovation, Testimonials</h2>
-               </div>
-            </div>
-            <div class="section-paragraph">
-               <div class="fade-in-on-scroll">
-                  <p>Discover what the coding community is saying about Glossy in our Testimonials section. Immerse yourself in firsthand experiences as developers share.</p>
-               </div>
-            </div>
-         </div>
-         <div data-delay="4000" data-animation="slide" class="testimonal-slider w-slider" data-autoplay="false" data-easing="ease" data-hide-arrows="false" data-disable-swipe="false" data-autoplay-limit="0" data-nav-spacing="3" data-duration="500" data-infinite="false">
-            <div class="testimonal-mask w-slider-mask">
-               <div class="testimonal-slide w-slide">
-                  <div class="testimonial-text">&quot;Fast Theme Changes in Submit have transformed the way I work. Switching between themes on-the-fly helps me align my coding environment with different project requirements swiftly. Glossy has truly streamlined my workflow.&quot;</div>
-                  <div class="testimonal-info">
-                     <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde14a_Testimonial%20User%2001.jpg" loading="lazy" alt="" class="user-image" />
-                     <div class="testimonial-info-text">
-                        <div class="user-name">Emily Chen</div>
-                        <div class="user-job-position">DevOps Specialist</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="testimonal-slide w-slide">
-                  <div class="testimonial-text">&quot;Submit has redefined my coding experience. The Profile View feature allows me to seamlessly switch between different project setups, enhancing my efficiency. It&#x27;s become an indispensable companion in my quest for coding perfection.&quot;</div>
-                  <div class="testimonal-info">
-                     <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde143_Testimonial%20User%2003.jpg" loading="lazy" alt="" class="user-image" />
-                     <div class="testimonial-info-text">
-                        <div class="user-name">Sarah Thompson</div>
-                        <div class="user-job-position">Senior Software Engineer</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="testimonal-slide w-slide">
-                  <div class="testimonial-text">&quot;Editor Color Changes in Submit let me curate a visually pleasing environment for coding. The diverse color themes not only boost my creativity but also contribute to a more enjoyable and less stressful coding experience.&quot;</div>
-                  <div class="testimonal-info">
-                     <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde149_Testimonial%20User%2002.jpg" loading="lazy" alt="" class="user-image" />
-                     <div class="testimonial-info-text">
-                        <div class="user-name">Alex Rodriguez</div>
-                        <div class="user-job-position">UX/UI Frontend Developer</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="testimonal-slide w-slide">
-                  <div class="testimonial-text">&quot;Fast Theme Changes in Submit have transformed the way I work. Switching between themes on-the-fly helps me align my coding environment with different project requirements swiftly. Glossy has truly streamlined my workflow.&quot;</div>
-                  <div class="testimonal-info">
-                     <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde14a_Testimonial%20User%2001.jpg" loading="lazy" alt="" class="user-image" />
-                     <div class="testimonial-info-text">
-                        <div class="user-name">Emily Chen</div>
-                        <div class="user-job-position">DevOps Specialist</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="testimonal-slide w-slide">
-                  <div class="testimonial-text">&quot;Submit has redefined my coding experience. The Profile View feature allows me to seamlessly switch between different project setups, enhancing my efficiency. It&#x27;s become an indispensable companion in my quest for coding perfection.&quot;</div>
-                  <div class="testimonal-info">
-                     <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde143_Testimonial%20User%2003.jpg" loading="lazy" alt="" class="user-image" />
-                     <div class="testimonial-info-text">
-                        <div class="user-name">Sarah Thompson</div>
-                        <div class="user-job-position">Senior Software Engineer</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="testimonal-slide w-slide">
-                  <div class="testimonial-text">&quot;Editor Color Changes in Submit let me curate a visually pleasing environment for coding. The diverse color themes not only boost my creativity but also contribute to a more enjoyable and less stressful coding experience.&quot;</div>
-                  <div class="testimonal-info">
-                     <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde149_Testimonial%20User%2002.jpg" loading="lazy" alt="" class="user-image" />
-                     <div class="testimonial-info-text">
-                        <div class="user-name">Alex Rodriguez</div>
-                        <div class="user-job-position">UX/UI Frontend Developer</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="testimonal-slide w-slide">
-                  <div class="testimonial-text">&quot;Fast Theme Changes in Submit have transformed the way I work. Switching between themes on-the-fly helps me align my coding environment with different project requirements swiftly. Glossy has truly streamlined my workflow.&quot;</div>
-                  <div class="testimonal-info">
-                     <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde14a_Testimonial%20User%2001.jpg" loading="lazy" alt="" class="user-image" />
-                     <div class="testimonial-info-text">
-                        <div class="user-name">Emily Chen</div>
-                        <div class="user-job-position">DevOps Specialist</div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="left-arrow w-slider-arrow-left">
-               <div class="arrow-holder"><img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde224_Left%20Arrow%20Slider.svg" loading="lazy" alt="" class="arrow-icon" /></div>
-            </div>
-            <div class="right-arrow w-slider-arrow-right">
-               <div class="arrow-holder"><img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde223_Right%20Arrow%20Slider.svg" loading="lazy" alt="" class="arrow-icon right-side" /></div>
-            </div>
-            <div class="hide w-slider-nav w-round w-num"></div>
-         </div>
-      </div>
-   </div> -->
-            <!-- <div class="section">
-      <div class="container">
-         <div class="section-paddings">
-            <div class="section-center-text">
-               <div class="section-title xl">
-                  <div class="fade-in-on-scroll">
-                     <h2 class="title medium">Insights &amp; Inspiration Explore Our Blog</h2>
-                  </div>
-               </div>
-               <div class="section-paragraph">
-                  <div class="fade-in-on-scroll">
-                     <p>Dive deeper into the world of finance with our engaging blog content. From expert financial advice to the latest industry trends</p>
-                  </div>
-               </div>
-            </div>
-            <div class="new-features-holder">
-               <div class="blog-grid-3x-holder">
-                  <div class="blog-grid-twos-wrapper w-dyn-list">
-                     <div role="list" class="blog-grid-3x w-dyn-items">
-                        <div role="listitem" class="blog-grid-twos-item w-dyn-item">
-                           <a href="/post/how-to-build-strong-relationships-in-a-digital-age" class="blog-item w-inline-block">
-                              <div class="blog-grid-3x-image-holder"><img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde102/66a92b76e1155b1f28fde10c_Blog%20Images%2001.jpg" loading="lazy" alt="" class="blog-grid-2x-image" /></div>
-                              <div class="content">
-                                 <div class="blog-date">April 8, 2023</div>
-                                 <div class="blog-title-holder">
-                                    <div class="blog-grid-2x-title">How to Build Strong Relationships in a Digital Age</div>
-                                    <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde126_Blog%20Icon.svg" loading="lazy" alt="" class="blog-arrow" />
-                                 </div>
-                                 <p>Aut omnis repudiandae et.
-                                    Minima et deleniti et.
-                                    Ut aut voluptatibus corporis aliquam in praesentium a officiis aut.
-                                 </p>
-                              </div>
-                           </a>
-                        </div>
-                        <div role="listitem" class="blog-grid-twos-item w-dyn-item">
-                           <a href="/post/10-web-design-blogs-you-cant-miss" class="blog-item w-inline-block">
-                              <div class="blog-grid-3x-image-holder"><img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde102/66a92b76e1155b1f28fde10f_Blog%20Images%2004.jpg" loading="lazy" alt="" class="blog-grid-2x-image" /></div>
-                              <div class="content">
-                                 <div class="blog-date">April 8, 2023</div>
-                                 <div class="blog-title-holder">
-                                    <div class="blog-grid-2x-title">10 Web Design Blogs You Can&#x27;t Miss</div>
-                                    <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde126_Blog%20Icon.svg" loading="lazy" alt="" class="blog-arrow" />
-                                 </div>
-                                 <p>In non nobis maxime vel blanditiis.
-                                    Consequatur tempore exercitationem. 
-                                 </p>
-                              </div>
-                           </a>
-                        </div>
-                        <div role="listitem" class="blog-grid-twos-item w-dyn-item">
-                           <a href="/post/14-common-misconceptions-about-web-design" class="blog-item w-inline-block">
-                              <div class="blog-grid-3x-image-holder"><img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde102/66a92b76e1155b1f28fde10d_Blog%20Images%2002.jpg" loading="lazy" alt="" class="blog-grid-2x-image" /></div>
-                              <div class="content">
-                                 <div class="blog-date">April 8, 2023</div>
-                                 <div class="blog-title-holder">
-                                    <div class="blog-grid-2x-title">14 Common Misconceptions About Web Design</div>
-                                    <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde126_Blog%20Icon.svg" loading="lazy" alt="" class="blog-arrow" />
-                                 </div>
-                                 <p>Cupiditate autem exercitationem numquam ipsum recusandae ducimus enim quaerat.
-                                    Perferendis laboriosam recusandae voluptatem.
-                                    Ut ullam doloribus.
-                                 </p>
-                              </div>
-                           </a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div> 
-      </div>
-   </div> -->
-            <!-- <div class="section">
-      <div class="container">
-         <div class="section-center-text">
-            <div class="section-title xl">
-               <div class="fade-in-on-scroll">
-                  <h2 class="fading-title">Your Queries Answered: FAQs</h2>
-               </div>
-            </div>
-            <div class="section-paragraph">
-               <div class="fade-in-on-scroll">
-                  <p>Find answers to commonly asked questions about Labyrinth and banking in general.</p>
-               </div>
-            </div>
-         </div>
-         <div class="faq-holder">
-            <div class="ease-faq-container-01">
-               <div class="ease-faq">
-                  <div class="ease-faq-title-holder">
-                     <div class="ease-faq-title">Is there a free trial available?</div>
-                     <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde226_X%20Icon%20Orange.svg" loading="lazy" alt="" class="ease-faq-icon" />
-                  </div>
-                  <div class="ease-faq-answer-holder">
-                     <div class="ease-faq-answer">Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.</div>
-                  </div>
-               </div>
-               <div class="ease-faq-bg"></div>
-            </div>
-            <div class="ease-faq-container-01">
-               <div class="ease-faq">
-                  <div class="ease-faq-title-holder">
-                     <div class="ease-faq-title">Can I change my plan later?</div>
-                     <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde226_X%20Icon%20Orange.svg" loading="lazy" alt="" class="ease-faq-icon" />
-                  </div>
-                  <div class="ease-faq-answer-holder">
-                     <div class="ease-faq-answer">Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.</div>
-                  </div>
-               </div>
-               <div class="ease-faq-bg"></div>
-            </div>
-            <div class="ease-faq-container-01">
-               <div class="ease-faq">
-                  <div class="ease-faq-title-holder">
-                     <div class="ease-faq-title">What is your cancellation policy?</div>
-                     <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde226_X%20Icon%20Orange.svg" loading="lazy" alt="" class="ease-faq-icon" />
-                  </div>
-                  <div class="ease-faq-answer-holder">
-                     <div class="ease-faq-answer">Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.</div>
-                  </div>
-               </div>
-               <div class="ease-faq-bg"></div>
-            </div>
-            <div class="ease-faq-container-01">
-               <div class="ease-faq">
-                  <div class="ease-faq-title-holder">
-                     <div class="ease-faq-title">Can other info be added to an invoice?</div>
-                     <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde226_X%20Icon%20Orange.svg" loading="lazy" alt="" class="ease-faq-icon" />
-                  </div>
-                  <div class="ease-faq-answer-holder">
-                     <div class="ease-faq-answer">Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.</div>
-                  </div>
-               </div>
-               <div class="ease-faq-bg"></div>
-            </div>
-            <div class="ease-faq-container-01">
-               <div class="ease-faq">
-                  <div class="ease-faq-title-holder">
-                     <div class="ease-faq-title">How does billing work?</div>
-                     <img src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde226_X%20Icon%20Orange.svg" loading="lazy" alt="" class="ease-faq-icon" />
-                  </div>
-                  <div class="ease-faq-answer-holder">
-                     <div class="ease-faq-answer">Yes, you can try us for free for 30 days. If you want, we’ll provide you with a free, personalized 30-minute onboarding call to get you up and running as soon as possible.</div>
-                  </div>
-               </div>
-               <div class="ease-faq-bg"></div>
-            </div>
-         </div>
-      </div>
-   </div> -->
-            <!-- <div class="section">
-      <div class="container">
-         <div class="text-container">
-            <h2><span class="text-gradient-light">Chose a plan that’s right for you</span></h2>
-            <div class="small-content">
-               <p class="white-50pct">Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet.</p>
-            </div>
-         </div>
-         <div data-current="Yearly" data-easing="ease" data-duration-in="300" data-duration-out="100" class="pricing-tabs a-tabs">
-            <div class="tabs-menu w-tab-menu">
-               <a data-w-tab="Monthly" class="tab-link w-inline-block w-tab-link">
-                  <div>Monthly</div>
-               </a>
-               <a data-w-tab="Yearly" class="tab-link w-inline-block w-tab-link w--current">
-                  <div>Yearly<span class="yearly-link-discount-2"> -20%</span></div>
-               </a>
-            </div>
-            <div class="pricing-tabs-content w-tab-content">
-               <div data-w-tab="Monthly" class="pricing-tab-pane w-tab-pane">
-                  <div class="w-layout-grid main-pricing-grid">
-                     <div id="w-node-_77821d1e-69ff-efe2-ce08-c433d137b77c-af601ecf" class="content">
-                        <div class="card pricing-card">
-                           <div class="pricing-item-holder">
-                              <div class="top-pricing-type">Starter</div>
-                              <div class="price-wrapp">
-                                 <div class="price-text"><span class="text-gradient-light">FREE</span></div>
-                                 <div class="_40pct-white-text">/ user / trial</div>
-                              </div>
-                              <div class="pricing-features-wrapp">
-                                 <div class="pricing-feature-item">
-                                    <img loading="lazy" src="https://wubflow-shield.NOCODEXPORT.DEV/64ab129be947025f126b614f/64ab129be947025f126b617e_Person-Icon.svg" alt="" class="pricing-feature-image-2" />
-                                    <div class="pricing-feature-text">Up to 1 user, no admin</div>
-                                 </div>
-                                 <div class="pricing-feature-item">
-                                    <img loading="lazy" src="https://wubflow-shield.NOCODEXPORT.DEV/64ab129be947025f126b614f/64ab129be947025f126b616a_Cloud-Icon.svg" alt="" class="pricing-feature-image-2" />
-                                    <div class="pricing-feature-text">Up to 1 remote network</div>
-                                 </div>
-                              </div>
-                              <ul role="list" class="pricing-list">
-                                 <li class="list-item">2 editable boards</li>
-                                 <li class="list-item">Premium templates</li>
-                                 <li class="list-item">Anonymous board viewers</li>
-                                 <li class="list-item">Core integrations</li>
-                              </ul>
-                               <div class="main-pricing-button-holder"><a href="#" class="main-button empty-button w-button">Start 14-days Trial</a></div> 
-                           </div>
-                        </div>
-                     </div>
-                     <div id="w-node-_77821d1e-69ff-efe2-ce08-c433d137b79c-af601ecf" class="content">
-                        <div class="card pricing-card main-pricing-card">
-                           <div class="pricing-item-holder">
-                              <div class="top-pricing-type">Pro</div>
-                              <div class="price-wrapp">
-                                 <div class="price-text"><span class="text-gradient-light">AED9.99</span></div>
-                                 <div class="_40pct-white-text">/ user / month</div>
-                              </div>
-                              <div class="pricing-features-wrapp">
-                                 <div class="pricing-feature-item">
-                                    <img loading="lazy" src="https://wubflow-shield.NOCODEXPORT.DEV/64ab129be947025f126b614f/64ab129be947025f126b617e_Person-Icon.svg" alt="" class="pricing-feature-image-2" />
-                                    <div class="pricing-feature-text">Up to 10 users, 2 admins</div>
-                                 </div>
-                                 <div class="pricing-feature-item">
-                                    <img loading="lazy" src="https://wubflow-shield.NOCODEXPORT.DEV/64ab129be947025f126b614f/64ab129be947025f126b616a_Cloud-Icon.svg" alt="" class="pricing-feature-image-2" />
-                                    <div class="pricing-feature-text">Up to 20 remote networks</div>
-                                 </div>
-                              </div>
-                              <ul role="list" class="pricing-list">
-                                 <li class="list-item">Everything in Starter +</li>
-                                 <li class="list-item">Access to SaaS</li>
-                                 <li class="list-item">Analytics and more</li>
-                                 <li class="list-item">Anonymous board viewers</li>
-                              </ul>
-                              <div class="main-pricing-button-holder"><a href="#" class="main-button w-button">Start 14-days Trial</a></div> 
-                              <div class="card-noise-bg"></div>
-                           </div>
-                           <div class="card-colored-bg"></div>
-                        </div>
-                     </div>
-                     <div id="w-node-_77821d1e-69ff-efe2-ce08-c433d137b7be-af601ecf" class="content">
-                        <div class="card pricing-card">
-                           <div class="pricing-item-holder">
-                              <div class="top-pricing-type">Pro+</div>
-                              <div class="price-wrapp">
-                                 <div class="price-text"><span class="text-gradient-light">AED14.99</span></div>
-                                 <div class="_40pct-white-text">/ user / month</div>
-                              </div>
-                              <div class="pricing-features-wrapp">
-                                 <div class="pricing-feature-item">
-                                    <img loading="lazy" src="https://wubflow-shield.NOCODEXPORT.DEV/64ab129be947025f126b614f/64ab129be947025f126b617e_Person-Icon.svg" alt="" class="pricing-feature-image-2" />
-                                    <div class="pricing-feature-text">Up to 500 users, 10 admins</div>
-                                 </div>
-                                 <div class="pricing-feature-item">
-                                    <img loading="lazy" src="https://wubflow-shield.NOCODEXPORT.DEV/64ab129be947025f126b614f/64ab129be947025f126b616a_Cloud-Icon.svg" alt="" class="pricing-feature-image-2" />
-                                    <div class="pricing-feature-text">Up to 100 remote networks</div>
-                                 </div>
-                              </div>
-                              <ul role="list" class="pricing-list">
-                                 <li class="list-item">Everything in Teams +</li>
-                                 <li class="list-item">24/7 Support</li>
-                                 <li class="list-item">Weekly Reports</li>
-                                 <li class="list-item">All features included</li>
-                              </ul>
-                               <div class="main-pricing-button-holder"><a href="#" class="main-button with-icon w-button">Start 14-days Trial</a></div> 
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div data-w-tab="Yearly" class="pricing-tab-pane w-tab-pane w--tab-active">
-                  <div class="w-layout-grid main-pricing-grid">
-                     <div id="w-node-_77821d1e-69ff-efe2-ce08-c433d137b7e0-af601ecf" class="content">
-                        <div class="card pricing-card">
-                           <div class="pricing-item-holder">
-                              <div class="top-pricing-type">Starter</div>
-                              <div class="price-wrapp">
-                                 <div class="price-text"><span class="text-gradient-light">FREE</span></div>
-                                 <div class="_40pct-white-text">/ user / trial</div>
-                              </div>
-                              <div class="pricing-features-wrapp">
-                                 <div class="pricing-feature-item">
-                                    <img loading="lazy" src="https://wubflow-shield.NOCODEXPORT.DEV/64ab129be947025f126b614f/64ab129be947025f126b617e_Person-Icon.svg" alt="" class="pricing-feature-image-2" />
-                                    <div class="pricing-feature-text">Up to 1 user, no admin</div>
-                                 </div>
-                                 <div class="pricing-feature-item">
-                                    <img loading="lazy" src="https://wubflow-shield.NOCODEXPORT.DEV/64ab129be947025f126b614f/64ab129be947025f126b616a_Cloud-Icon.svg" alt="" class="pricing-feature-image-2" />
-                                    <div class="pricing-feature-text">Up to 1 remote network</div>
-                                 </div>
-                              </div>
-                              <ul role="list" class="pricing-list">
-                                 <li class="list-item">2 editable boards</li>
-                                 <li class="list-item">Premium templates</li>
-                                 <li class="list-item">Anonymous board viewers</li>
-                                 <li class="list-item">Core integrations</li>
-                              </ul>
-                              <div class="main-pricing-button-holder"><a href="#" class="main-button empty-button w-button">Start 14-days Trial</a></div> 
-                           </div>
-                        </div>
-                     </div>
-                     <div id="w-node-_77821d1e-69ff-efe2-ce08-c433d137b800-af601ecf" class="content">
-                        <div class="card pricing-card main-pricing-card">
-                           <div class="pricing-item-holder">
-                              <div class="top-pricing-type">Pro</div>
-                              <div class="price-wrapp">
-                                 <div class="price-text"><span class="text-gradient-light">AED94.99</span></div>
-                                 <div class="_40pct-white-text">/ user / year</div>
-                              </div>
-                              <div class="pricing-features-wrapp">
-                                 <div class="pricing-feature-item">
-                                    <img loading="lazy" src="https://wubflow-shield.NOCODEXPORT.DEV/64ab129be947025f126b614f/64ab129be947025f126b617e_Person-Icon.svg" alt="" class="pricing-feature-image-2" />
-                                    <div class="pricing-feature-text">Up to 10 users, 2 admins</div>
-                                 </div>
-                                 <div class="pricing-feature-item">
-                                    <img loading="lazy" src="https://wubflow-shield.NOCODEXPORT.DEV/64ab129be947025f126b614f/64ab129be947025f126b616a_Cloud-Icon.svg" alt="" class="pricing-feature-image-2" />
-                                    <div class="pricing-feature-text">Up to 20 remote networks</div>
-                                 </div>
-                              </div>
-                              <ul role="list" class="pricing-list">
-                                 <li class="list-item">Everything in Starter +</li>
-                                 <li class="list-item">Access to SaaS</li>
-                                 <li class="list-item">Analytics and more</li>
-                                 <li class="list-item">Anonymous board viewers</li>
-                              </ul>
-                               <div class="main-pricing-button-holder"><a href="#" class="main-button w-button">Start 14-days Trial</a></div> 
-                              <div class="card-noise-bg"></div>
-                           </div>
-                           <div class="card-colored-bg"></div>
-                        </div>
-                     </div>
-                     <div id="w-node-_77821d1e-69ff-efe2-ce08-c433d137b822-af601ecf" class="content">
-                        <div class="card pricing-card">
-                           <div class="pricing-item-holder">
-                              <div class="top-pricing-type">Pro+</div>
-                              <div class="price-wrapp">
-                                 <div class="price-text"><span class="text-gradient-light">AED142.99</span></div>
-                                 <div class="_40pct-white-text">/ user / year</div>
-                              </div>
-                              <div class="pricing-features-wrapp">
-                                 <div class="pricing-feature-item">
-                                    <img loading="lazy" src="https://wubflow-shield.NOCODEXPORT.DEV/64ab129be947025f126b614f/64ab129be947025f126b617e_Person-Icon.svg" alt="" class="pricing-feature-image-2" />
-                                    <div class="pricing-feature-text">Up to 500 users, 10 admins</div>
-                                 </div>
-                                 <div class="pricing-feature-item">
-                                    <img loading="lazy" src="https://wubflow-shield.NOCODEXPORT.DEV/64ab129be947025f126b614f/64ab129be947025f126b616a_Cloud-Icon.svg" alt="" class="pricing-feature-image-2" />
-                                    <div class="pricing-feature-text">Up to 100 remote networks</div>
-                                 </div>
-                              </div>
-                              <ul role="list" class="pricing-list">
-                                 <li class="list-item">Everything in Teams +</li>
-                                 <li class="list-item">24/7 Support</li>
-                                 <li class="list-item">Weekly Reports</li>
-                                 <li class="list-item">All features included</li>
-                              </ul>
-                               <div class="main-pricing-button-holder"><a href="#" class="main-button with-icon w-button">Start 14-days Trial</a></div> 
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div> -->
+
             <div class="section overflow-hidden" data-w-id="8ed71055-6ae7-5324-a6d4-54fc76e0e2d9"
                style="margin-top: 0 !important; margin-bottom: 0 !important;">
                <div class="container">
@@ -1407,7 +696,7 @@
                               data-wf-page-id="66a92b76e1155b1f28fde156" id="Early-Access-Emails" method="get"
                               name="wf-form-Early-Access-Emails">
                               <a class="join-waitlist-button"
-                                 href="https://studentverse-web-8500.onbiela.dev/waitlist">Join the UNI-verse</a>
+                                 href="/waitlist">Join the UNI-verse</a>
                            </form>
                            <div class="thank-you-message w-form-done">
                               <div><span class="white-text">Thank you! </span><br />Your submission has been received!
