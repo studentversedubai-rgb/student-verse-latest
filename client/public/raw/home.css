@@ -14,11 +14,11 @@ html, body {
    position: absolute;
    top: 50%;
    left: 50%;
-   transform: translate(-57%, -50%);
+   transform: translate(-57.5%, -50%);
    z-index: 2;
    pointer-events: none;
    display: flex;
-   gap: 23em;
+   gap: 26em;
    margin-right: 20em;
 }
 
@@ -275,4 +275,9 @@ select {
   margin-bottom: 0 !important;
   padding-top: 40px;
   padding-bottom: 40px;
+}
+
+/* CTA Section - Align button to the left */
+.cta-form-holder .form-block .form-holder {
+  align-items: flex-start;
 }
