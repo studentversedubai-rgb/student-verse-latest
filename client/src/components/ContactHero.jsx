@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { getApiUrl_v2 } from '../config/api';
 
 export default function ContactHero() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export default function ContactHero() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -18,17 +20,60 @@ export default function ContactHero() {
       ...prev,
       [name]: value
     }));
+    // Clear error when user starts typing
+    if (error) setError('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
+    setError('');
+
+    try {
+      // Map department values to match backend expectations
+      const inquiryTypeMap = {
+        'support': 'student_support',
+        'merchant': 'merchant_business',
+        'careers': 'student_support',
+        'partnerships': 'merchant_business'
+      };
+
+      const response = await fetch(getApiUrl_v2('/api/contact/submit'), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          message: formData.message,
+          inquiryType: inquiryTypeMap[formData.department] || 'student_support'
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit message');
+      }
+
+      // Success - show success screen
       setIsSubmitted(true);
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        message: '',
+        department: ''
+      });
+    } catch (err) {
+      console.error('Contact form error:', err);
+      setError(err.message || 'Failed to send message. Please try again.');
+    } finally {
       setIsSubmitting(false);
-    }, 2000);
+    }
   };
 
   const containerVariants = {
@@ -112,7 +157,7 @@ export default function ContactHero() {
             ease: "easeInOut"
           }}
         />
-        
+
         <motion.div
           style={{
             position: 'absolute',
@@ -173,10 +218,10 @@ export default function ContactHero() {
             }}
           >
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-              <path d="M20 6L9 17L4 12" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M20 6L9 17L4 12" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </motion.div>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -193,7 +238,7 @@ export default function ContactHero() {
           >
             Message Sent!
           </motion.h2>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -207,7 +252,7 @@ export default function ContactHero() {
           >
             Thank you for reaching out! We've received your message and will get back to you within 24 hours.
           </motion.p>
-          
+
           <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -258,7 +303,7 @@ export default function ContactHero() {
         variants={floatingVariants}
         animate="animate"
       />
-      
+
       <motion.div
         style={{
           position: 'absolute',
@@ -305,9 +350,9 @@ export default function ContactHero() {
         }}
       />
 
-      <div style={{ 
-        maxWidth: '1200px', 
-        margin: '0 auto', 
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto',
         padding: 'clamp(1rem, 3vw, 2rem)',
         position: 'relative',
         zIndex: 10
@@ -334,7 +379,7 @@ export default function ContactHero() {
           >
             Let's Connect
           </motion.h1>
-          
+
           <motion.p
             variants={itemVariants}
             style={{
@@ -387,8 +432,8 @@ export default function ContactHero() {
                 boxShadow: '0 0 20px rgba(0, 240, 255, 0.3)'
               }}>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                  <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <polyline points="22,6 12,13 2,6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <polyline points="22,6 12,13 2,6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
               <h3 style={{
@@ -406,7 +451,7 @@ export default function ContactHero() {
               }}>
                 Get in touch with our team for support, partnerships, or career opportunities.
               </p>
-              <a 
+              <a
                 href="mailto:careers@studentverse.app"
                 style={{
                   color: '#00F0FF',
@@ -443,8 +488,8 @@ export default function ContactHero() {
                 boxShadow: '0 0 20px rgba(255, 184, 0, 0.3)'
               }}>
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                  <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="white" strokeWidth="2"/>
-                  <circle cx="12" cy="10" r="3" stroke="white" strokeWidth="2"/>
+                  <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="white" strokeWidth="2" />
+                  <circle cx="12" cy="10" r="3" stroke="white" strokeWidth="2" />
                 </svg>
               </div>
               <h3 style={{
@@ -529,7 +574,7 @@ export default function ContactHero() {
                     value={formData.firstName}
                     onChange={handleInputChange}
                     required
-                    whileFocus={{ 
+                    whileFocus={{
                       scale: 1.02,
                       boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)"
                     }}
@@ -568,7 +613,7 @@ export default function ContactHero() {
                     value={formData.lastName}
                     onChange={handleInputChange}
                     required
-                    whileFocus={{ 
+                    whileFocus={{
                       scale: 1.02,
                       boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)"
                     }}
@@ -608,7 +653,7 @@ export default function ContactHero() {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  whileFocus={{ 
+                  whileFocus={{
                     scale: 1.02,
                     boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)"
                   }}
@@ -646,7 +691,7 @@ export default function ContactHero() {
                   value={formData.department}
                   onChange={handleInputChange}
                   required
-                  whileFocus={{ 
+                  whileFocus={{
                     scale: 1.02,
                     boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)"
                   }}
@@ -690,7 +735,7 @@ export default function ContactHero() {
                   onChange={handleInputChange}
                   required
                   rows={4}
-                  whileFocus={{ 
+                  whileFocus={{
                     scale: 1.02,
                     boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)"
                   }}
@@ -710,6 +755,25 @@ export default function ContactHero() {
                 />
               </motion.div>
 
+              {/* Error Message */}
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{
+                    padding: '1rem',
+                    background: 'rgba(255, 59, 48, 0.1)',
+                    border: '1px solid rgba(255, 59, 48, 0.3)',
+                    borderRadius: '12px',
+                    color: '#ff3b30',
+                    fontSize: '0.9rem',
+                    textAlign: 'center'
+                  }}
+                >
+                  {error}
+                </motion.div>
+              )}
+
               <motion.button
                 type="submit"
                 disabled={isSubmitting}
@@ -720,8 +784,8 @@ export default function ContactHero() {
                 whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
                 whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
                 style={{
-                  background: isSubmitting 
-                    ? 'rgba(255, 255, 255, 0.1)' 
+                  background: isSubmitting
+                    ? 'rgba(255, 255, 255, 0.1)'
                     : 'linear-gradient(90deg, #2962FF, #7B2CBF, #FFB800)',
                   color: 'white',
                   border: 'none',
@@ -730,8 +794,8 @@ export default function ContactHero() {
                   fontSize: 'clamp(1rem, 2.5vw, 1.1rem)',
                   fontWeight: '600',
                   cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                  boxShadow: isSubmitting 
-                    ? 'none' 
+                  boxShadow: isSubmitting
+                    ? 'none'
                     : '0 4px 20px rgba(41, 98, 255, 0.4)',
                   transition: 'all 0.3s ease',
                   display: 'flex',

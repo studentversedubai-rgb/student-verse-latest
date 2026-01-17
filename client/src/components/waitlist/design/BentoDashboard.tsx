@@ -7,7 +7,7 @@ import RadarVisual from "./RadarVisual";
 import ChipSlots from "./ChipSlots";
 import QueueVisualization from "../QueueVisualization";
 import HolographicPlanet from "./HolographicPlanet";
-import type { ReferralStats } from "../../services/api";
+import type { ReferralStats } from "../../../services/api";
 
 interface BentoDashboardProps {
     queuePosition: number;

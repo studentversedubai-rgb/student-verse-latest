@@ -7,6 +7,11 @@ vite.config.ts.*
 build
 .vite
 .env
-.env
+.env.local
+.env*.local
 Thumbs.db
 *.log
+
+client/.env
+client/.env.local
+client/.env*.local
