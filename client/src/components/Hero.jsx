@@ -112,7 +112,7 @@ export default function Hero() {
               <div className="hero-circle-wrapper _03 center-circle">
                 <motion.img 
                   alt="Background circle 3" 
-                  className="hero-circle-03" 
+                  className="hero-circle-03 mobile-enhanced-opacity" 
                   loading="lazy"
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938cab78e7525914d0f9f_Circles%20(1).png"
                   initial={{
