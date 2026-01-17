@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
 export default function Trustbar() {
@@ -48,17 +47,18 @@ export default function Trustbar() {
         transform: 'translateY(0)',
         minHeight: '200px',
         display: 'block',
-        visibility: 'visible'
+        visibility: 'visible',
+        padding: '40px 20px'
       }}
     >
-      <div className="trustbar-inner" style={{ opacity: 1, transform: 'translateY(0)' }}>
+      <div className="trustbar-inner" style={{ opacity: 1, transform: 'translateY(0)', maxWidth: '1200px', margin: '0 auto' }}>
         <motion.p 
           className="trustbar-kicker"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          style={{ marginBottom: '18px' }}
+          style={{ marginBottom: '32px', textAlign: 'center' }}
         >
           LAUNCHING SOON AT TOP CAMPUSES
         </motion.p>
@@ -66,7 +66,14 @@ export default function Trustbar() {
         <motion.div 
           className="trustbar-logos"
           variants={containerVariants}
-          style={{ display: 'flex', gap: '28px', justifyContent: 'center', alignItems: 'center' }}
+          style={{ 
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+            gap: '24px',
+            justifyItems: 'center',
+            alignItems: 'center',
+            width: '100%'
+          }}
         >
           {universities.map((university) => (
             <motion.div 
@@ -81,8 +88,9 @@ export default function Trustbar() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minHeight: '100px',
-                minWidth: '160px'
+                minHeight: '80px',
+                width: '100%',
+                padding: '12px'
               }}
             >
               <img 
@@ -91,7 +99,9 @@ export default function Trustbar() {
                 loading="lazy"
                 style={{ 
                   maxHeight: university.className === 'large' ? '72px' : '60px',
-                  maxWidth: '160px',
+                  maxWidth: '100%',
+                  width: 'auto',
+                  height: 'auto',
                   objectFit: 'contain',
                   display: 'block'
                 }}
@@ -107,6 +117,32 @@ export default function Trustbar() {
           ))}
         </motion.div>
       </div>
+      
+      <style>{`
+        @media (max-width: 768px) {
+          .trustbar-logos {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 20px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .trustbar-logos {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+          }
+          
+          .trustbar-logo img {
+            max-height: 56px !important;
+          }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1024px) {
+          .trustbar-logos {
+            grid-template-columns: repeat(3, 1fr) !important;
+          }
+        }
+      `}</style>
     </motion.section>
   );
 }
