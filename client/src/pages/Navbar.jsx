@@ -78,11 +78,11 @@ export default function Navbar() {
           top: 0, 
           left: 0, 
           right: 0, 
-          zIndex: 1000
+          zIndex: 1000,
         }}
         role="banner"
       >
-        <div className="flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-12 h-20 sm:h-24 md:h-28 lg:h-32 max-w-full mx-0 relative w-full">
+        <div className="flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-12 h-16 sm:h-18 md:h-20 lg:h-22 max-w-full mx-0 relative w-full">
           {/* Mobile: Hidden spacer for centering logo */}
           <div className="block sm:hidden w-10"></div>
           
@@ -97,7 +97,7 @@ export default function Navbar() {
                 alt="StudentVerse Logo"
                 loading="lazy"
                 src="/assets/svlogo.png"
-                className="h-12 sm:h-10 md:h-12 lg:h-14 w-auto block"
+                className="h-10 sm:h-8 md:h-9 lg:h-10 w-auto block"
               />
             </Link>
           </div>
@@ -145,7 +145,7 @@ export default function Navbar() {
 
               <nav 
                 role="navigation"
-                className="px-4 sm:px-8 md:px-12 lg:px-16"
+                className="px-3 sm:px-6 md:px-8 lg:px-10"
                 style={{
                   position: "relative",
                   display: "flex",
@@ -155,24 +155,24 @@ export default function Navbar() {
                   backdropFilter: "blur(20px)",
                   WebkitBackdropFilter: "blur(20px)",
                   borderRadius: "50px",
-                  padding: "0.75rem 2rem",
+                  padding: "0.5rem 1.5rem",
                   boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
                   border: "2px solid transparent",
-                  minWidth: "400px",
-                  maxWidth: "600px",
+                  minWidth: "300px",
+                  maxWidth: "450px",
                   pointerEvents: "auto",
                   zIndex: 10
                 }}
               >
                 <div 
-                  className="flex gap-4 sm:gap-8 md:gap-12 lg:gap-16 items-center justify-center w-full"
+                  className="flex gap-3 sm:gap-6 md:gap-8 lg:gap-10 items-center justify-center w-full"
                 >
                   {navLinks.map((link) => (
                     <Link
                       key={link.href}
                       to={link.href}
                       onClick={handleNavClick}
-                      className="text-sm sm:text-base md:text-lg font-semibold transition-all duration-300 relative py-2 whitespace-nowrap tracking-wide"
+                      className="text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 relative py-1.5 whitespace-nowrap tracking-wide"
                       style={{
                         color: isActiveLink(link.href) ? "#ffffff" : "rgba(255, 255, 255, 0.8)",
                         textDecoration: "none",
@@ -216,10 +216,10 @@ export default function Navbar() {
               onClick={handleNavClick}
               className="join-waitlist-button"
               style={{
-                fontSize: "1.2rem",
+                fontSize: "0.85rem",
                 fontWeight: "700",
                 textTransform: "uppercase",
-                padding: "1rem 2.5rem",
+                padding: "0.65rem 1.5rem",
                 borderRadius: "50px",
                 textDecoration: "none",
                 display: "inline-block",

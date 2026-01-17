@@ -15,3 +15,7 @@ Thumbs.db
 client/.env
 client/.env.local
 client/.env*.local
+
+# PurgeCSS output
+client/src/styles/purged/
+client/src/styles/.backup/
