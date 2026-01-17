@@ -37,7 +37,7 @@ export default function Home() {
       <Hero />
       <TrustedBy />
       <Features />
-      <div className='h-[300px] sm:h-[400px] md:h-[500px] grid place-content-center'>
+      <div className='h-[80px] sm:h-[400px] md:h-[500px] grid place-content-center'>
         <ScrollBaseAnimation
           // delay={500}
           baseVelocity={3}

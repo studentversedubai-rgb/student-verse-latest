@@ -1,10 +1,27 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 export default function Hero() {
   const { isAuthenticated } = useAuth();
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    // Check if animation has already played in this session
+    const animated = sessionStorage.getItem('heroAnimated');
+    if (animated) {
+      setHasAnimated(true);
+      setIsReady(true);
+    } else {
+      // Small delay to ensure smooth initial render
+      requestAnimationFrame(() => {
+        setIsReady(true);
+      });
+      sessionStorage.setItem('heroAnimated', 'true');
+    }
+  }, []);
   
   return (
     <>
@@ -16,133 +33,83 @@ export default function Hero() {
           <div className="home-v3-hero-section">
             
             {/* Hero App Section */}
-            <div className="hero-v3-app">
-              <motion.div 
-                className="animate-on-load-01"
-                initial={{
-                  y: 30,
-                  opacity: 0
-                }}
-                animate={{
-                  y: 0,
-                  opacity: 1
-                }}
-                transition={{
-                  duration: 0.8,
-                  ease: "easeOut",
-                  delay: 0.2
-                }}
-              >
-                <div className="hero-section-app-container">
-                  <div className="hero-section-phone-holder">
-                    <img 
-                      alt="iPhone mockup" 
-                      className="hero-section-phone-image" 
+            <motion.div 
+              className="hero-v3-app"
+              initial={hasAnimated ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 1,
+                ease: [0.25, 0.1, 0.25, 1],
+                delay: 0.2
+              }}
+            >
+              <div className="hero-section-app-container">
+                <div className="hero-section-phone-holder">
+                  <img
+                    alt="iPhone mockup"
+                    className="hero-section-phone-image"
+                    loading="lazy"
+                    src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde227_Apple%20Iphone%2014%20pro.png"
+                  />
+                  <div className="hero-section-phone-screenshot-holder">
+                    <img
+                      alt="App screenshot"
+                      className="hero-section-phone-screenshot-image"
                       loading="lazy"
-                      src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde227_Apple%20Iphone%2014%20pro.png" 
+                      src="/assets/Uis.jpeg"
+                      sizes="(max-width: 479px) 500px, (max-width: 767px) 800px, (max-width: 991px) 1080px, 1179px"
                     />
-                    <div className="hero-section-phone-screenshot-holder">
-                      <img 
-                        alt="App screenshot"
-                        className="hero-section-phone-screenshot-image" 
-                        loading="lazy" 
-                        src="/assets/Uis.jpeg"
-                        sizes="(max-width: 479px) 500px, (max-width: 767px) 800px, (max-width: 991px) 1080px, 1179px"
-                      />
-                    </div>
                   </div>
                 </div>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
 
             {/* Hero Circles */}
-            <div className="hero-circles-wrapper-v3">
+            <motion.div 
+              className="hero-circles-wrapper-v3"
+              initial={hasAnimated ? { y: 0, opacity: 1 } : { y: 80, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                duration: 1.2,
+                ease: [0.25, 0.1, 0.25, 1],
+                delay: 0.1
+              }}
+            >
               <div className="hero-circle-wrapper _01 center-circle">
-                <motion.img 
-                  alt="Background circle 1" 
-                  className="hero-circle" 
+                <img
+                  alt="Background circle 1"
+                  className="hero-circle"
                   loading="lazy"
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938caa62c8b5f7aaf5ad7_Circles%20(2).png"
-                  initial={{
-                    y: 140,
-                    scale: 0,
-                    opacity: 0,
-                    filter: "blur(20px)"
-                  }}
-                  animate={{
-                    y: 0,
-                    scale: 1,
-                    opacity: 1,
-                    filter: "blur(0px)"
-                  }}
-                  transition={{
-                    duration: 1.2,
-                    ease: "easeOut",
-                    delay: 0.4
-                  }}
                 />
               </div>
               
               <div className="w-layout-vflex hero-circle-wrapper _02 center-circle">
-                <motion.img 
-                  alt="Background circle 2" 
+                <img
+                  alt="Background circle 2"
                   className="hero-circle-02"
                   loading="lazy"
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938ca8d17e84d6ed8613e_Circles%20(3).png"
-                  initial={{
-                    y: 213,
-                    scale: 0,
-                    opacity: 0,
-                    filter: "blur(20px)"
-                  }}
-                  animate={{
-                    y: 0,
-                    scale: 1,
-                    opacity: 1,
-                    filter: "blur(0px)"
-                  }}
-                  transition={{
-                    duration: 1.2,
-                    ease: "easeOut",
-                    delay: 0.6
-                  }}
                 />
               </div>
               
               <div className="hero-circle-wrapper _03 center-circle">
-                <motion.img 
-                  alt="Background circle 3" 
-                  className="hero-circle-03 mobile-enhanced-opacity" 
+                <img
+                  alt="Background circle 3"
+                  className="hero-circle-03 mobile-enhanced-opacity"
                   loading="lazy"
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938cab78e7525914d0f9f_Circles%20(1).png"
-                  initial={{
-                    y: 280,
-                    scale: 0,
-                    opacity: 0,
-                    filter: "blur(20px)"
-                  }}
-                  animate={{
-                    y: 0,
-                    scale: 1,
-                    opacity: 1,
-                    filter: "blur(0px)"
-                  }}
-                  transition={{
-                    duration: 1.2,
-                    ease: "easeOut",
-                    delay: 0.8
-                  }}
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Hero Center Content */}
-          <div className="hero-section-center-holder" style={{ gap: '1rem' }}>
+          <div className="hero-section-center-holder" style={{ gap: '1rem', opacity: isReady ? 1 : 0 }}>
             <div className="hero-center-text" style={{ marginBottom: '0.5rem' }}>
               <motion.h1 
                 className="gradient-title"
-                initial={{ y: 50, opacity: 0 }}
+                initial={hasAnimated ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{
                   duration: 0.8,
@@ -180,7 +147,7 @@ export default function Hero() {
                 style={{ margin: 0 }}
               >
                 <motion.div
-                  initial={{ y: 20, opacity: 0 }}
+                  initial={hasAnimated ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{
                     duration: 0.6,
