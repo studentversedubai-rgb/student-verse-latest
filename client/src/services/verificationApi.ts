@@ -11,6 +11,7 @@
  */
 
 import storage from "../utils/storage";
+import { API_CONFIG } from "../config/api";
 
 // ============================================================================
 // Types & Interfaces
@@ -117,14 +118,7 @@ export const sendOTP = async (
   request: SendOTPRequest,
 ): Promise<SendOTPResponse> => {
   try {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    if (!apiUrl) {
-      throw new Error(
-        "VITE_API_URL is not configured in environment variables",
-      );
-    }
-
-    const response = await fetch(`${apiUrl}/api/waitlist/join`, {
+    const response = await fetch(`${API_CONFIG.BASE_URL}/api/waitlist/join`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: request.email }),
@@ -166,14 +160,7 @@ export const verifyOTP = async (
   request: VerifyOTPRequest,
 ): Promise<VerifyOTPResponse> => {
   try {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    if (!apiUrl) {
-      throw new Error(
-        "VITE_API_URL is not configured in environment variables",
-      );
-    }
-
-    const response = await fetch(`${apiUrl}/api/auth/verify-otp`, {
+    const response = await fetch(`${API_CONFIG.BASE_URL}/api/auth/verify-otp`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(request),
@@ -216,14 +203,7 @@ export const resendOTP = async (
   request: ResendOTPRequest,
 ): Promise<ResendOTPResponse> => {
   try {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    if (!apiUrl) {
-      throw new Error(
-        "VITE_API_URL is not configured in environment variables",
-      );
-    }
-
-    const response = await fetch(`${apiUrl}/api/waitlist/join`, {
+    const response = await fetch(`${API_CONFIG.BASE_URL}/api/waitlist/join`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: request.email }),
