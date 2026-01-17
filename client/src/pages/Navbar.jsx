@@ -83,8 +83,11 @@ export default function Navbar() {
         role="banner"
       >
         <div className="flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-12 h-20 sm:h-24 md:h-28 lg:h-32 max-w-full mx-0 relative w-full">
+          {/* Mobile: Hidden spacer for centering logo */}
+          <div className="block sm:hidden w-10"></div>
+          
           {/* Logo Section */}
-          <div className="relative z-10">
+          <div className="relative z-10 flex justify-center sm:justify-start flex-1 sm:flex-initial">
             <Link
               to="/"
               onClick={handleNavClick}
@@ -94,7 +97,7 @@ export default function Navbar() {
                 alt="StudentVerse Logo"
                 loading="lazy"
                 src="/assets/svlogo.png"
-                className="h-8 sm:h-10 md:h-12 lg:h-14 w-auto block"
+                className="h-12 sm:h-10 md:h-12 lg:h-14 w-auto block"
               />
             </Link>
           </div>
@@ -271,61 +274,163 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
               onClick={closeMenu}
+              style={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: "rgba(0, 0, 0, 0.7)",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
+                zIndex: 999
+              }}
             />
             
             {/* Drawer */}
             <motion.div
               className="mobile-drawer"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "100%", opacity: 0 }}
               transition={{ 
                 type: "spring", 
                 stiffness: 300, 
-                damping: 30 
+                damping: 30,
+                opacity: { duration: 0.2 }
+              }}
+              style={{
+                position: "fixed",
+                top: 0,
+                right: 0,
+                height: "100vh",
+                width: "320px",
+                maxWidth: "85vw",
+                background: "linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%)",
+                borderTopLeftRadius: "24px",
+                borderBottomLeftRadius: "24px",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                borderRight: "none",
+                boxShadow: "-10px 0 50px rgba(0, 0, 0, 0.8), 0 0 100px rgba(0, 0, 0, 0.5)",
+                zIndex: 1000,
+                overflow: "hidden"
               }}
             >
-              <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+              {/* Animated gradient border on left edge */}
+              <motion.div
+                initial={{ opacity: 0, scaleY: 0 }}
+                animate={{ opacity: 1, scaleY: 1 }}
+                exit={{ opacity: 0, scaleY: 0 }}
+                transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  width: "3px",
+                  background: "linear-gradient(180deg, #00b8cc 0%, #cc8800 50%, #9a1f5a 100%)",
+                  borderTopLeftRadius: "24px",
+                  borderBottomLeftRadius: "24px"
+                }}
+              />
+
+              <div style={{ display: "flex", flexDirection: "column", height: "100%", position: "relative", zIndex: 1 }}>
                 {/* Header */}
-                <div className="mobile-drawer-header">
-                  <img
+                <motion.div 
+                  className="mobile-drawer-header"
+                  initial={{ y: -20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.1, duration: 0.4, ease: "easeOut" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "2rem 1.5rem 1.5rem",
+                    borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
+                    background: "linear-gradient(90deg, rgba(0, 184, 204, 0.05) 0%, rgba(204, 136, 0, 0.05) 50%, rgba(154, 31, 90, 0.05) 100%)"
+                  }}
+                >
+                  <motion.img
                     src="/assets/svlogo.png"
                     alt="StudentVerse"
-                    style={{ height: "32px" }}
+                    style={{ height: "40px" }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.2 }}
                   />
-                  <button
+                  <motion.button
                     onClick={closeMenu}
                     className="close-btn"
                     aria-label="Close menu"
+                    whileHover={{ scale: 1.1, rotate: 90 }}
+                    whileTap={{ scale: 0.9 }}
+                    transition={{ duration: 0.2 }}
+                    style={{
+                      background: "rgba(255, 255, 255, 0.1)",
+                      border: "1px solid rgba(255, 255, 255, 0.2)",
+                      borderRadius: "50%",
+                      width: "40px",
+                      height: "40px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                      color: "#ffffff",
+                      transition: "all 0.2s ease"
+                    }}
                   >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                       <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                     </svg>
-                  </button>
-                </div>
+                  </motion.button>
+                </motion.div>
 
                 {/* Navigation Links */}
-                <nav style={{ flex: 1, padding: "2rem 1.5rem" }}>
+                <motion.nav 
+                  style={{ flex: 1, padding: "2rem 1.5rem" }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3, duration: 0.4 }}
+                >
                   <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                     {navLinks.map((link, index) => (
-                      <motion.div key={link.href}>
+                      <motion.div 
+                        key={link.href}
+                        initial={{ x: 50, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ 
+                          delay: 0.4 + (index * 0.1), 
+                          duration: 0.5, 
+                          ease: "easeOut" 
+                        }}
+                      >
                         <Link
                           to={link.href}
                           onClick={handleNavClick}
                           className="mobile-nav-link"
                           style={{
-                            color: isActiveLink(link.href) ? "#ffffff" : "#ffffff",
-                            fontWeight: isActiveLink(link.href) ? "600" : "500"
-                            
+                            display: "block",
+                            padding: "1rem 1.5rem",
+                            color: isActiveLink(link.href) ? "#00b8cc" : "#ffffff",
+                            textDecoration: "none",
+                            fontSize: "1.125rem",
+                            fontWeight: isActiveLink(link.href) ? "600" : "500",
+                            borderRadius: "12px",
+                            margin: "0.25rem 0",
+                            transition: "all 0.3s ease",
+                            background: isActiveLink(link.href) 
+                              ? "linear-gradient(90deg, rgba(0, 184, 204, 0.1) 0%, rgba(204, 136, 0, 0.1) 100%)"
+                              : "transparent",
+                            border: isActiveLink(link.href) 
+                              ? "1px solid rgba(0, 184, 204, 0.3)"
+                              : "1px solid transparent"
                           }}
                         >
                           <motion.span
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: index * 0.1 + 0.2 }}
-                            whileHover={{ x: 10 }}
+                            whileHover={{ x: 8, scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            transition={{ duration: 0.2 }}
                             style={{ display: "block" }}
                           >
                             {link.label}
@@ -334,16 +439,19 @@ export default function Navbar() {
                       </motion.div>
                     ))}
                   </div>
-                </nav>
+                </motion.nav>
 
                 {/* Bottom Actions */}
-                <div style={{ 
-                  padding: "1.5rem", 
-                  borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "1rem"
-                }}>
+                <motion.div 
+                  style={{ 
+                    padding: "1.5rem", 
+                    borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+                    background: "linear-gradient(90deg, rgba(0, 184, 204, 0.03) 0%, rgba(204, 136, 0, 0.03) 50%, rgba(154, 31, 90, 0.03) 100%)"
+                  }}
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.7, duration: 0.5, ease: "easeOut" }}
+                >
                   <Link
                     to={isAuthenticated ? "/waitlist" : "/waitlist"}
                     onClick={handleNavClick}
@@ -352,27 +460,27 @@ export default function Navbar() {
                       fontSize: "1rem",
                       fontWeight: "700",
                       textTransform: "uppercase",
-                      padding: "0.75rem 1.5rem",
+                      padding: "1rem 1.5rem",
                       borderRadius: "50px",
                       textDecoration: "none",
                       display: "block",
                       textAlign: "center",
                       whiteSpace: "nowrap",
-                      letterSpacing: "0.5px"
+                      letterSpacing: "0.5px",
+                      position: "relative",
+                      overflow: "hidden"
                     }}
                   >
                     <motion.span
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.6 }}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      style={{ display: "block" }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      style={{ display: "block", position: "relative", zIndex: 1 }}
                     >
                       {isAuthenticated ? "View Dashboard" : "Join The Waitlist"}
                     </motion.span>
                   </Link>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           </>
