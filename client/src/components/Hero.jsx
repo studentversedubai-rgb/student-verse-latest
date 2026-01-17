@@ -8,8 +8,8 @@ export default function Hero() {
   
   return (
     <>
-      {/* Empty div for spacing */}
-      <div style={{ height: '100px' }} className="empty-div"></div>
+      {/* Empty div for spacing - responsive */}
+      <div style={{ height: 'clamp(20px, 8vw, 100px)' }} className="empty-div"></div>
       
       <div className="section">
         <div className="container">
