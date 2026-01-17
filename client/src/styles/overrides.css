@@ -792,3 +792,91 @@
     padding: 16px 25px !important;
   }
 }
+
+/* ===== TEAM SECTION CARD FIXES ===== */
+/* Remove all hover effects and ensure cards stay visible */
+.org-card,
+.org-card:hover,
+[id^="tech-"],
+[id^="mkt-"],
+[id^="merch-"],
+[id="cto"],
+[id="marketing"],
+[id="merchant"],
+[id="frontend-lead"],
+[id="backend-lead"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 1 !important;
+  position: relative !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* Remove any conflicting CSS that might cause vanishing */
+.org-section,
+.org-wrap,
+.org-container {
+  overflow: visible !important;
+}
+
+/* Ensure team cards stay visible - no hover effects */
+.org-card {
+  background: rgba(20, 20, 26, .92) !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+.org-card:hover {
+  transform: none !important;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35) !important;
+  background: rgba(20, 20, 26, .92) !important;
+}
+
+/* ===== FAQ ACCORDION FIXES ===== */
+.ease-faq-container-01 {
+  cursor: pointer;
+  transition: background-color 0.3s ease !important;
+}
+
+.ease-faq-answer-holder {
+  max-height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease !important;
+  padding-top: 0 !important;
+}
+
+.ease-faq-container-01.is-open .ease-faq-answer-holder {
+  max-height: 500px !important;
+  opacity: 1 !important;
+  padding-top: 12px !important;
+}
+
+.ease-faq-answer {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+}
+
+.ease-faq-icon {
+  transition: transform 0.3s ease !important;
+  flex-shrink: 0;
+}
+
+/* ===== REMOVE TOP SPACING FROM SECTIONS ===== */
+#org,
+#faq-about {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.section-center-text {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.fading-title {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}

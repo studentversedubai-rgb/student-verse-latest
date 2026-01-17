@@ -8,6 +8,7 @@ import './styles/page.css'
 import './styles/about.css'
 import './styles/contact.css'
 import './styles/home.css'
+import './styles/navbar.css'
 import './styles/react-fixes.css'
 import './styles/overrides.css'
 

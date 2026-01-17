@@ -1,6 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { initPageInteractions } from '../utils/initInteractions'
 import { normalizeHtml } from '../utils/normalizeHtml'
+import Navbar from './Navbar'
+import Hero from '../components/Hero'
+import TrustedBy from '../components/TrustedBy'
+import Features from '../components/Features'
+import Trustbar from '../components/Trustbar'
+import CTA from '../components/CTA'
+import MainFooter from '../components/Footer'
 import Footer from './Footer'
 
 export default function Home() {
@@ -25,8 +32,16 @@ export default function Home() {
 
   return (
     <>
-      <div ref={containerRef} dangerouslySetInnerHTML={{ __html: html }} />
+      <Navbar />
+      <Hero />
+      <TrustedBy />
+      <Features />
+      <Trustbar />
+      <CTA />
+      <MainFooter />
       <Footer />
+      {/* Keep the original HTML for any remaining content */}
+      <div ref={containerRef} dangerouslySetInnerHTML={{ __html: html }} style={{ display: 'none' }} />
     </>
   )
 }

@@ -5,7 +5,6 @@ import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import Waitlist from "./pages/Waitlist";
-import Pricing from "./pages/Pricing.jsx";
 export default function App() {
   useEffect(() => {
     document.documentElement.classList.add("is-loaded");
@@ -20,7 +19,6 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/waitlist" element={<Waitlist />} />
-        <Route path="/pricing" element={<Pricing />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

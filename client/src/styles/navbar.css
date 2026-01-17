@@ -1,0 +1,432 @@
+/* Enhanced Navbar Styles for StudentVerse */
+
+/* Ensure navbar is always on top */
+.navbar.w-nav {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  padding-left: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Glass morphism effect */
+.navbar-glass-effect {
+  background: rgba(8, 12, 31, 0.8) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.navbar-glass-effect.scrolled {
+  background: rgba(8, 12, 31, 0.95) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Desktop navigation pill styling */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Remove all old pill styling conflicts */
+.nav-links-pill {
+  /* Styles are now inline in the component */
+}
+
+.nav-links-pill:hover {
+  /* Styles are now inline in the component */
+}
+
+.nav-links-pill::before {
+  /* Removed - no longer needed */
+}
+
+.nav-links-pill:hover::before {
+  /* Removed - no longer needed */
+}
+
+/* Active pill background */
+.nav-active-pill {
+  /* Styles are now inline in the component */
+}
+
+/* Navigation links inside pill */
+.nav-links-pill .nav-link {
+  /* Styles are now inline in the component */
+}
+
+.nav-links-pill .nav-link:hover {
+  /* Styles are now inline in the component */
+}
+
+/* Mobile drawer overlay */
+.mobile-drawer-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  z-index: 40 !important;
+}
+
+/* Mobile drawer */
+.mobile-drawer {
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  height: 100vh !important;
+  width: 320px !important;
+  max-width: 85vw !important;
+  background: rgba(8, 12, 31, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: -10px 0 50px rgba(0, 0, 0, 0.5) !important;
+  z-index: 50 !important;
+}
+
+/* Mobile drawer header */
+.mobile-drawer-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 1.5rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Mobile navigation links */
+.mobile-nav-link {
+  display: block !important;
+  padding: 1rem 1.5rem !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-size: 1.125rem !important;
+  font-weight: 500 !important;
+  border-radius: 0.5rem !important;
+  margin: 0.25rem 0 !important;
+  transition: all 0.2s ease !important;
+}
+
+.mobile-nav-link:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #00F0FF !important;
+  transform: translateX(8px) !important;
+}
+
+/* Mobile CTA buttons */
+.mobile-cta-primary {
+  background: linear-gradient(90deg, #2962FF, #7B2CBF, #FFB800) !important;
+  background-size: 200% 200% !important;
+  color: #ffffff !important;
+  font-weight: bold !important;
+  text-transform: uppercase !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 50px !important;
+  border: none !important;
+  text-decoration: none !important;
+  display: block !important;
+  text-align: center !important;
+  transition: all 0.3s ease !important;
+}
+
+.mobile-cta-primary:hover {
+  transform: scale(1.02) !important;
+  box-shadow: 0 8px 25px rgba(41, 98, 255, 0.4) !important;
+}
+
+.mobile-cta-secondary {
+  background: transparent !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  padding: 0.75rem 1.5rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 50px !important;
+  text-decoration: none !important;
+  display: block !important;
+  text-align: center !important;
+  transition: all 0.3s ease !important;
+}
+
+.mobile-cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: #ffffff !important;
+  transform: scale(1.02) !important;
+}
+
+/* Hamburger menu button */
+.hamburger-btn {
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0.5rem !important;
+  border-radius: 0.5rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.hamburger-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Close button */
+.close-btn {
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 0.5rem !important;
+  border-radius: 50% !important;
+  transition: all 0.2s ease !important;
+  color: #ffffff !important;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+  
+  .show-mobile {
+    display: block !important;
+  }
+  
+  .navbar-container {
+    padding: 0 1rem !important;
+  }
+  
+  .mobile-drawer {
+    width: 280px !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .hidden-desktop {
+    display: none !important;
+  }
+  
+  .show-desktop {
+    display: flex !important;
+  }
+}
+
+/* Tablet specific adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .nav-links-pill {
+    padding: 0.5rem 1.5rem !important;
+    gap: 1.5rem !important;
+  }
+  
+  .navbar-right-actions {
+    gap: 0.75rem !important;
+  }
+  
+  .nav-cta-button {
+    padding: 0.6rem 1.2rem !important;
+    font-size: 0.8rem !important;
+  }
+}
+
+/* Large screen adjustments */
+@media (min-width: 1200px) {
+  .navbar-container {
+    padding: 0 3rem !important;
+  }
+  
+  .nav-links-pill {
+    gap: 2.5rem !important;
+  }
+}
+
+/* Animation keyframes */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Ensure body doesn't scroll when menu is open */
+body.menu-open {
+  overflow: hidden !important;
+}
+
+/* Enhanced hover effects for interactive elements */
+.nav-link-glow:hover {
+  color: #00F0FF !important;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.3) !important;
+}
+
+/* Remove old active link styling */
+.nav-link-active {
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  text-shadow: none !important;
+}
+
+.mobile-nav-link:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #00F0FF !important;
+  transform: translateX(4px) !important;
+}
+
+.mobile-nav-link-active {
+  color: #00F0FF !important;
+  font-weight: 600 !important;
+  background: rgba(0, 240, 255, 0.1) !important;
+}
+
+.nav-signin-button:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: #ffffff !important;
+}
+
+.nav-cta-button:hover,
+.mobile-cta-primary:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 15px rgba(41, 98, 255, 0.3) !important;
+}
+
+.mobile-cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: #ffffff !important;
+}
+
+.cta-glow:hover {
+  box-shadow: 
+    0 0 20px rgba(41, 98, 255, 0.4),
+    0 0 40px rgba(255, 184, 0, 0.3),
+    0 0 60px rgba(123, 44, 191, 0.2) !important;
+}
+
+/* Focus states for accessibility */
+.nav-link:focus,
+.mobile-nav-link:focus,
+.hamburger-btn:focus,
+.close-btn:focus {
+  outline: 2px solid #00F0FF !important;
+  outline-offset: 2px !important;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Fix for potential z-index conflicts */
+.navbar.w-nav {
+  z-index: 1000 !important;
+}
+
+.mobile-drawer-overlay {
+  z-index: 999 !important;
+}
+
+.mobile-drawer {
+  z-index: 1001 !important;
+}
+
+/* Ensure proper spacing for content below navbar */
+body {
+  padding-top: 70px;
+}
+
+/* Override any conflicting styles from existing CSS */
+.navbar .nav-menu.w-nav-menu {
+  position: static !important;
+  background: transparent !important;
+}
+
+.navbar .menu-button.w-nav-button {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Ensure brand image is always visible */
+.navbar .brand-image {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* Link component hover effects */
+.nav-link:hover,
+.mobile-nav-link:hover {
+  text-decoration: none !important;
+}
+
+/* Ensure Link components inherit proper styling */
+a.nav-link,
+a.mobile-nav-link,
+a.nav-signin-button,
+a.nav-cta-button,
+a.mobile-cta-primary,
+a.mobile-cta-secondary {
+  text-decoration: none !important;
+}
+
+/* Active link indicator animation */
+.nav-link {
+  position: relative !important;
+}
+
+/* Smooth transitions for all interactive elements */
+.nav-link,
+.mobile-nav-link,
+.nav-signin-button,
+.nav-cta-button,
+.mobile-cta-primary,
+.mobile-cta-secondary {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}

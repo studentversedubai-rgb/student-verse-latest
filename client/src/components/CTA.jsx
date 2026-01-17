@@ -1,0 +1,118 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+
+export default function CTA() {
+  return (
+    <div className="section overflow-hidden" style={{ marginTop: '0 !important', marginBottom: '0 !important' }}>
+      <div className="container">
+        <div className="cta-container">
+          <motion.div 
+            className="cta-form-holder"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <div className="cta-heading-holder">
+              <div className="cta-heading-wrapper">
+                <motion.div 
+                  className="cta-heading fading-title"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                >
+                  Get Started with StudentVerse
+                </motion.div>
+              </div>
+              <motion.div 
+                className="cta-paragraph-holder"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+              >
+                <p>Bigger savings. Smarter students. StudentVerse starts here. Unlock deals made for student life.</p>
+              </motion.div>
+            </div>
+            
+            <motion.div 
+              className="form-block w-form"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
+            >
+              <form 
+                className="form-holder" 
+                data-name="Early Access Emails"
+                data-wf-element-id="8ed71055-6ae7-5324-a6d4-54fc76e0e2eb" 
+                data-wf-page-id="66a92b76e1155b1f28fde156"
+                id="Early-Access-Emails" 
+                method="get" 
+                name="wf-form-Early-Access-Emails"
+              >
+                <Link 
+                  className="join-waitlist-button" 
+                  to="/waitlist"
+                >
+                  Join the UNI-verse
+                </Link>
+              </form>
+              
+              <div className="thank-you-message w-form-done">
+                <div>
+                  <span className="white-text">Thank you! </span><br />
+                  Your submission has been received!
+                </div>
+              </div>
+              
+              <div className="error-message w-form-fail">
+                <div>
+                  <span className="white-text">Oops! <br /></span>
+                  Something went wrong! Try again later
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+          
+          <motion.div 
+            className="cta-app-wrapper"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          >
+            <div className="hero-section-app-container-ct">
+              <motion.div 
+                className="hero-section-phone-holder"
+                whileHover={{ 
+                  y: -10,
+                  transition: { duration: 0.3 }
+                }}
+              >
+                <img 
+                  alt="iPhone mockup" 
+                  className="hero-section-phone-image" 
+                  loading="lazy"
+                  src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a92b76e1155b1f28fde227_Apple%20Iphone%2014%20pro.png" 
+                />
+                <div className="hero-section-phone-screenshot-holder">
+                  <img 
+                    alt="App interface" 
+                    className="hero-section-phone-screenshot-image" 
+                    loading="lazy" 
+                    src="/assets/UI.jpeg" 
+                  />
+                </div>
+              </motion.div>
+              
+              
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}
