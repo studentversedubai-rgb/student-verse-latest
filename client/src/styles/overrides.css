@@ -894,6 +894,29 @@
   text-align: center !important;
 }
 
+/* Specific override for CTA heading to be left-aligned */
+.cta-heading.fading-title {
+  text-align: left !important;
+}
+
+/* Ensure FAQ title is centered - multiple selectors for specificity */
+.section-title .fading-title,
+#faq-about .section-title .fading-title,
+#faq-about .fading-title,
+.section-center-text .section-title .fading-title,
+.section-center-text .fading-title {
+  text-align: center !important;
+}
+
+/* Ensure the entire FAQ section title container is centered */
+#faq-about .section-center-text,
+#faq-about .section-title,
+#faq-about .section-title.xl {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
 /* Fix FAQ holder alignment */
 .faq-holder {
   max-width: 900px !important;

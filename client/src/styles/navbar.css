@@ -6,9 +6,14 @@
   top: 0 !important;
   left: 0 !important;
   right: 0 !important;
+  width: 100% !important;
   z-index: 1000 !important;
   padding-left: 20px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transform: none !important;
+  /* Only transition background and backdrop-filter, not position/transform */
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              backdrop-filter 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Glass morphism effect */
@@ -17,6 +22,8 @@
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  /* Prevent any layout shifts */
+  will-change: background-color, backdrop-filter, box-shadow !important;
 }
 
 .navbar-glass-effect.scrolled {
@@ -26,42 +33,18 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
 }
 
+/* Ensure navbar container is stable */
+.navbar .navbar-container,
+.navbar > div {
+  transform: none !important;
+  position: relative !important;
+}
+
 /* Desktop navigation pill styling */
 .nav-menu {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* Remove all old pill styling conflicts */
-.nav-links-pill {
-  /* Styles are now inline in the component */
-}
-
-.nav-links-pill:hover {
-  /* Styles are now inline in the component */
-}
-
-.nav-links-pill::before {
-  /* Removed - no longer needed */
-}
-
-.nav-links-pill:hover::before {
-  /* Removed - no longer needed */
-}
-
-/* Active pill background */
-.nav-active-pill {
-  /* Styles are now inline in the component */
-}
-
-/* Navigation links inside pill */
-.nav-links-pill .nav-link {
-  /* Styles are now inline in the component */
-}
-
-.nav-links-pill .nav-link:hover {
-  /* Styles are now inline in the component */
 }
 
 /* Mobile drawer overlay */
@@ -123,7 +106,7 @@
 
 /* Mobile CTA buttons */
 .mobile-cta-primary {
-  background: linear-gradient(90deg, #2962FF, #7B2CBF, #FFB800) !important;
+  background: linear-gradient(90deg, #00b8cc, #cc8800, #9a1f5a) !important;
   background-size: 200% 200% !important;
   color: #ffffff !important;
   font-weight: bold !important;
@@ -139,7 +122,7 @@
 
 .mobile-cta-primary:hover {
   transform: scale(1.02) !important;
-  box-shadow: 0 8px 25px rgba(41, 98, 255, 0.4) !important;
+  box-shadow: 0 8px 25px rgba(0, 184, 204, 0.4) !important;
 }
 
 .mobile-cta-secondary {
@@ -191,7 +174,7 @@
 }
 
 /* Responsive utilities */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .hidden-mobile {
     display: none !important;
   }
@@ -206,6 +189,34 @@
   
   .mobile-drawer {
     width: 280px !important;
+  }
+  
+  /* Adjust navbar height for mobile */
+  .navbar.w-nav {
+    min-height: 80px !important;
+    max-height: 80px !important;
+  }
+  
+  body {
+    padding-top: 80px !important;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+  
+  .show-mobile {
+    display: block !important;
+  }
+  
+  .navbar-container {
+    padding: 0 1.5rem !important;
+  }
+  
+  .mobile-drawer {
+    width: 320px !important;
   }
 }
 
@@ -379,7 +390,18 @@ body.menu-open {
 
 /* Ensure proper spacing for content below navbar */
 body {
-  padding-top: 70px;
+  padding-top: 120px;
+}
+
+/* Prevent any layout shifts during page transitions */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Ensure navbar container maintains its position */
+.navbar.w-nav {
+  min-height: 110px;
+  max-height: 110px;
 }
 
 /* Override any conflicting styles from existing CSS */
@@ -398,6 +420,34 @@ body {
   opacity: 1 !important;
   visibility: visible !important;
   display: block !important;
+}
+
+/* Override any global transforms that might affect navbar */
+.navbar,
+.navbar *,
+.navbar .w-nav,
+.navbar > div {
+  transform: none !important;
+}
+
+/* Prevent navbar from being affected by page transitions */
+.navbar.w-nav {
+  contain: layout style !important;
+}
+
+/* Ensure navbar is not affected by any global nav transforms */
+.navbar.w-nav,
+.navbar.w-nav > *,
+.navbar.w-nav .nav-links {
+  transform: none !important;
+  margin-left: 0 !important;
+  left: auto !important;
+}
+
+/* Override specific transforms from page.css */
+.navbar .nav-links {
+  transform: none !important;
+  margin-left: 0 !important;
 }
 
 /* Link component hover effects */

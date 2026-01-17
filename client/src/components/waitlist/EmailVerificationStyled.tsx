@@ -9,14 +9,11 @@ import {
     AlertCircle,
     Shield,
     Sparkles,
-    ArrowRight,
-    Rocket,
     CheckCircle2,
     ArrowLeft
 } from 'lucide-react';
 import { OrbitalLogoSmall } from './Logo';
 import { isUniversityEmail } from '../../utils/validation';
-import SpotlightButton from './SpotlightButton';
 import LoadingScreen from './LoadingScreen';
 import OTPModal from './OTPModal';
 import CountdownDisplay from './design/CountdownDisplay';
@@ -35,21 +32,6 @@ interface EmailVerificationStyledProps {
 }
 
 type VerificationStep = 'email-input' | 'otp-verification' | 'completing';
-
-// Premium gradient ring background
-const GradientOrb = React.memo(() => (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        {/* Center multi-color glow */}
-        <div
-            className="absolute w-[600px] h-[600px] rounded-full opacity-30"
-            style={{
-                background: "radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, rgba(236, 72, 153, 0.2) 25%, rgba(59, 130, 246, 0.15) 50%, transparent 70%)",
-                filter: "blur(80px)",
-            }}
-        />
-    </div>
-));
-GradientOrb.displayName = 'GradientOrb';
 
 // Simple email hint component
 const EmailHint: React.FC<{ email: string; isValid: boolean }> = React.memo(({ email, isValid }) => {
@@ -101,6 +83,12 @@ export default function EmailVerificationStyled({
     // Disable custom cursor on this page
     useEffect(() => {
         document.body.style.cursor = 'auto';
+        document.body.style.padding = "0px";
+        document.body.style.height = "0px";
+        document.body.style.margin = "0px";
+        
+        // Remove body padding-top for waitlist page
+        
         // Target the custom cursor component container (has z-9999 class)
         const cursorContainer = document.querySelector('.z-9999');
 
@@ -110,6 +98,8 @@ export default function EmailVerificationStyled({
 
         return () => {
             document.body.style.cursor = "";
+            // Restore body padding-top when leaving waitlist page
+            document.body.style.paddingTop = "120px";
             if (cursorContainer instanceof HTMLElement) {
                 cursorContainer.style.display = "";
             }
@@ -231,11 +221,11 @@ export default function EmailVerificationStyled({
             />
 
             {/* Main verification screen */}
-            <div className="min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 py-12 relative overflow-hidden bg-black cursor-auto">
+            <div className="min-h-screen flex flex-col items-center justify-start px-4 sm:px-6 pt-0 pb-12 relative overflow-hidden bg-black cursor-auto">
                 {/* Back button */}
                 <motion.button
                     onClick={() => navigate('/')}
-                    className="absolute top-6 left-6 flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-200 text-neutral-300 hover:text-white z-50"
+                    className="absolute top-2 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-200 text-neutral-300 hover:text-white z-50"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
@@ -246,21 +236,91 @@ export default function EmailVerificationStyled({
                     <span className="text-sm font-medium">Back</span>
                 </motion.button>
 
-                {/* Gradient rings background */}
-                <GradientOrb />
+                {/* Hero circles background - replace all other backgrounds */}
+                <div className="hero-circles-wrapper-v3 absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                    <div className="hero-circle-wrapper _01 center-circle absolute">
+                        <motion.img 
+                            alt="Background circle 1" 
+                            className="hero-circle w-[690px] h-[690px] object-contain" 
+                            loading="lazy"
+                            src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938caa62c8b5f7aaf5ad7_Circles%20(2).png"
+                            initial={{ 
+                                y: 200, 
+                                scale: 0.8, 
+                                opacity: 0 
+                            }}
+                            animate={{ 
+                                y: 0, 
+                                scale: 1, 
+                                opacity: 0.8 
+                            }}
+                            transition={{
+                                duration: 0.8,
+                                ease: [0.25, 0.46, 0.45, 0.94],
+                                delay: 0.5
+                            }}
+                        />
+                    </div>
+                    <div className="w-layout-vflex hero-circle-wrapper _02 center-circle absolute">
+                        <motion.img 
+                            alt="Background circle 2" 
+                            className="hero-circle-02 w-[860px] h-[860px] object-contain"
+                            loading="lazy"
+                            src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938ca8d17e84d6ed8613e_Circles%20(3).png"
+                            initial={{ 
+                                y: 250, 
+                                scale: 0.8, 
+                                opacity: 0 
+                            }}
+                            animate={{ 
+                                y: 0, 
+                                scale: 1, 
+                                opacity: 0.7 
+                            }}
+                            transition={{
+                                duration: 0.9,
+                                ease: [0.25, 0.46, 0.45, 0.94],
+                                delay: 0.7
+                            }}
+                        />
+                    </div>
+                    <div className="hero-circle-wrapper _03 center-circle absolute">
+                        <motion.img 
+                            alt="Background circle 3" 
+                            className="hero-circle-03 w-[1000px] h-[1000px] object-contain" 
+                            loading="lazy"
+                            src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938cab78e7525914d0f9f_Circles%20(1).png"
+                            initial={{ 
+                                y: 300, 
+                                scale: 0.8, 
+                                opacity: 0 
+                            }}
+                            animate={{ 
+                                y: 0, 
+                                scale: 1, 
+                                opacity: 0.6 
+                            }}
+                            transition={{
+                                duration: 1.0,
+                                ease: [0.25, 0.46, 0.45, 0.94],
+                                delay: 0.9
+                            }}
+                        />
+                    </div>
+                </div>
 
                 {/* Main content */}
                 <motion.div
-                    className="w-full max-w-[480px] relative z-30"
+                    className="w-full max-w-[480px] relative z-30 mt-16"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                 >
                     {/* Header */}
-                    <div className="text-center mb-10">
+                    <div className="text-center mb-6">
                         {/* Logo icon */}
                         <motion.div
-                            className="mb-6 flex justify-center"
+                            className="mb-4 flex justify-center"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.1 }}
@@ -281,7 +341,7 @@ export default function EmailVerificationStyled({
 
                         {/* Metallic gradient title - inspired by reference */}
                         <motion.h1
-                            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 tracking-tight leading-tight"
+                            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-2 tracking-tight leading-tight"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
@@ -318,30 +378,6 @@ export default function EmailVerificationStyled({
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
                     >
-                        {/* Orbit rings - 2 rings total for cleaner look */}
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                            {/* Outer ring */}
-                            <div
-                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] rounded-full animate-pulse-slow"
-                                style={{
-                                    background: "conic-gradient(from 0deg, rgba(139, 92, 246, 0.3) 0%, rgba(236, 72, 153, 0.3) 25%, rgba(251, 146, 60, 0.25) 50%, rgba(59, 130, 246, 0.3) 75%, rgba(139, 92, 246, 0.3) 100%)",
-                                    WebkitMaskImage: "radial-gradient(circle, transparent calc(50% - 2px), black 50%)",
-                                    maskImage: "radial-gradient(circle, transparent calc(50% - 2px), black 50%)",
-                                    filter: "blur(3px)"
-                                }}
-                            />
-                            {/* Inner ring */}
-                            <div
-                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full animate-pulse-slow"
-                                style={{
-                                    animationDelay: "1.5s",
-                                    background: "conic-gradient(from 180deg, rgba(59, 130, 246, 0.5) 0%, rgba(139, 92, 246, 0.5) 33%, rgba(236, 72, 153, 0.5) 66%, rgba(59, 130, 246, 0.5) 100%)",
-                                    WebkitMaskImage: "radial-gradient(circle, transparent calc(50% - 2px), black 50%)",
-                                    maskImage: "radial-gradient(circle, transparent calc(50% - 2px), black 50%)",
-                                    filter: "blur(3px)"
-                                }}
-                            />
-                        </div>
 
                         {/* Animated gradient border orbit */}
                         <div className="absolute -inset-[2px] rounded-3xl opacity-80">

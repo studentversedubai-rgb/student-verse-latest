@@ -133,7 +133,7 @@ export default function BentoDashboard({ queuePosition, totalUsers = 1000, refer
     return (
         <motion.div
             id="sv_bento-dashboard"
-            className="min-h-screen flex items-center justify-center px-4 py-6 sm:p-6 relative"
+            className="min-h-screen flex items-center justify-start px-4 pt-0 pb-6 sm:px-6 sm:pt-0 sm:pb-6 relative"
             initial="hidden"
             animate="visible"
             variants={containerVariants}

@@ -25,7 +25,7 @@ export default function About() {
   }, [html]);
 
   return (
-    <div style={{ paddingTop: "80px" }}>
+    <div style={{ paddingTop: "40px" }}>
       <Navbar />
       <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
         <TeamSection />

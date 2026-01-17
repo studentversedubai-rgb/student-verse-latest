@@ -99,13 +99,7 @@ export default function TeamSection() {
         role: "Frontend Dev",
         color: "linear-gradient(135deg, #7B2CBF, #9D4EDD)"
       },
-      {
-        id: "tech-fe-2",
-        initials: "YK",
-        name: "Yahya Kanjo",
-        role: "Backend Dev",
-        color: "linear-gradient(135deg, #00F0FF, #06B6D4)"
-      },
+    
       {
         id: "tech-fe-3-2",
         initials: "HW",
@@ -159,7 +153,7 @@ export default function TeamSection() {
     const colors = getColorValues(member.color);
 
     return (
-      <div 
+      <div
         style={{
           background: "linear-gradient(145deg, rgba(20, 25, 45, 0.95) 0%, rgba(15, 18, 35, 0.9) 100%)",
           backdropFilter: "blur(20px)",
@@ -189,8 +183,8 @@ export default function TeamSection() {
           background: `linear-gradient(90deg, transparent, ${colors.primary}60, transparent)`,
           opacity: 0.6
         }} />
-        
-        <div 
+
+        <div
           style={{
             background: member.color,
             color: "#ffffff",
@@ -209,13 +203,13 @@ export default function TeamSection() {
         >
           {member.initials}
         </div>
-        
+
         <div style={{
           textAlign: isFounder ? "center" : "left",
           flex: 1,
           minWidth: 0
         }}>
-          <div 
+          <div
             style={{
               color: "#ffffff",
               fontSize: isFounder ? "1.25rem" : isLead ? "1.1rem" : "1rem",
@@ -227,7 +221,7 @@ export default function TeamSection() {
           >
             {member.name}
           </div>
-          <div 
+          <div
             style={{
               fontSize: isFounder ? "0.95rem" : isLead ? "0.9rem" : "0.85rem",
               fontWeight: "500",
@@ -248,7 +242,7 @@ export default function TeamSection() {
   return (
     <div style={{ padding: "0" }}>
       <div>
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -256,35 +250,49 @@ export default function TeamSection() {
         >
           <section id="org" style={{ padding: "0" }}>
             <div style={{ width: "min(1100px, 92vw)", margin: "0 auto" }}>
-              <motion.header 
+              <motion.header
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
                 style={{ textAlign: "center", marginBottom: "3rem", marginTop: "0" }}
               >
-                <h2 style={{
-                  fontSize: "2.5rem",
-                  fontWeight: "700",
-                  background: "linear-gradient(135deg, #2962FF, #00F0FF)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  marginBottom: "1rem"
-                }}>
-                  Meet the Team
-                </h2>
-                <p style={{
-                  fontSize: "1.1rem",
-                  color: "rgba(255, 255, 255, 0.7)",
-                  maxWidth: "600px",
-                  margin: "0 auto"
-                }}>
+                <motion.h1
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  style={{
+                    fontSize: 'clamp(3rem, 8vw, 5rem)',
+                    fontWeight: '700',
+                    background: 'linear-gradient(315deg, #999, #fff)',
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    marginBottom: '1.5rem',
+                    lineHeight: '1.1'
+                  }}
+                >
+                  Meet The Team
+                </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                  style={{
+                    fontSize: "1.3rem",
+                    color: "rgba(255, 255, 255, 0.8)",
+                    maxWidth: "600px",
+                    margin: "0 auto",
+                    lineHeight: "1.6"
+                  }}
+                >
                   A quick look at how we're structured.
-                </p>
+                </motion.p>
               </motion.header>
 
-              <motion.div 
+              <motion.div
                 id="orgWrap"
                 variants={containerVariants}
                 initial="hidden"
@@ -329,7 +337,7 @@ export default function TeamSection() {
                   maxWidth: "1200px"
                 }}>
                   {/* Technology team */}
-                  <motion.div 
+                  <motion.div
                     variants={containerVariants}
                     style={{
                       background: "linear-gradient(145deg, rgba(20, 25, 50, 0.6) 0%, rgba(15, 18, 40, 0.4) 100%)",
@@ -367,7 +375,7 @@ export default function TeamSection() {
                   </motion.div>
 
                   {/* Marketing team */}
-                  <motion.div 
+                  <motion.div
                     variants={containerVariants}
                     style={{
                       background: "linear-gradient(145deg, rgba(20, 35, 45, 0.6) 0%, rgba(15, 25, 35, 0.4) 100%)",
@@ -405,7 +413,7 @@ export default function TeamSection() {
                   </motion.div>
 
                   {/* Merchants team */}
-                  <motion.div 
+                  <motion.div
                     variants={containerVariants}
                     style={{
                       background: "linear-gradient(145deg, rgba(30, 25, 40, 0.6) 0%, rgba(20, 18, 30, 0.4) 100%)",

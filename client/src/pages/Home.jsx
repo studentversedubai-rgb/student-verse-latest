@@ -9,6 +9,7 @@ import Trustbar from '../components/Trustbar'
 import CTA from '../components/CTA'
 import MainFooter from '../components/Footer'
 import Footer from './Footer'
+import ScrollBaseAnimation from '../components/scroll-text-marque'
 
 export default function Home() {
   const [html, setHtml] = useState('')
@@ -36,6 +37,17 @@ export default function Home() {
       <Hero />
       <TrustedBy />
       <Features />
+      <div className='h-[300px] sm:h-[400px] md:h-[500px] grid place-content-center'>
+        <ScrollBaseAnimation
+          // delay={500}
+          baseVelocity={3}
+          scrollDependent={true}
+          clasname='font-bold tracking-[-0.07em] leading-[90%] bg-gradient-to-r from-[#00b8cc] via-[#cc8800] to-[#9a1f5a] bg-clip-text text-transparent'
+        >
+          VERIFY. DISCOVER. REDEEM.
+        </ScrollBaseAnimation>
+      </div>
+
       <Trustbar />
       <CTA />
       <MainFooter />

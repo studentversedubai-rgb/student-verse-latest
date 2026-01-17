@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function Hero() {
+  const { isAuthenticated } = useAuth();
+  
   return (
     <>
       {/* Empty div for spacing */}
@@ -188,7 +191,7 @@ export default function Hero() {
                     className="join-waitlist-button" 
                     to="/waitlist"
                   >
-                    Join TheUNI-verse
+                    {isAuthenticated ? "View Dashboard" : "Join The UNI-verse"}
                   </Link>
                 </motion.div>
               </form>

@@ -86,7 +86,7 @@ const WaitlistContent: React.FC = () => {
 export default function WaitlistPage() {
     return (
         <AuthProvider>
-            <div className="min-h-screen bg-navy">
+            <div className="min-h-screen bg-navy m-0 p-0" style={{ paddingTop: 0, marginTop: 0 }}>
                 <Suspense fallback={<LoadingSpinner />}>
                     <WaitlistContent />
                 </Suspense>

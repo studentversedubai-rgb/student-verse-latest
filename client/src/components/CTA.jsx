@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function CTA() {
+  const { isAuthenticated } = useAuth();
+  
   return (
     <div className="section overflow-hidden" style={{ marginTop: '0 !important', marginBottom: '0 !important' }}>
       <div className="container">
@@ -18,6 +21,7 @@ export default function CTA() {
               <div className="cta-heading-wrapper">
                 <motion.div 
                   className="cta-heading fading-title"
+                  style={{ textAlign: 'left' }}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -57,7 +61,7 @@ export default function CTA() {
                   className="join-waitlist-button" 
                   to="/waitlist"
                 >
-                  Join the UNI-verse
+                  {isAuthenticated ? "View Dashboard" : "Join the UNI-verse"}
                 </Link>
               </form>
               

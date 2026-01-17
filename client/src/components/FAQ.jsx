@@ -70,30 +70,41 @@ export default function FAQ() {
           <div id="faq-about">
             <div style={{ padding: "0", margin: "0" }}>
               <div className="container">
-                <div style={{ margin: "0", padding: "0", textAlign: "center" }}>
-                  <div className="section-title xl">
-                    <motion.div 
-                      className="fade-in-on-scroll"
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.6, ease: "easeOut" }}
-                    >
-                      <h2 className="fading-title">StudentVerse FAQs</h2>
-                    </motion.div>
-                  </div>
+                <div style={{ margin: "0", padding: "0", textAlign: "center", width: "100%" }}>
+                  <motion.h1
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    style={{
+                      fontSize: 'clamp(3rem, 8vw, 5rem)',
+                      fontWeight: '700',
+                      background: 'linear-gradient(315deg, #999, #fff)',
+                      backgroundClip: 'text',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      marginBottom: '1.5rem',
+                      lineHeight: '1.1'
+                    }}
+                  >
+                    StudentVerse FAQs
+                  </motion.h1>
                   
-                  <div className="section-paragraph">
-                    <motion.div 
-                      className="fade-in-on-scroll"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-100px" }}
-                      transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-                    >
-                      <p>Get quick answers to your questions about StudentVerse and saving as a student.</p>
-                    </motion.div>
-                  </div>
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                    style={{
+                      fontSize: "1.3rem",
+                      color: "rgba(255, 255, 255, 0.8)",
+                      maxWidth: "600px",
+                      margin: "0 auto",
+                      lineHeight: "1.6"
+                    }}
+                  >
+                    Get quick answers to your questions about StudentVerse and saving as a student.
+                  </motion.p>
                 </div>
               </div>
               
