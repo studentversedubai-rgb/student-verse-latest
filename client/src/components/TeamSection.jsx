@@ -160,7 +160,7 @@ export default function TeamSection() {
           WebkitBackdropFilter: "blur(20px)",
           border: `1px solid ${colors.primary}35`,
           borderRadius: isFounder ? "24px" : "18px",
-          padding: isFounder ? "2rem 2.5rem" : isLead ? "1.5rem" : "1.25rem",
+          padding: isFounder ? "clamp(1.5rem, 4vw, 2rem) clamp(2rem, 5vw, 2.5rem)" : isLead ? "clamp(1rem, 3vw, 1.5rem)" : "clamp(0.875rem, 2.5vw, 1.25rem)",
           display: "flex",
           flexDirection: isFounder ? "column" : "row",
           alignItems: "center",
@@ -255,7 +255,7 @@ export default function TeamSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease: "easeOut" }}
-                style={{ textAlign: "center", marginBottom: "3rem", marginTop: "0" }}
+                style={{ textAlign: "center", marginBottom: "clamp(2rem, 5vw, 3rem)", marginTop: "0" }}
               >
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
@@ -302,9 +302,9 @@ export default function TeamSection() {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  gap: "2.5rem",
-                  padding: "2rem",
-                  borderRadius: "32px",
+                  gap: "clamp(1.5rem, 4vw, 2.5rem)",
+                  padding: "clamp(1rem, 3vw, 2rem)",
+                  borderRadius: "clamp(20px, 4vw, 32px)",
                   background: "linear-gradient(180deg, rgba(15, 18, 35, 0.5) 0%, rgba(10, 12, 25, 0.3) 100%)",
                   border: "1px solid rgba(255, 255, 255, 0.05)",
                   position: "relative",
@@ -342,8 +342,8 @@ export default function TeamSection() {
                     style={{
                       background: "linear-gradient(145deg, rgba(20, 25, 50, 0.6) 0%, rgba(15, 18, 40, 0.4) 100%)",
                       backdropFilter: "blur(10px)",
-                      borderRadius: "24px",
-                      padding: "2rem",
+                      borderRadius: "20px",
+                      padding: "clamp(1rem, 3vw, 2rem)",
                       border: "1px solid rgba(41, 98, 255, 0.15)",
                       position: "relative",
                       overflow: "hidden"
@@ -351,9 +351,9 @@ export default function TeamSection() {
                   >
                     <h3 style={{
                       color: "#ffffff",
-                      fontSize: "1.5rem",
+                      fontSize: "clamp(1.25rem, 3vw, 1.5rem)",
                       fontWeight: "700",
-                      marginBottom: "1.5rem",
+                      marginBottom: "clamp(1rem, 2.5vw, 1.5rem)",
                       textAlign: "center",
                       background: "linear-gradient(135deg, #2962FF, #00F0FF)",
                       WebkitBackgroundClip: "text",
@@ -380,8 +380,8 @@ export default function TeamSection() {
                     style={{
                       background: "linear-gradient(145deg, rgba(20, 35, 45, 0.6) 0%, rgba(15, 25, 35, 0.4) 100%)",
                       backdropFilter: "blur(10px)",
-                      borderRadius: "24px",
-                      padding: "2rem",
+                      borderRadius: "20px",
+                      padding: "clamp(1rem, 3vw, 2rem)",
                       border: "1px solid rgba(0, 240, 255, 0.15)",
                       position: "relative",
                       overflow: "hidden"
@@ -389,9 +389,9 @@ export default function TeamSection() {
                   >
                     <h3 style={{
                       color: "#ffffff",
-                      fontSize: "1.5rem",
+                      fontSize: "clamp(1.25rem, 3vw, 1.5rem)",
                       fontWeight: "700",
-                      marginBottom: "1.5rem",
+                      marginBottom: "clamp(1rem, 2.5vw, 1.5rem)",
                       textAlign: "center",
                       background: "linear-gradient(135deg, #00F0FF, #FFB800)",
                       WebkitBackgroundClip: "text",
@@ -418,8 +418,8 @@ export default function TeamSection() {
                     style={{
                       background: "linear-gradient(145deg, rgba(30, 25, 40, 0.6) 0%, rgba(20, 18, 30, 0.4) 100%)",
                       backdropFilter: "blur(10px)",
-                      borderRadius: "24px",
-                      padding: "2rem",
+                      borderRadius: "20px",
+                      padding: "clamp(1rem, 3vw, 2rem)",
                       border: "1px solid rgba(255, 184, 0, 0.15)",
                       position: "relative",
                       overflow: "hidden"
@@ -427,9 +427,9 @@ export default function TeamSection() {
                   >
                     <h3 style={{
                       color: "#ffffff",
-                      fontSize: "1.5rem",
+                      fontSize: "clamp(1.25rem, 3vw, 1.5rem)",
                       fontWeight: "700",
-                      marginBottom: "1.5rem",
+                      marginBottom: "clamp(1rem, 2.5vw, 1.5rem)",
                       textAlign: "center",
                       background: "linear-gradient(135deg, #FFB800, #7B2CBF)",
                       WebkitBackgroundClip: "text",

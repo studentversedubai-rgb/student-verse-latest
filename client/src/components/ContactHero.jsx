@@ -308,7 +308,7 @@ export default function ContactHero() {
       <div style={{ 
         maxWidth: '1200px', 
         margin: '0 auto', 
-        padding: '0 2rem',
+        padding: 'clamp(1rem, 3vw, 2rem)',
         position: 'relative',
         zIndex: 10
       }}>
@@ -317,7 +317,7 @@ export default function ContactHero() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          style={{ textAlign: 'center', marginBottom: '4rem' }}
+          style={{ textAlign: 'center', marginBottom: 'clamp(2rem, 5vw, 3rem)' }}
         >
           <motion.h1
             variants={itemVariants}
@@ -352,7 +352,7 @@ export default function ContactHero() {
         <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '3rem',
+          gap: 'clamp(1.5rem, 4vw, 2.5rem)',
           alignItems: 'start'
         }}>
           {/* Contact Info Cards */}
@@ -481,8 +481,8 @@ export default function ContactHero() {
             style={{
               background: 'rgba(8, 12, 31, 0.9)',
               backdropFilter: 'blur(20px)',
-              borderRadius: '24px',
-              padding: '3rem',
+              borderRadius: '20px',
+              padding: 'clamp(1.5rem, 4vw, 2.5rem)',
               border: '2px solid transparent',
               backgroundImage: 'linear-gradient(rgba(8, 12, 31, 0.9), rgba(8, 12, 31, 0.9)), linear-gradient(45deg, #2962FF, #FFB800, #7B2CBF)',
               backgroundOrigin: 'border-box',
@@ -496,18 +496,18 @@ export default function ContactHero() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
               style={{
-                fontSize: '2rem',
+                fontSize: 'clamp(1.5rem, 4vw, 2rem)',
                 fontWeight: '600',
                 color: 'white',
-                marginBottom: '2rem',
+                marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
                 textAlign: 'center'
               }}
             >
               Send us a message
             </motion.h2>
 
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(1rem, 2.5vw, 1.25rem)' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(0.75rem, 2vw, 1rem)' }}>
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -535,12 +535,12 @@ export default function ContactHero() {
                     }}
                     style={{
                       width: '100%',
-                      padding: '1rem',
+                      padding: 'clamp(0.75rem, 2vw, 1rem)',
                       background: 'rgba(255, 255, 255, 0.05)',
                       border: '1px solid rgba(255, 255, 255, 0.2)',
-                      borderRadius: '12px',
+                      borderRadius: '10px',
                       color: 'white',
-                      fontSize: '1rem',
+                      fontSize: 'clamp(0.9rem, 2vw, 1rem)',
                       transition: 'all 0.3s ease'
                     }}
                     placeholder="Your first name"
@@ -574,12 +574,12 @@ export default function ContactHero() {
                     }}
                     style={{
                       width: '100%',
-                      padding: '1rem',
+                      padding: 'clamp(0.75rem, 2vw, 1rem)',
                       background: 'rgba(255, 255, 255, 0.05)',
                       border: '1px solid rgba(255, 255, 255, 0.2)',
-                      borderRadius: '12px',
+                      borderRadius: '10px',
                       color: 'white',
-                      fontSize: '1rem',
+                      fontSize: 'clamp(0.9rem, 2vw, 1rem)',
                       transition: 'all 0.3s ease'
                     }}
                     placeholder="Your last name"
@@ -614,12 +614,12 @@ export default function ContactHero() {
                   }}
                   style={{
                     width: '100%',
-                    padding: '1rem',
+                    padding: 'clamp(0.75rem, 2vw, 1rem)',
                     background: 'rgba(255, 255, 255, 0.05)',
                     border: '1px solid rgba(255, 255, 255, 0.2)',
-                    borderRadius: '12px',
+                    borderRadius: '10px',
                     color: 'white',
-                    fontSize: '1rem',
+                    fontSize: 'clamp(0.9rem, 2vw, 1rem)',
                     transition: 'all 0.3s ease'
                   }}
                   placeholder="your.email@example.com"
@@ -652,12 +652,12 @@ export default function ContactHero() {
                   }}
                   style={{
                     width: '100%',
-                    padding: '1rem',
+                    padding: 'clamp(0.75rem, 2vw, 1rem)',
                     background: 'rgba(255, 255, 255, 0.05)',
                     border: '1px solid rgba(255, 255, 255, 0.2)',
-                    borderRadius: '12px',
+                    borderRadius: '10px',
                     color: 'white',
-                    fontSize: '1rem',
+                    fontSize: 'clamp(0.9rem, 2vw, 1rem)',
                     transition: 'all 0.3s ease'
                   }}
                 >
@@ -689,21 +689,21 @@ export default function ContactHero() {
                   value={formData.message}
                   onChange={handleInputChange}
                   required
-                  rows={5}
+                  rows={4}
                   whileFocus={{ 
                     scale: 1.02,
                     boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)"
                   }}
                   style={{
                     width: '100%',
-                    padding: '1rem',
+                    padding: 'clamp(0.75rem, 2vw, 1rem)',
                     background: 'rgba(255, 255, 255, 0.05)',
                     border: '1px solid rgba(255, 255, 255, 0.2)',
-                    borderRadius: '12px',
+                    borderRadius: '10px',
                     color: 'white',
-                    fontSize: '1rem',
+                    fontSize: 'clamp(0.9rem, 2vw, 1rem)',
                     resize: 'vertical',
-                    minHeight: '120px',
+                    minHeight: 'clamp(100px, 15vw, 120px)',
                     transition: 'all 0.3s ease'
                   }}
                   placeholder="Tell us about your inquiry, idea, or how we can help you..."
@@ -725,9 +725,9 @@ export default function ContactHero() {
                     : 'linear-gradient(90deg, #2962FF, #7B2CBF, #FFB800)',
                   color: 'white',
                   border: 'none',
-                  padding: '1.2rem 2rem',
+                  padding: 'clamp(0.875rem, 2.5vw, 1.2rem) clamp(1.5rem, 4vw, 2rem)',
                   borderRadius: '50px',
-                  fontSize: '1.1rem',
+                  fontSize: 'clamp(1rem, 2.5vw, 1.1rem)',
                   fontWeight: '600',
                   cursor: isSubmitting ? 'not-allowed' : 'pointer',
                   boxShadow: isSubmitting 

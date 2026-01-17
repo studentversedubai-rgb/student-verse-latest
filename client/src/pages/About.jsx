@@ -25,9 +25,9 @@ export default function About() {
   }, [html]);
 
   return (
-    <div style={{ paddingTop: "40px" }}>
+    <div style={{ paddingTop: "clamp(20px, 5vw, 40px)" }}>
       <Navbar />
-      <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "clamp(1rem, 3vw, 2rem)" }}>
         <TeamSection />
         <FAQ />
         <MainFooter />
