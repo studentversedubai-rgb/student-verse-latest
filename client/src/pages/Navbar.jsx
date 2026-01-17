@@ -305,8 +305,8 @@ export default function Navbar() {
                 position: "fixed",
                 top: 0,
                 right: 0,
-                height: "100dvh", // Use dynamic viewport height
-                maxHeight: "100vh", // Fallback for older browsers
+                height: "100vh", // Use standard viewport height
+                maxHeight: "100vh",
                 width: "320px",
                 maxWidth: "85vw",
                 background: "linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%)",
@@ -339,7 +339,7 @@ export default function Navbar() {
                 }}
               />
 
-              {/* Header */}
+              {/* Header - Compact */}
               <motion.div 
                 className="mobile-drawer-header"
                 initial={{ y: -20, opacity: 0 }}
@@ -349,7 +349,7 @@ export default function Navbar() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  padding: "1.5rem 1.5rem 1rem",
+                  padding: "1rem 1.5rem 0.75rem",
                   borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
                   background: "linear-gradient(90deg, rgba(0, 184, 204, 0.05) 0%, rgba(204, 136, 0, 0.05) 50%, rgba(154, 31, 90, 0.05) 100%)",
                   flexShrink: 0
@@ -358,7 +358,7 @@ export default function Navbar() {
                 <motion.img
                   src="/assets/svlogo.png"
                   alt="StudentVerse"
-                  style={{ height: "36px" }}
+                  style={{ height: "32px" }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.2 }}
                 />
@@ -373,8 +373,8 @@ export default function Navbar() {
                     background: "rgba(255, 255, 255, 0.1)",
                     border: "1px solid rgba(255, 255, 255, 0.2)",
                     borderRadius: "50%",
-                    width: "36px",
-                    height: "36px",
+                    width: "32px",
+                    height: "32px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -383,25 +383,28 @@ export default function Navbar() {
                     transition: "all 0.2s ease"
                   }}
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
                     <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                   </svg>
                 </motion.button>
               </motion.div>
 
-              {/* Navigation Links */}
+              {/* Navigation Links - Compact */}
               <motion.nav 
                 style={{ 
                   flex: 1, 
-                  padding: "1.5rem 1.5rem",
+                  padding: "1rem 1.5rem",
                   overflow: "auto",
-                  minHeight: 0 // Allow flex shrinking
+                  minHeight: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center"
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.4 }}
               >
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
                   {navLinks.map((link, index) => (
                     <motion.div 
                       key={link.href}
@@ -419,13 +422,13 @@ export default function Navbar() {
                         className="mobile-nav-link"
                         style={{
                           display: "block",
-                          padding: "0.875rem 1.25rem",
+                          padding: "0.75rem 1rem",
                           color: isActiveLink(link.href) ? "#00b8cc" : "#ffffff",
                           textDecoration: "none",
-                          fontSize: "1.1rem",
+                          fontSize: "1rem",
                           fontWeight: isActiveLink(link.href) ? "600" : "500",
-                          borderRadius: "12px",
-                          margin: "0.25rem 0",
+                          borderRadius: "10px",
+                          margin: "0.125rem 0",
                           transition: "all 0.3s ease",
                           background: isActiveLink(link.href) 
                             ? "linear-gradient(90deg, rgba(0, 184, 204, 0.1) 0%, rgba(204, 136, 0, 0.1) 100%)"
@@ -436,7 +439,7 @@ export default function Navbar() {
                         }}
                       >
                         <motion.span
-                          whileHover={{ x: 8, scale: 1.02 }}
+                          whileHover={{ x: 6, scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           transition={{ duration: 0.2 }}
                           style={{ display: "block" }}
@@ -449,10 +452,10 @@ export default function Navbar() {
                 </div>
               </motion.nav>
 
-              {/* Bottom Actions */}
+              {/* Bottom Actions - Always Visible */}
               <motion.div 
                 style={{ 
-                  padding: "1.25rem 1.5rem 1.5rem", 
+                  padding: "1rem 1.5rem", 
                   borderTop: "1px solid rgba(255, 255, 255, 0.1)",
                   background: "linear-gradient(90deg, rgba(0, 184, 204, 0.03) 0%, rgba(204, 136, 0, 0.03) 50%, rgba(154, 31, 90, 0.03) 100%)",
                   flexShrink: 0
@@ -466,10 +469,10 @@ export default function Navbar() {
                   onClick={handleNavClick}
                   className="join-waitlist-button"
                   style={{
-                    fontSize: "0.95rem",
+                    fontSize: "0.9rem",
                     fontWeight: "700",
                     textTransform: "uppercase",
-                    padding: "0.875rem 1.25rem",
+                    padding: "0.75rem 1rem",
                     borderRadius: "50px",
                     textDecoration: "none",
                     display: "block",
