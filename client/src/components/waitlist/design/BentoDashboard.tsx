@@ -42,7 +42,7 @@ const cardVariants: Variants = {
     },
 };
 
-// Memoized BentoCard component with animated gradient border
+// Memoized BentoCard component with animated gradient border (same as EmailVerificationStyled)
 const BentoCard = memo(({
     children,
     className = "",
@@ -56,12 +56,31 @@ const BentoCard = memo(({
             whileHover={{ y: -4, transition: { duration: 0.2 } }}
             className={`relative rounded-3xl overflow-visible ${className}`}
         >
-            {/* Card content with ultra-thin gradient border */}
-            <div className="relative bg-black rounded-3xl p-5 sm:p-6 lg:p-8 border-[0.5px] border-transparent bg-clip-padding" style={{
-                backgroundImage: 'linear-gradient(black, black), linear-gradient(90deg, #3B82F6 0%, #EC4899 20%, #8B5CF6 40%, #FB923C 60%, #F59E0B 80%, #3B82F6 100%)',
-                backgroundOrigin: 'border-box',
-                backgroundClip: 'padding-box, border-box'
-            }}>
+            {/* Animated gradient border orbit - same as EmailVerificationStyled */}
+            <div className="absolute -inset-[2px] rounded-3xl opacity-80">
+                <motion.div
+                    className="absolute inset-0 rounded-3xl"
+                    style={{
+                        background: "linear-gradient(90deg, #8B5CF6 0%, #EC4899 18%, #FB923C 35%, #3B82F6 52%, #06B6D4 68%, #FB923C 85%, #8B5CF6 100%)",
+                        backgroundSize: "300% 300%"
+                    }}
+                    animate={{
+                        backgroundPosition: ["0% 50%", "300% 50%"]
+                    }}
+                    transition={{
+                        duration: 4,
+                        ease: "linear",
+                        repeat: Infinity
+                    }}
+                />
+                {/* Soft multi-color glow effect */}
+                <div className="absolute inset-0 rounded-3xl blur-lg" style={{
+                    background: "linear-gradient(90deg, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.4) 20%, rgba(251, 146, 60, 0.35) 40%, rgba(59, 130, 246, 0.4) 60%, rgba(251, 146, 60, 0.35) 80%, rgba(139, 92, 246, 0.4) 100%)"
+                }} />
+            </div>
+
+            {/* Card content with black background */}
+            <div className="relative bg-black rounded-3xl border-2 border-transparent p-5 sm:p-6 lg:p-8 z-10">
                 {children}
             </div>
         </motion.div>
@@ -69,26 +88,48 @@ const BentoCard = memo(({
 });
 BentoCard.displayName = "BentoCard";
 
-// Social link component with animated border
+// Social link component with animated RGB border
 const SocialLink = memo(({ href, icon: Icon, label }: { href: string; icon: React.ElementType; label: string }) => (
     <motion.a
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black border-[0.5px] flex items-center justify-center text-white/70 hover:text-white transition-all duration-300"
-        style={{
-            backgroundImage: 'linear-gradient(black, black), linear-gradient(90deg, #3B82F6 0%, #EC4899 20%, #8B5CF6 40%, #FB923C 60%, #F59E0B 80%, #3B82F6 100%)',
-            backgroundOrigin: 'border-box',
-            backgroundClip: 'padding-box, border-box'
-        }}
+        className="group relative w-16 h-16 sm:w-17 sm:h-17 rounded-full flex items-center justify-center text-white/70 hover:text-white transition-all duration-300"
         whileHover={{
             scale: 1.1,
-            backgroundColor: "rgba(41, 98, 255, 0.2)",
         }}
         whileTap={{ scale: 0.95 }}
         aria-label={label}
     >
-        <Icon className="w-5 h-5 transition-transform group-hover:scale-110" />
+        {/* Animated gradient border orbit */}
+        <div className="absolute -inset-[2px] rounded-full opacity-80">
+            <motion.div
+                className="absolute inset-0 rounded-full"
+                style={{
+                    background: "linear-gradient(90deg, #8B5CF6 0%, #EC4899 18%, #FB923C 35%, #3B82F6 52%, #06B6D4 68%, #FB923C 85%, #8B5CF6 100%)",
+                    backgroundSize: "300% 300%"
+                }}
+                animate={{
+                    backgroundPosition: ["0% 50%", "300% 50%"]
+                }}
+                transition={{
+                    duration: 4,
+                    ease: "linear",
+                    repeat: Infinity
+                }}
+            />
+            {/* Soft multi-color glow effect */}
+            <div className="absolute inset-0 rounded-full blur-md" style={{
+                background: "linear-gradient(90deg, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.4) 20%, rgba(251, 146, 60, 0.35) 40%, rgba(59, 130, 246, 0.4) 60%, rgba(251, 146, 60, 0.35) 80%, rgba(139, 92, 246, 0.4) 100%)"
+            }} />
+        </div>
+
+        {/* Icon container with black background */}
+        <div className="relative bg-black rounded-full w-full h-full flex items-center justify-center border-2 border-transparent z-10">
+            <Icon className="w-6 h-6 sm:w-7 sm:h-7 transition-transform group-hover:scale-110" />
+        </div>
+
+        {/* Hover ripple effect */}
         <motion.div
             className="absolute inset-0 rounded-full bg-azure/20"
             initial={{ scale: 0, opacity: 0 }}
@@ -122,119 +163,176 @@ const XIcon = () => (
 
 export default function BentoDashboard({ queuePosition, totalUsers = 1000, referralStats, referralCode }: BentoDashboardProps) {
     const [copied, setCopied] = useState(false);
-    const referralLink = `studentverse.io/ref/u/${referralCode}`;
 
     const handleCopyLink = useCallback(() => {
-        navigator.clipboard.writeText(referralLink);
+        navigator.clipboard.writeText(referralCode);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-    }, [referralLink]);
+    }, [referralCode]);
+
+    const handleSocialShare = useCallback((platform: string) => {
+        const shareMessage = `🎓 Join me on StudentVerse - the ultimate student platform! 
+
+Get exclusive discounts, connect with fellow students, and never pay full price again! 
+
+Use my referral code: ${referralCode}
+
+Join the waitlist: https://studentverse.ae/waitlist
+
+#StudentVerse #StudentLife #Discounts`;
+
+        const encodedMessage = encodeURIComponent(shareMessage);
+        const encodedUrl = encodeURIComponent('https://studentverse.ae/waitlist');
+
+        switch (platform) {
+            case 'whatsapp':
+                window.open(`https://wa.me/?text=${encodedMessage}`, '_blank');
+                break;
+            case 'instagram':
+                // Instagram doesn't support direct sharing with text, so copy to clipboard
+                navigator.clipboard.writeText(shareMessage);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 3000);
+                // Open Instagram
+                window.open('https://instagram.com', '_blank');
+                break;
+            case 'facebook':
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedMessage}`, '_blank');
+                break;
+            case 'twitter':
+                window.open(`https://twitter.com/intent/tweet?text=${encodedMessage}`, '_blank');
+                break;
+            case 'copy':
+                navigator.clipboard.writeText(shareMessage);
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+                break;
+            default:
+                break;
+        }
+    }, [referralCode]);
 
     return (
         <motion.div
             id="sv_bento-dashboard"
-            className="min-h-screen flex items-center justify-start px-4 pt-0 pb-6 sm:px-6 sm:pt-0 sm:pb-6 relative"
+            className="min-h-screen flex items-start justify-center px-0 pt-0 pb-6 relative"
             initial="hidden"
             animate="visible"
             variants={containerVariants}
         >
-            <div className="max-w-6xl w-full relative z-10">
-                {/* Main Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+            <div className="max-w-6xl w-full relative z-10 px-4 sm:px-6">
+                {/* Main Grid - Proper Bento Layout with Better Mobile Spacing */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-6">
 
-                    {/* Card 1: Queue Position - Large Feature Card */}
-                    <BentoCard className="lg:col-span-2">
-                        <div className="text-center">
-                            <motion.p
-                                className="text-gray-400 mb-3 font-mono text-xs sm:text-sm uppercase tracking-[0.2em]"
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.3 }}
-                            >
-                                Queue Position
-                            </motion.p>
-
-                            {/* Animated Queue Number */}
-                            <motion.div
-                                className="relative inline-block"
-                                initial={{ scale: 0.5, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                transition={{ type: "spring", stiffness: 100, delay: 0.4 }}
-                            >
-                                <motion.span
-                                    className="text-5xl sm:text-6xl lg:text-8xl font-black font-display block"
-                                    style={{
-                                        background: "linear-gradient(135deg, #3B82F6 0%, #2563EB 50%, #1D4ED8 100%)",
-                                        WebkitBackgroundClip: "text",
-                                        WebkitTextFillColor: "transparent",
-                                        filter: "drop-shadow(0 0 30px rgba(59, 130, 246, 0.5))",
-                                    }}
-                                    animate={{
-                                        filter: [
-                                            "drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))",
-                                            "drop-shadow(0 0 40px rgba(59, 130, 246, 0.6))",
-                                            "drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))",
-                                        ]
-                                    }}
-                                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    {/* Top Left: Queue Position (2/3 width) - Responsive Layout */}
+                    <BentoCard className="lg:col-span-2 min-h-[280px] lg:min-h-[240px]">
+                        <div className="h-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 lg:gap-6">
+                            {/* Queue Position Content */}
+                            <div className="flex-1 text-center lg:text-left lg:pl-8">
+                                <motion.p
+                                    className="text-gray-400 mb-3 font-mono text-xs sm:text-sm uppercase tracking-[0.2em]"
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.3 }}
                                 >
-                                    #{queuePosition.toLocaleString()}
-                                </motion.span>
-                            </motion.div>
+                                    Queue Position
+                                </motion.p>
+
+                                {/* Animated Queue Number */}
+                                <motion.div
+                                    className="relative"
+                                    initial={{ scale: 0.5, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    transition={{ type: "spring", stiffness: 100, delay: 0.4 }}
+                                >
+                                    <motion.span
+                                        className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black font-display block"
+                                        style={{
+                                            background: "linear-gradient(135deg, #3B82F6 0%, #2563EB 50%, #1D4ED8 100%)",
+                                            WebkitBackgroundClip: "text",
+                                            WebkitTextFillColor: "transparent",
+                                            filter: "drop-shadow(0 0 30px rgba(59, 130, 246, 0.5))",
+                                        }}
+                                        animate={{
+                                            filter: [
+                                                "drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))",
+                                                "drop-shadow(0 0 40px rgba(59, 130, 246, 0.6))",
+                                                "drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))",
+                                            ]
+                                        }}
+                                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                                    >
+                                        #{queuePosition.toLocaleString()}
+                                    </motion.span>
+                                </motion.div>
+                            </div>
 
                             {/* Radar Visual */}
                             <motion.div
-                                className="flex justify-center mt-6"
+                                className="flex justify-center lg:justify-end flex-shrink-0"
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ delay: 0.6 }}
                             >
-                                <RadarVisual size="md" />
+                                <RadarVisual
+                                    size="lg"
+                                    blips={[
+                                        { x: 25, y: 30, color: "#03d0e6", id: "target-1" },
+                                        { x: 70, y: 45, color: "#03d0e6", id: "target-2" },
+                                        { x: 45, y: 65, color: "#03d0e6", id: "target-3" },
+                                        { x: 80, y: 70, color: "#03d0e6", id: "target-4" },
+                                        { x: 15, y: 75, color: "#03d0e6", id: "target-5" }
+                                    ]}
+                                    scanning={true}
+                                />
                             </motion.div>
                         </div>
                     </BentoCard>
 
-                    {/* Card 2: Pro Membership Unlock */}
-                    <BentoCard className="lg:row-span-2">
+                    {/* Top Right: Pro Membership Unlock (1/3 width) */}
+                    <BentoCard className="lg:col-span-1 min-h-[280px] lg:min-h-[240px]">
                         <motion.div
+                            className="h-full flex flex-col justify-between"
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.5 }}
                         >
-                            <div className="flex items-center gap-2 mb-3">
-                                <Crown className="w-5 h-5 text-gold" />
-                                <h3 className="font-display text-lg sm:text-xl font-bold text-white">UNLOCK PRO</h3>
-                            </div>
-
-                            <p className="text-gray-400 mb-5 text-sm leading-relaxed">
-                                Refer <span className="text-gold font-semibold">5 students</span> to unlock
-                                <span className="text-cyan font-semibold"> 1 month free</span> SV Pro membership
-                            </p>
-
-                            <ChipSlots
-                                total={5}
-                                filled={referralStats.count}
-                                labels={["REFERRAL 1", "LOCKED", "LOCKED", "LOCKED", "LOCKED"]}
-                            />
-
-                            {/* Progress indicator */}
-                            <div className="mt-5 mb-4">
-                                <div className="flex justify-between text-xs mb-2">
-                                    <span className="text-gray-500">Progress</span>
-                                    <span className="text-gold font-mono">{referralStats.count}/5</span>
+                            <div>
+                                <div className="flex items-center gap-2 mb-3">
+                                    <Crown className="w-5 h-5 text-gold" />
+                                    <h3 className="font-display text-lg sm:text-xl font-bold text-white">UNLOCK PRO</h3>
                                 </div>
-                                <div className="h-2 bg-white/10 rounded-full overflow-hidden">
-                                    <motion.div
-                                        className="h-full bg-linear-to-r from-gold to-orange-500"
-                                        initial={{ width: 0 }}
-                                        animate={{ width: `${(referralStats.count / 5) * 100}%` }}
-                                        transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-                                    />
+
+                                <p className="text-gray-400 mb-5 text-sm leading-relaxed">
+                                    Refer <span className="text-gold font-semibold">5 students</span> to unlock
+                                    <span className="text-cyan font-semibold"> 1 month free</span> SV Pro membership
+                                </p>
+
+                                <ChipSlots
+                                    total={5}
+                                    filled={referralStats.count}
+                                    labels={["REFERRAL 1", "LOCKED", "LOCKED", "LOCKED", "LOCKED"]}
+                                />
+
+                                {/* Progress indicator */}
+                                <div className="mt-5 mb-4">
+                                    <div className="flex justify-between text-xs mb-2">
+                                        <span className="text-gray-500">Progress</span>
+                                        <span className="text-gold font-mono">{referralStats.count}/5</span>
+                                    </div>
+                                    <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+                                        <motion.div
+                                            className="h-full bg-linear-to-r from-gold to-orange-500"
+                                            initial={{ width: 0 }}
+                                            animate={{ width: `${(referralStats.count / 5) * 100}%` }}
+                                            transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
+                                        />
+                                    </div>
                                 </div>
                             </div>
 
                             <motion.div
-                                className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider"
+                                className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider mt-auto"
                                 animate={{ opacity: [0.7, 1, 0.7] }}
                                 transition={{ duration: 2, repeat: Infinity }}
                             >
@@ -244,109 +342,280 @@ export default function BentoDashboard({ queuePosition, totalUsers = 1000, refer
                         </motion.div>
                     </BentoCard>
 
-                    {/* Card 3: SV Orbit AI */}
-                    <BentoCard className="lg:col-span-2">
-                        <div className="flex flex-col sm:flex-row items-center gap-4">
-                            <motion.div
-                                className="shrink-0"
-                                whileHover={{ scale: 1.05, rotate: 5 }}
-                                transition={{ type: "spring", stiffness: 300 }}
-                            >
-                                <HolographicPlanet size="md" />
-                            </motion.div>
-                            <div className="text-center sm:text-left flex-1">
-                                <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
-                                    <Sparkles className="w-5 h-5 text-violet" />
-                                    <h3 className="font-display text-xl sm:text-2xl font-bold text-white">SV Orbit AI</h3>
-                                </div>
-                                <p className="text-gray-400 text-sm sm:text-base mb-3">
-                                    Tell me your vibe. I&apos;ll plan the night.
-                                </p>
+                    {/* Bottom: SV Orbit AI (Full width) - Clean Desktop Layout */}
+                    <BentoCard className="lg:col-span-3 min-h-[180px]">
+                        <div className="relative h-full">
+                            {/* Background Gradient */}
+                            <div className="absolute inset-0 rounded-3xl" />
+                            
+                            {/* Main Content */}
+                            <div className="relative z-10 h-full flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+                                
+                                {/* Left: Planet Visual */}
                                 <motion.div
-                                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violet/10 border border-violet/30"
-                                    animate={{
-                                        boxShadow: [
-                                            "0 0 0 rgba(123, 44, 191, 0)",
-                                            "0 0 20px rgba(123, 44, 191, 0.3)",
-                                            "0 0 0 rgba(123, 44, 191, 0)",
-                                        ]
-                                    }}
-                                    transition={{ duration: 2, repeat: Infinity }}
+                                    className="shrink-0 mt-3 sm:mt-0"
+                                    whileHover={{ scale: 1.05, rotate: 5 }}
+                                    transition={{ type: "spring", stiffness: 300 }}
                                 >
-                                    <motion.div
-                                        className="w-2 h-2 rounded-full bg-violet"
-                                        animate={{ scale: [1, 1.2, 1] }}
-                                        transition={{ duration: 1, repeat: Infinity }}
-                                    />
-                                    <span className="text-violet text-xs font-mono uppercase tracking-wider">System Loading...</span>
+                                    <HolographicPlanet size="lg" />
                                 </motion.div>
+                                
+                                {/* Center: Main Content */}
+                                <div className="flex-1 text-center lg:text-left lg:ml-4">
+                                    <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
+                                        <Sparkles className="w-6 h-6 text-violet pt-3" />
+                                        <h3 className="font-display text-2xl lg:text-3xl font-bold text-white">SV Orbit AI</h3>
+                                    </div>
+                                    
+                                    <p className="text-violet text-base font-medium mb-3">
+                                        Tell me your vibe. I&apos;ll plan the night.
+                                    </p>
+                                    
+                                    <p className="text-gray-300 text-sm lg:text-base mb-4 leading-relaxed max-w-2xl">
+                                        Your personal AI companion that understands your mood, preferences, and social circle. 
+                                        From spontaneous coffee dates to epic weekend adventures.
+                                    </p>
+
+                                    {/* Feature Tags */}
+                                    <div className="flex flex-wrap justify-center lg:justify-start gap-2 mt-5 lg:mt-0">
+                                        <motion.span 
+                                            className="px-3 py-1 rounded-full bg-violet/10 border border-violet/20 text-violet text-xs font-medium"
+                                            whileHover={{ scale: 1.05, backgroundColor: "rgba(123, 44, 191, 0.15)" }}
+                                        >
+                                            🎯 Smart Recommendations
+                                        </motion.span>
+                                        <motion.span 
+                                            className="px-3 py-1 rounded-full bg-cyan/10 border border-cyan/20 text-cyan text-xs font-medium"
+                                            whileHover={{ scale: 1.05, backgroundColor: "rgba(0, 240, 255, 0.15)" }}
+                                        >
+                                            🌐 Social Integration
+                                        </motion.span>
+                                        <motion.span 
+                                            className="px-3 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-medium"
+                                            whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 184, 0, 0.15)" }}
+                                        >
+                                            ⚡ Instant Planning
+                                        </motion.span>
+                                    </div>
+                                </div>
+
+                                {/* Right: Status Panel */}
+                                <div className="shrink-0 text-center lg:text-right">
+                                    <motion.div
+                                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet/10 border border-violet/30 mb-4"
+                                        animate={{
+                                            boxShadow: [
+                                                "0 0 0 rgba(123, 44, 191, 0)",
+                                                "0 0 20px rgba(123, 44, 191, 0.3)",
+                                                "0 0 0 rgba(123, 44, 191, 0)",
+                                            ]
+                                        }}
+                                        transition={{ duration: 2, repeat: Infinity }}
+                                    >
+                                        <motion.div
+                                            className="w-2 h-2 rounded-full bg-violet"
+                                            animate={{ scale: [1, 1.2, 1] }}
+                                            transition={{ duration: 1, repeat: Infinity }}
+                                        />
+                                        <span className="text-violet text-sm font-mono">SYSTEM LOADING...</span>
+                                    </motion.div>
+
+                                    {/* Progress Stats */}
+                                    <div className="space-y-1.5">
+                                        <motion.div 
+                                            className="flex items-center justify-center lg:justify-end gap-2 text-xs text-gray-400"
+                                            animate={{ opacity: [0.6, 1, 0.6] }}
+                                            transition={{ duration: 3, repeat: Infinity, delay: 0 }}
+                                        >
+                                            <div className="w-1.5 h-1.5 rounded-full bg-violet" />
+                                            <span>AI Training: 87%</span>
+                                        </motion.div>
+                                        
+                                        <motion.div 
+                                            className="flex items-center justify-center lg:justify-end gap-2 text-xs text-gray-400"
+                                            animate={{ opacity: [0.6, 1, 0.6] }}
+                                            transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+                                        >
+                                            <div className="w-1.5 h-1.5 rounded-full bg-cyan" />
+                                            <span>Neural Networks: 92%</span>
+                                        </motion.div>
+                                        
+                                        <motion.div 
+                                            className="flex items-center justify-center lg:justify-end gap-2 text-xs text-gray-400"
+                                            animate={{ opacity: [0.6, 1, 0.6] }}
+                                            transition={{ duration: 3, repeat: Infinity, delay: 2 }}
+                                        >
+                                            <div className="w-1.5 h-1.5 rounded-full bg-gold" />
+                                            <span>Pro Features: 95%</span>
+                                        </motion.div>
+                                    </div>
+                                </div>
                             </div>
+
+                            {/* Subtle Floating Elements */}
+                            <motion.div
+                                className="absolute top-4 right-6 w-2 h-2 rounded-full bg-violet/30"
+                                animate={{
+                                    scale: [1, 1.3, 1],
+                                    opacity: [0.3, 0.6, 0.3]
+                                }}
+                                transition={{ duration: 4, repeat: Infinity }}
+                            />
+                            <motion.div
+                                className="absolute bottom-4 left-1/3 w-1.5 h-1.5 rounded-full bg-cyan/30"
+                                animate={{
+                                    scale: [1, 1.2, 1],
+                                    opacity: [0.3, 0.5, 0.3]
+                                }}
+                                transition={{ duration: 5, repeat: Infinity, delay: 2 }}
+                            />
                         </div>
                     </BentoCard>
                 </div>
 
-                {/* Referral Link Section */}
+                {/* Referral Code & Social Sharing Section */}
                 <motion.div
                     className="mt-6"
                     variants={cardVariants}
                 >
-                    <h4 className="font-semibold mb-3 text-gray-400 text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2">
+                    <h4 className="font-semibold mb-3 text-gray-400 text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 ">
                         <Rocket className="w-4 h-4 text-cyan" />
-                        Your Referral Link
+                        Share Your Referral Code
                     </h4>
-                    <div className="bg-black rounded-xl border-[0.5px] p-4 sm:p-5" style={{
-                        backgroundImage: 'linear-gradient(black, black), linear-gradient(90deg, #3B82F6 0%, #EC4899 20%, #8B5CF6 40%, #FB923C 60%, #F59E0B 80%, #3B82F6 100%)',
-                        backgroundOrigin: 'border-box',
-                        backgroundClip: 'padding-box, border-box'
-                    }}>
-                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                    
+                    {/* Referral Code Card with Animated Border - Horizontal Layout */}
+                    <div className="relative rounded-3xl overflow-visible mt-5 ">
+                        {/* Animated gradient border orbit - same as other cards */}
+                        <div className="absolute -inset-[2px] rounded-3xl opacity-80">
                             <motion.div
-                                className="font-mono text-purple-400 text-sm sm:text-base break-all"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.8 }}
-                            >
-                                {referralLink}
-                            </motion.div>
-                            <motion.button
-                                onClick={handleCopyLink}
-                                className="relative flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 hover:shadow-xl hover:shadow-purple-500/60 text-white px-6 py-3 rounded-xl font-semibold whitespace-nowrap transition-all duration-300 text-sm sm:text-base overflow-hidden"
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                            >
-                                <AnimatePresence mode="wait">
-                                    {copied ? (
-                                        <motion.span
-                                            key="copied"
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -10 }}
-                                            className="flex items-center gap-2"
+                                className="absolute inset-0 rounded-3xl"
+                                style={{
+                                    background: "linear-gradient(90deg, #8B5CF6 0%, #EC4899 18%, #FB923C 35%, #3B82F6 52%, #06B6D4 68%, #FB923C 85%, #8B5CF6 100%)",
+                                    backgroundSize: "300% 300%"
+                                }}
+                                animate={{
+                                    backgroundPosition: ["0% 50%", "300% 50%"]
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    ease: "linear",
+                                    repeat: Infinity
+                                }}
+                            />
+                            {/* Soft multi-color glow effect */}
+                            <div className="absolute inset-0 rounded-3xl blur-lg" style={{
+                                background: "linear-gradient(90deg, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.4) 20%, rgba(251, 146, 60, 0.35) 40%, rgba(59, 130, 246, 0.4) 60%, rgba(251, 146, 60, 0.35) 80%, rgba(139, 92, 246, 0.4) 100%)"
+                            }} />
+                        </div>
+
+                        {/* Card content - Horizontal Layout */}
+                        <div className="relative bg-black rounded-3xl border-2 border-transparent p-5 sm:p-6 z-10">
+                            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                                
+                                {/* Left Section: Referral Code Display */}
+                                <div className="text-center lg:text-left">
+                                    <p className="text-gray-400 text-xs mb-2 uppercase tracking-wider">Your Referral Code</p>
+                                    <motion.div
+                                        className="font-mono text-4xl sm:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 lg:mb-0 mt-4 lg:mt-0"
+                                        animate={{
+                                            backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                                        }}
+                                        transition={{
+                                            duration: 3,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                        style={{
+                                            backgroundSize: "200% 200%",
+                                            
+                                        }}
+                                    >
+                                        {referralCode}
+                                    </motion.div>
+                                    
+                                  
+                                </div>
+
+                                {/* Right Section: Social Sharing Buttons */}
+                                <div className="text-center lg:text-right">
+                                    <p className="text-gray-400 text-xs mb-4 uppercase tracking-wider flex items-center justify-center lg:justify-end gap-2">
+                                        <Sparkles className="w-3 h-3" />
+                                        Share & Earn Rewards
+                                    </p>
+                                    
+                                    {/* Social Buttons Row */}
+                                    <div className="flex justify-center lg:justify-end gap-3 mt-6 mb-8">
+                                        {/* WhatsApp */}
+                                        <motion.button
+                                            onClick={() => handleSocialShare('whatsapp')}
+                                            className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500/20 to-green-600/30 border border-green-500/30 flex items-center justify-center text-green-400 hover:text-green-300 transition-all duration-300 group backdrop-blur-sm"
+                                            whileHover={{ scale: 1.05, backgroundColor: "rgba(37, 211, 102, 0.2)" }}
+                                            whileTap={{ scale: 0.95 }}
+                                            title="Share on WhatsApp"
                                         >
-                                            <Check className="w-4 h-4" />
-                                            Copied!
-                                        </motion.span>
-                                    ) : (
-                                        <motion.span
-                                            key="copy"
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            exit={{ opacity: 0, y: -10 }}
-                                            className="flex items-center gap-2"
+                                            <svg className="w-6 h-6 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/>
+                                            </svg>
+                                        </motion.button>
+
+                                        {/* Instagram */}
+                                        <motion.button
+                                            onClick={() => handleSocialShare('instagram')}
+                                            className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500/20 to-purple-600/30 border border-pink-500/30 flex items-center justify-center text-pink-400 hover:text-pink-300 transition-all duration-300 group backdrop-blur-sm"
+                                            whileHover={{ scale: 1.05, backgroundColor: "rgba(240, 148, 51, 0.2)" }}
+                                            whileTap={{ scale: 0.95 }}
+                                            title="Share on Instagram"
                                         >
-                                            <Copy className="w-4 h-4" />
-                                            Copy Link
-                                        </motion.span>
-                                    )}
-                                </AnimatePresence>
-                            </motion.button>
+                                            <InstagramIcon />
+                                        </motion.button>
+
+                                        {/* Facebook */}
+                                        <motion.button
+                                            onClick={() => handleSocialShare('facebook')}
+                                            className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/20 to-blue-600/30 border border-blue-500/30 flex items-center justify-center text-blue-400 hover:text-blue-300 transition-all duration-300 group backdrop-blur-sm"
+                                            whileHover={{ scale: 1.05, backgroundColor: "rgba(24, 119, 242, 0.2)" }}
+                                            whileTap={{ scale: 0.95 }}
+                                            title="Share on Facebook"
+                                        >
+                                            <svg className="w-6 h-6 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                            </svg>
+                                        </motion.button>
+
+                                        {/* Twitter/X */}
+                                        <motion.button
+                                            onClick={() => handleSocialShare('twitter')}
+                                            className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500/20 to-blue-600/30 border border-sky-500/30 flex items-center justify-center text-sky-400 hover:text-sky-300 transition-all duration-300 group backdrop-blur-sm"
+                                            whileHover={{ scale: 1.05, backgroundColor: "rgba(29, 161, 242, 0.2)" }}
+                                            whileTap={{ scale: 0.95 }}
+                                            title="Share on Twitter"
+                                        >
+                                            <XIcon />
+                                        </motion.button>
+
+                                        {/* Copy Message */}
+                                        <motion.button
+                                            onClick={() => handleSocialShare('copy')}
+                                            className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-pink-600/30 border border-purple-500/30 flex items-center justify-center text-purple-400 hover:text-purple-300 transition-all duration-300 group backdrop-blur-sm"
+                                            whileHover={{ scale: 1.05, backgroundColor: "rgba(139, 92, 246, 0.2)" }}
+                                            whileTap={{ scale: 0.95 }}
+                                            title="Copy Share Message"
+                                        >
+                                            <Copy className="w-5 h-5 transition-transform group-hover:scale-110" />
+                                        </motion.button>
+                                    </div>
+
+                                    <p className="text-gray-500 text-xs mt-4">
+                                        Share your code and earn rewards when friends join!
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </motion.div>
-
                 {/* Social Links */}
                 <motion.div
-                    className="flex justify-center gap-4 mt-6"
+                    className="flex justify-center gap-4 mt-10"
                     variants={cardVariants}
                 >
                     <SocialLink href="https://instagram.com/studentverse.ae" icon={InstagramIcon} label="Instagram" />
@@ -356,7 +625,7 @@ export default function BentoDashboard({ queuePosition, totalUsers = 1000, refer
 
                 {/* Launch Target */}
                 <motion.div
-                    className="text-center mt-6"
+                    className="text-center mt-6 mb-10"
                     variants={cardVariants}
                 >
                     <motion.p
@@ -369,15 +638,45 @@ export default function BentoDashboard({ queuePosition, totalUsers = 1000, refer
                     </motion.p>
                 </motion.div>
 
-                {/* Queue Visualization */}
+                {/* Queue Visualization with Animated RGB Border */}
                 <motion.div
                     className="mt-6"
                     variants={cardVariants}
                 >
-                    <QueueVisualization
-                        currentPosition={queuePosition}
-                        totalUsers={totalUsers}
-                    />
+                    {/* Queue Visualization Card with Animated Border */}
+                    <div className="relative rounded-3xl overflow-visible">
+                        {/* Animated gradient border orbit - same as other cards */}
+                        <div className="absolute -inset-[2px] rounded-3xl opacity-80">
+                            <motion.div
+                                className="absolute inset-0 rounded-3xl"
+                                style={{
+                                    background: "linear-gradient(90deg, #8B5CF6 0%, #EC4899 18%, #FB923C 35%, #3B82F6 52%, #06B6D4 68%, #FB923C 85%, #8B5CF6 100%)",
+                                    backgroundSize: "300% 300%"
+                                }}
+                                animate={{
+                                    backgroundPosition: ["0% 50%", "300% 50%"]
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    ease: "linear",
+                                    repeat: Infinity
+                                }}
+                            />
+                            {/* Soft multi-color glow effect */}
+                            <div className="absolute inset-0 rounded-3xl blur-lg" style={{
+                                background: "linear-gradient(90deg, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.4) 20%, rgba(251, 146, 60, 0.35) 40%, rgba(59, 130, 246, 0.4) 60%, rgba(251, 146, 60, 0.35) 80%, rgba(139, 92, 246, 0.4) 100%)"
+                            }} />
+                        </div>
+
+                        {/* Card content with black background */}
+                        <div className="relative bg-black rounded-3xl border-2 border-transparent z-10 overflow-hidden">
+                            <QueueVisualization
+                                currentPosition={queuePosition}
+                                totalUsers={totalUsers}
+                                className="!bg-transparent !border-none !shadow-none !backdrop-blur-none p-5 sm:p-6 lg:p-8"
+                            />
+                        </div>
+                    </div>
                 </motion.div>
             </div>
         </motion.div>

@@ -60,6 +60,17 @@ export default function CTA() {
                 <Link 
                   className="join-waitlist-button" 
                   to="/waitlist"
+                  style={{
+                    fontSize: "1.2rem",
+                    fontWeight: "700",
+                    textTransform: "uppercase",
+                    padding: "1rem 2.5rem",
+                    borderRadius: "50px",
+                    textDecoration: "none",
+                    display: "inline-block",
+                    whiteSpace: "nowrap",
+                    letterSpacing: "0.5px"
+                  }}
                 >
                   {isAuthenticated ? "View Dashboard" : "Join the UNI-verse"}
                 </Link>

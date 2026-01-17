@@ -1,5 +1,5 @@
-import React from 'react';
 import { motion } from 'framer-motion';
+import ElectricBorder from './ElectricBorder';
 
 export default function Features() {
   const features = [
@@ -7,6 +7,7 @@ export default function Features() {
       id: 'cyan',
       title: 'Verified Digital ID',
       description: 'Forget the plastic card. Carry your official student status with dynamic, fraud-proof Rolling QR technology.',
+      color: '#00f0ff',
       icon: (
         <svg className="feature-icon cyan-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <path d="M50 10 L20 20 L20 45 C20 65 35 80 50 90 C65 80 80 65 80 45 L80 20 Z" fill="none" stroke="currentColor" strokeWidth="3"></path>
@@ -18,6 +19,7 @@ export default function Features() {
       id: 'yellow',
       title: 'Instant Savings',
       description: 'Use SV Pay to tap and redeem discounts at top brands. From coffee runs to cinema nights, Unlock Student Discounts.',
+      color: '#ffb800',
       icon: (
         <svg className="feature-icon yellow-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <path d="M20 20 L50 20 L80 50 L50 80 L20 50 Z" fill="none" stroke="currentColor" strokeWidth="3"></path>
@@ -34,6 +36,7 @@ export default function Features() {
       id: 'purple',
       title: 'SV Orbit AI',
       description: 'Your personal AI planner. Tell Orbit your budget and vibe, and it builds your entire itinerary.',
+      color: '#c42878',
       icon: (
         <svg className="feature-icon purple-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="50" cy="50" fill="none" rx="22" ry="22" stroke="currentColor" strokeWidth="3"></ellipse>
@@ -55,8 +58,8 @@ export default function Features() {
   };
 
   const cardVariants = {
-    hidden: { 
-      opacity: 0, 
+    hidden: {
+      opacity: 0,
       y: 50,
       scale: 0.9
     },
@@ -87,7 +90,7 @@ export default function Features() {
                 <h2 className="title medium">How it Works</h2>
               </motion.div>
             </div>
-            
+
             <div className="feature-section">
               <motion.div 
                 className="feature-container"
@@ -96,30 +99,44 @@ export default function Features() {
                 whileInView="visible"
                 viewport={{ once: true, margin: "-100px" }}
               >
-                {features.map((feature, index) => (
-                  <motion.div 
+                {features.map((feature) => (
+                  <ElectricBorder
                     key={feature.id}
-                    className={`feature-card ${feature.id}`}
-                    variants={cardVariants}
-                    whileHover={{ 
-                      y: -10,
-                      transition: { duration: 0.3 }
-                    }}
+                    color={feature.color}
+                    speed={1}
+                    chaos={0.12}
+                    borderRadius={24}
+                    style={{ height: '100%' }}
                   >
-                    <div className={`feature-card-glow ${feature.id}`}></div>
                     <motion.div 
-                      className="feature-icon-container"
+                      className={`feature-card ${feature.id}`}
+                      variants={cardVariants}
                       whileHover={{ 
-                        scale: 1.1,
-                        rotate: 5,
+                        y: -10,
                         transition: { duration: 0.3 }
                       }}
+                      style={{ 
+                        position: 'relative',
+                        zIndex: 10,
+                        background: '#000000',
+                        height: '100%'
+                      }}
                     >
-                      {feature.icon}
+                      <div className={`feature-card-glow ${feature.id}`}></div>
+                      <motion.div 
+                        className="feature-icon-container"
+                        whileHover={{ 
+                          scale: 1.1,
+                          rotate: 5,
+                          transition: { duration: 0.3 }
+                        }}
+                      >
+                        {feature.icon}
+                      </motion.div>
+                      <h2 className="feature-title">{feature.title}</h2>
+                      <p className="feature-description">{feature.description}</p>
                     </motion.div>
-                    <h2 className="feature-title">{feature.title}</h2>
-                    <p className="feature-description">{feature.description}</p>
-                  </motion.div>
+                  </ElectricBorder>
                 ))}
               </motion.div>
             </div>
@@ -127,5 +144,6 @@ export default function Features() {
         </div>
       </div>
     </div>
+    
   );
 }

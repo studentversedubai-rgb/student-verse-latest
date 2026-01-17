@@ -138,8 +138,8 @@ export default function Hero() {
           </div>
 
           {/* Hero Center Content */}
-          <div className="hero-section-center-holder">
-            <div className="hero-center-text">
+          <div className="hero-section-center-holder" style={{ gap: '1rem' }}>
+            <div className="hero-center-text" style={{ marginBottom: '0.5rem' }}>
               <motion.h1 
                 className="gradient-title"
                 initial={{ y: 50, opacity: 0 }}
@@ -154,7 +154,7 @@ export default function Hero() {
               </motion.h1>
             </div>
             
-            <div className="center-hero-paragraph-holder">
+            {/* <div className="center-hero-paragraph-holder">
               <motion.h3
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -166,9 +166,9 @@ export default function Hero() {
               >
                 VERIFY. DISCOVER. REDEEM.
               </motion.h3>
-            </div>
+            </div> */}
             
-            <div className="form-block hero-form w-form">
+            <div className="form-block hero-form w-form" style={{ marginTop: '1rem', marginBottom: '1rem' }}>
               <form 
                 className="form-holder" 
                 data-name="Early Access Emails"
@@ -177,6 +177,7 @@ export default function Hero() {
                 id="Early-Access-Emails" 
                 method="get" 
                 name="wf-form-Early-Access-Emails"
+                style={{ margin: 0 }}
               >
                 <motion.div
                   initial={{ y: 20, opacity: 0 }}
@@ -186,10 +187,22 @@ export default function Hero() {
                     ease: "easeOut",
                     delay: 0.7
                   }}
+                  style={{ margin: 0 }}
                 >
                   <Link 
                     className="join-waitlist-button" 
                     to="/waitlist"
+                    style={{
+                      fontSize: "1.2rem",
+                      fontWeight: "700",
+                      textTransform: "uppercase",
+                      padding: "1rem 2.5rem",
+                      borderRadius: "50px",
+                      textDecoration: "none",
+                      display: "inline-block",
+                      whiteSpace: "nowrap",
+                      letterSpacing: "0.5px"
+                    }}
                   >
                     {isAuthenticated ? "View Dashboard" : "Join The UNI-verse"}
                   </Link>

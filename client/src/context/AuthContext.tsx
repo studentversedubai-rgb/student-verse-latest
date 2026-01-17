@@ -30,10 +30,25 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const [user, setUser] = useState<User | null>(null);
-    const [queueStats, setQueueStats] = useState<QueueStats | null>(null);
-    const [referralStats, setReferralStats] = useState<ReferralStats | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    // Development: Set default logged-in user
+    const [user, setUser] = useState<User | null>({
+        id: 'dev-user-123',
+        email: 'dev@studentverse.ae',
+        referralCode: 'DEV123',
+        joinedAt: Date.now(),
+        isVerified: true
+    });
+    const [queueStats, setQueueStats] = useState<QueueStats | null>({
+        position: 3001,
+        totalUsers: 5000,
+        estimatedWaitTime: '2 weeks'
+    });
+    const [referralStats, setReferralStats] = useState<ReferralStats | null>({
+        code: 'DEV123',
+        count: 2,
+        totalRewards: 50
+    });
+    const [isLoading, setIsLoading] = useState(false); // Set to false for immediate display
 
     const fetchUserData = useCallback(async (currentUser: User) => {
         try {
@@ -48,8 +63,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         }
     }, []);
 
-    // Check for existing session on mount
+    // Check for existing session on mount - DISABLED FOR DEVELOPMENT
     useEffect(() => {
+        // Development: Skip session check, use hardcoded data above
+        setIsLoading(false);
+        
+        /* PRODUCTION CODE - UNCOMMENT WHEN READY
         const checkSession = async () => {
             try {
                 const storedUser = storage.get<User>('current_user');
@@ -65,6 +84,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         };
 
         checkSession();
+        */
     }, [fetchUserData]);
 
     const login = async (email: string, referralCode: string | null) => {
