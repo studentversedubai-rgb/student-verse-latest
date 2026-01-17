@@ -7,7 +7,7 @@ export default function CTA() {
   const { isAuthenticated } = useAuth();
   
   return (
-    <div className="section overflow-hidden" style={{ marginTop: '0 !important', marginBottom: '0 !important' }}>
+    <div className="section overflow-hidden" style={{ marginTop: '0', paddingTop: '40px', marginBottom: '0' }}>
       <div className="container">
         <div className="cta-container">
           <motion.div 

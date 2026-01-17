@@ -45,20 +45,21 @@ export default function Trustbar() {
       style={{ 
         opacity: 1, 
         transform: 'translateY(0)',
-        minHeight: '200px',
         display: 'block',
         visibility: 'visible',
-        padding: '40px 20px'
+        padding: '40px 20px 40px 20px',
+        width: '100%',
+        overflow: 'hidden'
       }}
     >
-      <div className="trustbar-inner" style={{ opacity: 1, transform: 'translateY(0)', maxWidth: '1200px', margin: '0 auto' }}>
+      <div className="trustbar-inner" style={{ opacity: 1, transform: 'translateY(0)', maxWidth: '1200px', margin: '0 auto', padding: '0 20px', width: '100%', boxSizing: 'border-box' }}>
         <motion.p 
           className="trustbar-kicker"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          style={{ marginBottom: '32px', textAlign: 'center' }}
+          style={{ marginBottom: '24px', textAlign: 'center', paddingTop: '20px' }}
         >
           LAUNCHING SOON AT TOP CAMPUSES
         </motion.p>

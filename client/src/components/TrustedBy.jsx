@@ -16,7 +16,7 @@ export default function TrustedBy() {
   ];
 
   return (
-    <div className="trusted-by">
+    <div className="trusted-by" style={{ paddingBottom: '20px' }}>
       <div className="center-text">
         <motion.div 
           className="fade-in-on-scroll"

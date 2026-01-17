@@ -76,9 +76,9 @@ export default function Features() {
 
   return (
     <div id="Features-homepage">
-      <div className="section">
+      <div className="section" style={{ paddingTop: '40px' }}>
         <div className="container">
-          <div className="section-center-text" style={{ marginTop: '0 !important' }}>
+          <div className="section-center-text" style={{ marginTop: '0' }}>
             <div className="section-title xl">
               <motion.div 
                 className="fade-in-on-scroll"
