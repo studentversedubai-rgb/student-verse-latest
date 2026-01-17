@@ -379,8 +379,8 @@
   display: flex !important;
   gap: 32px !important;
   /* Wider spacing */
-  padding: 14px 36px !important;
-  /* Balanced: a tiny bit less wide */
+  padding: 20px 36px !important;
+  /* Increased top/bottom padding from 14px to 20px */
   border-radius: 100px !important;
   background-size: 200% 200% !important;
   animation: pulse-blend 4s infinite ease-in-out !important;
@@ -393,9 +393,11 @@
   background-color: #000000 !important;
   /* Ensure solid black inside so content is readable */
 
-  /* Reset original transform and apply requested shift */
+  /* Reset original transform and apply requested shift with added right margin */
   transform: translateX(91px) !important;
-  margin: 0 !important;
+  margin: 0 15px 0 0 !important;
+  padding-right: 10px !important;
+  /* Added 15px right margin */
 }
 
 .nav-link.w-nav-link {
