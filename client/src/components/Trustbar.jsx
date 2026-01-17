@@ -47,12 +47,21 @@ export default function Trustbar() {
         transform: 'translateY(0)',
         display: 'block',
         visibility: 'visible',
-        padding: '40px 20px 40px 20px',
+        padding: '60px 20px 40px 20px',
         width: '100%',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        boxSizing: 'border-box'
       }}
     >
-      <div className="trustbar-inner" style={{ opacity: 1, transform: 'translateY(0)', maxWidth: '1200px', margin: '0 auto', padding: '0 20px', width: '100%', boxSizing: 'border-box' }}>
+      <div className="trustbar-inner" style={{ 
+        opacity: 1, 
+        transform: 'translateY(0)', 
+        maxWidth: '1200px', 
+        margin: '0 auto', 
+        padding: '0 20px', 
+        width: '100%', 
+        boxSizing: 'border-box' 
+      }}>
         <motion.p 
           className="trustbar-kicker"
           initial={{ opacity: 0, y: 20 }}
@@ -73,7 +82,8 @@ export default function Trustbar() {
             gap: '24px',
             justifyItems: 'center',
             alignItems: 'center',
-            width: '100%'
+            width: '100%',
+            boxSizing: 'border-box'
           }}
         >
           {universities.map((university) => (
@@ -91,7 +101,8 @@ export default function Trustbar() {
                 justifyContent: 'center',
                 minHeight: '80px',
                 width: '100%',
-                padding: '12px'
+                padding: '12px',
+                boxSizing: 'border-box'
               }}
             >
               <img 
@@ -120,10 +131,18 @@ export default function Trustbar() {
       </div>
       
       <style>{`
+        .trustbar.is-visible {
+          box-sizing: border-box;
+        }
+        
         @media (max-width: 768px) {
           .trustbar-logos {
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 20px !important;
+          }
+          
+          .trustbar.is-visible {
+            padding: 40px 16px 30px 16px !important;
           }
         }
         
@@ -135,6 +154,14 @@ export default function Trustbar() {
           
           .trustbar-logo img {
             max-height: 56px !important;
+          }
+          
+          .trustbar.is-visible {
+            padding: 30px 16px 20px 16px !important;
+          }
+          
+          .trustbar-inner {
+            padding: 0 16px !important;
           }
         }
         
