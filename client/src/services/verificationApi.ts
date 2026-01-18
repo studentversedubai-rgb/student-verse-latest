@@ -19,6 +19,7 @@ import { API_CONFIG } from "../config/api";
 
 export interface SendOTPRequest {
   email: string;
+  referralCode?: string | null;
 }
 
 export interface SendOTPResponse {
@@ -39,6 +40,11 @@ export interface VerifyOTPResponse {
   verified?: boolean;
   attemptsRemaining?: number;
   lockedUntil?: number; // Unix timestamp if account is locked
+  data?: {
+    referralCode: string;
+    referralCount: number;
+    waitlistPosition: number;
+  };
 }
 
 export interface ResendOTPRequest {
@@ -121,7 +127,10 @@ export const sendOTP = async (
     const response = await fetch(`${API_CONFIG.BASE_URL}/api/waitlist/join`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: request.email }),
+      body: JSON.stringify({
+        email: request.email,
+        referralCode: request.referralCode || undefined,
+      }),
     });
 
     if (!response.ok) {
@@ -132,6 +141,12 @@ export const sendOTP = async (
     }
 
     const result = await response.json();
+
+    // Store referralCode temporarily for OTP verification
+    if (request.referralCode) {
+      storage.set('sv_pending_referral', request.referralCode);
+    }
+
     return {
       success: result.ok,
       message: result.message || "Verification code sent to your email.",
@@ -169,16 +184,58 @@ export const verifyOTP = async (
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(
-        errorData.message || `HTTP ${response.status}: Failed to verify OTP`,
+        errorData.error || `HTTP ${response.status}: Failed to verify OTP`,
       );
     }
 
     const result = await response.json();
-    return {
-      success: result.ok,
-      message: result.message || "Email verified successfully!",
-      verified: result.ok,
-    };
+
+    console.log('✅ Backend OTP verification response:', result);
+
+    // Backend returns data FLAT, not nested in a 'data' object
+    // Backend format: { ok: true, referralCode: "...", position: 1, referralCount: 0, rewardStatus: "..." }
+    // Frontend needs: { referralCode: "...", waitlistPosition: 1, referralCount: 0 }
+
+    if (result.ok && result.referralCode) {
+      // Restructure backend response to match frontend expectations
+      const userData = {
+        referralCode: result.referralCode,
+        waitlistPosition: result.position, // Backend uses 'position', frontend expects 'waitlistPosition'
+        referralCount: result.referralCount,
+      };
+
+      console.log('✅ Storing user data in localStorage:', {
+        email: request.email,
+        data: userData
+      });
+
+      storage.set('sv_user_email', request.email);
+      storage.set('sv_user_data', userData);
+      // Clear pending referral code
+      storage.remove('sv_pending_referral');
+
+      console.log('✅ Data stored successfully');
+      console.log('✅ Verification:', {
+        email: storage.get('sv_user_email'),
+        data: storage.get('sv_user_data')
+      });
+
+      return {
+        success: result.ok,
+        message: result.message || "Email verified successfully!",
+        verified: result.ok,
+        data: userData,
+      };
+    } else {
+      console.warn('⚠️ No data in backend response or verification failed');
+      console.warn('⚠️ Full response:', JSON.stringify(result, null, 2));
+
+      return {
+        success: false,
+        message: result.message || "Verification failed",
+        verified: false,
+      };
+    }
   } catch (error) {
     console.error("Error verifying OTP:", error);
     return {

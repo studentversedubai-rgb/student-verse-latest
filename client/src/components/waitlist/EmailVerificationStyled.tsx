@@ -80,7 +80,7 @@ export default function EmailVerificationStyled({
 
     const isEmailValid = useMemo(() => isUniversityEmail(email), [email]);
 
-    
+
 
     useLayoutEffect(() => {
         // 1. Force the body to zero out everything
@@ -136,7 +136,10 @@ export default function EmailVerificationStyled({
         setIsLoading(true);
 
         try {
-            const result = await sendOTP({ email: email.trim().toLowerCase() });
+            const result = await sendOTP({
+                email: email.trim().toLowerCase(),
+                referralCode: referralCode || null,
+            });
 
             if (result.success) {
                 setStep("otp-verification");
@@ -164,7 +167,7 @@ export default function EmailVerificationStyled({
         } finally {
             setIsLoading(false);
         }
-    }, [email, isEmailValid]);
+    }, [email, isEmailValid, referralCode]);
 
     const handleOTPVerify = useCallback(async (otp: string) => {
         return await verifyOTP({ email: email.trim().toLowerCase(), otp });
