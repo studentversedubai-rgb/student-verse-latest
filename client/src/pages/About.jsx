@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { initPageInteractions } from "../utils/initInteractions";
 import { normalizeHtml } from "../utils/normalizeHtml";
 import Navbar from "./Navbar";
 import TeamSection from "../components/TeamSection";
@@ -15,14 +14,6 @@ export default function About() {
       .then((res) => res.text())
       .then((text) => setHtml(normalizeHtml(text)));
   }, []);
-
-  useEffect(() => {
-    if (!html) return;
-    const timer = setTimeout(() => {
-      initPageInteractions(document);
-    }, 0);
-    return () => clearTimeout(timer);
-  }, [html]);
 
   return (
     <div style={{ paddingTop: "clamp(20px, 5vw, 40px)" }}>

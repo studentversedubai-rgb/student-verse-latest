@@ -73,11 +73,11 @@ export default function Navbar() {
     <>
       <div
         className={`navbar w-nav navbar-glass-effect ${scrolled ? 'scrolled' : ''}`}
-        style={{ 
-          position: "fixed", 
-          top: 0, 
-          left: 0, 
-          right: 0, 
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
           zIndex: 1000,
         }}
         role="banner"
@@ -85,7 +85,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center px-4 sm:px-6 md:px-8 lg:px-12 h-16 sm:h-18 md:h-20 lg:h-22 max-w-full mx-0 relative w-full">
           {/* Mobile: Hidden spacer for centering logo */}
           <div className="block sm:hidden w-10"></div>
-          
+
           {/* Logo Section */}
           <div className="relative z-10 flex justify-center sm:justify-start flex-1 sm:flex-initial">
             <Link
@@ -97,7 +97,7 @@ export default function Navbar() {
                 alt="StudentVerse Logo"
                 loading="lazy"
                 src="/assets/svlogo.png"
-                className="h-10 sm:h-8 md:h-9 lg:h-10 w-auto block"
+                className="ml-6 sm:ml-0 h-12 sm:h-8 md:h-9 lg:h-10 w-auto block"
               />
             </Link>
           </div>
@@ -143,7 +143,7 @@ export default function Navbar() {
                 }} />
               </div>
 
-              <nav 
+              <nav
                 role="navigation"
                 className="px-3 sm:px-6 md:px-8 lg:px-10"
                 style={{
@@ -164,7 +164,7 @@ export default function Navbar() {
                   zIndex: 10
                 }}
               >
-                <div 
+                <div
                   className="flex gap-3 sm:gap-6 md:gap-8 lg:gap-10 items-center justify-center w-full"
                 >
                   {navLinks.map((link) => (
@@ -236,12 +236,13 @@ export default function Navbar() {
             className="hidden-desktop show-mobile"
             onClick={toggleMenu}
             style={{
-              zIndex: 1001,
+              zIndex: 1003,
               background: "transparent",
               border: "none",
               cursor: "pointer",
               padding: "0.5rem",
-              borderRadius: "0.5rem"
+              borderRadius: "0.5rem",
+              position: "relative"
             }}
             aria-label="Toggle mobile menu"
           >
@@ -252,11 +253,11 @@ export default function Navbar() {
             >
               {isMenuOpen ? (
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18 6L6 18M6 6L18 18" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M18 6L6 18M6 6L18 18" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               ) : (
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 12H21M3 6H21M3 18H21" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M3 12H21M3 6H21M3 18H21" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               )}
             </div>
@@ -276,49 +277,20 @@ export default function Navbar() {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               onClick={closeMenu}
-              style={{
-                position: "fixed",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: "rgba(0, 0, 0, 0.7)",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-                zIndex: 999
-              }}
             />
-            
+
             {/* Drawer */}
             <motion.div
               className="mobile-drawer"
-              initial={{ x: "100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "100%", opacity: 0 }}
-              transition={{ 
-                type: "spring", 
-                stiffness: 300, 
-                damping: 30,
-                opacity: { duration: 0.2 }
-              }}
-              style={{
-                position: "fixed",
-                top: 0,
-                right: 0,
-                height: "100vh", // Use standard viewport height
-                maxHeight: "100vh",
-                width: "320px",
-                maxWidth: "85vw",
-                background: "linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #000000 100%)",
-                borderTopLeftRadius: "24px",
-                borderBottomLeftRadius: "24px",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                borderRight: "none",
-                boxShadow: "-10px 0 50px rgba(0, 0, 0, 0.8), 0 0 100px rgba(0, 0, 0, 0.5)",
-                zIndex: 1000,
-                overflow: "hidden",
-                display: "flex",
-                flexDirection: "column"
+              initial={{ x: "100%", opacity: 0, scale: 0.95 }}
+              animate={{ x: 0, opacity: 1, scale: 1 }}
+              exit={{ x: "100%", opacity: 0, scale: 0.95 }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 40,
+                opacity: { duration: 0.3 },
+                scale: { duration: 0.3 }
               }}
             >
               {/* Animated gradient border on left edge */}
@@ -326,7 +298,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, scaleY: 0 }}
                 animate={{ opacity: 1, scaleY: 1 }}
                 exit={{ opacity: 0, scaleY: 0 }}
-                transition={{ delay: 0.2, duration: 0.5, ease: "easeOut" }}
+                transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
                 style={{
                   position: "absolute",
                   left: 0,
@@ -334,47 +306,58 @@ export default function Navbar() {
                   bottom: 0,
                   width: "3px",
                   background: "linear-gradient(180deg, #00b8cc 0%, #cc8800 50%, #9a1f5a 100%)",
-                  borderTopLeftRadius: "24px",
-                  borderBottomLeftRadius: "24px"
+                  borderTopLeftRadius: "20px",
+                  borderBottomLeftRadius: "20px",
+                  zIndex: 2
                 }}
               />
 
-              {/* Header - Compact */}
-              <motion.div 
+              {/* Header with Logo and Close Button */}
+              <motion.div
                 className="mobile-drawer-header"
-                initial={{ y: -20, opacity: 0 }}
+                initial={{ y: -30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.1, duration: 0.4, ease: "easeOut" }}
+                transition={{ delay: 0.1, duration: 0.5, ease: "easeOut" }}
                 style={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "space-between",
-                  padding: "1rem 1.5rem 0.75rem",
-                  borderBottom: "1px solid rgba(255, 255, 255, 0.1)",
-                  background: "linear-gradient(90deg, rgba(0, 184, 204, 0.05) 0%, rgba(204, 136, 0, 0.05) 50%, rgba(154, 31, 90, 0.05) 100%)",
-                  flexShrink: 0
+                  padding: "1.5rem 2rem",
+                  borderBottom: "1px solid rgba(255, 255, 255, 0.15)",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  backdropFilter: "blur(10px)",
+                  WebkitBackdropFilter: "blur(10px)",
+                  position: "relative",
+                  zIndex: 2,
+                  flexShrink: 0,
+                  minHeight: "80px"
                 }}
               >
                 <motion.img
                   src="/assets/svlogo.png"
                   alt="StudentVerse"
-                  style={{ height: "32px" }}
-                  whileHover={{ scale: 1.05 }}
+                  style={{ height: "36px" }}
+                  whileHover={{ scale: 1.05, rotate: 2 }}
+                  whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.2 }}
                 />
                 <motion.button
                   onClick={closeMenu}
                   className="close-btn"
                   aria-label="Close menu"
-                  whileHover={{ scale: 1.1, rotate: 90 }}
+                  whileHover={{
+                    scale: 1.1,
+                    rotate: 90,
+                    backgroundColor: "rgba(255, 255, 255, 0.15)"
+                  }}
                   whileTap={{ scale: 0.9 }}
                   transition={{ duration: 0.2 }}
                   style={{
                     background: "rgba(255, 255, 255, 0.1)",
                     border: "1px solid rgba(255, 255, 255, 0.2)",
                     borderRadius: "50%",
-                    width: "32px",
-                    height: "32px",
+                    width: "36px",
+                    height: "36px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -383,37 +366,47 @@ export default function Navbar() {
                     transition: "all 0.2s ease"
                   }}
                 >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
+                  <motion.svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    initial={{ rotate: 0 }}
+                    whileHover={{ rotate: 180 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  </motion.svg>
                 </motion.button>
               </motion.div>
 
-              {/* Navigation Links - Compact */}
-              <motion.nav 
-                style={{ 
-                  flex: 1, 
-                  padding: "1rem 1.5rem",
+              {/* Navigation Links */}
+              <motion.nav
+                style={{
+                  flex: 1,
+                  padding: "2rem 2rem",
                   overflow: "auto",
                   minHeight: 0,
                   display: "flex",
                   flexDirection: "column",
-                  justifyContent: "center"
+                  justifyContent: "flex-start"
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.4 }}
               >
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                   {navLinks.map((link, index) => (
-                    <motion.div 
+                    <motion.div
                       key={link.href}
-                      initial={{ x: 50, opacity: 0 }}
-                      animate={{ x: 0, opacity: 1 }}
-                      transition={{ 
-                        delay: 0.4 + (index * 0.1), 
-                        duration: 0.5, 
-                        ease: "easeOut" 
+                      initial={{ x: 50, opacity: 0, scale: 0.9 }}
+                      animate={{ x: 0, opacity: 1, scale: 1 }}
+                      transition={{
+                        delay: 0.4 + (index * 0.1),
+                        duration: 0.6,
+                        ease: "easeOut",
+                        type: "spring",
+                        stiffness: 300
                       }}
                     >
                       <Link
@@ -422,75 +415,94 @@ export default function Navbar() {
                         className="mobile-nav-link"
                         style={{
                           display: "block",
-                          padding: "0.75rem 1rem",
+                          padding: "1rem 1.5rem",
                           color: isActiveLink(link.href) ? "#00b8cc" : "#ffffff",
                           textDecoration: "none",
-                          fontSize: "1rem",
+                          fontSize: "1.1rem",
                           fontWeight: isActiveLink(link.href) ? "600" : "500",
-                          borderRadius: "10px",
-                          margin: "0.125rem 0",
+                          borderRadius: "12px",
+                          margin: "0.25rem 0",
                           transition: "all 0.3s ease",
-                          background: isActiveLink(link.href) 
-                            ? "linear-gradient(90deg, rgba(0, 184, 204, 0.1) 0%, rgba(204, 136, 0, 0.1) 100%)"
+                          background: isActiveLink(link.href)
+                            ? "linear-gradient(90deg, rgba(0, 184, 204, 0.15) 0%, rgba(204, 136, 0, 0.1) 100%)"
                             : "transparent",
-                          border: isActiveLink(link.href) 
+                          border: isActiveLink(link.href)
                             ? "1px solid rgba(0, 184, 204, 0.3)"
-                            : "1px solid transparent"
+                            : "1px solid transparent",
+                          position: "relative",
+                          overflow: "hidden"
                         }}
                       >
                         <motion.span
-                          whileHover={{ x: 6, scale: 1.02 }}
+                          whileHover={{
+                            x: 8,
+                            scale: 1.02,
+                            color: "#00F0FF"
+                          }}
                           whileTap={{ scale: 0.98 }}
                           transition={{ duration: 0.2 }}
-                          style={{ display: "block" }}
+                          style={{
+                            display: "block",
+                            position: "relative",
+                            zIndex: 1
+                          }}
                         >
                           {link.label}
                         </motion.span>
+
+                        {/* Hover effect background */}
+                        <motion.div
+                          className="hover-bg"
+                          initial={{ scale: 0, opacity: 0 }}
+                          whileHover={{ scale: 1, opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                          style={{
+                            position: "absolute",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            background: "rgba(0, 240, 255, 0.1)",
+                            borderRadius: "12px",
+                            zIndex: 0
+                          }}
+                        />
                       </Link>
                     </motion.div>
                   ))}
                 </div>
               </motion.nav>
 
-              {/* Bottom Actions - Always Visible */}
-              <motion.div 
-                style={{ 
-                  padding: "1rem 1.5rem", 
+              {/* Bottom CTA */}
+              <motion.div
+                style={{
+                  padding: "1.5rem 2rem 2rem",
                   borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-                  background: "linear-gradient(90deg, rgba(0, 184, 204, 0.03) 0%, rgba(204, 136, 0, 0.03) 50%, rgba(154, 31, 90, 0.03) 100%)",
+                  background: "linear-gradient(90deg, rgba(0, 184, 204, 0.05) 0%, rgba(204, 136, 0, 0.03) 50%, rgba(154, 31, 90, 0.05) 100%)",
                   flexShrink: 0
                 }}
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.5, ease: "easeOut" }}
+                transition={{ delay: 0.8, duration: 0.6, ease: "easeOut" }}
               >
                 <Link
-                  to={isAuthenticated ? "/waitlist" : "/waitlist"}
+                  to="/waitlist"
                   onClick={handleNavClick}
                   className="join-waitlist-button"
                   style={{
-                    fontSize: "0.9rem",
+
+                    fontSize: "1rem",
                     fontWeight: "700",
                     textTransform: "uppercase",
-                    padding: "0.75rem 1rem",
+                    padding: "0.8rem 2rem",
                     borderRadius: "50px",
                     textDecoration: "none",
-                    display: "block",
-                    textAlign: "center",
+                    display: "inline-block",
                     whiteSpace: "nowrap",
-                    letterSpacing: "0.5px",
-                    position: "relative",
-                    overflow: "hidden"
+                    letterSpacing: "0.5px"
                   }}
                 >
-                  <motion.span
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
-                    style={{ display: "block", position: "relative", zIndex: 1 }}
-                  >
-                    {isAuthenticated ? "View Dashboard" : "Join The Waitlist"}
-                  </motion.span>
+                  {isAuthenticated ? "View Dashboard" : "Join The UNI-verse"}
                 </Link>
               </motion.div>
             </motion.div>

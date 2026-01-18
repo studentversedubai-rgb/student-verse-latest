@@ -18,7 +18,7 @@ export default function Features() {
     {
       id: 'yellow',
       title: 'Instant Savings',
-      description: 'Use SV Pay to tap and redeem discounts at top brands. From coffee runs to cinema nights, Unlock Student Discounts.',
+      description: 'Redeem discounts at top brands. From coffee runs to cinema nights, Unlock Student Discounts.',
       color: '#ffb800',
       icon: (
         <svg className="feature-icon yellow-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -76,7 +76,7 @@ export default function Features() {
 
   return (
     <div id="Features-homepage">
-      <div className="section" style={{ paddingTop: '40px' }}>
+      <div className="section" style={{ paddingTop: '20px' }}>
         <div className="container">
           <div className="section-center-text" style={{ marginTop: '0' }}>
             <div className="section-title xl">

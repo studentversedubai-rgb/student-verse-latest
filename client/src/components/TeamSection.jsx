@@ -1,30 +1,29 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 
 export default function TeamSection() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '-50px'
       }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
-  };
+
+    return () => observer.disconnect();
+  }, []);
 
   const teamMembers = {
     boss: {
@@ -242,26 +241,27 @@ export default function TeamSection() {
   return (
     <div style={{ padding: "0" }}>
       <div>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+        <div
+          ref={sectionRef}
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+            transition: 'opacity 0.8s ease-out, transform 0.8s ease-out'
+          }}
         >
           <section id="org" style={{ padding: "0" }}>
             <div style={{ width: "min(1100px, 92vw)", margin: "0 auto" }}>
-              <motion.header
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                style={{ textAlign: "center", marginBottom: "clamp(2rem, 5vw, 3rem)", marginTop: "0" }}
+              <header
+                style={{ 
+                  textAlign: "center", 
+                  marginBottom: "clamp(2rem, 5vw, 3rem)", 
+                  marginTop: "0",
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                  transition: 'opacity 0.6s ease-out 0.2s, transform 0.6s ease-out 0.2s'
+                }}
               >
-                <motion.h1
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+                <h1
                   style={{
                     fontSize: 'clamp(3rem, 8vw, 5rem)',
                     fontWeight: '700',
@@ -270,34 +270,32 @@ export default function TeamSection() {
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     marginBottom: '1.5rem',
-                    lineHeight: '1.1'
+                    lineHeight: '1.1',
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+                    transition: 'opacity 0.8s ease-out 0.4s, transform 0.8s ease-out 0.4s'
                   }}
                 >
                   Meet The Team
-                </motion.h1>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+                </h1>
+                <p
                   style={{
                     fontSize: "1.3rem",
                     color: "rgba(255, 255, 255, 0.8)",
                     maxWidth: "600px",
                     margin: "0 auto",
-                    lineHeight: "1.6"
+                    lineHeight: "1.6",
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                    transition: 'opacity 0.6s ease-out 0.6s, transform 0.6s ease-out 0.6s'
                   }}
                 >
                   A quick look at how we're structured.
-                </motion.p>
-              </motion.header>
+                </p>
+              </header>
 
-              <motion.div
+              <div
                 id="orgWrap"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
                 style={{
                   display: "flex",
                   flexDirection: "column",
@@ -308,11 +306,20 @@ export default function TeamSection() {
                   background: "linear-gradient(180deg, rgba(15, 18, 35, 0.5) 0%, rgba(10, 12, 25, 0.3) 100%)",
                   border: "1px solid rgba(255, 255, 255, 0.05)",
                   position: "relative",
-                  overflow: "visible"
+                  overflow: "visible",
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
+                  transition: 'opacity 0.8s ease-out 0.8s, transform 0.8s ease-out 0.8s'
                 }}
               >
                 {/* Founder */}
-                <TeamCard member={teamMembers.boss} isFounder={true} />
+                <div style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+                  transition: 'opacity 0.6s ease-out 1.0s, transform 0.6s ease-out 1.0s'
+                }}>
+                  <TeamCard member={teamMembers.boss} isFounder={true} />
+                </div>
 
                 {/* Leads */}
                 <div style={{
@@ -321,7 +328,10 @@ export default function TeamSection() {
                   gap: "1.5rem",
                   width: "100%",
                   maxWidth: "900px",
-                  justifyItems: "center"
+                  justifyItems: "center",
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+                  transition: 'opacity 0.6s ease-out 1.2s, transform 0.6s ease-out 1.2s'
                 }}>
                   {teamMembers.leads.map((lead) => (
                     <TeamCard key={lead.id} member={lead} isLead={true} />
@@ -334,11 +344,13 @@ export default function TeamSection() {
                   gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
                   gap: "1.5rem",
                   width: "100%",
-                  maxWidth: "1200px"
+                  maxWidth: "1200px",
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
+                  transition: 'opacity 0.8s ease-out 1.4s, transform 0.8s ease-out 1.4s'
                 }}>
                   {/* Technology team */}
-                  <motion.div
-                    variants={containerVariants}
+                  <div
                     style={{
                       background: "linear-gradient(145deg, rgba(20, 25, 50, 0.6) 0%, rgba(15, 18, 40, 0.4) 100%)",
                       backdropFilter: "blur(10px)",
@@ -372,11 +384,10 @@ export default function TeamSection() {
                         <TeamCard key={member.id} member={member} />
                       ))}
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* Marketing team */}
-                  <motion.div
-                    variants={containerVariants}
+                  <div
                     style={{
                       background: "linear-gradient(145deg, rgba(20, 35, 45, 0.6) 0%, rgba(15, 25, 35, 0.4) 100%)",
                       backdropFilter: "blur(10px)",
@@ -410,11 +421,10 @@ export default function TeamSection() {
                         <TeamCard key={member.id} member={member} />
                       ))}
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* Merchants team */}
-                  <motion.div
-                    variants={containerVariants}
+                  <div
                     style={{
                       background: "linear-gradient(145deg, rgba(30, 25, 40, 0.6) 0%, rgba(20, 18, 30, 0.4) 100%)",
                       backdropFilter: "blur(10px)",
@@ -448,12 +458,12 @@ export default function TeamSection() {
                         <TeamCard key={member.id} member={member} />
                       ))}
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </section>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

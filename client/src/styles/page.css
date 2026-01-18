@@ -10302,7 +10302,7 @@ body {
 }
 
 .cyan-icon {
-  color: #00a3a3; /* Subtle cyan color */
+  color: #00f0ff; /* Subtle cyan color */
 }
 
 .yellow-icon {
@@ -10310,7 +10310,7 @@ body {
 }
 
 .purple-icon {
-  color: #805ad5; /* Subtle purple color */
+  color: #c42878; /* Subtle purple color */
 }
 
 .feature-title {
@@ -10350,7 +10350,7 @@ body {
 }
 
 .cyan-icon {
-  color: #2962FF; /* Updated to a deeper blue */
+  color: #00f0ff; /* Updated to a deeper blue */
   animation: none; /* Remove the glow animation */
 }
 
@@ -10360,7 +10360,7 @@ body {
 }
 
 .purple-icon {
-  color: #7B2CBF;
+  color: #c42878;
   animation: glow-purple 3s ease-in-out infinite;
 }
 
@@ -10417,7 +10417,7 @@ body {
 @media (max-width: 768px) {
   .feature-container {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 50px;
     padding: 10px;
   }
 
@@ -10436,6 +10436,14 @@ body {
 
   .feature-description {
     font-size: 15px;
+  }
+}
+
+/* Tablet view - medium screens */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .feature-container {
+    gap: 45px;
+    padding: 15px;
   }
 }
 
