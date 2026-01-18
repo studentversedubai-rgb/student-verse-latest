@@ -82,6 +82,26 @@ textarea {
   font-family: "Geist", Helvetica, Arial, sans-serif;
   font-weight: 700;
   letter-spacing: -0.03em;
+  text-align: center !important;
+  margin: 0 auto !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* Ensure hero center text is properly positioned */
+.hero-center-text {
+  text-align: center !important;
+  position: relative !important;
+  z-index: 10 !important;
+  margin: 0 auto !important;
+}
+
+/* Ensure hero section center holder is properly positioned */
+.hero-section-center-holder {
+  text-align: center !important;
+  position: relative !important;
+  z-index: 10 !important;
+  margin: 0 auto !important;
 }
 
 /* ================================

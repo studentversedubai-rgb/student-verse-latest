@@ -90,7 +90,10 @@ export default function FAQ() {
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       marginBottom: '1.5rem',
-                      lineHeight: '1.1'
+                      lineHeight: '1.1',
+                      textAlign: 'center',
+                      position: 'relative',
+                      zIndex: 10
                     }}
                   >
                     StudentVerse FAQs
@@ -142,15 +145,7 @@ export default function FAQ() {
                       position: 'relative'
                     }}
                   >
-                    <ElectricBorder
-                      color={faq.color}
-                      speed={1.2}
-                      chaos={0.08}
-                      borderRadius={16}
-                      style={{ 
-                        position: 'relative'
-                      }}
-                    >
+                    
                       <motion.div 
                         className={`faq-card ${openFAQ === faq.id ? 'is-open' : ''}`}
                         onClick={() => toggleFAQ(faq.id)}
@@ -281,7 +276,6 @@ export default function FAQ() {
                           </p>
                         </motion.div>
                       </motion.div>
-                    </ElectricBorder>
                   </motion.div>
                 ))}
               </motion.div>
@@ -291,4 +285,4 @@ export default function FAQ() {
       </div>
     </div>
   );
-}
+} 

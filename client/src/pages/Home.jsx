@@ -47,11 +47,17 @@ export default function Home() {
       <Trustbar />
       
       {/* Ghost Cursor Section with Text */}
-      <div id="ghost-section" className="ghost-cursor-section relative h-screen flex items-center justify-center mt-20 hidden lg:block">
+      <div id="ghost-section" className="ghost-cursor-section relative hidden lg:block" style={{ 
+        height: '100vh', 
+        marginTop: '120px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
         <GhostCursor
           // Visuals
           color="#00f0ff"
-          brightness={1}
+          brightness={0.5}
           edgeIntensity={0}
 
           // Trail and motion
@@ -71,12 +77,26 @@ export default function Home() {
           className="absolute inset-0"
         />
         
-        {/* Text Overlay */}
-        <div className="relative z-20 text-center pointer-events-none px-4">
-          <h2 className="ghost-text text-black font-bold opacity-90 tracking-wide">
+        {/* Text Overlay - Perfectly Centered */}
+        <div className="relative z-20 pointer-events-none" style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          textAlign: 'center',
+          width: '100%',
+          maxWidth: '800px'
+        }}>
+          <h2 className="ghost-text text-white font-bold opacity-90 tracking-wide" style={{
+            margin: '0',
+            lineHeight: '1.1'
+          }}>
             Unlock savings only
           </h2>
-          <h2 className="ghost-text-highlight font-bold text-black opacity-90 tracking-wide mt-2">
+          <h2 className="ghost-text-highlight font-bold text-white opacity-90 tracking-wide" style={{
+            margin: '0.5rem 0 0 0',
+            lineHeight: '1.1'
+          }}>
             students know about
           </h2>
         </div>

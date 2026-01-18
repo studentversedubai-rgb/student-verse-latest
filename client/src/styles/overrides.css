@@ -808,6 +808,42 @@
   }
 }
 
+/* ===== HERO SECTION FIXES ===== */
+/* Ensure hero section is properly positioned and not affected by ghost cursor */
+.section {
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+/* Hero text positioning fixes */
+.hero-section-center-holder {
+  position: relative !important;
+  z-index: 10 !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+
+.hero-center-text {
+  position: relative !important;
+  z-index: 10 !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+
+.gradient-title {
+  position: relative !important;
+  z-index: 10 !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+}
+
+/* Ensure ghost cursor section doesn't interfere with hero */
+.ghost-cursor-section {
+  position: relative !important;
+  z-index: 1 !important;
+  margin-top: 120px !important;
+}
+
 /* ===== TEAM SECTION CARD FIXES ===== */
 /* Remove all hover effects and ensure cards stay visible */
 .org-card,
