@@ -32,7 +32,7 @@ const RadarVisual = memo(function RadarVisual({
             blip: "w-2 h-2"
         },
         lg: { 
-            container: "w-83 h-81.5", 
+            container: "w-63 sm:w-83 h-60.5 sm:h-81.5", 
             grid: 5,
             blip: "w-2.5 h-2.5"
         }
