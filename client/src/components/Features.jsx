@@ -6,7 +6,7 @@ export default function Features() {
     {
       id: 'cyan',
       title: 'Verified Digital ID',
-      description: 'Forget the plastic card. Carry your official student status with dynamic, fraud-proof Rolling QR technology.',
+      description: 'Forget the plastic card. Carry your official student status with a dynamic, animated ID. Just Flash & Verify to prove you belong.',
       color: '#00f0ff',
       icon: (
         <svg className="feature-icon cyan-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -143,7 +143,7 @@ export default function Features() {
                         {feature.title}
                       </h2>
 
-                      <p className="feature-description" style={{ opacity: 0.8, lineHeight: '1.6' }}>
+                      <p className="feature-description" style={{ opacity: 0.8, lineHeight: '1.6', textAlign: 'justify' }}>
                         {feature.description}
                       </p>
                     </motion.div>
