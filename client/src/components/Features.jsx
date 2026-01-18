@@ -18,7 +18,7 @@ export default function Features() {
     {
       id: 'yellow',
       title: 'Instant Savings',
-      description: 'Reedeem discounts at top brands. From coffee runs to cinema nights, Unlock Student Discounts.',
+      description: 'Unlock exclusive perks at your favorite spots. From coffee runs to cinema nights, just show your StudentVerse ID to save instantly.',
       color: '#ffb800',
       icon: (
         <svg className="feature-icon yellow-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +107,7 @@ export default function Features() {
                     chaos={0.12}
                     borderRadius={24}
                     // Added padding here to give the "electricity" room to breathe
-                    style={{ height: '100%', padding: '4px' }}
+                    style={{ height: '100%', padding: '4px',  }}
                   >
                     <motion.div
                     
@@ -133,7 +133,7 @@ export default function Features() {
 
                       <motion.div
                         className="feature-icon-container"
-                        style={{ color: feature.color, marginBottom: '20px' }} // Colors the SVG
+                        style={{ color: feature.color, marginBottom: '5px' }} // Colors the SVG
                         whileHover={{ scale: 1.1, rotate: 5 }}
                       >
                         {feature.icon}

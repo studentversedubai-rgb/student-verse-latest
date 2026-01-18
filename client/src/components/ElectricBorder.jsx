@@ -270,7 +270,7 @@ const ElectricBorder = ({
   return (
     <div
       ref={containerRef}
-      className={`relative overflow-visible isolate  ${className ?? ''}`}
+      className={`relative overflow-visible isolate  ${className ?? ''} `}
       style={{ '--electric-border-color': color, borderRadius, ...style }}
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[2]">

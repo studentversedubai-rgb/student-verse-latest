@@ -118,8 +118,26 @@ export default function Footer() {
                 Connect with US
               </Link>
             </div>
+            <div
+              className="footer-block"
+              id="w-node-e92bf484-a605-4132-f141-4518468af7fa-468af7d9"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                transition: 'opacity 0.6s ease-out 0.8s, transform 0.6s ease-out 0.8s'
+              }}
+            >
+              <div className="title-small">Terms &amp; Conditions</div> 
+              <a
+                className="footer-link"
+                href="/about#faq-about"
+              >
+                Privacy Policy
+              </a>
+              
+            </div>
           </div>
-        </div>
+        </div>  
       </div>
     </div>
   );
