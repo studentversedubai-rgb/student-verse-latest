@@ -595,13 +595,7 @@ select {
   background-color: rgba(10, 10, 20, 0.8) !important;
 }
 
-.feature-card:not(.w-button):not(.button):not(a):not(button):hover {
-  background-color: rgba(10, 10, 20, 0.8) !important;
-  back
 
-.feature-card:hover .feature-title {
-  text-shadow: 0 0 20px var(--card-color-1);
-}
 
 /* Enhanced glow effect on hover */
 .feature-card:hover .feature-card-glow {
@@ -680,32 +674,3 @@ select {
   }
 }
 
-/* Particle effect container */
-.feature-card .particles {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  border-radius: 20px;
-}
-
-/* Mobile adjustments */
-@media (max-width: 768px) {
-  .feature-card {
-    padding: 30px 20px;
-  }
-  
-  .feature-icon-container {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .feature-icon {
-    width: 45px;
-    height: 45px;
-  }
-  
-  .feature-title {
-    font-size: 1.25rem;
-  }
-}
