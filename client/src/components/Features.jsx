@@ -123,12 +123,11 @@ export default function Features() {
                         flexDirection: 'column',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        padding: '30px',
-                        paddingTop: '60px',
-                        paddingBottom: '60px',
+                        padding: '60px 20px',
                         textAlign: 'center',
                         color: '#ffffff' // Ensures text is visible on black
                       }}
+                      className="feature-card-content"
                     >
 
                       <motion.div
