@@ -47,7 +47,7 @@ export default function Home() {
       <Trustbar />
       
       {/* Ghost Cursor Section with Text */}
-      <div id="ghost-section" className="ghost-cursor-section relative h-screen flex items-center justify-center mt-20">
+      <div id="ghost-section" className="ghost-cursor-section relative h-screen flex items-center justify-center mt-20 hidden lg:block">
         <GhostCursor
           // Visuals
           color="#00f0ff"
