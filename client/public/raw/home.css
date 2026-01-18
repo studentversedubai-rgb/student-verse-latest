@@ -368,9 +368,7 @@ select {
   }
 }
 
-/* ================================
-   Animated Feature Cards
-   ================================ */
+/* Animated Feature Cards */
 
 .feature-container {
   perspective: 1000px;
@@ -379,13 +377,18 @@ select {
 .feature-card {
   --border-opacity: 0.6;
   position: relative;
-  background: rgba(10, 10, 20, 0.8);
+  background: rgba(10, 10, 20, 0.8) !important;
   border-radius: 20px;
   padding: 40px 30px;
   transform-style: preserve-3d;
   transition: box-shadow 0.3s ease;
   overflow: hidden;
   will-change: transform;
+  /* Remove any default button/link styles */
+  border: none !important;
+  outline: none !important;
+  text-decoration: none !important;
+  cursor: default !important;
 }
 
 /* Animated gradient border */
@@ -578,12 +581,23 @@ select {
   z-index: 2;
 }
 
-/* Hover state enhancements */
-.feature-card:hover {
-  box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.5),
-    0 0 40px -10px var(--card-color-1);
+/* Remove any unwanted default hover effects */
+.feature-card,
+.feature-card:hover,
+.feature-card:focus,
+.feature-card:active {
+  background-color: transparent !important;
+  background: transparent !important;
 }
+
+/* Override any Webflow default button/link styles */
+.feature-card:not(.w-button):not(.button):not(a):not(button) {
+  background-color: rgba(10, 10, 20, 0.8) !important;
+}
+
+.feature-card:not(.w-button):not(.button):not(a):not(button):hover {
+  background-color: rgba(10, 10, 20, 0.8) !important;
+  back
 
 .feature-card:hover .feature-title {
   text-shadow: 0 0 20px var(--card-color-1);

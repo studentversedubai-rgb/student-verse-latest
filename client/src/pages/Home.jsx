@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { initPageInteractions } from '../utils/initInteractions'
 import { normalizeHtml } from '../utils/normalizeHtml'
 import Navbar from './Navbar'
@@ -9,10 +9,15 @@ import Trustbar from '../components/Trustbar'
 import CTA from '../components/CTA'
 import MainFooter from '../components/Footer'
 import Footer from './Footer'
-import ScrollBaseAnimation from '../components/scroll-text-marque'
+import GhostCursor from '../components/GhostCursor'
+import { useLenisScroll } from '../hooks/useLenisScroll'
+import '../styles/ghost-cursor.css'
 
 export default function Home() {
   const [html, setHtml] = useState('')
+  
+  // Initialize Lenis smooth scroll
+  useLenisScroll()
 
   useEffect(() => {
     fetch('/raw/home.html')
@@ -37,18 +42,46 @@ export default function Home() {
       <Hero />
       <TrustedBy />
       <Features />
-      <div className='h-[80px] sm:h-[400px] md:h-[500px] grid place-content-center'>
-        <ScrollBaseAnimation
-          // delay={500}
-          baseVelocity={3}
-          scrollDependent={true}
-          clasname='font-bold tracking-[-0.07em] leading-[90%] bg-gradient-to-r from-[#00b8cc] via-[#cc8800] to-[#9a1f5a] bg-clip-text text-transparent'
-        >
-          VERIFY. DISCOVER. REDEEM.
-        </ScrollBaseAnimation>
-      </div>
+   
 
       <Trustbar />
+      
+      {/* Ghost Cursor Section with Text */}
+      <div id="ghost-section" className="ghost-cursor-section relative h-screen flex items-center justify-center mt-20">
+        <GhostCursor
+          // Visuals
+          color="#00f0ff"
+          brightness={1}
+          edgeIntensity={0}
+
+          // Trail and motion
+          trailLength={50}
+          inertia={0.5}
+
+          // Post-processing
+          grainIntensity={0.05}
+          bloomStrength={0.2}
+          bloomRadius={1.0}
+          bloomThreshold={0.025}
+
+          // Fade-out behavior
+          fadeDelayMs={1000}
+          fadeDurationMs={1500}
+          
+          className="absolute inset-0"
+        />
+        
+        {/* Text Overlay */}
+        <div className="relative z-20 text-center pointer-events-none px-4">
+          <h2 className="ghost-text text-black font-bold opacity-90 tracking-wide">
+            Unlock savings only
+          </h2>
+          <h2 className="ghost-text-highlight font-bold text-black opacity-90 tracking-wide mt-2">
+            students know about
+          </h2>
+        </div>
+      </div>
+      
       <CTA />
       <MainFooter />
       <Footer />

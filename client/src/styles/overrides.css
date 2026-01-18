@@ -886,6 +886,33 @@
   margin-top: 0 !important;
 }
 
+/* ===== FEATURE CARDS - REMOVE UNWANTED HOVER EFFECTS ===== */
+/* Prevent any default Webflow or browser styles from affecting feature cards */
+.feature-card,
+.feature-card * {
+  /* Remove any default button/link hover effects */
+  background-color: transparent !important;
+  outline: none !important;
+  border: none !important;
+}
+
+.feature-card:hover,
+.feature-card:focus,
+.feature-card:active {
+  /* Ensure no blue or unwanted background colors appear on hover */
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+/* Override any inherited Webflow button styles */
+.feature-card:not(.w-button):not(.button):not(a):not(button) {
+  background: rgba(10, 10, 20, 0.8) !important;
+}
+
+.feature-card:not(.w-button):not(.button):not(a):not(button):hover {
+  background: rgba(10, 10, 20, 0.8) !important;
+}
+
 .section-center-text {
   margin-top: 0 !important;
   padding-top: 0 !important;

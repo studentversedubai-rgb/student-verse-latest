@@ -1,0 +1,81 @@
+/* Ghost Cursor Section Styles */
+.ghost-cursor-section {
+    cursor: none;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+}
+
+/* Smooth scroll container */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* Scroll snap for desktop only */
+@media (min-width: 1024px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+  
+  .ghost-cursor-section {
+    scroll-snap-align: center;
+  }
+}
+
+
+
+
+
+
+
+
+
+/* Viewport-based responsive text sizing */
+.ghost-text {
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  line-height: 0.9;
+}
+
+.ghost-text-highlight {
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  line-height: 0.9;
+}
+
+/* Fine-tuned breakpoints for optimal sizing */
+@media (min-width: 320px) {
+  .ghost-text, .ghost-text-highlight {
+    font-size: clamp(1.2rem, 3.5vw, 3rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .ghost-text, .ghost-text-highlight {
+    font-size: clamp(2rem, 4.5vw, 5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ghost-text, .ghost-text-highlight {
+    font-size: clamp(2.5rem, 5vw, 6rem);
+  }
+}
+
+@media (min-width: 1440px) {
+  .ghost-text, .ghost-text-highlight {
+    font-size: clamp(3rem, 5.5vw, 7rem);
+  }
+}
+
+@media (min-width: 1920px) {
+  .ghost-text, .ghost-text-highlight {
+    font-size: clamp(3.5rem, 6vw, 8rem);
+  }
+}

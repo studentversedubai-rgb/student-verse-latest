@@ -121,19 +121,28 @@ export default function Hero() {
               </motion.h1>
             </div>
             
-            {/* <div className="center-hero-paragraph-holder">
+            <div className="center-hero-paragraph-holder">
               <motion.h3
-                initial={{ y: 30, opacity: 0 }}
+                initial={hasAnimated ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{
                   duration: 0.6,
                   ease: "easeOut",
                   delay: 0.5
                 }}
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: "600",
+                  textTransform: "uppercase",
+                  letterSpacing: "2px",
+                  color: "#ffffff",
+                  marginBottom: "1rem",
+                  textAlign: "center"
+                }}
               >
                 VERIFY. DISCOVER. REDEEM.
               </motion.h3>
-            </div> */}
+            </div>
             
             <div className="form-block hero-form w-form" style={{ marginTop: '1rem', marginBottom: '1rem' }}>
               <form 

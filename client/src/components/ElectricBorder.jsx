@@ -293,7 +293,7 @@ const ElectricBorder = ({
           }}
         />
       </div>
-      <div className="relative rounded-[inherit] z-[1]">{children}</div>
+      <div className="relative rounded-[inherit] z-[10]">{children}</div>
     </div>
   );
 };
