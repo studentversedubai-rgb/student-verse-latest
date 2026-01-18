@@ -75,75 +75,155 @@ export default function Features() {
   };
 
   return (
-    <div id="Features-homepage">
-      <div className="section" style={{ paddingTop: '20px' }}>
-        <div className="container">
-          <div className="section-center-text" style={{ marginTop: '0' }}>
-            <div className="section-title xl">
-              <motion.div 
-                className="fade-in-on-scroll"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                <h2 className="title medium">How it Works</h2>
-              </motion.div>
-            </div>
+    <>
+      <style>
+        {`
+          /* Base transitions for smooth hover effects */
+          .feature-card {
+            transition: box-shadow 0.4s ease-in-out !important;
+          }
 
-            <div className="feature-section">
-              <motion.div 
-                className="feature-container"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-              >
-                {features.map((feature) => (
-                  <ElectricBorder
-                    key={feature.id}
-                    color={feature.color}
-                    speed={1}
-                    chaos={0.12}
-                    borderRadius={24}
-                    style={{ height: '100%' }}
-                  >
-                    <motion.div 
-                      className={`feature-card ${feature.id}`}
-                      variants={cardVariants}
-                      whileHover={{ 
-                        y: -10,
-                        transition: { duration: 0.3 }
-                      }}
-                      style={{ 
-                        position: 'relative',
-                        zIndex: 10,
-                        background: '#000000',
-                        height: '100%'
-                      }}
+          /* Color-specific hover enhancements */
+          .feature-card.cyan:hover {
+            box-shadow: 
+              0 25px 50px -12px rgba(0, 0, 0, 0.5),
+              0 0 40px -10px rgba(0, 240, 255, 0.6),
+              inset 0 1px 0 rgba(0, 240, 255, 0.1) !important;
+          }
+
+          .feature-card.yellow:hover {
+            box-shadow: 
+              0 25px 50px -12px rgba(0, 0, 0, 0.5),
+              0 0 40px -10px rgba(255, 184, 0, 0.6),
+              inset 0 1px 0 rgba(255, 184, 0, 0.1) !important;
+          }
+
+          .feature-card.purple:hover {
+            box-shadow: 
+              0 25px 50px -12px rgba(0, 0, 0, 0.5),
+              0 0 40px -10px rgba(196, 40, 120, 0.6),
+              inset 0 1px 0 rgba(196, 40, 120, 0.1) !important;
+          }
+
+          /* Enhanced glow effect on hover */
+          .feature-card .feature-card-glow {
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out !important;
+          }
+
+          .feature-card:hover .feature-card-glow {
+            opacity: 0.8 !important;
+            transform: scale(1.1) !important;
+          }
+
+          /* Enhanced glow backgrounds */
+          .feature-card-glow.cyan {
+            background: radial-gradient(circle at center, rgba(0, 240, 255, 0.15) 0%, transparent 50%) !important;
+          }
+
+          .feature-card-glow.yellow {
+            background: radial-gradient(circle at center, rgba(255, 184, 0, 0.15) 0%, transparent 50%) !important;
+          }
+
+          .feature-card-glow.purple {
+            background: radial-gradient(circle at center, rgba(196, 40, 120, 0.15) 0%, transparent 50%) !important;
+          }
+
+          /* Ensure content stays above shimmer */
+          .feature-card .feature-icon-container,
+          .feature-card .feature-title,
+          .feature-card .feature-description {
+            position: relative !important;
+            z-index: 2 !important;
+          }
+
+          /* Smooth transitions for title text effects */
+          .feature-card .feature-title {
+            transition: text-shadow 0.4s ease-in-out !important;
+          }
+
+          .feature-card:hover .feature-title {
+            text-shadow: 0 0 20px var(--card-color-1) !important;
+          }
+
+          /* Smooth transitions for icon effects */
+          .feature-card .feature-icon {
+            transition: filter 0.4s ease-in-out !important;
+          }
+
+          .feature-card:hover .feature-icon {
+            filter: drop-shadow(0 0 20px var(--card-color-1)) !important;
+          }
+        `}
+      </style>
+      <div id="Features-homepage">
+        <div className="section" style={{ paddingTop: '20px' }}>
+          <div className="container">
+            <div className="section-center-text" style={{ marginTop: '0' }}>
+              <div className="section-title xl">
+                <motion.div 
+                  className="fade-in-on-scroll"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
+                  <h2 className="title medium">How it Works</h2>
+                </motion.div>
+              </div>
+
+              <div className="feature-section">
+                <motion.div 
+                  className="feature-container"
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                >
+                  {features.map((feature) => (
+                    <ElectricBorder
+                      key={feature.id}
+                      color={feature.color}
+                      speed={1}
+                      chaos={0.12}
+                      borderRadius={24}
+                      style={{ height: '100%' }}
                     >
-                      <div className={`feature-card-glow ${feature.id}`}></div>
                       <motion.div 
-                        className="feature-icon-container"
+                        className={`feature-card ${feature.id}`}
+                        variants={cardVariants}
                         whileHover={{ 
-                          scale: 1.1,
-                          rotate: 5,
+                          y: -10,
                           transition: { duration: 0.3 }
                         }}
+                        style={{ 
+                          position: 'relative',
+                          zIndex: 10,
+                          background: '#000000',
+                          height: '100%'
+                        }}
                       >
-                        {feature.icon}
+                        <div className={`feature-card-glow ${feature.id}`}></div>
+                        <motion.div 
+                          className="feature-icon-container"
+                          whileHover={{ 
+                            scale: 1.1,
+                            rotate: 5,
+                            transition: { duration: 0.3 }
+                          }}
+                        >
+                          {feature.icon}
+                        </motion.div>
+                        <h2 className="feature-title">{feature.title}</h2>
+                        <p className="feature-description">{feature.description}</p>
                       </motion.div>
-                      <h2 className="feature-title">{feature.title}</h2>
-                      <p className="feature-description">{feature.description}</p>
-                    </motion.div>
-                  </ElectricBorder>
-                ))}
-              </motion.div>
+                    </ElectricBorder>
+                  ))}
+                </motion.div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    
+    </>
   );
 }

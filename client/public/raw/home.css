@@ -486,7 +486,7 @@ select {
 }
 
 .feature-card-glow.purple {
-  background: radial-gradient(circle at center, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+  background: radial-gradient(circle at center, rgba(196, 40, 120, 0.15) 0%, transparent 50%);
 }
 
 /* Icon container */
@@ -509,6 +509,40 @@ select {
 
 .feature-card:hover .feature-icon {
   filter: drop-shadow(0 0 20px var(--card-color-1));
+}
+
+/* Color-specific hover enhancements */
+.feature-card.cyan:hover {
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 40px -10px rgba(0, 240, 255, 0.6),
+    inset 0 1px 0 rgba(0, 240, 255, 0.1);
+}
+
+.feature-card.cyan:hover::before {
+  --border-opacity: 1;
+}
+
+.feature-card.yellow:hover {
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 40px -10px rgba(255, 184, 0, 0.6),
+    inset 0 1px 0 rgba(255, 184, 0, 0.1);
+}
+
+.feature-card.yellow:hover::before {
+  --border-opacity: 1;
+}
+
+.feature-card.purple:hover {
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 40px -10px rgba(196, 40, 120, 0.6),
+    inset 0 1px 0 rgba(196, 40, 120, 0.1);
+}
+
+.feature-card.purple:hover::before {
+  --border-opacity: 1;
 }
 
 /* Icon colors */
@@ -555,18 +589,80 @@ select {
   text-shadow: 0 0 20px var(--card-color-1);
 }
 
-/* Shimmer effect on hover */
-.feature-card:hover::before {
-  opacity: 1;
-  animation: shimmer 2s ease-in-out infinite;
+/* Enhanced glow effect on hover */
+.feature-card:hover .feature-card-glow {
+  opacity: 0.8;
+  transform: scale(1.1);
 }
 
-@keyframes shimmer {
+/* Color-specific shimmer effects on hover */
+.feature-card.cyan:hover::before {
+  opacity: 1;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(0, 240, 255, 0.4) 50%,
+    transparent 70%
+  );
+  background-size: 200% 200%;
+  animation: shimmer-cyan 2s ease-in-out infinite;
+}
+
+.feature-card.yellow:hover::before {
+  opacity: 1;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 184, 0, 0.4) 50%,
+    transparent 70%
+  );
+  background-size: 200% 200%;
+  animation: shimmer-yellow 2s ease-in-out infinite;
+}
+
+.feature-card.purple:hover::before {
+  opacity: 1;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(196, 40, 120, 0.4) 50%,
+    transparent 70%
+  );
+  background-size: 200% 200%;
+  animation: shimmer-purple 2s ease-in-out infinite;
+}
+
+/* Color-specific shimmer animations */
+@keyframes shimmer-cyan {
   0%, 100% {
-    background-position: 0% 50%;
+    background-position: -200% -200%;
+    opacity: 0.3;
   }
   50% {
-    background-position: 100% 50%;
+    background-position: 200% 200%;
+    opacity: 0.6;
+  }
+}
+
+@keyframes shimmer-yellow {
+  0%, 100% {
+    background-position: -200% -200%;
+    opacity: 0.3;
+  }
+  50% {
+    background-position: 200% 200%;
+    opacity: 0.6;
+  }
+}
+
+@keyframes shimmer-purple {
+  0%, 100% {
+    background-position: -200% -200%;
+    opacity: 0.3;
+  }
+  50% {
+    background-position: 200% 200%;
+    opacity: 0.6;
   }
 }
 
