@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useLayoutEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -80,28 +80,27 @@ export default function EmailVerificationStyled({
 
     const isEmailValid = useMemo(() => isUniversityEmail(email), [email]);
 
-    // Disable custom cursor on this page
-    useEffect(() => {
-        document.body.style.cursor = 'auto';
-        document.body.style.padding = "0px";
-        document.body.style.height = "0px";
-        document.body.style.margin = "0px";
-        
-        // Remove body padding-top for waitlist page
-        
-        // Target the custom cursor component container (has z-9999 class)
-        const cursorContainer = document.querySelector('.z-9999');
+    
 
+    useLayoutEffect(() => {
+        // 1. Force the body to zero out everything
+        document.body.style.setProperty('padding', '0px', 'important');
+        document.body.style.setProperty('margin', '0px', 'important');
+        document.documentElement.style.setProperty('margin', '0px', 'important');
+        document.documentElement.style.setProperty('padding', '0px', 'important');
+
+        // 2. Hide the custom cursor
+        const cursorContainer = document.querySelector('.z-9999');
         if (cursorContainer instanceof HTMLElement) {
             cursorContainer.style.display = 'none';
         }
 
         return () => {
-            document.body.style.cursor = "";
-            // Restore body padding-top when leaving waitlist page
-            document.body.style.paddingTop = "120px";
+            // 3. Reset back to your app's default when leaving this page
+            document.body.style.setProperty('padding', '80px 0px 0px', ''); // Restores original
+            document.body.style.setProperty('margin', '', '');
             if (cursorContainer instanceof HTMLElement) {
-                cursorContainer.style.display = "";
+                cursorContainer.style.display = '';
             }
         };
     }, []);
@@ -239,20 +238,20 @@ export default function EmailVerificationStyled({
                 {/* Hero circles background - replace all other backgrounds */}
                 <div className="hero-circles-wrapper-v3 absolute inset-0 flex items-center justify-center pointer-events-none z-10">
                     <div className="hero-circle-wrapper _01 center-circle absolute">
-                        <motion.img 
-                            alt="Background circle 1" 
-                            className="hero-circle w-[690px] h-[690px] object-contain" 
+                        <motion.img
+                            alt="Background circle 1"
+                            className="hero-circle w-[690px] h-[690px] object-contain"
                             loading="lazy"
                             src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938caa62c8b5f7aaf5ad7_Circles%20(2).png"
-                            initial={{ 
-                                y: 200, 
-                                scale: 0.8, 
-                                opacity: 0 
+                            initial={{
+                                y: 200,
+                                scale: 0.8,
+                                opacity: 0
                             }}
-                            animate={{ 
-                                y: 0, 
-                                scale: 1, 
-                                opacity: 0.8 
+                            animate={{
+                                y: 0,
+                                scale: 1,
+                                opacity: 0.8
                             }}
                             transition={{
                                 duration: 0.8,
@@ -262,20 +261,20 @@ export default function EmailVerificationStyled({
                         />
                     </div>
                     <div className="w-layout-vflex hero-circle-wrapper _02 center-circle absolute">
-                        <motion.img 
-                            alt="Background circle 2" 
+                        <motion.img
+                            alt="Background circle 2"
                             className="hero-circle-02 w-[860px] h-[860px] object-contain"
                             loading="lazy"
                             src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938ca8d17e84d6ed8613e_Circles%20(3).png"
-                            initial={{ 
-                                y: 250, 
-                                scale: 0.8, 
-                                opacity: 0 
+                            initial={{
+                                y: 250,
+                                scale: 0.8,
+                                opacity: 0
                             }}
-                            animate={{ 
-                                y: 0, 
-                                scale: 1, 
-                                opacity: 0.7 
+                            animate={{
+                                y: 0,
+                                scale: 1,
+                                opacity: 0.7
                             }}
                             transition={{
                                 duration: 0.9,
@@ -285,20 +284,20 @@ export default function EmailVerificationStyled({
                         />
                     </div>
                     <div className="hero-circle-wrapper _03 center-circle absolute">
-                        <motion.img 
-                            alt="Background circle 3" 
-                            className="hero-circle-03 w-[1000px] h-[1000px] object-contain" 
+                        <motion.img
+                            alt="Background circle 3"
+                            className="hero-circle-03 w-[1000px] h-[1000px] object-contain"
                             loading="lazy"
                             src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938cab78e7525914d0f9f_Circles%20(1).png"
-                            initial={{ 
-                                y: 300, 
-                                scale: 0.8, 
-                                opacity: 0 
+                            initial={{
+                                y: 300,
+                                scale: 0.8,
+                                opacity: 0
                             }}
-                            animate={{ 
-                                y: 0, 
-                                scale: 1, 
-                                opacity: 0.6 
+                            animate={{
+                                y: 0,
+                                scale: 1,
+                                opacity: 0.6
                             }}
                             transition={{
                                 duration: 1.0,
@@ -430,8 +429,8 @@ export default function EmailVerificationStyled({
                                             value={email}
                                             onChange={handleEmailChange}
                                             className={`w-full pl-12 pr-12 py-3.5 rounded-xl bg-white/5 border text-neutral-200 placeholder-neutral-600 text-sm transition-all focus:outline-none focus:bg-white/10 ${isEmailValid && email
-                                                    ? "border-purple-500/40 focus:border-purple-500/60 shadow-lg shadow-purple-500/10"
-                                                    : "border-white/10 focus:border-blue-400/40"
+                                                ? "border-purple-500/40 focus:border-purple-500/60 shadow-lg shadow-purple-500/10"
+                                                : "border-white/10 focus:border-blue-400/40"
                                                 }`}
                                             placeholder="student@university.edu"
                                             required
