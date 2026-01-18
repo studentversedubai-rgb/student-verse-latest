@@ -97,7 +97,7 @@ export default function Navbar() {
                 alt="StudentVerse Logo"
                 loading="lazy"
                 src="/assets/svlogo.png"
-                className="ml-6 sm:ml-0 h-12 sm:h-8 md:h-9 lg:h-10 w-auto block"
+                className="ml-3 sm:ml-0 h-12 sm:h-8 md:h-9 lg:h-10 w-auto block"
               />
             </Link>
           </div>
