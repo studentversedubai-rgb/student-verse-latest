@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion';
-import ElectricBorder from './ElectricBorder';
 
 export default function Features() {
   const features = [
     {
       id: 'cyan',
       title: 'Verified Digital ID',
-      description: 'Forget the plastic card. Carry your official student status with a dynamic, animated ID. Just Flash & Verify to prove you belong.',
+      description: 'Forget the plastic card. Carry your official student status with a dynamic, animated ID. Just Flash & Verify to earn your rewards.',
       color: '#00f0ff',
       icon: (
         <svg className="feature-icon cyan-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -35,7 +34,7 @@ export default function Features() {
     {
       id: 'purple',
       title: 'SV Orbit AI',
-      description: 'Your personal AI planner. Tell Orbit your budget and vibe, and it builds your entire itinerary.',
+      description: 'Your personal AI companion that learns and adapts to your needs, understanding your mood, preferences, and epic weekend adventures',
       color: '#c42878',
       icon: (
         <svg className="feature-icon purple-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -100,53 +99,70 @@ export default function Features() {
                 viewport={{ once: true, margin: "-100px" }}
               >
                 {features.map((feature) => (
-                  <ElectricBorder
+                  <motion.div
                     key={feature.id}
-                    color={feature.color}
-                    speed={1}
-                    chaos={0.12}
-                    borderRadius={24}
-                    // Added padding here to give the "electricity" room to breathe
-                    style={{ height: '100%', padding: '4px',  }}
+                    variants={cardVariants}
+                    whileHover={{ y: -10 }}
+                    className="relative rounded-3xl overflow-visible"
                   >
-                    <motion.div
-                    
-                      variants={cardVariants}
-                      whileHover={{ y: -10 }}
-                      style={{
-                        position: 'relative',
-                        zIndex: 10,
-                        background: 'transparent',
-                        height: '100%',
-                        borderRadius: '20px', // Matches your border radius
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        padding: '60px 20px',
-                        textAlign: 'center',
-                        color: '#ffffff' // Ensures text is visible on black
-                      }}
-                      className="feature-card-content"
-                    >
-
+                    {/* Animated gradient border orbit - same as BentoDashboard */}
+                    <div className="absolute -inset-[2px] rounded-3xl opacity-80">
                       <motion.div
-                        className="feature-icon-container"
-                        style={{ color: feature.color, marginBottom: '5px' }} // Colors the SVG
-                        whileHover={{ scale: 1.1, rotate: 5 }}
+                        className="absolute inset-0 rounded-3xl"
+                        style={{
+                          background: "linear-gradient(90deg, #8B5CF6 0%, #EC4899 18%, #FB923C 35%, #3B82F6 52%, #06B6D4 68%, #FB923C 85%, #8B5CF6 100%)",
+                          backgroundSize: "300% 300%"
+                        }}
+                        animate={{
+                          backgroundPosition: ["0% 50%", "300% 50%"]
+                        }}
+                        transition={{
+                          duration: 4,
+                          ease: "linear",
+                          repeat: Infinity
+                        }}
+                      />
+                      {/* Soft multi-color glow effect */}
+                      <div
+                        className="absolute inset-0 rounded-3xl blur-lg"
+                        style={{
+                          background: "linear-gradient(90deg, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.4) 20%, rgba(251, 146, 60, 0.35) 40%, rgba(59, 130, 246, 0.4) 60%, rgba(251, 146, 60, 0.35) 80%, rgba(139, 92, 246, 0.4) 100%)"
+                        }}
+                      />
+                    </div>
+
+                    {/* Card content with black background */}
+                    <div className="relative bg-black rounded-3xl border-2 border-transparent p-5 sm:p-6 lg:p-8 z-10">
+                      <motion.div
+                        style={{
+                          height: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          textAlign: 'center',
+                          color: '#ffffff'
+                        }}
+                        className="feature-card-content"
                       >
-                        {feature.icon}
+                        <motion.div
+                          className="feature-icon-container"
+                          style={{ color: feature.color, marginBottom: '20px' }}
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                        >
+                          {feature.icon}
+                        </motion.div>
+
+                        <h2 className="feature-title" style={{ fontSize: '1.5rem', marginBottom: '15px', fontWeight: '600' }}>
+                          {feature.title}
+                        </h2>
+
+                        <p className="feature-description" style={{ opacity: 0.8, lineHeight: '1.6', textAlign: 'center' }}>
+                          {feature.description}
+                        </p>
                       </motion.div>
-
-                      <h2 className="feature-title" style={{ fontSize: '1.5rem', marginBottom: '15px' }}>
-                        {feature.title}
-                      </h2>
-
-                      <p className="feature-description" style={{ opacity: 0.8, lineHeight: '1.6', textAlign: 'justify' }}>
-                        {feature.description}
-                      </p>
-                    </motion.div>
-                  </ElectricBorder>
+                    </div>
+                  </motion.div>
                 ))}
               </motion.div>
             </div>

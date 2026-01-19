@@ -15,7 +15,7 @@ import '../styles/ghost-cursor.css'
 
 export default function Home() {
   const [html, setHtml] = useState('')
-  
+
   // Initialize Lenis smooth scroll
   useLenisScroll()
 
@@ -42,15 +42,13 @@ export default function Home() {
       <Hero />
       <TrustedBy />
       <Features />
-   
-
       <Trustbar />
-      
       {/* Ghost Cursor Section with Text */}
-      <div id="ghost-section" className="ghost-cursor-section relative hidden lg:block" style={{ 
-        height: '100vh', 
+      <div id="ghost-section" className="ghost-cursor-section relative hidden lg:block " style={{
+        height: '100vh',
         marginTop: '120px',
         display: 'flex',
+
         alignItems: 'center',
         justifyContent: 'center'
       }}>
@@ -73,10 +71,10 @@ export default function Home() {
           // Fade-out behavior
           fadeDelayMs={1000}
           fadeDurationMs={1500}
-          
+
           className="absolute inset-0"
         />
-        
+
         {/* Text Overlay - Perfectly Centered */}
         <div className="relative z-20 pointer-events-none" style={{
           position: 'absolute',
@@ -101,7 +99,7 @@ export default function Home() {
           </h2>
         </div>
       </div>
-      
+
       <CTA />
       <MainFooter />
       <Footer />

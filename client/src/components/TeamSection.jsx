@@ -37,7 +37,7 @@ export default function TeamSection() {
         id: "cto",
         initials: "MK",
         name: "Mohamed Elkhouly",
-        role: "Chief Technology Officer",
+        role: "Product Manager  ",
         color: "linear-gradient(135deg, #2962FF, #3B82F6)"
       },
       {
@@ -98,7 +98,7 @@ export default function TeamSection() {
         role: "Frontend Dev",
         color: "linear-gradient(135deg, #7B2CBF, #9D4EDD)"
       },
-    
+
       {
         id: "tech-fe-3-2",
         initials: "HW",
@@ -252,9 +252,9 @@ export default function TeamSection() {
           <section id="org" style={{ padding: "0" }}>
             <div style={{ width: "min(1100px, 92vw)", margin: "0 auto" }}>
               <header
-                style={{ 
-                  textAlign: "center", 
-                  marginBottom: "clamp(2rem, 5vw, 3rem)", 
+                style={{
+                  textAlign: "center",
+                  marginBottom: "clamp(2rem, 5vw, 3rem)",
                   marginTop: "0",
                   opacity: isVisible ? 1 : 0,
                   transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
