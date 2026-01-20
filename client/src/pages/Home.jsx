@@ -44,7 +44,7 @@ export default function Home() {
       <Features />
       <Trustbar />
       {/* Ghost Cursor Section with Text */}
-      <div id="ghost-section" className="ghost-cursor-section relative hidden lg:block " style={{
+      {/* <div id="ghost-section" className="ghost-cursor-section relative hidden lg:block " style={{
         height: '100vh',
         marginTop: '120px',
         display: 'flex',
@@ -53,29 +53,24 @@ export default function Home() {
         justifyContent: 'center'
       }}>
         <GhostCursor
-          // Visuals
           color="#00f0ff"
           brightness={0.5}
           edgeIntensity={0}
 
-          // Trail and motion
           trailLength={50}
           inertia={0.5}
 
-          // Post-processing
           grainIntensity={0.05}
           bloomStrength={0.2}
           bloomRadius={1.0}
           bloomThreshold={0.025}
 
-          // Fade-out behavior
           fadeDelayMs={1000}
           fadeDurationMs={1500}
 
           className="absolute inset-0"
         />
 
-        {/* Text Overlay - Perfectly Centered */}
         <div className="relative z-20 pointer-events-none" style={{
           position: 'absolute',
           top: '50%',
@@ -98,7 +93,7 @@ export default function Home() {
             students know about
           </h2>
         </div>
-      </div>
+      </div> */}
 
       <CTA />
       <MainFooter />

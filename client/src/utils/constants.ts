@@ -77,7 +77,7 @@ export const QUEUE_CONFIG = {
 
 export const VERIFICATION_UI_CONFIG = {
     OTP_LENGTH: 6,
-    OTP_EXPIRY_DISPLAY: '5 minutes',
+    OTP_EXPIRY_DISPLAY: '10 minutes',
     RESEND_COOLDOWN_DISPLAY: '60 seconds',
     MAX_ATTEMPTS_DISPLAY: 5,
     LOCKOUT_DISPLAY: '15 minutes',

@@ -22,18 +22,18 @@ export default function Hero() {
       sessionStorage.setItem('heroAnimated', 'true');
     }
   }, []);
-  
+
   return (
     <>
       {/* Empty div for spacing - responsive */}
-      <div style={{ height: 'clamp(20px, 8vw, 100px)' }} className="empty-div"></div>
-      
+      <div style={{ height: 'clamp(10px, 3vw, 40px)' }} className="empty-div"></div>
+
       <div className="section">
         <div className="container">
           <div className="home-v3-hero-section">
-            
+
             {/* Hero App Section */}
-            <motion.div 
+            <motion.div
               className="hero-v3-app"
               initial={hasAnimated ? { y: 0, opacity: 1 } : { y: 100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -65,7 +65,7 @@ export default function Hero() {
             </motion.div>
 
             {/* Hero Circles */}
-            <motion.div 
+            <motion.div
               className="hero-circles-wrapper-v3"
               initial={hasAnimated ? { y: 0, opacity: 1 } : { y: 80, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -83,7 +83,7 @@ export default function Hero() {
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938caa62c8b5f7aaf5ad7_Circles%20(2).png"
                 />
               </div>
-              
+
               <div className="w-layout-vflex hero-circle-wrapper _02 center-circle">
                 <img
                   alt="Background circle 2"
@@ -92,7 +92,7 @@ export default function Hero() {
                   src="https://wubflow-shield.NOCODEXPORT.DEV/66a92b76e1155b1f28fde0f0/66a938ca8d17e84d6ed8613e_Circles%20(3).png"
                 />
               </div>
-              
+
               <div className="hero-circle-wrapper _03 center-circle">
                 <img
                   alt="Background circle 3"
@@ -107,7 +107,7 @@ export default function Hero() {
           {/* Hero Center Content */}
           <div className="hero-section-center-holder" style={{ gap: '1rem', opacity: isReady ? 1 : 0 }}>
             <div className="hero-center-text" style={{ marginBottom: '0.5rem' }}>
-              <motion.h1 
+              <motion.h1
                 className="gradient-title"
                 initial={hasAnimated ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -120,7 +120,7 @@ export default function Hero() {
                 UNLOCK <br /> STUDENT DISCOUNTS
               </motion.h1>
             </div>
-            
+
             <div className="center-hero-paragraph-holder">
               <motion.h3
                 initial={hasAnimated ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
@@ -143,15 +143,15 @@ export default function Hero() {
                 VERIFY. DISCOVER. REDEEM.
               </motion.h3>
             </div>
-            
+
             <div className="form-block hero-form w-form" style={{ marginTop: '1rem', marginBottom: '1rem' }}>
-              <form 
-                className="form-holder" 
+              <form
+                className="form-holder"
                 data-name="Early Access Emails"
-                data-wf-element-id="34e446c1-e739-20c5-2b6f-f78302acc646" 
+                data-wf-element-id="34e446c1-e739-20c5-2b6f-f78302acc646"
                 data-wf-page-id="66a92b76e1155b1f28fde156"
-                id="Early-Access-Emails" 
-                method="get" 
+                id="Early-Access-Emails"
+                method="get"
                 name="wf-form-Early-Access-Emails"
                 style={{ margin: 0 }}
               >
@@ -165,8 +165,8 @@ export default function Hero() {
                   }}
                   style={{ margin: 0 }}
                 >
-                  <Link 
-                    className="join-waitlist-button" 
+                  <Link
+                    className="join-waitlist-button"
                     to="/waitlist"
                     style={{
                       fontSize: "1.2rem",

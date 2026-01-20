@@ -3,6 +3,17 @@
    Keep existing structure; only fix requested issues.
    ===================================================== */
 
+/* RGB Border Animation for Team Cards */
+@keyframes rgbBorder {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
 /* 1) How it Works: bigger icon circle + icons */
 .how-it-works-v3-icon-holder {
   width: 96px !important;
@@ -923,6 +934,13 @@
 /* ===== REMOVE TOP SPACING FROM SECTIONS ===== */
 #org,
 #faq-about {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+#faq-about>div,
+#faq-about .container,
+#faq-about>* {
   padding-top: 0 !important;
   margin-top: 0 !important;
 }

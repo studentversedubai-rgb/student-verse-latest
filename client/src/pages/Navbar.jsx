@@ -120,17 +120,19 @@ export default function Navbar() {
           >
             {/* Animated gradient border container */}
             <div className="relative">
-              {/* Static gradient border */}
+              {/* Animated RGB border */}
               <div className="absolute -inset-[2px] rounded-full opacity-80">
                 <div
                   className="absolute inset-0 rounded-full"
                   style={{
-                    background: "linear-gradient(90deg, #00b8cc 0%, #cc8800 35%, #9a1f5a 70%, #00b8cc 100%)",
+                    background: "linear-gradient(90deg, #8B5CF6 0%, #EC4899 18%, #FB923C 35%, #3B82F6 52%, #06B6D4 68%, #FB923C 85%, #8B5CF6 100%)",
+                    backgroundSize: "300% 300%",
+                    animation: "rgbBorder 4s linear infinite"
                   }}
                 />
                 {/* Soft glow effect */}
                 <div className="absolute inset-0 rounded-full blur-lg" style={{
-                  background: "linear-gradient(90deg, rgba(0, 184, 204, 0.4) 0%, rgba(204, 136, 0, 0.4) 35%, rgba(154, 31, 90, 0.4) 70%, rgba(0, 184, 204, 0.4) 100%)"
+                  background: "linear-gradient(90deg, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.4) 20%, rgba(251, 146, 60, 0.35) 40%, rgba(59, 130, 246, 0.4) 60%, rgba(251, 146, 60, 0.35) 80%, rgba(139, 92, 246, 0.4) 100%)"
                 }} />
               </div>
 
@@ -142,12 +144,12 @@ export default function Navbar() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  background: "rgba(8, 12, 31, 0.95)",
+                  background: "#000000",
                   backdropFilter: "blur(20px)",
                   WebkitBackdropFilter: "blur(20px)",
                   borderRadius: "50px",
                   padding: "0.5rem 1.5rem",
-                  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+                  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.4)",
                   border: "2px solid transparent",
                   minWidth: "300px",
                   maxWidth: "450px",
@@ -184,15 +186,6 @@ export default function Navbar() {
                       }}
                     >
                       {link.label}
-                      {isActiveLink(link.href) && (
-                        <div
-                          className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full"
-                          style={{
-                            background: "linear-gradient(90deg, #00b8cc, #cc8800)",
-                            boxShadow: "0 0 10px #00b8cc"
-                          }}
-                        />
-                      )}
                     </Link>
                   ))}
                 </div>

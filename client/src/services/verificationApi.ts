@@ -75,7 +75,7 @@ export interface VerificationState {
 
 export const VERIFICATION_CONFIG = {
   OTP_LENGTH: 6,
-  OTP_EXPIRY_MS: 5 * 60 * 1000, // 5 minutes
+  OTP_EXPIRY_MS: 10 * 60 * 1000, // 10 minutes
   RESEND_COOLDOWN_MS: 60 * 1000, // 60 seconds
   MAX_ATTEMPTS: 5,
   MAX_RESENDS: 3,

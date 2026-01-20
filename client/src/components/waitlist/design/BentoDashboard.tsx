@@ -602,16 +602,6 @@ Join the waitlist: https://studentverse.ae/waitlist
                                             </svg>
                                         </motion.button>
 
-                                        {/* Twitter/X */}
-                                        <motion.button
-                                            onClick={() => handleSocialShare('twitter')}
-                                            className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-500/20 to-blue-600/30 border border-sky-500/30 flex items-center justify-center text-sky-400 hover:text-sky-300 transition-all duration-300 group backdrop-blur-sm"
-                                            whileHover={{ scale: 1.05, backgroundColor: "rgba(29, 161, 242, 0.2)" }}
-                                            whileTap={{ scale: 0.95 }}
-                                            title="Share on Twitter"
-                                        >
-                                            <XIcon />
-                                        </motion.button>
 
                                         {/* Copy Message */}
                                         <motion.button
@@ -640,7 +630,6 @@ Join the waitlist: https://studentverse.ae/waitlist
                 >
                     <SocialLink href="https://instagram.com/studentverse.ae" icon={InstagramIcon} label="Instagram" />
                     <SocialLink href="https://linkedin.com/company/studentverse.ae" icon={LinkedInIcon} label="LinkedIn" />
-                    <SocialLink href="https://x.com/studentverse.ae" icon={XIcon} label="X (Twitter)" />
                 </motion.div>
 
                 {/* Launch Target */}
