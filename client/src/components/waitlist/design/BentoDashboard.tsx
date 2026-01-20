@@ -164,9 +164,9 @@ const XIcon = () => (
 export default function BentoDashboard({ queuePosition, totalUsers = 1000, referralStats, referralCode }: BentoDashboardProps) {
     const [copied, setCopied] = useState(false);
 
-    // Determine PRO status based on referral count
-    const isPro = referralStats.count >= 5 || referralStats.rewardStatus === 'unlocked';
-    
+    // Determine PRO status - only unlocked when 5 or more referrals
+    const isPro = referralStats.count >= 5;
+
     // Generate dynamic chip labels based on referral count
     const chipLabels = Array.from({ length: 5 }, (_, i) => {
         if (i < referralStats.count) {
@@ -367,10 +367,10 @@ Join the waitlist: https://studentverse.ae/waitlist
                         <div className="relative h-full">
                             {/* Background Gradient */}
                             <div className="absolute inset-0 rounded-3xl" />
-                            
+
                             {/* Main Content */}
                             <div className="relative z-10 h-full flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
-                                
+
                                 {/* Left: Planet Visual */}
                                 <motion.div
                                     className="shrink-0 mt-3 sm:mt-0"
@@ -379,38 +379,38 @@ Join the waitlist: https://studentverse.ae/waitlist
                                 >
                                     <HolographicPlanet size="lg" />
                                 </motion.div>
-                                
+
                                 {/* Center: Main Content */}
                                 <div className="flex-1 text-center lg:text-left lg:ml-4">
                                     <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
                                         <Sparkles className="w-6 h-6 text-violet pt-3" />
                                         <h3 className="font-display text-2xl lg:text-3xl font-bold text-white">SV Orbit AI</h3>
                                     </div>
-                                    
+
                                     <p className="text-violet text-base font-medium mb-3">
                                         Tell me your vibe. I&apos;ll plan the night.
                                     </p>
-                                    
+
                                     <p className="text-gray-300 text-sm lg:text-base mb-4 leading-relaxed max-w-2xl">
-                                        Your personal AI companion that understands your mood, preferences, and social circle. 
+                                        Your personal AI companion that understands your mood, preferences, and social circle.
                                         From spontaneous coffee dates to epic weekend adventures.
                                     </p>
 
                                     {/* Feature Tags */}
                                     <div className="flex flex-wrap justify-center lg:justify-start gap-2 mt-5 lg:mt-0">
-                                        <motion.span 
+                                        <motion.span
                                             className="px-3 py-1 rounded-full bg-violet/10 border border-violet/20 text-violet text-xs font-medium"
                                             whileHover={{ scale: 1.05, backgroundColor: "rgba(123, 44, 191, 0.15)" }}
                                         >
                                             🎯 Smart Recommendations
                                         </motion.span>
-                                        <motion.span 
+                                        <motion.span
                                             className="px-3 py-1 rounded-full bg-cyan/10 border border-cyan/20 text-cyan text-xs font-medium"
                                             whileHover={{ scale: 1.05, backgroundColor: "rgba(0, 240, 255, 0.15)" }}
                                         >
                                             🌐 Social Integration
                                         </motion.span>
-                                        <motion.span 
+                                        <motion.span
                                             className="px-3 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold text-xs font-medium"
                                             whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 184, 0, 0.15)" }}
                                         >
@@ -442,7 +442,7 @@ Join the waitlist: https://studentverse.ae/waitlist
 
                                     {/* Progress Stats */}
                                     <div className="space-y-1.5">
-                                        <motion.div 
+                                        <motion.div
                                             className="flex items-center justify-center lg:justify-end gap-2 text-xs text-gray-400"
                                             animate={{ opacity: [0.6, 1, 0.6] }}
                                             transition={{ duration: 3, repeat: Infinity, delay: 0 }}
@@ -450,8 +450,8 @@ Join the waitlist: https://studentverse.ae/waitlist
                                             <div className="w-1.5 h-1.5 rounded-full bg-violet" />
                                             <span>AI Training: 87%</span>
                                         </motion.div>
-                                        
-                                        <motion.div 
+
+                                        <motion.div
                                             className="flex items-center justify-center lg:justify-end gap-2 text-xs text-gray-400"
                                             animate={{ opacity: [0.6, 1, 0.6] }}
                                             transition={{ duration: 3, repeat: Infinity, delay: 1 }}
@@ -459,8 +459,8 @@ Join the waitlist: https://studentverse.ae/waitlist
                                             <div className="w-1.5 h-1.5 rounded-full bg-cyan" />
                                             <span>Neural Networks: 92%</span>
                                         </motion.div>
-                                        
-                                        <motion.div 
+
+                                        <motion.div
                                             className="flex items-center justify-center lg:justify-end gap-2 text-xs text-gray-400"
                                             animate={{ opacity: [0.6, 1, 0.6] }}
                                             transition={{ duration: 3, repeat: Infinity, delay: 2 }}
@@ -502,7 +502,7 @@ Join the waitlist: https://studentverse.ae/waitlist
                         <Rocket className="w-4 h-4 text-cyan" />
                         Share Your Referral Code
                     </h4>
-                    
+
                     {/* Referral Code Card with Animated Border - Horizontal Layout */}
                     <div className="relative rounded-3xl overflow-visible mt-5 ">
                         {/* Animated gradient border orbit - same as other cards */}
@@ -531,7 +531,7 @@ Join the waitlist: https://studentverse.ae/waitlist
                         {/* Card content - Horizontal Layout */}
                         <div className="relative bg-black rounded-3xl border-2 border-transparent p-5 sm:p-6 z-10">
                             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-                                
+
                                 {/* Left Section: Referral Code Display */}
                                 <div className="text-center lg:text-left">
                                     <p className="text-gray-400 text-xs mb-2 uppercase tracking-wider">Your Referral Code</p>
@@ -547,13 +547,13 @@ Join the waitlist: https://studentverse.ae/waitlist
                                         }}
                                         style={{
                                             backgroundSize: "200% 200%",
-                                            
+
                                         }}
                                     >
                                         {referralCode}
                                     </motion.div>
-                                    
-                                  
+
+
                                 </div>
 
                                 {/* Right Section: Social Sharing Buttons */}
@@ -562,7 +562,7 @@ Join the waitlist: https://studentverse.ae/waitlist
                                         <Sparkles className="w-3 h-3" />
                                         Share & Earn Rewards
                                     </p>
-                                    
+
                                     {/* Social Buttons Row */}
                                     <div className="flex justify-center lg:justify-end gap-3 mt-6 mb-8">
                                         {/* WhatsApp */}
@@ -574,7 +574,7 @@ Join the waitlist: https://studentverse.ae/waitlist
                                             title="Share on WhatsApp"
                                         >
                                             <svg className="w-6 h-6 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488"/>
+                                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.465 3.488" />
                                             </svg>
                                         </motion.button>
 
@@ -598,7 +598,7 @@ Join the waitlist: https://studentverse.ae/waitlist
                                             title="Share on Facebook"
                                         >
                                             <svg className="w-6 h-6 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                                             </svg>
                                         </motion.button>
 

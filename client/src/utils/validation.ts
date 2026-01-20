@@ -6,8 +6,8 @@ export const isUniversityEmail = (email: string): boolean => {
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailPattern.test(emailLower)) return false;
   // TESTING: Allow any email domain temporarily. Enable back later by uncommenting below:
-  return true;
-  // return UNIVERSITY_DOMAINS.some(domain => emailLower.endsWith(domain));
+  // return true;
+  return UNIVERSITY_DOMAINS.some(domain => emailLower.endsWith(domain));
 };
 
 export const generateReferralCode = (): string => {
