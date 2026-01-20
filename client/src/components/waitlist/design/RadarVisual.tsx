@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 
 interface RadarVisualProps {
     size?: 'sm' | 'md' | 'lg';
-    blips?: Array<{ 
-        x: number; 
-        y: number; 
+    blips?: Array<{
+        x: number;
+        y: number;
         color?: string;
         id: string;
     }>;
@@ -19,20 +19,20 @@ const RadarVisual = memo(function RadarVisual({
     blips = [],
     scanning = true
 }: RadarVisualProps) {
-    
+
     const sizeConfig = {
-        sm: { 
-            container: "w-32 h-32", 
+        sm: {
+            container: "w-32 h-32",
             grid: 3,
             blip: "w-1.5 h-1.5"
         },
-        md: { 
-            container: "w-64 h-64", 
+        md: {
+            container: "w-64 h-64",
             grid: 4,
             blip: "w-2 h-2"
         },
-        lg: { 
-            container: "w-63 sm:w-83 h-60.5 sm:h-81.5", 
+        lg: {
+            container: "w-63 sm:w-83 h-60.5 sm:h-83",
             grid: 5,
             blip: "w-2.5 h-2.5"
         }
@@ -55,8 +55,8 @@ const RadarVisual = memo(function RadarVisual({
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ 
-                    delay: i * 0.1, 
+                transition={{
+                    delay: i * 0.1,
                     duration: 0.5,
                     ease: "easeOut"
                 }}
@@ -66,22 +66,22 @@ const RadarVisual = memo(function RadarVisual({
 
     const crosshairs = (
         <>
-            <motion.div 
+            <motion.div
                 className="absolute inset-0 flex items-center justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
             >
-                <div 
+                <div
                     className="w-full h-px"
-                    style={{ 
-                        background: `linear-gradient(90deg, transparent, rgba(${hudColorRGB}, 0.25), transparent)` 
+                    style={{
+                        background: `linear-gradient(90deg, transparent, rgba(${hudColorRGB}, 0.25), transparent)`
                     }}
                 />
-                <div 
+                <div
                     className="h-full w-px absolute"
-                    style={{ 
-                        background: `linear-gradient(180deg, transparent, rgba(${hudColorRGB}, 0.25), transparent)` 
+                    style={{
+                        background: `linear-gradient(180deg, transparent, rgba(${hudColorRGB}, 0.25), transparent)`
                     }}
                 />
             </motion.div>
@@ -92,15 +92,15 @@ const RadarVisual = memo(function RadarVisual({
         <motion.div
             className="absolute inset-0"
             animate={{ rotate: 360 }}
-            transition={{ 
-                duration: 4, 
-                repeat: Infinity, 
-                ease: "linear" 
+            transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "linear"
             }}
         >
-            <div 
+            <div
                 className="absolute top-1/2 left-1/2 w-px -translate-x-1/2 -translate-y-full"
-                style={{ 
+                style={{
                     height: '50%',
                     background: `linear-gradient(to bottom, ${hudColor}, rgba(${hudColorRGB}, 0.4), transparent)`,
                     transformOrigin: 'bottom center',
@@ -112,7 +112,7 @@ const RadarVisual = memo(function RadarVisual({
 
     return (
         <div className={`relative ${config.container} rounded-full overflow-hidden`}>
-            <div 
+            <div
                 className="absolute inset-0 rounded-full backdrop-blur-sm"
                 style={{
                     background: 'rgba(8, 12, 31, 0.25)',
@@ -123,13 +123,13 @@ const RadarVisual = memo(function RadarVisual({
                     `
                 }}
             />
-            
+
             {gridCircles}
-            
+
             {crosshairs}
-            
+
             {scanningLine}
-            
+
             {blips.map((blip, i) => (
                 <motion.div
                     key={blip.id}
@@ -142,7 +142,7 @@ const RadarVisual = memo(function RadarVisual({
                         transform: 'translate(-50%, -50%)'
                     }}
                     initial={{ opacity: 0, scale: 0 }}
-                    animate={{ 
+                    animate={{
                         opacity: [0, 1, 1, 0],
                         scale: [0, 1.5, 1, 0.8]
                     }}
@@ -155,7 +155,7 @@ const RadarVisual = memo(function RadarVisual({
                     }}
                 />
             ))}
-            
+
             <motion.div
                 className="absolute top-1/2 left-1/2 rounded-full -translate-x-1/2 -translate-y-1/2"
                 style={{

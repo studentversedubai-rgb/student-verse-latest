@@ -16,6 +16,7 @@ export interface BackendUserData {
     referralCode: string;
     referralCount: number;
     waitlistPosition: number;
+    rewardStatus?: string;
 }
 
 export interface VerifyOTPResponse {
@@ -86,6 +87,40 @@ export const getStoredUserData = (): { email: string; data: BackendUserData } | 
     }
 
     return { email, data };
+};
+
+/**
+ * Fetch fresh user data from backend API
+ */
+export const getCurrentUserData = async (email: string): Promise<BackendUserData | null> => {
+    try {
+        const url = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.USER_GET_DATA}?email=${encodeURIComponent(email)}`;
+        console.log('🔄 Fetching user data from:', url);
+
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        const data = await response.json();
+        console.log('📥 Response:', data);
+
+        if (!response.ok) {
+            console.error('❌ Failed to fetch user data:', data.error);
+            return null;
+        }
+
+        if (data.ok && data.data) {
+            console.log('✅ Fresh referral count:', data.data.referralCount);
+            storage.set(STORAGE_KEYS.USER_DATA, data.data);
+            return data.data;
+        }
+
+        return null;
+    } catch (error) {
+        console.error('❌ Error fetching user data:', error);
+        return null;
+    }
 };
 
 /**

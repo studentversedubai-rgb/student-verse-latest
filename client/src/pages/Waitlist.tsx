@@ -12,6 +12,7 @@ const WaitlistContent: React.FC = () => {
         isAuthenticated,
         login,
         logout,
+        refreshData,
     } = useAuth();
     const [searchParams] = useSearchParams();
     const [referralFromUrl, setReferralFromUrl] = useState<string | null>(null);
@@ -44,6 +45,7 @@ const WaitlistContent: React.FC = () => {
             <DashboardStyled
                 user={user}
                 onLogout={logout}
+                onRefresh={refreshData}
                 queueStats={queueStats}
                 referralStats={referralStats}
             />

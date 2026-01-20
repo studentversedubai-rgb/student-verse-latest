@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
 import storage from '../utils/storage';
+import { getCurrentUserData } from '../services/backendApi';
 
 // ============================================================================
 // Types - Match backend response structure
@@ -18,6 +19,7 @@ export interface User {
     referralCode: string;
     referralCount: number;
     waitlistPosition: number;
+    rewardStatus?: string;
 }
 
 export interface QueueStats {
@@ -29,6 +31,7 @@ export interface QueueStats {
 export interface ReferralStats {
     code: string;
     count: number;
+    rewardStatus?: string;
     users: Array<{
         email: string;
         joinedAt: number;
@@ -117,6 +120,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const referralStats: ReferralStats = {
             code: user.referralCode,
             count: user.referralCount,
+            rewardStatus: user.rewardStatus,
             users: [], // Backend doesn't provide individual referral users
         };
 
@@ -193,16 +197,41 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
     const refreshData = async () => {
-        // Backend data is one-time only, no refresh endpoint
-        // Just reload from storage
-        if (user) {
-            const storedUser = loadUserFromStorage();
-            if (storedUser) {
-                setUser(storedUser);
-                const { queueStats, referralStats } = transformUserData(storedUser);
-                setQueueStats(queueStats);
-                setReferralStats(referralStats);
+        if (!user) {
+            console.log('⚠️ No user logged in');
+            return;
+        }
+
+        console.log('🔄 Refreshing data for:', user.email);
+
+        try {
+            const freshData = await getCurrentUserData(user.email);
+
+            if (freshData) {
+                console.log('📊 Old count:', user.referralCount, '→ New count:', freshData.referralCount);
+
+                const updatedUser: User = {
+                    ...user,
+                    referralCount: freshData.referralCount,
+                    rewardStatus: freshData.rewardStatus,
+                };
+                setUser(updatedUser);
+
+                setReferralStats(prev => prev ? {
+                    ...prev,
+                    count: freshData.referralCount,
+                    rewardStatus: freshData.rewardStatus,
+                } : null);
+
+                setQueueStats(prev => prev ? {
+                    ...prev,
+                    referralCount: freshData.referralCount,
+                } : null);
+
+                console.log('✅ Refresh complete!');
             }
+        } catch (error) {
+            console.error('❌ Refresh error:', error);
         }
     };
 

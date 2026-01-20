@@ -38,6 +38,7 @@ export const API_CONFIG = {
     WAITLIST_JOIN: "/api/waitlist/join",
     AUTH_VERIFY_OTP: "/api/auth/verify-otp",
     CONTACT_SUBMIT: "/api/contact/submit",
+    USER_GET_DATA: "/api/user/data",
   },
 } as const;
 

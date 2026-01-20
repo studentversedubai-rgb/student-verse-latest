@@ -164,6 +164,17 @@ const XIcon = () => (
 export default function BentoDashboard({ queuePosition, totalUsers = 1000, referralStats, referralCode }: BentoDashboardProps) {
     const [copied, setCopied] = useState(false);
 
+    // Determine PRO status based on referral count
+    const isPro = referralStats.count >= 5 || referralStats.rewardStatus === 'unlocked';
+    
+    // Generate dynamic chip labels based on referral count
+    const chipLabels = Array.from({ length: 5 }, (_, i) => {
+        if (i < referralStats.count) {
+            return `REFERRAL ${i + 1}`;
+        }
+        return 'LOCKED';
+    });
+
     const handleCopyLink = useCallback(() => {
         navigator.clipboard.writeText(referralCode);
         setCopied(true);
@@ -222,10 +233,10 @@ Join the waitlist: https://studentverse.ae/waitlist
         >
             <div className="max-w-6xl w-full relative z-10 px-4 sm:px-6">
                 {/* Main Grid - Proper Bento Layout with Better Mobile Spacing */}
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-3">
 
-                    {/* Top Left: Queue Position (2/3 width) - Responsive Layout */}
-                    <BentoCard className="lg:col-span-2 min-h-[280px] lg:min-h-[240px]">
+                    {/* Top Left: Queue Position - Slightly reduced width */}
+                    <BentoCard className="lg:col-span-3 min-h-[280px] lg:min-h-[240px]">
                         <div className="h-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 lg:gap-6">
                             {/* Queue Position Content */}
                             <div className="flex-1 text-center lg:text-left lg:pl-8">
@@ -289,8 +300,8 @@ Join the waitlist: https://studentverse.ae/waitlist
                         </div>
                     </BentoCard>
 
-                    {/* Top Right: Pro Membership Unlock (1/3 width) */}
-                    <BentoCard className="lg:col-span-1 min-h-[280px] lg:min-h-[240px]">
+                    {/* Top Right: Pro Membership Unlock - Slightly increased width */}
+                    <BentoCard className="lg:col-span-2 min-h-[280px] lg:min-h-[240px]">
                         <motion.div
                             className="h-full flex flex-col justify-between"
                             initial={{ opacity: 0 }}
@@ -311,7 +322,7 @@ Join the waitlist: https://studentverse.ae/waitlist
                                 <ChipSlots
                                     total={5}
                                     filled={referralStats.count}
-                                    labels={["REFERRAL 1", "LOCKED", "LOCKED", "LOCKED", "LOCKED"]}
+                                    labels={chipLabels}
                                 />
 
                                 {/* Progress indicator */}
@@ -333,17 +344,26 @@ Join the waitlist: https://studentverse.ae/waitlist
 
                             <motion.div
                                 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider mt-auto"
-                                animate={{ opacity: [0.7, 1, 0.7] }}
-                                transition={{ duration: 2, repeat: Infinity }}
+                                animate={isPro ? {} : { opacity: [0.7, 1, 0.7] }}
+                                transition={isPro ? {} : { duration: 2, repeat: Infinity }}
                             >
-                                <Lock className="w-4 h-4 text-gold" />
-                                <span className="text-gold">PRO STATUS: LOCKED</span>
+                                {isPro ? (
+                                    <>
+                                        <Crown className="w-4 h-4 text-gold" />
+                                        <span className="text-gold">PRO STATUS: UNLOCKED</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Lock className="w-4 h-4 text-gold" />
+                                        <span className="text-gold">PRO STATUS: LOCKED</span>
+                                    </>
+                                )}
                             </motion.div>
                         </motion.div>
                     </BentoCard>
 
                     {/* Bottom: SV Orbit AI (Full width) - Clean Desktop Layout */}
-                    <BentoCard className="lg:col-span-3 min-h-[180px]">
+                    <BentoCard className="lg:col-span-5 min-h-[180px]">
                         <div className="relative h-full">
                             {/* Background Gradient */}
                             <div className="absolute inset-0 rounded-3xl" />
