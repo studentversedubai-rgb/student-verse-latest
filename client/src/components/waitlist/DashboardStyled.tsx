@@ -155,9 +155,8 @@ const DashboardStyled = React.memo(function DashboardStyled({
                             alignItems: isScrolled ? 'flex-start' : 'center'
                         }}
                         transition={{
-                            type: "spring",
-                            stiffness: 300,
-                            damping: 30
+                            duration: 0.4,
+                            ease: "easeInOut"
                         }}
                     >
                         {/* Logo */}
