@@ -127,14 +127,25 @@ export default function Footer() {
                 transition: 'opacity 0.6s ease-out 0.8s, transform 0.6s ease-out 0.8s'
               }}
             >
-              <div className="title-small">Terms &amp; Conditions</div> 
+              <div className="title-small">Legal Terms &amp; Policies</div> 
               <Link
                 className="footer-link"
                 to="/terms"
               >
+                Terms &amp; Conditions
+              </Link>
+              <Link
+                className="footer-link"
+                to="/privacy"
+              >
                 Privacy Policy
               </Link>
-              
+              <Link
+                className="footer-link"
+                to="/cookies"
+              >
+                Cookie Policy
+              </Link>
             </div>
           </div>
         </div>  
