@@ -6,6 +6,7 @@ import Hero from '../components/Hero'
 import TrustedBy from '../components/TrustedBy'
 import Features from '../components/Features'
 import Trustbar from '../components/Trustbar'
+import PricingPlans from '../components/PricingPlans'
 import CTA from '../components/CTA'
 import MainFooter from '../components/Footer'
 import Footer from './Footer'
@@ -43,6 +44,7 @@ export default function Home() {
       <TrustedBy />
       <Features />
       <Trustbar />
+      <PricingPlans />
       {/* Ghost Cursor Section with Text */}
       {/* <div id="ghost-section" className="ghost-cursor-section relative hidden lg:block " style={{
         height: '100vh',

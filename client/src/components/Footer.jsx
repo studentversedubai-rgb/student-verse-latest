@@ -128,12 +128,12 @@ export default function Footer() {
               }}
             >
               <div className="title-small">Terms &amp; Conditions</div> 
-              <a
+              <Link
                 className="footer-link"
-                href="/about#faq-about"
+                to="/terms"
               >
                 Privacy Policy
-              </a>
+              </Link>
               
             </div>
           </div>
