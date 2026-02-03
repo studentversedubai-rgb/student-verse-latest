@@ -41,7 +41,7 @@ export default function Home() {
     <>
       <Navbar />
       <Hero />
-      <TrustedBy />
+      {/* <TrustedBy /> */}
       <Features />
       <Trustbar />
       <PricingPlans />
