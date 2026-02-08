@@ -40,6 +40,7 @@ export const UNIVERSITY_DOMAINS: string[] = [
     'edu.fr', // France (some universities)
     'edu.it', // Italy (some universities)
     'edu.pl', // Poland
+    'sae.edu',
     'edu.ru', // Russia
     // Specific well-known universities
     'student.uva.nl',
