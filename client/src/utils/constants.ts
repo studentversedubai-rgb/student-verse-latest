@@ -17,6 +17,9 @@ export const UNIVERSITY_DOMAINS: string[] = [
     'edu.my', // Malaysia
     'edu.pk', // Pakistan
     'edu.ph', // Philippines
+    'spjain.org',
+    'amitydubai.ae',
+    'amityuniversity.ae',
     'edu.sa', // Saudi Arabia
     'edu.qa', // Qatar
     'edu.kw', // Kuwait
