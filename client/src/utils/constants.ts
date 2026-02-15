@@ -25,7 +25,6 @@ export const UNIVERSITY_DOMAINS: string[] = [
     'edu.eg', // Egypt
     'edu.jo', // Jordan
     'edu.lb', // Lebanon
-    'ac.il', // Israel
     'edu.tr', // Turkey
     'edu.br', // Brazil
     'edu.mx', // Mexico
