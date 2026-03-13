@@ -165,23 +165,25 @@ export default function Hero() {
                   }}
                   style={{ margin: 0 }}
                 >
-                  <Link
-                    className="join-waitlist-button"
-                    to="/waitlist"
+                  <div
+                    className="coming-soon-text"
                     style={{
                       fontSize: "1.2rem",
                       fontWeight: "700",
                       textTransform: "uppercase",
                       padding: "1rem 2.5rem",
                       borderRadius: "50px",
-                      textDecoration: "none",
                       display: "inline-block",
                       whiteSpace: "nowrap",
-                      letterSpacing: "0.5px"
+                      letterSpacing: "0.5px",
+                      color: "rgba(255, 255, 255, 0.6)",
+                      background: "rgba(255, 255, 255, 0.05)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      cursor: "default"
                     }}
                   >
-                    {isAuthenticated ? "View Dashboard" : "Join The UNI-verse"}
-                  </Link>
+                    Coming Soon
+                  </div>
                 </motion.div>
               </form>
               <div id="brands-homepage"></div>

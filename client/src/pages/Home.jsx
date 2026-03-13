@@ -44,7 +44,14 @@ export default function Home() {
       {/* <TrustedBy /> */}
       <Features />
       <Trustbar />
-      <PricingPlans />
+      
+      {/* ============================================
+          MEMBERSHIP/PRICING SECTION - TEMPORARILY HIDDEN
+          This is the membership pricing section with plan cards.
+          Uncomment the line below to show it again.
+          ============================================ */}
+      {/* <PricingPlans /> */}
+      
       {/* Ghost Cursor Section with Text */}
       {/* <div id="ghost-section" className="ghost-cursor-section relative hidden lg:block " style={{
         height: '100vh',

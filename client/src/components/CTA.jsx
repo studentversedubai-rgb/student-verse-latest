@@ -93,23 +93,24 @@ export default function CTA() {
                   </div>
 
                   {/* Button with black background */}
-                  <Link
-                    className="join-waitlist-button relative bg-black rounded-full border-2 border-transparent z-10"
-                    to="/waitlist"
+                  <div
+                    className="coming-soon-text relative bg-black rounded-full border-2 border-transparent z-10"
                     style={{
                       fontSize: "1.2rem",
                       fontWeight: "700",
                       textTransform: "uppercase",
                       padding: "1rem 2.5rem",
-                      textDecoration: "none",
                       display: "inline-block",
                       whiteSpace: "nowrap",
                       letterSpacing: "0.5px",
-                      color: "white"
+                      color: "rgba(255, 255, 255, 0.6)",
+                      background: "rgba(0, 0, 0, 0.8)",
+                      border: "1px solid rgba(255, 255, 255, 0.1)",
+                      cursor: "default"
                     }}
                   >
-                    {isAuthenticated ? "View Dashboard" : "Join the UNI-verse"}
-                  </Link>
+                    Coming Soon
+                  </div>
                 </div>
               </form>
 

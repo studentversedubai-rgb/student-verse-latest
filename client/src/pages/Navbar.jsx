@@ -195,24 +195,25 @@ export default function Navbar() {
 
           {/* Desktop Right Actions */}
           <div className="show-desktop hidden-mobile flex items-center relative z-10">
-            <Link
-              to={isAuthenticated ? "/waitlist" : "/waitlist"}
-              onClick={handleNavClick}
-              className="join-waitlist-button"
+            <div
+              className="coming-soon-text"
               style={{
                 fontSize: "0.85rem",
                 fontWeight: "700",
                 textTransform: "uppercase",
                 padding: "0.65rem 1.5rem",
                 borderRadius: "50px",
-                textDecoration: "none",
                 display: "inline-block",
                 whiteSpace: "nowrap",
-                letterSpacing: "0.5px"
+                letterSpacing: "0.5px",
+                color: "rgba(255, 255, 255, 0.6)",
+                background: "rgba(255, 255, 255, 0.05)",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+                cursor: "default"
               }}
             >
-              {isAuthenticated ? "View Dashboard" : "Join The Waitlist"}
-            </Link>
+              Coming Soon
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -426,24 +427,27 @@ export default function Navbar() {
                   flexShrink: 0
                 }}
               >
-                <Link
-                  to="/waitlist"
-                  onClick={handleNavClick}
-                  className="join-waitlist-button"
+                <div
+                  className="coming-soon-text"
                   style={{
                     fontSize: "1rem",
                     fontWeight: "700",
                     textTransform: "uppercase",
                     padding: "0.8rem 2rem",
                     borderRadius: "50px",
-                    textDecoration: "none",
                     display: "inline-block",
                     whiteSpace: "nowrap",
-                    letterSpacing: "0.5px"
+                    letterSpacing: "0.5px",
+                    color: "rgba(255, 255, 255, 0.6)",
+                    background: "rgba(255, 255, 255, 0.05)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    cursor: "default",
+                    width: "100%",
+                    textAlign: "center"
                   }}
                 >
-                  {isAuthenticated ? "View Dashboard" : "Join The UNI-verse"}
-                </Link>
+                  Coming Soon
+                </div>
               </div>
             </motion.div>
           </>
