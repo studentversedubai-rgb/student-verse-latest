@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { normalizeHtml } from "../utils/normalizeHtml";
 import Navbar from "./Navbar";
-import TeamSection from "../components/TeamSection";
 import FAQ from "../components/FAQ";
 import MainFooter from "../components/Footer";
 import Footer from "./Footer";
@@ -20,7 +19,6 @@ export default function About() {
       <Navbar />
       <div style={{ display: "flex", flexDirection: "column", gap: "0", paddingTop: "0" }}>
         <FAQ />
-        <TeamSection />
 
         <MainFooter />
         <Footer />
