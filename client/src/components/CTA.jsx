@@ -18,18 +18,20 @@ export default function CTA() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="cta-heading-holder">
-              <div className="cta-heading-wrapper">
+              <motion.div
+                className="cta-heading-wrapper"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+              >
                 <motion.div
                   className="cta-heading fading-title"
                   style={{ textAlign: 'left', fontWeight: "bold" }}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
                 >
-                  Get Started with StudentVerse
+                  Ready to Start <span style={{ background: 'linear-gradient(135deg, #00f0ff 0%, #2962ff 50%, #7b2cbf 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Saving?</span>
                 </motion.div>
-              </div>
+              </motion.div>
               <motion.div
                 className="cta-paragraph-holder"
                 initial={{ opacity: 0, y: 20 }}
@@ -37,7 +39,7 @@ export default function CTA() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
               >
-                <p>Bigger savings. Smarter students. StudentVerse starts here. Unlock deals made for student life.</p>
+                <p style={{ margin: 0, padding: 0, listStyle: 'none' }}>Join thousands of students already saving big. Download StudentVerse and unlock exclusive discounts at 150+ partner brands today.</p>
               </motion.div>
             </div>
 
@@ -48,89 +50,57 @@ export default function CTA() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: "easeOut", delay: 0.6 }}
             >
-              <form
-                className="form-holder"
-                data-name="Early Access Emails"
-                data-wf-element-id="8ed71055-6ae7-5324-a6d4-54fc76e0e2eb"
-                data-wf-page-id="66a92b76e1155b1f28fde156"
-                id="Early-Access-Emails"
-                method="get"
-                name="wf-form-Early-Access-Emails"
+              {/* Coming Soon Button with no hover effect */}
+              <Link
+                to="#"
+                onClick={(e) => e.preventDefault()}
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  justifyContent: "flex-start"
-
+                  fontSize: "1.2rem",
+                  fontWeight: "700",
+                  textTransform: "uppercase",
+                  padding: "1rem 2.5rem",
+                  borderRadius: "50px",
+                  textDecoration: "none",
+                  display: "inline-block",
+                  whiteSpace: "nowrap",
+                  letterSpacing: "0.5px",
+                  background: "#333333",
+                  color: "#888888",
+                  cursor: "not-allowed",
+                  border: "1px solid #444444",
+                  pointerEvents: "none"
                 }}
               >
-                {/* Animated RGB Border Button */}
-                <div className="relative rounded-full overflow-visible inline-block">
-                  {/* Animated gradient border orbit - same as BentoDashboard */}
-                  <div className="absolute -inset-[2px] rounded-full opacity-80">
-                    <motion.div
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        background: "linear-gradient(90deg, #8B5CF6 0%, #EC4899 18%, #FB923C 35%, #3B82F6 52%, #06B6D4 68%, #FB923C 85%, #8B5CF6 100%)",
-                        backgroundSize: "300% 300%"
-                      }}
-                      animate={{
-                        backgroundPosition: ["0% 50%", "300% 50%"]
-                      }}
-                      transition={{
-                        duration: 4,
-                        ease: "linear",
-                        repeat: Infinity
-                      }}
-                    />
-                    {/* Soft multi-color glow effect */}
-                    <div
-                      className="absolute inset-0 rounded-full blur-md"
-                      style={{
-                        background: "linear-gradient(90deg, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.4) 20%, rgba(251, 146, 60, 0.35) 40%, rgba(59, 130, 246, 0.4) 60%, rgba(251, 146, 60, 0.35) 80%, rgba(139, 92, 246, 0.4) 100%)"
-                      }}
-                    />
-                  </div>
-
-                  {/* Button with black background */}
-                  <div
-                    className="coming-soon-text relative bg-black rounded-full border-2 border-transparent z-10"
-                    style={{
-                      fontSize: "1.2rem",
-                      fontWeight: "700",
-                      textTransform: "uppercase",
-                      padding: "1rem 2.5rem",
-                      display: "inline-block",
-                      whiteSpace: "nowrap",
-                      letterSpacing: "0.5px",
-                      color: "rgba(255, 255, 255, 0.6)",
-                      background: "rgba(0, 0, 0, 0.8)",
-                      border: "1px solid rgba(255, 255, 255, 0.1)",
-                      cursor: "default"
-                    }}
-                  >
-                    Coming Soon
-                  </div>
-                </div>
-              </form>
-
-              <div className="thank-you-message w-form-done">
-                <div>
-                  <span className="white-text">Thank you! </span><br />
-                  Your submission has been received!
-                </div>
-              </div>
-
-              <div className="error-message w-form-fail">
-                <div>
-                  <span className="white-text">Oops! <br /></span>
-                  Something went wrong! Try again later
-                </div>
-              </div>
+                Coming Soon
+              </Link>
             </motion.div>
           </motion.div>
 
+          <motion.div
+            className="cta-app-wrapper"
 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          >
+            <div className="hero-section-app-container-ct">
+              <motion.div
+                className="hero-section-phone-holder"
+                whileHover={{
+                  y: -10,
+                  transition: { duration: 0.3 }
+                }}
+              >
+               
+                <div className="hero-section-phone-screenshot-holder">
+                   
+                </div>
+              </motion.div>
+
+
+            </div>
+          </motion.div>
         </div>
 
       </div>

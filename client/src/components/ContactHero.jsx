@@ -1,26 +1,79 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { getApiUrl_v2 } from '../config/api';
+import { GraduationCap, MapPin, Sparkles, Handshake, CheckCircle, Tag, Zap } from 'lucide-react';
+import SubmitButton from './SubmitButton';
+
+const underlineInput = {
+  width: '100%',
+  padding: '0.75rem 0',
+  background: 'transparent',
+  border: 'none',
+  borderBottom: '1px solid rgba(255,255,255,0.2)',
+  borderRadius: 0,
+  color: 'white',
+  fontSize: '1rem',
+  outline: 'none',
+  transition: 'border-color 0.3s ease',
+};
+
+const underlineLabel = {
+  display: 'block',
+  color: 'rgba(255,255,255,0.4)',
+  marginBottom: '0.25rem',
+  fontSize: '0.75rem',
+  fontWeight: '500',
+  textTransform: 'uppercase',
+  letterSpacing: '1.5px',
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] } },
+};
+
+const WHY_CARDS = [
+  {
+    title: 'Student Audience',
+    body: 'Connect directly with university students looking for new places, deals, and experiences.',
+    icon: <GraduationCap size={32} color="#00f0ff" fill="#00f0ff" />,
+  },
+  {
+    title: 'More Foot Traffic',
+    body: 'Bring more people through your door with targeted offers and local discovery.',
+    icon: <MapPin size={32} color="#ff9800" />,
+  },
+  {
+    title: 'Brand Visibility',
+    body: 'Get featured listings, trending placements, and real exposure inside the app.',
+    icon: <Sparkles size={32} color="#FFD700" fill="#FFD700" />,
+  },
+  {
+    title: 'Easy Partnership',
+    body: 'Simple onboarding, clear offers, and a smooth experience for you and your customers.',
+    icon: <Handshake size={32} color="#2962ff" />,
+  },
+];
 
 export default function ContactHero() {
+  const [mode, setMode] = useState('business'); // 'business' | 'student'
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    message: '',
-    department: ''
+    firstName: '', lastName: '', email: '', businessType: '', location: '', subject: '', message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [focusedField, setFocusedField] = useState(null);
+
+  // Student form state
+  const [studentData, setStudentData] = useState({ fullName:'', university:'', studentEmail:'', course:'', year:'', why:'' });
+  const [studentSubmitted, setStudentSubmitted] = useState(false);
+  const [studentSubmitting, setStudentSubmitting] = useState(false);
+  const [studentError, setStudentError] = useState('');
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    // Clear error when user starts typing
+    setFormData(prev => ({ ...prev, [name]: value }));
     if (error) setError('');
   };
 
@@ -28,888 +81,313 @@ export default function ContactHero() {
     e.preventDefault();
     setIsSubmitting(true);
     setError('');
-
     try {
-      // Map department values to match backend expectations
-      const inquiryTypeMap = {
-        'support': 'student_support',
-        'merchant': 'merchant_business',
-        'careers': 'careers',
-        'partnerships': 'partnerships'
-      };
-
       const response = await fetch(getApiUrl_v2('/api/contact/submit'), {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           firstName: formData.firstName,
           lastName: formData.lastName,
           email: formData.email,
-          message: formData.message,
-          inquiryType: inquiryTypeMap[formData.department] || 'student_support'
+          message: `Subject: ${formData.subject}\nBusiness Type: ${formData.businessType}\nLocation: ${formData.location}\n\n${formData.message}`,
+          inquiryType: 'general',
         }),
       });
-
       const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to submit message');
-      }
-
-      // Success - show success screen
+      if (!response.ok) throw new Error(data.error || 'Failed to submit');
       setIsSubmitted(true);
-      // Reset form
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        message: '',
-        department: ''
-      });
+      setFormData({ firstName: '', lastName: '', email: '', businessType: '', location: '', subject: '', message: '' });
     } catch (err) {
-      console.error('Contact form error:', err);
-      setError(err.message || 'Failed to send message. Please try again.');
+      setError(err.message || 'Failed to send. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
+  const fieldStyle = (name) => ({
+    ...underlineInput,
+    borderBottomColor: focusedField === name ? '#ff9800' : 'rgba(255,255,255,0.2)',
+    outline: 'none',
+  });
+
+  const handleStudentChange = (e) => {
+    const { name, value } = e.target;
+    setStudentData(prev => ({ ...prev, [name]: value }));
+    if (studentError) setStudentError('');
+  };
+
+  const handleStudentSubmit = async (e) => {
+    e.preventDefault();
+    setStudentSubmitting(true);
+    setStudentError('');
+    try {
+      const response = await fetch(getApiUrl_v2('/api/contact/submit'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: studentData.fullName,
+          lastName: '',
+          email: studentData.studentEmail,
+          message: `University: ${studentData.university}\nCourse/Major: ${studentData.course}\nYear of Study: ${studentData.year}\n\nWhy join StudentVerse:\n${studentData.why}`,
+          inquiryType: 'student',
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Failed to submit');
+      setStudentSubmitted(true);
+      setStudentData({ fullName:'', university:'', studentEmail:'', course:'', year:'', why:'' });
+    } catch (err) {
+      setStudentError(err.message || 'Failed to send. Please try again.');
+    } finally {
+      setStudentSubmitting(false);
     }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 60, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 1,
-        ease: [0.25, 0.46, 0.45, 0.94],
-        delay: 0.3
-      }
-    }
-  };
-
-  const floatingVariants = {
-    animate: {
-      y: [-10, 10, -10],
-      transition: {
-        duration: 6,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
-    }
-  };
+  // Toggle pill
+  const Toggle = (
+    <div style={{ display:'flex', justifyContent:'center', padding:'2rem 0 0' }}>
+      <div style={{ display:'inline-flex', background:'rgba(255,255,255,0.06)', borderRadius:'999px', padding:'4px', border:'1px solid rgba(255,255,255,0.1)', position:'relative' }}>
+        {['business','student'].map(m => (
+          <button key={m} onClick={() => setMode(m)} style={{
+            position:'relative', zIndex:1, padding:'10px 32px', borderRadius:'999px', border:'none', cursor:'pointer', fontSize:'0.9rem', fontWeight:600, letterSpacing:'0.3px',
+            background: mode === m ? (m === 'business' ? '#ff9800' : '#7b2cbf') : 'transparent',
+            color: mode === m ? '#fff' : 'rgba(255,255,255,0.5)',
+            transition:'all 0.25s ease',
+          }}>
+            {m === 'business' ? 'Business' : 'Student'}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 
   if (isSubmitted) {
     return (
-      <div style={{
-        minHeight: '100vh',
-        background: 'linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 50%, #0a0e1a 100%)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        overflow: 'hidden'
-      }}>
-        {/* Animated Background Elements */}
-        <motion.div
-          style={{
-            position: 'absolute',
-            top: '20%',
-            left: '10%',
-            width: '300px',
-            height: '300px',
-            background: 'radial-gradient(circle, rgba(41, 98, 255, 0.1) 0%, transparent 70%)',
-            borderRadius: '50%',
-            filter: 'blur(40px)'
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3]
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-
-        <motion.div
-          style={{
-            position: 'absolute',
-            bottom: '20%',
-            right: '15%',
-            width: '200px',
-            height: '200px',
-            background: 'radial-gradient(circle, rgba(255, 184, 0, 0.1) 0%, transparent 70%)',
-            borderRadius: '50%',
-            filter: 'blur(30px)'
-          }}
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.7, 0.4]
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-        />
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          style={{
-            textAlign: 'center',
-            padding: '3rem',
-            background: 'rgba(8, 12, 31, 0.9)',
-            backdropFilter: 'blur(20px)',
-            borderRadius: '24px',
-            border: '2px solid transparent',
-            backgroundImage: 'linear-gradient(rgba(8, 12, 31, 0.9), rgba(8, 12, 31, 0.9)), linear-gradient(45deg, #2962FF, #FFB800, #7B2CBF)',
-            backgroundOrigin: 'border-box',
-            backgroundClip: 'padding-box, border-box',
-            boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
-            maxWidth: '500px',
-            position: 'relative',
-            zIndex: 10
-          }}
-        >
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.3, type: "spring", stiffness: 200 }}
-            style={{
-              width: '80px',
-              height: '80px',
-              background: 'linear-gradient(45deg, #2962FF, #00F0FF)',
-              borderRadius: '50%',
-              margin: '0 auto 2rem',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 0 30px rgba(0, 240, 255, 0.5)'
-            }}
-          >
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-              <path d="M20 6L9 17L4 12" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            style={{
-              fontSize: '2.5rem',
-              fontWeight: '700',
-              background: 'linear-gradient(315deg, #999, #fff)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              marginBottom: '1rem'
-            }}
-          >
-            Message Sent!
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.7 }}
-            style={{
-              fontSize: '1.1rem',
-              color: 'rgba(255, 255, 255, 0.8)',
-              lineHeight: '1.6',
-              marginBottom: '2rem'
-            }}
-          >
-            Thank you for reaching out! We've received your message and will get back to you within 24 hours.
-          </motion.p>
-
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.9 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsSubmitted(false)}
-            style={{
-              background: 'linear-gradient(90deg, #2962FF, #7B2CBF, #FFB800)',
-              color: 'white',
-              border: 'none',
-              padding: '1rem 2rem',
-              borderRadius: '50px',
-              fontSize: '1rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              boxShadow: '0 4px 20px rgba(41, 98, 255, 0.4)'
-            }}
-          >
-            Send Another Message
-          </motion.button>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '6rem 2rem' }}>
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6 }}
+          style={{ textAlign: 'center', maxWidth: '480px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
+            <CheckCircle size={64} color="#00f0ff" />
+          </div>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: '800', color: '#fff', marginBottom: '1rem' }}>Message sent.</h2>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', lineHeight: 1.7, marginBottom: '2rem' }}>
+            We'll get back to you within 24 hours.
+          </p>
+          <button onClick={() => setIsSubmitted(false)}
+            style={{ background: 'none', border: '1px solid rgba(255,255,255,0.2)', color: 'white', padding: '0.75rem 2rem', borderRadius: '50px', fontSize: '0.95rem', cursor: 'pointer' }}>
+            Send another
+          </button>
         </motion.div>
       </div>
     );
   }
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'black',
-      position: 'relative',
-      overflow: 'hidden',
-      paddingTop: '2rem',
-      paddingBottom: '4rem'
-    }}>
-      {/* Animated Background Elements */}
-      <motion.div
-        style={{
-          position: 'absolute',
-          top: '10%',
-          left: '5%',
-          width: '400px',
-          height: '400px',
-          background: 'radial-gradient(circle, rgba(41, 98, 255, 0.08) 0%, transparent 70%)',
-          borderRadius: '50%',
-          filter: 'blur(60px)'
-        }}
-        variants={floatingVariants}
-        animate="animate"
-      />
+    <div style={{ position: 'relative', overflow: 'hidden' }}>
+      {Toggle}
 
-      <motion.div
-        style={{
-          position: 'absolute',
-          top: '60%',
-          right: '10%',
-          width: '300px',
-          height: '300px',
-          background: 'radial-gradient(circle, rgba(255, 184, 0, 0.06) 0%, transparent 70%)',
-          borderRadius: '50%',
-          filter: 'blur(50px)'
-        }}
-        animate={{
-          y: [20, -20, 20],
-          x: [10, -10, 10]
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
-        }}
-      />
+      <div style={{ position: 'absolute', top: '20%', left: '-5%', width: '500px', height: '500px', background: 'radial-gradient(circle, rgba(41,98,255,0.06) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(80px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: '10%', right: '0%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(123,44,191,0.05) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(60px)', pointerEvents: 'none' }} />
 
-      <motion.div
-        style={{
-          position: 'absolute',
-          bottom: '10%',
-          left: '20%',
-          width: '250px',
-          height: '250px',
-          background: 'radial-gradient(circle, rgba(123, 44, 191, 0.05) 0%, transparent 70%)',
-          borderRadius: '50%',
-          filter: 'blur(40px)'
-        }}
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.3, 0.6, 0.3]
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 3
-        }}
-      />
+      {mode === 'student' ? (
+        /* â”€â”€ STUDENT MODE â”€â”€ */
+        <div style={{ maxWidth:'800px', margin:'0 auto', padding:'clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3rem) 4rem', position:'relative', zIndex:1 }}>
+          {studentSubmitted ? (
+            <motion.div initial={{ opacity:0, scale:0.9 }} animate={{ opacity:1, scale:1 }} transition={{ duration:0.6 }} style={{ textAlign:'center', maxWidth:'480px', margin:'0 auto' }}>
+              <div style={{ display:'flex', justifyContent:'center', marginBottom:'1.5rem' }}>
+                <CheckCircle size={64} color="#00f0ff" />
+              </div>
+              <h2 style={{ fontSize:'2.5rem', fontWeight:'800', color:'#fff', marginBottom:'1rem' }}>Application sent!</h2>
+              <p style={{ color:'rgba(255,255,255,0.6)', fontSize:'1.1rem', lineHeight:1.7, marginBottom:'2rem' }}>
+                We'll be in touch at <strong style={{ color:'#00f0ff' }}>{studentData.studentEmail || 'your email'}</strong> soon.
+              </p>
+              <button onClick={() => setStudentSubmitted(false)} style={{ background:'none', border:'1px solid rgba(255,255,255,0.2)', color:'white', padding:'0.75rem 2rem', borderRadius:'50px', fontSize:'0.95rem', cursor:'pointer' }}>
+                Submit another
+              </button>
+            </motion.div>
+          ) : (
+            <motion.div initial={{ opacity:0, y:30 }} animate={{ opacity:1, y:0 }} transition={{ duration:0.6 }}>
+              <h1 style={{ fontSize:'clamp(2.5rem,6vw,4rem)', fontWeight:800, lineHeight:1.1, marginBottom:'1rem', textAlign:'center' }}>
+                <span style={{ background:'linear-gradient(135deg,#7b2cbf,#9c27b0)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>Work With Us.</span>
+              </h1>
+              <p style={{ color:'rgba(255,255,255,0.55)', fontSize:'1.05rem', lineHeight:1.8, marginBottom:'2.5rem', textAlign:'center', maxWidth:'520px', margin:'0 auto 2.5rem' }}>
+                We're always looking for driven students to join the StudentVerse team. Fill in the form and we'll be in touch.
+              </p>
+              <form onSubmit={handleStudentSubmit} style={{ display:'flex', flexDirection:'column', gap:'2rem' }}>
+                <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1.5rem' }} className="student-grid">
+                  <div>
+                    <label style={underlineLabel}>Full Name</label>
+                    <input type="text" name="fullName" value={studentData.fullName} onChange={handleStudentChange} required style={{ ...underlineInput, borderBottomColor: focusedField==='fullName' ? '#7b2cbf' : 'rgba(255,255,255,0.2)' }} onFocus={()=>setFocusedField('fullName')} onBlur={()=>setFocusedField(null)} placeholder="Your full name" />
+                  </div>
+                  <div>
+                    <label style={underlineLabel}>University / College</label>
+                    <input type="text" name="university" value={studentData.university} onChange={handleStudentChange} required style={{ ...underlineInput, borderBottomColor: focusedField==='university' ? '#7b2cbf' : 'rgba(255,255,255,0.2)' }} onFocus={()=>setFocusedField('university')} onBlur={()=>setFocusedField(null)} placeholder="Your institution" />
+                  </div>
+                </div>
+                <div>
+                  <label style={underlineLabel}>Your Email</label>
+                  <input type="email" name="studentEmail" value={studentData.studentEmail} onChange={handleStudentChange} required style={{ ...underlineInput, borderBottomColor: focusedField==='studentEmail' ? '#7b2cbf' : 'rgba(255,255,255,0.2)' }} onFocus={()=>setFocusedField('studentEmail')} onBlur={()=>setFocusedField(null)} placeholder="you@email.com" />
+                </div>
+                <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'1.5rem' }} className="student-grid">
+                  <div>
+                    <label style={underlineLabel}>Course / Major</label>
+                    <input type="text" name="course" value={studentData.course} onChange={handleStudentChange} required style={{ ...underlineInput, borderBottomColor: focusedField==='course' ? '#7b2cbf' : 'rgba(255,255,255,0.2)' }} onFocus={()=>setFocusedField('course')} onBlur={()=>setFocusedField(null)} placeholder="e.g. Computer Science" />
+                  </div>
+                  <div>
+                    <label style={underlineLabel}>Year of Study</label>
+                    <select name="year" value={studentData.year} onChange={handleStudentChange} required style={{ ...underlineInput, borderBottomColor: focusedField==='year' ? '#7b2cbf' : 'rgba(255,255,255,0.2)', background:'transparent', appearance:'none', cursor:'pointer' }} onFocus={()=>setFocusedField('year')} onBlur={()=>setFocusedField(null)}>
+                      <option value="" style={{ background:'#0d1117' }}>Select year</option>
+                      {['1st Year','2nd Year','3rd Year','4th Year','Masters','PhD','Other'].map(y => (
+                        <option key={y} value={y} style={{ background:'#0d1117' }}>{y}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div style={{ background:'rgba(255,255,255,0.03)', border:'1px solid rgba(123,44,191,0.3)', borderRadius:'12px', padding:'1rem 1.25rem' }}>
+                  <label style={{ ...underlineLabel, marginBottom:'0.5rem' }}>Why do you want to work with us?</label>
+                  <textarea name="why" value={studentData.why} onChange={handleStudentChange} required rows={4} style={{ ...underlineInput, borderBottom:'none', padding:'0', resize:'none' }} onFocus={()=>setFocusedField('why')} onBlur={()=>setFocusedField(null)} placeholder="Tell us about yourself, your skills, and what you'd bring to the team..." />
+                </div>
+                {studentError && <p style={{ color:'#ff4444', fontSize:'0.9rem' }}>{studentError}</p>}
+                <SubmitButton label={studentSubmitting ? 'Sending...' : 'Submit'} disabled={studentSubmitting} />
+              </form>
+
+            </motion.div>
+          )}
+        </div>
+      ) : (
+        /* â”€â”€ BUSINESS MODE â”€â”€ */
+        <>
 
       <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        padding: 'clamp(1rem, 3vw, 2rem)',
-        position: 'relative',
-        zIndex: 10
-      }}>
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          style={{ textAlign: 'center', marginBottom: 'clamp(2rem, 5vw, 3rem)' }}
-        >
-          <motion.h1
-            variants={itemVariants}
-            style={{
-              fontSize: 'clamp(3rem, 8vw, 5rem)',
-              fontWeight: '700',
-              background: 'linear-gradient(315deg, #999, #fff)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              marginBottom: '1.5rem',
-              lineHeight: '1.1'
-            }}
-          >
-            Let's Connect
-          </motion.h1>
+        maxWidth: '1200px', margin: '0 auto',
+        padding: 'clamp(6rem, 10vw, 9rem) clamp(1.5rem, 4vw, 3rem) 4rem',
+        display: 'grid', gridTemplateColumns: '1fr 1fr',
+        gap: 'clamp(3rem, 8vw, 8rem)', alignItems: 'start',
+        position: 'relative', zIndex: 1,
+      }} className="contact-grid">
 
-          <motion.p
-            variants={itemVariants}
-            style={{
-              fontSize: '1.3rem',
-              color: 'rgba(255, 255, 255, 0.8)',
-              maxWidth: '600px',
-              margin: '0 auto',
-              lineHeight: '1.6'
-            }}
-          >
-            Have a question, idea, or want to partner with us? The StudentVerse team is ready to help you succeed.
+        {/* LEFT */}
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}
+          variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
+          style={{ paddingTop: '2rem' }}>
+          <motion.p variants={itemVariants} style={{ fontSize: '0.75rem', letterSpacing: '3px', textTransform: 'uppercase', color: '#00f0ff', marginBottom: '2rem', fontWeight: 600 }} />
+          <motion.h1 variants={itemVariants} style={{ fontSize: 'clamp(3rem, 9vw, 6rem)', fontWeight: 800, lineHeight: 1.05, marginBottom: '2.5rem', letterSpacing: '-0.025em' }}>
+            <span style={{ background: 'linear-gradient(315deg, #ff9800, #ffb74d)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Want to partner</span><br />
+            <span style={{ background: 'linear-gradient(315deg, #ff9800, #ffb74d)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>with us?</span>
+          </motion.h1>
+          <motion.p variants={itemVariants} style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, marginBottom: '3rem', maxWidth: '420px' }}>
+            Looking to get your brand in front of thousands of students? Fill out the form and we'll take it from there.
           </motion.p>
+          <motion.div variants={itemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            {[
+              { label: 'Email', value: 'Careers@studentverse.ae' },
+              { label: 'Based in', value: 'Dubai, UAE' },
+            ].map(({ label, value }) => (
+              <div key={label}>
+                <p style={{ fontSize: '0.7rem', letterSpacing: '2px', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: '0.25rem' }}>{label}</p>
+                <p style={{ fontSize: '1rem', color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>{value}</p>
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: 'clamp(1.5rem, 4vw, 2.5rem)',
-          alignItems: 'start'
-        }}>
-          {/* Contact Info Cards */}
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}
-          >
-            <motion.div
-              whileHover={{ y: -5, scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              style={{
-                position: 'relative',
-                overflow: 'visible'
-              }}
-            >
-              {/* Animated RGB border */}
-              <div className="absolute -inset-[2px] rounded-3xl opacity-80">
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    borderRadius: '20px',
-                    background: "linear-gradient(90deg, #8B5CF6 0%, #EC4899 18%, #FB923C 35%, #3B82F6 52%, #06B6D4 68%, #FB923C 85%, #8B5CF6 100%)",
-                    backgroundSize: "300% 300%",
-                    animation: "rgbBorder 4s linear infinite"
-                  }}
-                />
-                {/* Soft multi-color glow effect */}
-                <div
-                  className="absolute inset-0 blur-lg"
-                  style={{
-                    borderRadius: '20px',
-                    background: "linear-gradient(90deg, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.4) 20%, rgba(251, 146, 60, 0.35) 40%, rgba(59, 130, 246, 0.4) 60%, rgba(251, 146, 60, 0.35) 80%, rgba(139, 92, 246, 0.4) 100%)"
-                  }}
-                />
+        {/* RIGHT â€” form */}
+        <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          style={{ paddingTop: '2rem' }}>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+              <div>
+                <label style={underlineLabel}>Business Name</label>
+                <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} required
+                  onFocus={() => setFocusedField('firstName')} onBlur={() => setFocusedField(null)}
+                  style={fieldStyle('firstName')} placeholder="Your business name" />
               </div>
-
-              {/* Card content */}
-              <div style={{
-                position: 'relative',
-                zIndex: 10,
-                background: '#000000',
-                backdropFilter: 'blur(20px)',
-                borderRadius: '20px',
-                padding: '2rem',
-                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)'
-              }}>
-                <div style={{
-                  width: '60px',
-                  height: '60px',
-                  background: 'linear-gradient(45deg, #2962FF, #00F0FF)',
-                  borderRadius: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '1.5rem',
-                  boxShadow: '0 0 20px rgba(0, 240, 255, 0.3)'
-                }}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                    <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <polyline points="22,6 12,13 2,6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-                <h3 style={{
-                  fontSize: '1.5rem',
-                  fontWeight: '600',
-                  color: 'white',
-                  marginBottom: '0.5rem'
-                }}>
-                  Email Us
-                </h3>
-                <p style={{
-                  color: 'rgba(255, 255, 255, 0.7)',
-                  marginBottom: '1rem',
-                  lineHeight: '1.5'
-                }}>
-                  Get in touch with our team for support, partnerships, or career opportunities.
-                </p>
-                <a
-                  href="mailto:careers@studentverse.app"
-                  style={{
-                    color: '#00F0FF',
-                    textDecoration: 'none',
-                    fontWeight: '500',
-                    fontSize: '1.1rem'
-                  }}
-                >
-                  careers@studentverse.app
-                </a>
+              <div>
+                <label style={underlineLabel}>Your Name</label>
+                <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} required
+                  onFocus={() => setFocusedField('lastName')} onBlur={() => setFocusedField(null)}
+                  style={fieldStyle('lastName')} placeholder="Your name" />
               </div>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -5, scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              style={{
-                position: 'relative',
-                overflow: 'visible'
-              }}
-            >
-              {/* Animated RGB border */}
-              <div className="absolute -inset-[2px] rounded-3xl opacity-80">
-                <div
-                  className="absolute inset-0"
-                  style={{
-                    borderRadius: '20px',
-                    background: "linear-gradient(90deg, #8B5CF6 0%, #EC4899 18%, #FB923C 35%, #3B82F6 52%, #06B6D4 68%, #FB923C 85%, #8B5CF6 100%)",
-                    backgroundSize: "300% 300%",
-                    animation: "rgbBorder 4s linear infinite"
-                  }}
-                />
-                {/* Soft multi-color glow effect */}
-                <div
-                  className="absolute inset-0 blur-lg"
-                  style={{
-                    borderRadius: '20px',
-                    background: "linear-gradient(90deg, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.4) 20%, rgba(251, 146, 60, 0.35) 40%, rgba(59, 130, 246, 0.4) 60%, rgba(251, 146, 60, 0.35) 80%, rgba(139, 92, 246, 0.4) 100%)"
-                  }}
-                />
-              </div>
-
-              {/* Card content */}
-              <div style={{
-                position: 'relative',
-                zIndex: 10,
-                background: '#000000',
-                backdropFilter: 'blur(20px)',
-                borderRadius: '20px',
-                padding: '2rem',
-                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)'
-              }}>
-                <div style={{
-                  width: '60px',
-                  height: '60px',
-                  background: 'linear-gradient(45deg, #FFB800, #FF6B00)',
-                  borderRadius: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: '1.5rem',
-                  boxShadow: '0 0 20px rgba(255, 184, 0, 0.3)'
-                }}>
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-                    <path d="M21 10C21 17 12 23 12 23S3 17 3 10C3 5.02944 7.02944 1 12 1C16.9706 1 21 5.02944 21 10Z" stroke="white" strokeWidth="2" />
-                    <circle cx="12" cy="10" r="3" stroke="white" strokeWidth="2" />
-                  </svg>
-                </div>
-                <h3 style={{
-                  fontSize: '1.5rem',
-                  fontWeight: '600',
-                  color: 'white',
-                  marginBottom: '0.5rem'
-                }}>
-                  Visit Us
-                </h3>
-                <p style={{
-                  color: 'rgba(255, 255, 255, 0.7)',
-                  marginBottom: '1rem',
-                  lineHeight: '1.5'
-                }}>
-                  Located in the heart of innovation and technology.
-                </p>
-                <p style={{
-                  color: '#FFB800',
-                  fontWeight: '500',
-                  fontSize: '1.1rem'
-                }}>
-                  Dubai, United Arab Emirates
-                </p>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            style={{
-              position: 'relative',
-              overflow: 'visible'
-            }}
-          >
-            {/* Animated RGB border */}
-            <div className="absolute -inset-[2px] rounded-3xl opacity-80">
-              <div
-                className="absolute inset-0"
-                style={{
-                  borderRadius: '20px',
-                  background: "linear-gradient(90deg, #8B5CF6 0%, #EC4899 18%, #FB923C 35%, #3B82F6 52%, #06B6D4 68%, #FB923C 85%, #8B5CF6 100%)",
-                  backgroundSize: "300% 300%",
-                  animation: "rgbBorder 4s linear infinite"
-                }}
-              />
-              {/* Soft multi-color glow effect */}
-              <div
-                className="absolute inset-0 blur-lg"
-                style={{
-                  borderRadius: '20px',
-                  background: "linear-gradient(90deg, rgba(139, 92, 246, 0.4) 0%, rgba(236, 72, 153, 0.4) 20%, rgba(251, 146, 60, 0.35) 40%, rgba(59, 130, 246, 0.4) 60%, rgba(251, 146, 60, 0.35) 80%, rgba(139, 92, 246, 0.4) 100%)"
-                }}
-              />
             </div>
-
-            {/* Form content */}
-            <div
-              style={{
-                position: 'relative',
-                zIndex: 10,
-                background: '#000000',
-                backdropFilter: 'blur(20px)',
-                borderRadius: '20px',
-                padding: 'clamp(1.5rem, 4vw, 2.5rem)',
-                boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)'
-              }}
-            >
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                style={{
-                  fontSize: 'clamp(1.5rem, 4vw, 2rem)',
-                  fontWeight: '600',
-                  color: 'white',
-                  marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
-                  textAlign: 'center'
-                }}
-              >
-                Send us a message
-              </motion.h2>
-
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(1rem, 2.5vw, 1.25rem)' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'clamp(0.75rem, 2vw, 1rem)' }}>
-                  <motion.div
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                  >
-                    <label style={{
-                      display: 'block',
-                      color: 'rgba(255, 255, 255, 0.8)',
-                      marginBottom: '0.5rem',
-                      fontSize: '0.9rem',
-                      fontWeight: '500'
-                    }}>
-                      First Name
-                    </label>
-                    <motion.input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      required
-                      whileFocus={{
-                        scale: 1.02,
-                        boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)"
-                      }}
-                      style={{
-                        width: '100%',
-                        padding: 'clamp(0.75rem, 2vw, 1rem)',
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        borderRadius: '10px',
-                        color: 'white',
-                        fontSize: 'clamp(0.9rem, 2vw, 1rem)',
-                        transition: 'all 0.3s ease'
-                      }}
-                      placeholder="Your first name"
-                    />
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                  >
-                    <label style={{
-                      display: 'block',
-                      color: 'rgba(255, 255, 255, 0.8)',
-                      marginBottom: '0.5rem',
-                      fontSize: '0.9rem',
-                      fontWeight: '500'
-                    }}>
-                      Last Name
-                    </label>
-                    <motion.input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      required
-                      whileFocus={{
-                        scale: 1.02,
-                        boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)"
-                      }}
-                      style={{
-                        width: '100%',
-                        padding: 'clamp(0.75rem, 2vw, 1rem)',
-                        background: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        borderRadius: '10px',
-                        color: 'white',
-                        fontSize: 'clamp(0.9rem, 2vw, 1rem)',
-                        transition: 'all 0.3s ease'
-                      }}
-                      placeholder="Your last name"
-                    />
-                  </motion.div>
-                </div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
-                >
-                  <label style={{
-                    display: 'block',
-                    color: 'rgba(255, 255, 255, 0.8)',
-                    marginBottom: '0.5rem',
-                    fontSize: '0.9rem',
-                    fontWeight: '500'
-                  }}>
-                    Email Address
-                  </label>
-                  <motion.input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    whileFocus={{
-                      scale: 1.02,
-                      boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)"
-                    }}
-                    style={{
-                      width: '100%',
-                      padding: 'clamp(0.75rem, 2vw, 1rem)',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.2)',
-                      borderRadius: '10px',
-                      color: 'white',
-                      fontSize: 'clamp(0.9rem, 2vw, 1rem)',
-                      transition: 'all 0.3s ease'
-                    }}
-                    placeholder="your.email@example.com"
-                  />
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
-                >
-                  <label style={{
-                    display: 'block',
-                    color: 'rgba(255, 255, 255, 0.8)',
-                    marginBottom: '0.5rem',
-                    fontSize: '0.9rem',
-                    fontWeight: '500'
-                  }}>
-                    Department
-                  </label>
-                  <motion.select
-                    name="department"
-                    value={formData.department}
-                    onChange={handleInputChange}
-                    required
-                    whileFocus={{
-                      scale: 1.02,
-                      boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)"
-                    }}
-                    style={{
-                      width: '100%',
-                      padding: 'clamp(0.75rem, 2vw, 1rem)',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.2)',
-                      borderRadius: '10px',
-                      color: 'white',
-                      fontSize: 'clamp(0.9rem, 2vw, 1rem)',
-                      transition: 'all 0.3s ease'
-                    }}
-                  >
-                    <option value="" style={{ background: '#1a1f2e', color: 'white' }}>Select a department</option>
-                    <option value="support" style={{ background: '#1a1f2e', color: 'white' }}>Student Support</option>
-                    <option value="merchant" style={{ background: '#1a1f2e', color: 'white' }}>Merchant / Business</option>
-                    <option value="careers" style={{ background: '#1a1f2e', color: 'white' }}>Careers</option>
-                    <option value="partnerships" style={{ background: '#1a1f2e', color: 'white' }}>Partnerships</option>
-                  </motion.select>
-                </motion.div>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.7 }}
-                >
-                  <label style={{
-                    display: 'block',
-                    color: 'rgba(255, 255, 255, 0.8)',
-                    marginBottom: '0.5rem',
-                    fontSize: '0.9rem',
-                    fontWeight: '500'
-                  }}>
-                    Message
-                  </label>
-                  <motion.textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    rows={4}
-                    whileFocus={{
-                      scale: 1.02,
-                      boxShadow: "0 0 20px rgba(0, 240, 255, 0.3)"
-                    }}
-                    style={{
-                      width: '100%',
-                      padding: 'clamp(0.75rem, 2vw, 1rem)',
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.2)',
-                      borderRadius: '10px',
-                      color: 'white',
-                      fontSize: 'clamp(0.9rem, 2vw, 1rem)',
-                      resize: 'vertical',
-                      minHeight: 'clamp(100px, 15vw, 120px)',
-                      transition: 'all 0.3s ease'
-                    }}
-                    placeholder="Tell us about your inquiry, idea, or how we can help you..."
-                  />
-                </motion.div>
-
-                {/* Error Message */}
-                {error && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    style={{
-                      padding: '1rem',
-                      background: 'rgba(255, 59, 48, 0.1)',
-                      border: '1px solid rgba(255, 59, 48, 0.3)',
-                      borderRadius: '12px',
-                      color: '#ff3b30',
-                      fontSize: '0.9rem',
-                      textAlign: 'center'
-                    }}
-                  >
-                    {error}
-                  </motion.div>
-                )}
-
-                <motion.button
-                  type="submit"
-                  disabled={isSubmitting}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.8 }}
-                  whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
-                  whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
-                  style={{
-                    background: isSubmitting
-                      ? 'rgba(255, 255, 255, 0.1)'
-                      : 'linear-gradient(90deg, #2962FF, #7B2CBF, #FFB800)',
-                    color: 'white',
-                    border: 'none',
-                    padding: 'clamp(0.875rem, 2.5vw, 1.2rem) clamp(1.5rem, 4vw, 2rem)',
-                    borderRadius: '50px',
-                    fontSize: 'clamp(1rem, 2.5vw, 1.1rem)',
-                    fontWeight: '600',
-                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                    boxShadow: isSubmitting
-                      ? 'none'
-                      : '0 4px 20px rgba(41, 98, 255, 0.4)',
-                    transition: 'all 0.3s ease',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '0.5rem'
-                  }}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        style={{
-                          width: '20px',
-                          height: '20px',
-                          border: '2px solid rgba(255, 255, 255, 0.3)',
-                          borderTop: '2px solid white',
-                          borderRadius: '50%'
-                        }}
-                      />
-                      Sending...
-                    </>
-                  ) : (
-                    'Send Message'
-                  )}
-                </motion.button>
-              </form>
+            <div>
+              <label style={underlineLabel}>Email</label>
+              <input type="email" name="email" value={formData.email} onChange={handleInputChange} required
+                onFocus={() => setFocusedField('email')} onBlur={() => setFocusedField(null)}
+                style={fieldStyle('email')} placeholder="business@example.com" />
             </div>
-          </motion.div>
-        </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+              <div>
+                <label style={underlineLabel}>Business Type</label>
+                <select name="businessType" value={formData.businessType} onChange={handleInputChange}
+                  onFocus={() => setFocusedField('businessType')} onBlur={() => setFocusedField(null)}
+                  style={{ ...fieldStyle('businessType'), background: 'transparent', appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'none', border: 'none', borderBottom: `1px solid ${focusedField === 'businessType' ? '#ff9800' : 'rgba(255,255,255,0.2)'}`, borderRadius: 0, cursor: 'pointer' }}>
+                  <option value="" style={{ background: '#0d1117', color: 'white' }}>Select type</option>
+                  {['Restaurant / Cafe', 'Entertainment', 'Fitness', 'Retail', 'Services', 'Education', 'Beauty / Wellness', 'Other'].map(opt => (
+                    <option key={opt} value={opt} style={{ background: '#0d1117', color: 'white' }}>{opt}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label style={underlineLabel}>Location</label>
+                <input type="text" name="location" value={formData.location} onChange={handleInputChange}
+                  onFocus={() => setFocusedField('location')} onBlur={() => setFocusedField(null)}
+                  style={fieldStyle('location')} placeholder="City, Area" />
+              </div>
+            </div>
+            <div>
+              <label style={underlineLabel}>Message</label>
+              <textarea name="message" value={formData.message} onChange={handleInputChange} required rows={5}
+                onFocus={() => setFocusedField('message')} onBlur={() => setFocusedField(null)}
+                style={{ ...fieldStyle('message'), resize: 'none' }}
+                placeholder="Tell us what's on your mind..." />
+            </div>
+            {error && <p style={{ color: '#ff4444', fontSize: '0.9rem' }}>{error}</p>}
+            <SubmitButton label={isSubmitting ? 'Sending...' : 'Submit'} disabled={isSubmitting} />
+          </form>
+        </motion.div>
       </div>
+
+      {/* Why Businesses Choose StudentVerse */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.7 }}
+        style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem) clamp(4rem, 8vw, 6rem)', position: 'relative', zIndex: 1 }}
+      >
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 700, marginBottom: '0.75rem', background: 'linear-gradient(315deg, #999, #fff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            Why Businesses Choose StudentVerse
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem' }}>
+            Everything you need to reach the student market, in one place.
+          </p>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
+          {WHY_CARDS.map((card, i) => (
+            <motion.div key={card.title}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
+              style={{ padding: '0.5rem 0' }}>
+              <div style={{ marginBottom: '1rem' }}>{card.icon}</div>
+              <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'white', marginBottom: '0.5rem' }}>{card.title}</h4>
+              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.88rem', lineHeight: 1.6, margin: 0 }}>{card.body}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+      </>
+      )}
+
+      <style>{`
+        @media (max-width: 768px) {
+          .contact-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
+          .student-grid { grid-template-columns: 1fr !important; }
+          .student-perks-grid { grid-template-columns: 1fr !important; }
+        }
+        input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.2); }
+        select option { background: #0d1117; }
+      `}</style>
     </div>
   );
 }

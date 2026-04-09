@@ -20,7 +20,6 @@ export default function Contact() {
       <ContactHero />
       <MainFooter />
       <Footer />
-      {/* Keep the original HTML for any remaining content */}
       <div dangerouslySetInnerHTML={{ __html: html }} style={{ display: 'none' }} />
     </>
   );

@@ -152,7 +152,7 @@ export default function FAQ() {
                       className={`faq-card ${openFAQ === faq.id ? 'is-open' : ''}`}
                       onClick={() => toggleFAQ(faq.id)}
                       style={{
-                        background: 'rgba(8, 12, 31, 0.95)',
+                        background: 'rgba(0, 0, 0, 0.95)',
                         backdropFilter: 'blur(20px)',
                         WebkitBackdropFilter: 'blur(20px)',
                         borderRadius: '16px',
@@ -168,7 +168,7 @@ export default function FAQ() {
                         boxSizing: 'border-box'
                       }}
                       whileHover={{
-                        background: 'rgba(8, 12, 31, 0.98)',
+                        background: 'rgba(0, 0, 0, 1)',
                         transition: { duration: 0.2 }
                       }}
                     >

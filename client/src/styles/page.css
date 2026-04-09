@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  background: #000;
+  min-height: 100vh;
 }
 
 article,
@@ -4176,6 +4178,192 @@ figcaption {
   font-weight: 500;
 }
 
+/* How it Works - Step Process Layout */
+.process-section {
+  width: 100%;
+  max-width: 1000px;
+  margin: 60px auto 0;
+  padding: 0 20px;
+}
+
+.process-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  position: relative;
+}
+
+.process-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.process-connector {
+  position: absolute;
+  top: 30px;
+  left: calc(50% + 40px);
+  width: calc(100% - 80px);
+  height: 2px;
+  z-index: 0;
+}
+
+.connector-line {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.3) 0%, rgba(236, 72, 153, 0.3) 50%, rgba(255, 184, 0, 0.3) 100%);
+}
+
+.process-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.process-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 50%;
+  border: none;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.process-icon-wrapper:hover {
+  transform: scale(1.05);
+}
+
+.process-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.process-step-number {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  opacity: 0.9;
+}
+
+.process-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.process-description {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .process-section {
+    margin-top: 40px;
+    padding: 0 15px;
+  }
+
+  .process-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .process-connector {
+    display: none;
+  }
+
+  .process-item {
+    padding: 24px 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .process-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #8B5CF6, #EC4899, #FB923C);
+    opacity: 0.8;
+  }
+
+  .process-icon-wrapper {
+    width: 56px;
+    height: 56px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .process-item:nth-child(1) .process-icon-wrapper,
+  .process-item:nth-child(2) .process-icon-wrapper,
+  .process-item:nth-child(3) .process-icon-wrapper {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .process-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .process-step-number {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  .process-title {
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+
+  .process-description {
+    font-size: 13px;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .process-content {
+    align-items: center;
+    text-align: center;
+  }
+}
+
+/* Tablet view */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .process-description {
+    max-width: 220px;
+    font-size: 14px;
+  }
+}
+
+/* Remove old feature section styles */
+.feature-section {
+  display: none;
+}
+
 .white-text {
   color: #fff;
 }
@@ -4353,6 +4541,17 @@ figcaption {
   align-items: center;
   max-width: 420px;
   display: flex;
+}
+
+.cta-paragraph-holder p {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cta-paragraph-holder p::before,
+.cta-paragraph-holder p::after {
+  display: none;
 }
 
 .text-field {
@@ -10684,9 +10883,9 @@ figcaption {
   background: radial-gradient(circle,
       rgba(248, 249, 250, 1) 30%,
       /* Bright center for logos (Off-White) */
-      rgba(41, 98, 255, 0.15) 70%,
+      rgba(41, 98, 255, 0.08) 70%,
       /* Soft Blue bleed (#2962FF) */
-      rgba(123, 44, 191, 0.15) 85%,
+      rgba(123, 44, 191, 0.08) 85%,
       /* Soft Purple bleed (#7B2CBF) */
       rgba(0, 0, 0, 1) 100%
       /* Fades into website black background */
@@ -10728,6 +10927,8 @@ figcaption {
   margin: 0 auto;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   padding: 40px 10px;
+  background: transparent;
+  /* Allow the animated background to show through */
 }
 
 .feature-container {
@@ -11152,29 +11353,39 @@ html.is-loaded [class*=" animate-on-load"] {
 .teachmecode-partnership-banner {
   position: relative;
   width: 100%;
-  padding: 80px 0;
-  margin-top: 60px;
+  padding: 60px 0;
+  margin-top: 0;
   overflow: hidden;
-  background: #000000;
-  /* Solid black background */
-  border: none;
-  /* Remove the border */
-  border-radius: 20px;
-  /* Optional: Add rounded corners */
+  background: transparent;
 }
 
-/* Animated Aurora Background */
-.partnership-aurora {
+.teachmecode-partnership-banner::after {
+  content: '';
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: #000000;
-  /* Solid black background for the moving effect */
-  animation: auroraShift 8s ease-in-out infinite;
-  filter: blur(60px);
-  opacity: 0.6;
+  height: 80%;
+  background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(123, 44, 191, 1) 0%, rgba(100, 30, 170, 0.75) 35%, rgba(80, 20, 140, 0.35) 60%, transparent 100%);
+  animation: bannerGlowPulse 1.2s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes bannerGlowPulse {
+  0% {
+    opacity: 0.5;
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(22px);
+  }
+}
+
+/* Animated Aurora Background - Hidden */
+.partnership-aurora {
+  display: none;
 }
 
 @keyframes auroraShift {
@@ -11191,30 +11402,64 @@ html.is-loaded [class*=" animate-on-load"] {
 
 .partnership-badge {
   position: relative;
-  padding: 50px 80px;
-  border-radius: 30px;
-  background: #000000;
-  /* Solid black background */
-  backdrop-filter: blur(20px);
-  border: 2px solid transparent;
-  /* Transparent border to show gradient */
-  background-clip: padding-box;
-  /* box-shadow: 0 20px 60px rgba(41, 98, 255, 0.3), 0 10px 30px rgba(123, 44, 191, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1); */
-  animation: badgeFloat 6s ease-in-out infinite;
+  padding: 30px 50px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.partnership-badge::after {
+  display: none;
+}
+
+@keyframes revealTopOnly {
+  0% {
+    opacity: 0.3;
+    transform: translateX(-50%) translateY(20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0%);
+  }
+}
+
+@keyframes revealSemiCircle {
+  0% {
+    opacity: 0.6;
+    transform: translateX(-50%) translateY(10px) scaleX(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scaleX(1.1);
+  }
+}
+
+@keyframes revealGlow {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1.2);
+  }
+  100% {
+    opacity: 0.7;
+    transform: translateX(-50%) scaleY(1);
+  }
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 .partnership-badge::before {
-  content: "";
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: #000000;
-  border-radius: 30px;
-  z-index: -1;
-  animation: borderRotate 4s linear infinite;
-  background-size: 300% 300%;
+  display: none;
 }
 
 @keyframes badgeFloat {
@@ -11243,18 +11488,8 @@ html.is-loaded [class*=" animate-on-load"] {
   }
 }
 
-/* Badge Glow Effect */
 .badge-glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 120%;
-  height: 120%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(41, 98, 255, 0.6) 0%, rgba(123, 44, 191, 0.5) 50%, transparent 70%);
-  animation: pulseGlow 3s ease-in-out infinite;
-  filter: blur(30px);
-  z-index: -1;
+  display: none;
 }
 
 @keyframes pulseGlow {
@@ -11283,37 +11518,28 @@ html.is-loaded [class*=" animate-on-load"] {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 3px;
-  color: #ffffff;
-  /* Changed to white */
+  color: #a8a8b3;
   margin-bottom: 15px;
-  animation: fadeInUp 1s ease-out;
 }
 
 .partnership-brand {
-  font-size: 56px;
+  font-size: 48px;
   font-weight: 900;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #ffffff 100%);
-  /* Changed gradient to white */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  background-size: 200% 200%;
-  animation: gradientShift 5s ease infinite, textGlow 2s ease-in-out infinite;
-  text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
-  /* Adjusted text shadow for white */
-  letter-spacing: -1px;
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
 }
 
 .partnership-tagline {
-  font-size: 16px;
-  font-weight: 500;
-  color: #ffffff;
-  /* Changed to white */
-  margin-top: 15px;
-  letter-spacing: 1px;
-  animation: fadeInUp 1s ease-out 0.3s both;
+  display: none;
 }
 
 @keyframes gradientShift {
@@ -11351,15 +11577,9 @@ html.is-loaded [class*=" animate-on-load"] {
   }
 }
 
-/* Floating Particles */
+/* Floating Particles - Hidden */
 .partnership-particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 1;
+  display: none;
 }
 
 .particle {

@@ -35,7 +35,7 @@ export default function TrustedBy() {
   return (
     <motion.div 
       className="trusted-by" 
-      style={{ paddingBottom: '20px' }}
+      style={{ paddingBottom: '20px', background: 'transparent !important' }}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
@@ -58,7 +58,7 @@ export default function TrustedBy() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.7, ease: "easeOut", delay: 0.4 }}
       >
-        <div className="company-logo-holder" style={{ position: 'relative', overflow: 'hidden' }}>
+        <div className="company-logo-holder" style={{ position: 'relative', overflow: 'hidden', background: 'transparent !important' }}>
           <LogoLoop
             logos={logos}
             speed={120}
@@ -66,14 +66,10 @@ export default function TrustedBy() {
             logoHeight={80}
             gap={60}
             hoverSpeed={20}
-            fadeOut
-            fadeOutColor="#000000"
             scaleOnHover
             ariaLabel="Partner brands"
             renderItem={renderLogoItem}
           />
-          
-          <div className="partner-banner-aurora"></div>
         </div>
       </motion.div>
     </motion.div>
