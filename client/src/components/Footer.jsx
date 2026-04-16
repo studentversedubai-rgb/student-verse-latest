@@ -124,12 +124,12 @@ export default function Footer() {
       { name: 'Linkedin', href: 'https://www.linkedin.com/company/studentverseofficial/posts/?feedView=all' }
     ],
     support: [
-      { name: 'Help', href: '/support', hoverColor: '#00f0ff' },
+      { name: 'Help', href: '/support', hoverColor: '#007AFF' },
       { name: 'FAQs', href: '/about#faq-about', hoverColor: '#ff9800' },
       { name: 'Connect with Us', href: '/contact', hoverColor: '#7b2cbf' }
     ],
     legal: [
-      { name: 'Terms & Conditions', href: '/terms', hoverColor: '#00f0ff' },
+      { name: 'Terms & Conditions', href: '/terms', hoverColor: '#007AFF' },
       { name: 'Privacy Policy', href: '/privacy', hoverColor: '#ff9800' },
       { name: 'Cookie Policy', href: '/cookies', hoverColor: '#7b2cbf' }
     ]
@@ -380,7 +380,7 @@ export default function Footer() {
         }
 
         .footer-link:hover {
-          color: #00f0ff;
+          color: #007AFF;
           transform: translateX(5px);
         }
 

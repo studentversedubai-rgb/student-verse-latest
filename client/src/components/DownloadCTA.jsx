@@ -33,6 +33,35 @@ const StoreBtn = styled.a`
   svg { flex-shrink: 0; }
 `;
 
+const DisabledStoreBtn = styled.a`
+  background: transparent;
+  position: relative;
+  padding: 12px 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: default;
+  pointer-events: none;
+  border-radius: 25px;
+  outline: none;
+  overflow: hidden;
+  border: 1px solid #808080;
+  color: #808080;
+  span { margin: 0 4px; }
+  &::before {
+    position: absolute;
+    top: 0; left: -5em; right: 0; bottom: 0;
+    margin: auto; content: '';
+    border-radius: 50%; display: block;
+    width: 20em; height: 20em;
+    z-index: -1;
+  }
+  svg { flex-shrink: 0; }
+`;
+
 export default function DownloadCTA() {
   return (
     <section className="download-cta-section">
@@ -82,15 +111,16 @@ export default function DownloadCTA() {
                 <span>App Store</span>
               </div>
             </StoreBtn>
-            <StoreBtn href="https://play.google.com" target="_blank" rel="noopener noreferrer" data-color="#34A853">
+            <DisabledStoreBtn>
+              {/* #34A853 when google play is available */}
               <svg width="22" height="22" viewBox="0 0 512 512" fill="currentColor">
                 <path d="M70.667 499.429c-4.114 0-8.093-1.209-11.527-3.499L275.925 279.145l56.21 56.21L98.648 493.228c-8.404 4.131-18.59 6.201-27.981 6.201zM30.118 468.715c-2.731-5.042-4.118-10.731-4.118-16.572V59.857c0-5.731 1.34-11.31 3.97-16.279l196.452 196.452-196.304 228.685zM468.098 219.08l-53.913-30.913-61.938 61.938 61.938 61.938 54.569-31.267c15.496-8.88 24.765-25.077 24.765-42.848s-9.926-33.968-25.421-18.848zM59.14 16.07C62.574 13.78 66.553 12.571 70.667 12.571c9.391 0 19.577 2.07 27.981 6.201l233.787 157.873-56.21 56.21L59.14 16.07z"/>
               </svg>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', lineHeight: 1.2 }}>
-                <span style={{ fontSize: '0.65rem', opacity: 0.75, fontWeight: 400 }}>Get it now on</span>
+                <span style={{ fontSize: '0.65rem', opacity: 0.75, fontWeight: 400 }}>Coming Soon</span>
                 <span>Google Play</span>
               </div>
-            </StoreBtn>
+            </DisabledStoreBtn>
           </motion.div>
 
           <motion.p 

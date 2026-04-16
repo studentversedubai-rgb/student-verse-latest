@@ -93,8 +93,8 @@ export default function CTA() {
                 }}
               >
                
-                <div className="hero-section-phone-screenshot-holder">
-                   
+<div className="hero-section-phone-screenshot-holder">
+                    
                 </div>
               </motion.div>
 

@@ -55,7 +55,7 @@ export default function Support() {
       <Navbar />
       <div style={{ padding: 'clamp(7rem,12vh,10rem) clamp(1.5rem,5vw,4rem) 2rem', maxWidth: '680px', margin: '0 auto' }}>
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <h1 style={{ fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 800, background: 'linear-gradient(315deg, #008080, #00ced1)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', margin: '0 0 0.75rem' }}>
+          <h1 style={{ fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 800, background: 'linear-gradient(315deg, #0055aa, #007AFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', margin: '0 0 0.75rem' }}>
             Support Center
           </h1>
           <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '1.05rem', marginBottom: '2.5rem', lineHeight: 1.7 }}>

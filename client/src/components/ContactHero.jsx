@@ -66,7 +66,7 @@ export default function ContactHero() {
   const [focusedField, setFocusedField] = useState(null);
 
   // Student form state
-  const [studentData, setStudentData] = useState({ fullName:'', university:'', studentEmail:'', course:'', year:'', why:'' });
+  const [studentData, setStudentData] = useState({ fullName:'', university:'', studentEmail:'', course:'', year:'', role:'', why:'' });
   const [studentSubmitted, setStudentSubmitted] = useState(false);
   const [studentSubmitting, setStudentSubmitting] = useState(false);
   const [studentError, setStudentError] = useState('');
@@ -128,14 +128,14 @@ export default function ContactHero() {
           firstName: studentData.fullName,
           lastName: '',
           email: studentData.studentEmail,
-          message: `University: ${studentData.university}\nCourse/Major: ${studentData.course}\nYear of Study: ${studentData.year}\n\nWhy join StudentVerse:\n${studentData.why}`,
+          message: `University: ${studentData.university}\nCourse/Major: ${studentData.course}\nYear of Study: ${studentData.year}\nRole Applying For: ${studentData.role}\n\nWhy join StudentVerse:\n${studentData.why}`,
           inquiryType: 'student',
         }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Failed to submit');
       setStudentSubmitted(true);
-      setStudentData({ fullName:'', university:'', studentEmail:'', course:'', year:'', why:'' });
+      setStudentData({ fullName:'', university:'', studentEmail:'', course:'', year:'', role:'', why:'' });
     } catch (err) {
       setStudentError(err.message || 'Failed to send. Please try again.');
     } finally {
@@ -146,16 +146,24 @@ export default function ContactHero() {
   // Toggle pill
   const Toggle = (
     <div style={{ display:'flex', justifyContent:'center', padding:'2rem 0 0' }}>
-      <div style={{ display:'inline-flex', background:'rgba(255,255,255,0.06)', borderRadius:'999px', padding:'4px', border:'1px solid rgba(255,255,255,0.1)', position:'relative' }}>
-        {['business','student'].map(m => (
-          <button key={m} onClick={() => setMode(m)} style={{
-            position:'relative', zIndex:1, padding:'10px 32px', borderRadius:'999px', border:'none', cursor:'pointer', fontSize:'0.9rem', fontWeight:600, letterSpacing:'0.3px',
-            background: mode === m ? (m === 'business' ? '#ff9800' : '#7b2cbf') : 'transparent',
-            color: mode === m ? '#fff' : 'rgba(255,255,255,0.5)',
-            transition:'all 0.25s ease',
-          }}>
-            {m === 'business' ? 'Business' : 'Student'}
-          </button>
+      <div style={{ display:'inline-flex', background:'rgba(255,255,255,0.06)', borderRadius:'999px', padding:'4px', border:'1px solid rgba(255,255,255,0.1)', position:'relative', gap:'2px' }}>
+        {[
+          { key: 'business', label: 'Business', color: '#ff9800' },
+          { key: 'student', label: 'Student', color: '#9c27b0' }
+        ].map(m => (
+          <motion.button 
+            key={m.key} 
+            onClick={() => setMode(m.key)} 
+            whileHover={{ x: 4 }}
+            whileTap={{ x: -4, scale: 0.98 }}
+            style={{
+              position:'relative', zIndex:1, padding:'10px 32px', borderRadius:'999px', border:'none', cursor:'pointer', fontSize:'0.9rem', fontWeight:600, letterSpacing:'0.3px',
+              background: mode === m.key ? m.color : 'transparent',
+              color: mode === m.key ? '#fff' : 'rgba(255,255,255,0.5)',
+              transition:'all 0.25s ease',
+            }}>
+            {m.label}
+          </motion.button>
         ))}
       </div>
     </div>
@@ -239,9 +247,20 @@ export default function ContactHero() {
                       <option value="" style={{ background:'#0d1117' }}>Select year</option>
                       {['1st Year','2nd Year','3rd Year','4th Year','Masters','PhD','Other'].map(y => (
                         <option key={y} value={y} style={{ background:'#0d1117' }}>{y}</option>
+                        
                       ))}
+                      
                     </select>
                   </div>
+                </div>
+                <div>
+                  <label style={underlineLabel}>Role Applying For</label>
+                  <select name="role" value={studentData.role} onChange={handleStudentChange} required style={{ ...underlineInput, borderBottomColor: focusedField==='role' ? '#7b2cbf' : 'rgba(255,255,255,0.2)', background:'transparent', appearance:'none', cursor:'pointer' }} onFocus={()=>setFocusedField('role')} onBlur={()=>setFocusedField(null)}>
+                    <option value="" style={{ background:'#0d1117' }}>Select role</option>
+                    {['Frontend Developer','Backend Developer', 'Graphic Designer','Content Creator', 'Other'].map(r => (
+                      <option key={r} value={r} style={{ background:'#0d1117' }}>{r}</option>
+                    ))}
+                  </select>
                 </div>
                 <div style={{ background:'rgba(255,255,255,0.03)', border:'1px solid rgba(123,44,191,0.3)', borderRadius:'12px', padding:'1rem 1.25rem' }}>
                   <label style={{ ...underlineLabel, marginBottom:'0.5rem' }}>Why do you want to work with us?</label>

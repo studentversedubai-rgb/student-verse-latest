@@ -15,6 +15,7 @@ import MainFooter from '../components/Footer'
 import Footer from './Footer'
 import GhostCursor from '../components/GhostCursor'
 import { useLenisScroll } from '../hooks/useLenisScroll'
+import News from '../components/News'
 import '../styles/ghost-cursor.css'
 
 export default function Home() {
@@ -46,8 +47,9 @@ export default function Home() {
       <Hero />
       {/* <Partners /> */}
       <Features />
+      <News />
       <Trustbar />
-      <Stats />
+      {/* <Stats /> */}
       <DownloadCTA />
       <MainFooter />
       <Footer />
