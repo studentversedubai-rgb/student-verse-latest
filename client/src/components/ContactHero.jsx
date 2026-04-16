@@ -299,7 +299,7 @@ export default function ContactHero() {
           </motion.p>
           <motion.div variants={itemVariants} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {[
-              { label: 'Email', value: 'Careers@studentverse.ae' },
+              { label: 'Email', value: 'Partners@studentverse.ae' },
               { label: 'Based in', value: 'Dubai, UAE' },
             ].map(({ label, value }) => (
               <div key={label}>
