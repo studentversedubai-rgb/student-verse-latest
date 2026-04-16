@@ -79,13 +79,13 @@ export default function Hero() {
     <section style={{
       position: 'relative', display: 'flex', alignItems: 'center',
       overflow: 'hidden', backgroundColor: '#080C1F',
-      padding: 'clamp(5rem,12vh,9rem) clamp(1.5rem,5vw,4rem) 4rem',
+      minHeight: '89vh',
+      padding: 'clamp(0rem,5vh,4rem) clamp(1.5rem,5vw,4rem) 10rem',
     }}>
-      <video autoPlay muted loop playsInline style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', zIndex:0, pointerEvents:'none' }}>
+      <video autoPlay muted loop playsInline style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', zIndex:0, pointerEvents:'none', transform: 'rotate(180deg)' }}>
         <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260217_030345_246c0224-10a4-422c-b324-070b7c0eceda.mp4" type="video/mp4" />
       </video>
       <div style={{ position:'absolute', inset:0, backgroundColor:'rgba(0,0,0,0.5)', zIndex:1, pointerEvents:'none' }} />
-      <div style={{ position:'absolute', bottom:0, left:0, right:0, height:'180px', background:'linear-gradient(to bottom,transparent,#080C1F)', pointerEvents:'none', zIndex:2 }} />
 
       <div style={{ maxWidth:'1400px', width:'100%', margin:'0 auto', position:'relative', zIndex:3, display:'grid', gridTemplateColumns:'1fr 1fr', gap:'clamp(2rem,5vw,5rem)', alignItems:'center' }} className="hero-grid">
 
@@ -129,12 +129,12 @@ export default function Hero() {
         </motion.div>
 
         <motion.div initial={hasAnimated?{opacity:1,x:0}:{opacity:0,x:40}} animate={{opacity:1,x:0}} transition={{duration:0.9,ease:[0.25,0.46,0.45,0.94],delay:0.4}} style={{ display:'flex', alignItems:'center', justifyContent:'center' }}>
-          <div style={{ position:'relative', width:'520px', height:'520px' }}>
+          <div style={{ position:'relative', width:'620px', height:'620px' }}>
             <div style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center', zIndex:10, pointerEvents:'none' }}>
-              <img src="/assets/phones.png" alt="" aria-hidden="true" style={{ width:'52%', height:'auto', objectFit:'contain', display:'block' }} />
+              <img src="/assets/phones.png" alt="" aria-hidden="true" style={{ width:'65%', height:'auto', objectFit:'contain', display:'block' }} />
             </div>
             <div style={{ position:'absolute', inset:0, zIndex:20 }}>
-              <OrbitImages shape="ellipse" radiusX={240} radiusY={160} baseWidth={600} itemSize={130} duration={30} rotation={0} responsive={true} width={520} height={520}>
+              <OrbitImages shape="ellipse" radiusX={280} radiusY={190} baseWidth={600} itemSize={130} duration={30} rotation={0} responsive={true} width={620} height={620}>
                 {ORBIT_ITEMS.map(f => (
                   <div key={f.label} style={{ display:'flex', alignItems:'center', gap:'6px', color:'#fff', fontSize:'0.75rem', fontWeight:600, whiteSpace:'nowrap', letterSpacing:'0.3px' }}>
                     {f.icon}<span>{f.label}</span>
@@ -143,7 +143,7 @@ export default function Hero() {
               </OrbitImages>
             </div>
             <div style={{ position:'absolute', inset:0, display:'flex', alignItems:'center', justifyContent:'center', zIndex:30, pointerEvents:'none' }}>
-              <img src="/assets/phones.png" alt="App" style={{ width:'52%', height:'auto', objectFit:'contain', display:'block', WebkitMaskImage:'linear-gradient(to bottom,black 45%,transparent 65%)', maskImage:'linear-gradient(to bottom,black 45%,transparent 65%)' }} />
+              <img src="/assets/phones.png" alt="App" style={{ width:'65%', height:'auto', objectFit:'contain', display:'block', WebkitMaskImage:'linear-gradient(to bottom,black 45%,transparent 65%)', maskImage:'linear-gradient(to bottom,black 45%,transparent 65%)' }} />
             </div>
           </div>
         </motion.div>
@@ -151,12 +151,14 @@ export default function Hero() {
       </div>
       <style>{`@media(max-width:900px){
         .hero-grid{grid-template-columns:1fr!important; gap: clamp(1rem,3vw,2rem) !important;}
-        .hero-grid>div:first-child h1{font-size: clamp(2.2rem,6vw,3.2rem) !important; margin-bottom: clamp(1rem,2vw,1.5rem) !important;}
-        .hero-grid>div:first-child p{font-size: clamp(0.95rem,2.2vw,1.1rem) !important; margin-bottom: clamp(0.75rem,1.5vw,1rem) !important;}
-        .hero-grid>div:first-child div:last-child{gap: clamp(0.5rem,1.5vw,0.75rem) !important;}
-        .hero-grid>div:last-child{display:flex !important; width: 100% !important; max-width: 450px !important; margin: 0 auto !important;}
-        .hero-grid>div:last-child>div{width: 350px !important; height: 350px !important;}
-        .hero-grid>div:last-child img{width: 50% !important;}
+        .hero-grid>div:first-child{display:flex; flex-direction:column; align-items:center; text-align:center;}
+        .hero-grid>div:first-child h1{font-size: clamp(2.2rem,6vw,3.2rem) !important; margin-bottom: clamp(1rem,2vw,1.5rem) !important; text-align:center !important;}
+        .hero-grid>div:first-child p{font-size: clamp(0.95rem,2.2vw,1.1rem) !important; margin-bottom: clamp(0.75rem,1.5vw,1rem) !important; text-align:center !important;}
+        .hero-grid>div:first-child div:last-child{gap: clamp(0.5rem,1.5vw,0.75rem) !important; justify-content:center; transform: scale(0.85);}
+        .hero-grid>div:last-child{display:flex !important; width: 100% !important; max-width: 500px !important; margin: 0 auto !important;}
+        .hero-grid>div:last-child>div{width: 420px !important; height: 420px !important;}
+        .hero-grid>div:last-child img{width: 60% !important;}
+        .orbit-item{transform: scale(1.25) !important;}
       }`}</style>
     </section>
   );

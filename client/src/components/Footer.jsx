@@ -401,28 +401,67 @@ export default function Footer() {
           }
 
           .footer-content {
-            flex-direction: column;
-            gap: 40px;
+            flex-direction: column !important;
+            gap: 40px !important;
+            align-items: center !important;
+            text-align: center !important;
+            display: flex !important;
+            grid-template-columns: none !important;
           }
 
           .footer-brand-section {
-            max-width: 100%;
-            text-align: center;
+            max-width: 100% !important;
+            text-align: center !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+          }
+
+          .footer-brand {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100% !important;
+            margin: 0 auto !important;
+            text-align: center !important;
+          }
+
+          .footer-brand img {
+            margin: 0 auto !important;
+            padding-left: 50px !important;
           }
 
           .footer-social {
-            justify-content: center;
+            justify-content: center !important;
           }
 
           .footer-links-grid {
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
+            justify-content: center !important;
+            gap: 40px !important;
+            flex-wrap: wrap !important;
+            width: 100% !important;
           }
 
           .footer-column {
-            text-align: center;
-            min-width: 120px;
+            text-align: center !important;
+            min-width: 120px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+          }
+
+          .footer-links {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            padding: 0 !important;
+            margin: 0 !important;
+          }
+
+          .footer-links li {
+            text-align: center !important;
+            margin-bottom: 4px !important;
+            list-style: none !important;
           }
         }
       `}</style>
