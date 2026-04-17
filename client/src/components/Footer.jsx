@@ -124,7 +124,7 @@ export default function Footer() {
       { name: 'Linkedin', href: 'https://www.linkedin.com/company/studentverseofficial/posts/?feedView=all' }
     ],
     support: [
-      { name: 'Help', href: '/support', hoverColor: '#007AFF' },
+      // { name: 'Help', href: '/support', hoverColor: '#007AFF' },
       { name: 'FAQs', href: '/about#faq-about', hoverColor: '#ff9800' },
       { name: 'Connect with Us', href: '/contact', hoverColor: '#7b2cbf' }
     ],

@@ -36,7 +36,7 @@ export default function Features() {
     {
       id: 'purple',
       step: '03',
-      title: 'SV orbit AI',
+      title: 'SV Orbit AI',
       description: 'Your personal AI companion that learns and adapts to your needs, understanding your mood, preferences, and epic weekend adventures',
       color: '#c42878',
       icon: (

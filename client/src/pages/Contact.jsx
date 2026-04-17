@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import ContactHero from "../components/ContactHero";
 import MainFooter from "../components/Footer";
 import Footer from "./Footer";
+import MaintenancePage from "../components/maintenance";
 
 export default function Contact() {
   const [html, setHtml] = useState("");
@@ -17,7 +18,8 @@ export default function Contact() {
   return (
     <>
       <Navbar />
-      <ContactHero />
+      <MaintenancePage />
+      {/* <ContactHero /> */}
       <MainFooter />
       <Footer />
       <div dangerouslySetInnerHTML={{ __html: html }} style={{ display: 'none' }} />

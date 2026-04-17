@@ -20,9 +20,9 @@ const svNews = [
   },
   {
     id: 3,
-    title: 'coupon system under maintenance',
+    title: 'Code system under maintenance',
     date: 'April 17, 2026',
-    excerpt: 'Our coupon system is currently under maintenance and is being integrated into Flash & Verify. Please do not use QR codes for coupons as they will not work, use the code provided in the description instead.',
+    excerpt: 'Our code system is currently under maintenance and is being integrated into Flash & Verify. Please do not use QR codes for codes as they will not work, use the code provided in the description instead.',
     category: 'Feature',
     color: '#7b2cbf'
   }
