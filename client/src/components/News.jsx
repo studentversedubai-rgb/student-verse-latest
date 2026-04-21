@@ -20,9 +20,9 @@ const svNews = [
   },
   {
     id: 3,
-    title: 'Code system under maintenance',
-    date: 'April 17, 2026',
-    excerpt: 'Our code system is currently under maintenance and is being integrated into Flash & Verify. Please do not use QR codes for codes as they will not work, use the code provided in the description instead.',
+    title: 'Mystery feature coming soon to StudentVerse',
+    date: 'April 21, 2026',
+    excerpt: 'We have a surprise in store for our users! Stay tuned for an exciting new feature that will enhance your StudentVerse experience.',
     category: 'Feature',
     color: '#7b2cbf'
   }
@@ -74,10 +74,10 @@ const iosNews = [
   },
   {
     id: 3,
-    title: 'SV Orbit V1: Your New AI Study Companion',
-    date: 'April 17, 2026',
-    excerpt: 'Introducing our AI-powered feature that finds the best deals tailored just for you. Say hello to smarter savings!',
-    category: 'Feature',
+    title: 'SV app Signup Under Maintenance',
+    date: 'April 21, 2026',
+    excerpt: 'Due to high volume of sign in requests, our signup system is currently under maintenance. We apologize for any inconvenience and will be back up soon!',
+    category: 'Maintenance',
     color: '#007AFF'
   }
 ];
