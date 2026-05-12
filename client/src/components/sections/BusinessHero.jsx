@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { getApiUrl_v2 } from '../config/api';
+import { getApiUrl_v2 } from '../../config/api';
 
 const inputStyle = {
   width: '100%',

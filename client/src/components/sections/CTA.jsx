@@ -1,11 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 
 export default function CTA() {
-  const { isAuthenticated } = useAuth();
-
   return (
     <div className="section overflow-hidden" style={{ marginTop: '0', paddingTop: '40px', marginBottom: '0' }}>
       <div className="container " style={{ position: 'relative', zIndex: 1 }}>

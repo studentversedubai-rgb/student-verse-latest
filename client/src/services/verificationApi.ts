@@ -59,16 +59,6 @@ export interface ResendOTPResponse {
   resendCount?: number;
 }
 
-export interface VerificationState {
-  email: string;
-  otp: string;
-  expiresAt: number;
-  attempts: number;
-  resendCount: number;
-  lastResendAt: number;
-  lockedUntil: number | null;
-}
-
 // ============================================================================
 // Configuration
 // ============================================================================
@@ -81,34 +71,6 @@ export const VERIFICATION_CONFIG = {
   MAX_RESENDS: 3,
   LOCKOUT_DURATION_MS: 15 * 60 * 1000, // 15 minutes
 } as const;
-
-// ============================================================================
-// Mock Storage (Replace with real API calls)
-// ============================================================================
-
-const VERIFICATION_STORAGE_KEY = "sv_verification_state";
-
-const getVerificationState = (): VerificationState | null => {
-  if (typeof window === "undefined") return null;
-  const stored = storage.get<VerificationState>(VERIFICATION_STORAGE_KEY);
-  return stored;
-};
-
-const setVerificationState = (state: VerificationState): void => {
-  if (typeof window === "undefined") return;
-  storage.set(VERIFICATION_STORAGE_KEY, state);
-};
-
-const clearVerificationState = (): void => {
-  if (typeof window === "undefined") return;
-  storage.remove(VERIFICATION_STORAGE_KEY);
-};
-
-// Generate a random 6-digit OTP
-const generateOTP = (): string => {
-  // Default OTP for testing purposes - always returns 111111
-  return "111111";
-};
 
 // ============================================================================
 // API Methods (Mock Implementation - Ready for Backend Integration)
@@ -190,35 +152,16 @@ export const verifyOTP = async (
 
     const result = await response.json();
 
-    console.log('✅ Backend OTP verification response:', result);
-
-    // Backend returns data FLAT, not nested in a 'data' object
-    // Backend format: { ok: true, referralCode: "...", position: 1, referralCount: 0, rewardStatus: "..." }
-    // Frontend needs: { referralCode: "...", waitlistPosition: 1, referralCount: 0 }
-
     if (result.ok && result.referralCode) {
-      // Restructure backend response to match frontend expectations
       const userData = {
         referralCode: result.referralCode,
-        waitlistPosition: result.position, // Backend uses 'position', frontend expects 'waitlistPosition'
+        waitlistPosition: result.position,
         referralCount: result.referralCount,
       };
 
-      console.log('✅ Storing user data in localStorage:', {
-        email: request.email,
-        data: userData
-      });
-
       storage.set('sv_user_email', request.email);
       storage.set('sv_user_data', userData);
-      // Clear pending referral code
       storage.remove('sv_pending_referral');
-
-      console.log('✅ Data stored successfully');
-      console.log('✅ Verification:', {
-        email: storage.get('sv_user_email'),
-        data: storage.get('sv_user_data')
-      });
 
       return {
         success: result.ok,
@@ -227,9 +170,6 @@ export const verifyOTP = async (
         data: userData,
       };
     } else {
-      console.warn('⚠️ No data in backend response or verification failed');
-      console.warn('⚠️ Full response:', JSON.stringify(result, null, 2));
-
       return {
         success: false,
         message: result.message || "Verification failed",
@@ -303,37 +243,16 @@ export const getVerificationStatus = (): {
   canResend?: boolean;
   resendCooldownUntil?: number;
 } => {
-  const state = getVerificationState();
-
-  if (!state) {
-    return { inProgress: false };
-  }
-
-  const now = Date.now();
-  const isExpired = now > state.expiresAt;
-  const isLocked = state.lockedUntil && now < state.lockedUntil;
-  const resendCooldownUntil =
-    state.lastResendAt + VERIFICATION_CONFIG.RESEND_COOLDOWN_MS;
-  const canResend =
-    now > resendCooldownUntil &&
-    state.resendCount < VERIFICATION_CONFIG.MAX_RESENDS;
-
-  return {
-    inProgress: !isExpired && !isLocked,
-    email: state.email,
-    expiresAt: state.expiresAt,
-    attemptsRemaining: VERIFICATION_CONFIG.MAX_ATTEMPTS - state.attempts,
-    lockedUntil: state.lockedUntil,
-    canResend,
-    resendCooldownUntil: canResend ? undefined : resendCooldownUntil,
-  };
+  return { inProgress: false };
 };
 
 /**
  * Clear verification state (for logout or reset)
  */
 export const resetVerification = (): void => {
-  clearVerificationState();
+  if (typeof window !== 'undefined') {
+    storage.remove('sv_verification_state');
+  }
 };
 
 export default {

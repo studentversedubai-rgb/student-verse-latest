@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import InstagramButton from "../components/InstagramButton";
-import LinkedInButton from "../components/LinkedInButton";
+import InstagramButton from "../ui/InstagramButton";
+import LinkedInButton from "../ui/LinkedInButton";
 
 // Add swipe animation keyframes
 const style = document.createElement('style');
@@ -21,7 +20,6 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {

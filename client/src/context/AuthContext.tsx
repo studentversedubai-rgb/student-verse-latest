@@ -152,36 +152,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     // Data is already stored by verificationApi.verifyOTP
     // This function just loads it from storage and sets state
     const login = async (email: string, referralCode: string | null) => {
-        console.log('🔐 Login called with:', { email, referralCode });
         setIsLoading(true);
         try {
-            // Small delay to ensure localStorage write is complete
             await new Promise(resolve => setTimeout(resolve, 100));
 
-            console.log('📦 Loading user data from localStorage...');
-
-            // Load data that was stored by verifyOTP
             const storedUser = loadUserFromStorage();
-
-            console.log('📦 Loaded user data:', storedUser);
 
             if (storedUser) {
                 setUser(storedUser);
                 const { queueStats, referralStats } = transformUserData(storedUser);
                 setQueueStats(queueStats);
                 setReferralStats(referralStats);
-                console.log('✅ Login successful - user data set');
             } else {
-                // This shouldn't happen if OTP verification was successful
-                console.error('❌ No user data found after OTP verification');
-                console.log('📦 localStorage contents:', {
-                    sv_user_email: storage.get('sv_user_email'),
-                    sv_user_data: storage.get('sv_user_data'),
-                });
                 throw new Error('No user data found. Please try again.');
             }
         } catch (error) {
-            console.error('❌ Error during login:', error);
+            console.error('Error during login:', error);
             throw error;
         } finally {
             setIsLoading(false);
@@ -197,19 +183,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
     const refreshData = async () => {
-        if (!user) {
-            console.log('⚠️ No user logged in');
-            return;
-        }
-
-        console.log('🔄 Refreshing data for:', user.email);
+        if (!user) return;
 
         try {
             const freshData = await getCurrentUserData(user.email);
 
             if (freshData) {
-                console.log('📊 Old count:', user.referralCount, '→ New count:', freshData.referralCount);
-
                 const updatedUser: User = {
                     ...user,
                     referralCount: freshData.referralCount,
@@ -227,11 +206,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                     ...prev,
                     referralCount: freshData.referralCount,
                 } : null);
-
-                console.log('✅ Refresh complete!');
             }
         } catch (error) {
-            console.error('❌ Refresh error:', error);
+            console.error('Error refreshing user data:', error);
         }
     };
 

@@ -56,7 +56,6 @@
 
 /* Ensure navbar is always on top */
 .navbar.w-nav {
-  position: relative;
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -194,11 +193,9 @@
 }
 
 .mobile-nav-link:hover {
-  background: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(255, 255, 255, 0.05) !important;
   color: #2962ff !important;
-  transform: translateX(8px) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
+  transform: translateX(4px) !important;
 }
 
 /* Mobile CTA buttons with enhanced glass compatibility */
@@ -475,13 +472,6 @@ body.menu-open {
   border-color: #ffffff !important;
 }
 
-.cta-glow:hover {
-  box-shadow: 
-    0 0 20px rgba(41, 98, 255, 0.4),
-    0 0 40px rgba(255, 184, 0, 0.3),
-    0 0 60px rgba(123, 44, 191, 0.2) !important;
-}
-
 /* Focus states for accessibility */
 .nav-link:focus,
 .mobile-nav-link:focus,
@@ -511,11 +501,6 @@ body.menu-open {
 
 .mobile-drawer {
   z-index: 1010 !important;
-}
-
-/* Ensure proper spacing for content below navbar */
-body {
-  padding-top: 120px;
 }
 
 /* Prevent any layout shifts during page transitions */

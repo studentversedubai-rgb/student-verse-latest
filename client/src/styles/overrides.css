@@ -20,11 +20,6 @@
   height: 96px !important;
 }
 
-.how-it-works-v3-icon-holder .feature-icon {
-  width: 48px !important;
-  height: 48px !important;
-}
-
 /* Some icons are SVGs/images (depends on the export) */
 .how-it-works-v3-icon-holder svg,
 .how-it-works-v3-icon-holder img {
@@ -104,14 +99,10 @@
 
 /* 6) Force brand image size if it's collapsing */
 .brand-image {
-  max-height: 40px !important;
-  /* Adjust as needed */
   width: auto !important;
 }
 
 .footer-brand-image {
-  max-height: 40px !important;
-  /* Adjust as needed */
   width: auto !important;
 }
 
@@ -366,21 +357,13 @@
 }
 
 /* Zone 2: Centered Nav Links */
-/* Note: We need to target the nav-menu container to make sure it's centered */
 .nav-menu.w-nav-menu,
 .nav-menu {
   flex: 1 1 auto !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  position: absolute !important;
-  /* Absolute positioning for true center relative to parent */
-  left: 50% !important;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
   position: static !important;
-  /* Reset absolute */
   transform: translateX(55px) !important;
   justify-self: center !important;
 }
@@ -504,10 +487,6 @@
   .navbar-container {
     justify-content: space-between !important;
   }
-
-  .navbar-container {
-    justify-content: space-between !important;
-  }
 }
 
 /* 9) Reduce padding between "Meet the Team" and "FAQ" */
@@ -526,16 +505,9 @@
 }
 
 /* 10) Add spacing between FAQ content and Footer section */
-/* Target the FAQ holder that contains all FAQ items */
 .faq-holder {
   margin-bottom: 69px !important;
   padding-bottom: 50px !important;
-}
-
-/* Ensure the FAQ section itself doesn't add extra top spacing */
-#faq-about .section {
-  padding-top: 0px !important;
-  margin-top: 0px !important;
 }
 
 /* Remove any conflicting spacing from footer */

@@ -1,6 +1,6 @@
 ﻿import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import OrbitImages from './OrbitImages';
+import OrbitImages from '../ui/OrbitImages';
 import styled from 'styled-components';
 import { Cpu, Tag, ShieldCheck, Gift, Zap } from 'lucide-react';
 

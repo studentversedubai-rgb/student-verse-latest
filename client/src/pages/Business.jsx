@@ -1,7 +1,7 @@
-import Navbar from "./Navbar";
-import BusinessHero from "../components/BusinessHero";
-import MainFooter from "../components/Footer";
-import Footer from "./Footer";
+import Navbar from "../components/layout/Navbar";
+import BusinessHero from "../components/sections/BusinessHero";
+import MainFooter from "../components/layout/Footer";
+import PartnerBanner from "../components/layout/PartnerBanner";
 
 export default function Business() {
   return (
@@ -9,7 +9,7 @@ export default function Business() {
       <Navbar />
       <BusinessHero />
       <MainFooter />
-      <Footer />
+      <PartnerBanner />
     </>
   );
 }

@@ -1,8 +1,8 @@
 ﻿import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { getApiUrl_v2 } from '../config/api';
+import { getApiUrl_v2 } from '../../config/api';
 import { GraduationCap, MapPin, Sparkles, Handshake, CheckCircle } from 'lucide-react';
-import SubmitButton from './SubmitButton';
+import SubmitButton from '../ui/SubmitButton';
 
 const underlineInput = {
   width: '100%',
@@ -121,7 +121,7 @@ export default function ContactHero() {
           lastName: formData.lastName,
           email: formData.email,
           message: `Subject: ${formData.subject}\nBusiness Type: ${formData.businessType}\nLocation: ${formData.location}\n\n${formData.message}`,
-          inquiryType: 'general',
+          inquiryType: 'merchant_business',
         }),
       });
       const data = await response.json();
@@ -143,7 +143,7 @@ export default function ContactHero() {
 
   // Toggle pill
   const Toggle = (
-    <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem 0 0' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '7rem 0 0' }}>
       <div style={{ display: 'inline-flex', background: 'transparent', borderRadius: '999px', padding: '4px', border: '1px solid rgba(255,255,255,0.1)', position: 'relative', gap: '2px' }}>
         {[
           { key: 'business', label: 'Business', color: '#ff9800' },
@@ -437,7 +437,7 @@ export default function ContactHero() {
         /* Pricing cards — Neo Brutalism style (dark blue) */
         .sv-pricing-card {
           width: 240px;
-          background: #0d1b3e;
+          background: transparent;
           padding: 1.25rem;
           border-radius: 1rem;
           border: 0.5vmin solid rgba(255,255,255,0.15);
@@ -448,7 +448,7 @@ export default function ContactHero() {
         .sv-pricing-card--featured {
           border-color: #664eff;
           box-shadow: 0.4rem 0.4rem #664eff;
-          background: #0f1d4a;
+          background: transparent;
         }
         .sv-pricing-header-card {
           width: auto;
