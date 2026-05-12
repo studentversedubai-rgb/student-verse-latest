@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import Navbar from "./Navbar";
-import MainFooter from "../components/Footer";
-import Footer from "./Footer";
-import LogoLoop from "../components/LogoLoop";
+import Navbar from "../components/layout/Navbar";
+import MainFooter from "../components/layout/Footer";
+import PartnerBanner from "../components/layout/PartnerBanner";
+import LogoLoop from "../components/ui/LogoLoop";
 
 const C = {
   blue:   "#2962ff",
@@ -214,70 +214,6 @@ function HeroSection() {
   );
 }
 
-function HowItStartedSection() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once:true, margin:"-80px" });
-
-  const timeline = [
-    { year:"Nov", label:"The idea took shape. What started as a simple observation quickly turned into a plan, and a team was formed to begin building StudentVerse.", color: C.cyan },
-    { year:"Jan", label:"The first public step. A waitlist was launched, and development began on the first real version of the app.", color: C.orange },
-    { year:"Apr", label:"StudentVerse officially launched with a new website and app. Early partnerships were secured with 10+ brands, and the platform began expanding across 8+ universities in the UAE.", color: C.violet },
-  ];
-
-  return (
-    <section id="how-it-started" ref={ref} style={{ position:"relative", padding:"60px 20px 120px", overflow:"hidden" }}>
-      <div style={{ position:"relative", zIndex:1, maxWidth:1100, margin:"0 auto", display:"grid", gridTemplateColumns:"1fr 1fr", gap:"5rem", alignItems:"center" }} className="about-origin-grid">
-        <motion.div initial={{ opacity:0, x:-40 }} animate={inView ? { opacity:1, x:0 } : {}} transition={{ duration:.8 }}>
-          <h2 style={{ fontSize:"clamp(3.5rem,9vw,7rem)", fontWeight:900, lineHeight:0.92, marginBottom:"1.5rem", letterSpacing:"-0.04em", textAlign:"left", background:"linear-gradient(315deg,#999,#fff)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>
-            How StudentVerse Started
-          </h2>
-          <p style={{ fontSize:"1.05rem", color:"rgba(255,255,255,.6)", lineHeight:1.85, marginBottom:"2rem" }}>
-            One student noticed something strange. While student discounts were common in many countries, they were almost nonexistent in Dubai. Deals existed, but they were scattered, hard to find, and often discovered too late.
-            So instead of waiting for someone else to solve it, he decided to build it himself.
-          </p>
-          {timeline.map((t, i) => (
-            <motion.div key={i}
-              initial={{ opacity:0, x:-20 }}
-              animate={inView ? { opacity:1, x:0 } : {}}
-              transition={{ duration:.5, delay:.3 + i*.15 }}
-              style={{ display:"flex", gap:"1rem", alignItems:"flex-start", marginBottom:"1.2rem" }}
-            >
-              <div style={{
-                minWidth:48, height:48, borderRadius:"50%",
-                border:"1px solid " + t.color,
-                display:"flex", alignItems:"center", justifyContent:"center",
-                fontSize:".7rem", fontWeight:700, color:t.color, letterSpacing:"1px",
-              }}>{t.year}</div>
-              <p style={{ color:"rgba(255,255,255,.7)", fontSize:".95rem", lineHeight:1.6, paddingTop:".7rem" }}>{t.label}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-
-
-        <motion.div initial={{ opacity:0, x:40 }} animate={inView ? { opacity:1, x:0 } : {}} transition={{ duration:.8, delay:.2 }} style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"1.5rem", paddingTop:"3rem" }}>
-          <img
-            src="/assets/cute sanjy.jpeg"
-            alt="Sanjar Ghazanfar"
-            style={{ width:"100%", maxWidth:"420px", borderRadius:"20px", objectFit:"cover", display:"block" }}
-          />
-          <div style={{ margin:0, maxWidth:"420px", textAlign:"center", borderLeft:"none", paddingLeft:0 }}>
-            <p style={{ fontSize:"1.1rem", color:"rgba(255,255,255,0.75)", lineHeight:1.8, fontStyle:"italic", fontFamily:"Georgia, serif", margin:"0 0 0.75rem" }}>
-              "As a student myself, I could never find the discounts I was entitled to. The deals existed — they were just scattered and inaccessible. So I decided to change that."
-            </p>
-            <span style={{ color:"rgba(255,255,255,0.4)", fontSize:"0.85rem", letterSpacing:"1px", textTransform:"uppercase" }}>Sanjar Ghazanfar, Founder</span>
-          </div>
-        </motion.div>
-      </div>
-      <style>{`
-        @media (max-width: 768px) {
-          .about-origin-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
-        }
-      `}</style>
-    </section>
-  );
-}
-
 /*
   TEAM NAMES:
   Sanjar Ghazanfar, Mohamed Elkhouly, Sara Carla Kader,
@@ -393,11 +329,10 @@ export default function About() {
     <div style={{ minHeight:"100vh" }}>
       <Navbar />
       <HeroSection />
-      {/* <HowItStartedSection /> */}
       <TeamSection />
       <FAQSection />
       <MainFooter />
-      <Footer />
+      <PartnerBanner />
     </div>
   );
 }

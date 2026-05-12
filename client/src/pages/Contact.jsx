@@ -1,26 +1,15 @@
-import { useEffect, useState } from "react";
-import { normalizeHtml } from "../utils/normalizeHtml";
-import Navbar from "./Navbar";
-import ContactHero from "../components/ContactHero";
-import MainFooter from "../components/Footer";
-import Footer from "./Footer";
+import Navbar from "../components/layout/Navbar";
+import ContactHero from "../components/sections/ContactHero";
+import MainFooter from "../components/layout/Footer";
+import PartnerBanner from "../components/layout/PartnerBanner";
 
 export default function Contact() {
-  const [html, setHtml] = useState("");
-
-  useEffect(() => {
-    fetch("/raw/contact.html")
-      .then((res) => res.text())
-      .then((text) => setHtml(normalizeHtml(text)));
-  }, []);
-
   return (
     <>
       <Navbar />
       <ContactHero />
       <MainFooter />
-      <Footer />
-      <div dangerouslySetInnerHTML={{ __html: html }} style={{ display: 'none' }} />
+      <PartnerBanner />
     </>
   );
 }

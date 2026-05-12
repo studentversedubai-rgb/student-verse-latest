@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { useState } from 'react';
-import RainbowCard from './RainbowCard';
+import RainbowCard from '../ui/RainbowCard';
 
 export default function PricingPlans() {
     const [billingCycle, setBillingCycle] = useState('monthly');

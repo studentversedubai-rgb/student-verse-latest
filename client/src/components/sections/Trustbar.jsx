@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import LogoLoop from './LogoLoop';
+import LogoLoop from '../ui/LogoLoop';
 
 const universities = [
   { src: "/assets/uowd.webp",    alt: "University of Wollongong" },

@@ -22,17 +22,3 @@ export const generateReferralCode = (): string => {
 export const isValidReferralCode = (code: string): boolean => {
   return /^[A-Z0-9]{8}$/.test(code);
 };
-
-export interface ActivityLog {
-  ipAddress: string;
-  attempts: number;
-  timestamp: number;
-}
-
-export const detectSuspiciousActivity = (activityLog: ActivityLog): boolean => {
-  const { attempts, timestamp } = activityLog;
-  if (attempts > 10 && Date.now() - timestamp < 60000) {
-    return true;
-  }
-  return false;
-};
