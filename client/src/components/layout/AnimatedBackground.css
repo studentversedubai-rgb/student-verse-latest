@@ -503,3 +503,27 @@
   background: radial-gradient(ellipse at center, transparent 15%, #000 100%);
   pointer-events: none;
 }
+
+@media (max-width: 768px), (pointer: coarse) {
+  .animated-bg {
+    min-height: 100dvh;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(41, 98, 255, 0.16), transparent 34%),
+      radial-gradient(circle at 86% 18%, rgba(123, 44, 191, 0.14), transparent 32%),
+      linear-gradient(180deg, #02040d 0%, #050716 52%, #000 100%);
+  }
+
+  .animated-bg--mobile::before {
+    background:
+      radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 26% 42%, rgba(255,255,255,0.48), transparent),
+      radial-gradient(1px 1px at 48% 24%, rgba(255,255,255,0.62), transparent),
+      radial-gradient(1px 1px at 68% 64%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 84% 34%, rgba(255,255,255,0.58), transparent);
+    background-size: 100% 100%;
+  }
+
+  .animated-bg--mobile > * {
+    display: none;
+  }
+}

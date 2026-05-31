@@ -478,3 +478,53 @@
     height: 30px !important;
   }
 }
+
+@media (max-width: 768px), (pointer: coarse) {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .navbar.w-nav,
+  .navbar,
+  .navbar-glass-effect,
+  .navbar-glass-effect.scrolled,
+  .mobile-drawer,
+  .mobile-drawer-overlay,
+  .mobile-drawer-header {
+    background-color: rgba(8, 12, 31, 0.96) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .nebula,
+  .swirl,
+  .shooting-stars,
+  .shooting-star,
+  .dust,
+  .galaxy {
+    animation: none !important;
+    filter: none !important;
+  }
+
+  [style*="blur(80px)"],
+  [style*="blur(60px)"],
+  [style*="blur(50px)"],
+  [style*="blur(42px)"],
+  [style*="filter: blur"] {
+    display: none !important;
+  }
+
+  .maintenance-shell,
+  .maintenance-orbit-section,
+  .contact-form-holder,
+  .contact-form-block {
+    box-shadow: none !important;
+  }
+}

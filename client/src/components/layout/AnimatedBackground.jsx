@@ -3,15 +3,45 @@ import "./AnimatedBackground.css";
 
 export default function AnimatedBackground() {
   const [scrollY, setScrollY] = useState(0);
+  const [isMobileDevice, setIsMobileDevice] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(max-width: 768px), (pointer: coarse)").matches;
+  });
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px), (pointer: coarse)");
+    const updateDeviceMode = () => setIsMobileDevice(mediaQuery.matches);
+
+    updateDeviceMode();
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", updateDeviceMode);
+    } else {
+      mediaQuery.addListener(updateDeviceMode);
+    }
+
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener("change", updateDeviceMode);
+      } else {
+        mediaQuery.removeListener(updateDeviceMode);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isMobileDevice) return;
+
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMobileDevice]);
+
+  if (isMobileDevice) {
+    return <div className="animated-bg animated-bg--mobile" />;
+  }
 
   // Parallax offsets for live wallpaper effect
   const nebulaOffset = scrollY * 0.1;
