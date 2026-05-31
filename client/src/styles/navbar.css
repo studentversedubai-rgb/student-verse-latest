@@ -88,18 +88,13 @@
 }
 
 /* Ensure navbar container is stable */
-.navbar .navbar-container,
+
 .navbar > div:not(.ig-wrapper) {
   transform: none !important;
   position: relative !important;
 }
 
 /* Desktop navigation pill styling */
-.nav-menu {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 /* Mobile drawer overlay with enhanced blur */
 .mobile-drawer-overlay {
@@ -199,66 +194,8 @@
 }
 
 /* Mobile CTA buttons with enhanced glass compatibility */
-.mobile-cta-primary {
-  background: linear-gradient(90deg, #2962ff, #ffb800, #7b2cbf) !important;
-  background-size: 200% 200% !important;
-  color: #ffffff !important;
-  font-weight: bold !important;
-  text-transform: uppercase !important;
-  padding: 0.75rem 1.5rem !important;
-  border-radius: 50px !important;
-  border: none !important;
-  text-decoration: none !important;
-  display: block !important;
-  text-align: center !important;
-  transition: all 0.3s ease !important;
-  position: relative !important;
-  z-index: 2 !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-}
-
-.mobile-cta-primary:hover {
-  transform: scale(1.02) !important;
-  box-shadow: 0 8px 25px rgba(41, 98, 255, 0.4) !important;
-}
-
-.mobile-cta-secondary {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: #ffffff !important;
-  font-weight: 600 !important;
-  padding: 0.75rem 1.5rem !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 50px !important;
-  text-decoration: none !important;
-  display: block !important;
-  text-align: center !important;
-  transition: all 0.3s ease !important;
-  position: relative !important;
-  z-index: 2 !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-}
-
-.mobile-cta-secondary:hover {
-  background: rgba(255, 255, 255, 0.15) !important;
-  border-color: #ffffff !important;
-  transform: scale(1.02) !important;
-}
 
 /* Hamburger menu button */
-.hamburger-btn {
-  background: transparent !important;
-  border: none !important;
-  cursor: pointer !important;
-  padding: 0.5rem !important;
-  border-radius: 0.5rem !important;
-  transition: all 0.2s ease !important;
-}
-
-.hamburger-btn:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-}
 
 /* Close button */
 .close-btn {
@@ -283,10 +220,6 @@
   
   .show-mobile {
     display: block !important;
-  }
-  
-  .navbar-container {
-    padding: 0 1rem !important;
   }
   
   .mobile-drawer {
@@ -323,10 +256,6 @@
     display: block !important;
   }
   
-  .navbar-container {
-    padding: 0 1.5rem !important;
-  }
-  
   .mobile-drawer {
     width: 320px !important;
     max-width: 340px !important;
@@ -353,73 +282,10 @@
 }
 
 /* Tablet specific adjustments */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .nav-links-pill {
-    padding: 0.5rem 1.5rem !important;
-    gap: 1.5rem !important;
-  }
-  
-  .navbar-right-actions {
-    gap: 0.75rem !important;
-  }
-  
-  .nav-cta-button {
-    padding: 0.6rem 1.2rem !important;
-    font-size: 0.8rem !important;
-  }
-}
 
 /* Large screen adjustments */
-@media (min-width: 1200px) {
-  .navbar-container {
-    padding: 0 3rem !important;
-  }
-  
-  .nav-links-pill {
-    gap: 2.5rem !important;
-  }
-}
 
 /* Animation keyframes */
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
 
 /* Smooth scrolling for anchor links */
 html {
@@ -432,17 +298,8 @@ body.menu-open {
 }
 
 /* Enhanced hover effects for interactive elements */
-.nav-link-glow:hover {
-  color: #2962ff !important;
-  text-shadow: 0 0 8px rgba(41, 98, 255, 0.3) !important;
-}
 
 /* Remove old active link styling */
-.nav-link-active {
-  color: #ffffff !important;
-  font-weight: 500 !important;
-  text-shadow: none !important;
-}
 
 .mobile-nav-link:hover {
   background: rgba(255, 255, 255, 0.05) !important;
@@ -450,32 +307,9 @@ body.menu-open {
   transform: translateX(4px) !important;
 }
 
-.mobile-nav-link-active {
-  color: #2962ff !important;
-  font-weight: 600 !important;
-  background: rgba(41, 98, 255, 0.1) !important;
-}
-
-.nav-signin-button:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border-color: #ffffff !important;
-}
-
-.nav-cta-button:hover,
-.mobile-cta-primary:hover {
-  transform: translateY(-1px) !important;
-  box-shadow: 0 4px 15px rgba(41, 98, 255, 0.3) !important;
-}
-
-.mobile-cta-secondary:hover {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border-color: #ffffff !important;
-}
-
 /* Focus states for accessibility */
-.nav-link:focus,
+
 .mobile-nav-link:focus,
-.hamburger-btn:focus,
 .close-btn:focus {
   outline: 2px solid #2962ff !important;
   outline-offset: 2px !important;
@@ -515,22 +349,8 @@ html, body {
 }
 
 /* Override any conflicting styles from existing CSS */
-.navbar .nav-menu.w-nav-menu {
-  position: static !important;
-  background: transparent !important;
-}
-
-.navbar .menu-button.w-nav-button {
-  background: transparent !important;
-  border: none !important;
-}
 
 /* Ensure brand image is always visible */
-.navbar .brand-image {
-  opacity: 1 !important;
-  visibility: visible !important;
-  display: block !important;
-}
 
 /* Override any global transforms that might affect navbar */
 .navbar,
@@ -546,132 +366,32 @@ html, body {
 
 /* Ensure navbar is not affected by any global nav transforms */
 .navbar.w-nav,
-.navbar.w-nav > *:not(.ig-wrapper),
-.navbar.w-nav .nav-links {
+.navbar.w-nav > *:not(.ig-wrapper) {
   transform: none !important;
   margin-left: 0 !important;
   left: auto !important;
 }
 
 /* Override specific transforms from page.css */
-.navbar .nav-links {
-  transform: none !important;
-  margin-left: 0 !important;
-}
 
 /* Link component hover effects */
-.nav-link:hover,
+
 .mobile-nav-link:hover {
   text-decoration: none !important;
 }
 
 /* Ensure Link components inherit proper styling */
-a.nav-link,
-a.mobile-nav-link,
-a.nav-signin-button,
-a.nav-cta-button,
-a.mobile-cta-primary,
-a.mobile-cta-secondary {
+
+a.mobile-nav-link {
   text-decoration: none !important;
 }
 
 /* Active link indicator animation */
-.nav-link {
-  position: relative !important;
-}
 
 /* Smooth transitions for all interactive elements */
-.nav-link,
-.mobile-nav-link,
-.nav-signin-button,
-.nav-cta-button,
-.mobile-cta-primary,
-.mobile-cta-secondary {
+
+.mobile-nav-link {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Instagram tooltip component — Uiverse by vinodjangid07 */
-.tooltip-container {
-  position: relative;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 17px;
-  border-radius: 10px;
-}
-.tooltip-container .tooltip {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s;
-  border-radius: 15px;
-  box-shadow: inset 5px 5px 5px rgba(0,0,0,0.2), inset -5px -5px 15px rgba(255,255,255,0.1), 5px 5px 15px rgba(0,0,0,0.3), -5px -5px 15px rgba(255,255,255,0.1);
-  z-index: 9999;
-}
-.tooltip-container .profile {
-  background: #2a2b2f;
-  border-radius: 10px 15px;
-  padding: 10px;
-  border: 1px solid #52382f;
-}
-.tooltip-container:hover .tooltip {
-  top: 60px;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-.tooltip-container .icon {
-  text-decoration: none;
-  color: #fff;
-  display: block;
-  position: relative;
-}
-.tooltip-container .layer {
-  width: 55px;
-  height: 55px;
-  transition: transform 0.3s;
-}
-.tooltip-container .icon:hover .layer {
-  transform: rotate(-35deg) skew(20deg);
-}
-.tooltip-container .layer span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  border: 1px solid #fff;
-  border-radius: 15px;
-  transition: all 0.3s;
-  color: #e6683c;
-  border-color: #e6683c;
-}
-.tooltip-container .icon:hover .layer span {
-  box-shadow: -1px 1px 3px #e6683c;
-}
-.tooltip-container .icon:hover .layer span:nth-child(1) { opacity: 0.2; }
-.tooltip-container .icon:hover .layer span:nth-child(2) { opacity: 0.4; transform: translate(5px, -5px); }
-.tooltip-container .icon:hover .layer span:nth-child(3) { opacity: 0.6; transform: translate(10px, -10px); }
-.tooltip-container .icon:hover .layer span:nth-child(4) { opacity: 0.8; transform: translate(15px, -15px); }
-.tooltip-container .icon:hover .layer span:nth-child(5) { opacity: 1;   transform: translate(20px, -20px); }
-.tooltip-container .instagramSVG {
-  font-size: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-}
-.tooltip-container .user { display: flex; gap: 10px; }
-.tooltip-container .img {
-  width: 50px; height: 50px;
-  font-size: 25px; font-weight: 700;
-  border: 1px solid #e6683c; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  background: #fff;
-}
-.tooltip-container .name { font-size: 17px; font-weight: 700; color: #e6683c; }
-.tooltip-container .details { display: flex; flex-direction: column; gap: 0; color: #fff; }
-.tooltip-container .about { color: #ccc; padding-top: 5px; }
