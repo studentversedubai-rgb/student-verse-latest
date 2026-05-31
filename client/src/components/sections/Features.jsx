@@ -5,6 +5,7 @@ export default function Features() {
     {
       id: 'cyan',
       step: '01',
+      eyebrow: 'FLASH VERIFY',
       title: 'Verify Your Student ID',
       description: 'Forget the plastic card. Carry your official student status with a dynamic, animated ID. Just Flash & Verify to earn your rewards.',
       color: '#00f0ff',
@@ -18,6 +19,7 @@ export default function Features() {
     {
       id: 'yellow',
       step: '02',
+      eyebrow: 'LIVE DEALS',
       title: 'Discover Instant Rewards',
       description: 'Unlock exclusive perks at your favorite spots. From coffee runs to cinema nights, just show your StudentVerse ID to save instantly.',
       color: '#ffb800',
@@ -36,9 +38,10 @@ export default function Features() {
     {
       id: 'purple',
       step: '03',
+      eyebrow: 'SV ORBIT',
       title: 'SV Orbit AI',
       description: 'Your personal AI companion that learns and adapts to your needs, understanding your mood, preferences, and epic weekend adventures',
-      color: '#c42878',
+      color: '#A855F7',
       icon: (
         <svg className="feature-icon purple-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
           <ellipse cx="50" cy="50" fill="none" rx="22" ry="22" stroke="currentColor" strokeWidth="3"></ellipse>
@@ -60,7 +63,7 @@ export default function Features() {
 
   return (
     <div id="Features-homepage">
-      <div className="section" style={{ paddingTop: '60px', paddingBottom: '60px' }}>
+      <div className="section" style={{ paddingTop: '60px', paddingBottom: '70px' }}>
         <div className="container">
           <div className="section-center-text" style={{ marginTop: '0' }}>
             <div className="section-title xl">
@@ -106,6 +109,7 @@ export default function Features() {
                     key={feature.id}
                     variants={itemVariants}
                     className="process-item"
+                    style={{ '--feature-accent': feature.color }}
                   >
                     <div className="process-connector">
                       {index < features.length - 1 && <div className="connector-line"></div>}
@@ -118,6 +122,10 @@ export default function Features() {
 
                       <div className="process-step-number" style={{ color: feature.color }}>
                         {feature.step}
+                      </div>
+
+                      <div className="process-eyebrow" style={{ color: feature.color }}>
+                        {feature.eyebrow}
                       </div>
 
                       <h3 className="process-title">{feature.title}</h3>

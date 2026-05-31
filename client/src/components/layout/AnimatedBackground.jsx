@@ -50,6 +50,14 @@ export default function AnimatedBackground() {
         style={{ transform: `translateY(${starOffset}px)` }}
       ></div>
 
+      {/* Shooting stars */}
+      <div className="shooting-stars">
+        <div className="shooting-star shooting-star-1"></div>
+        <div className="shooting-star shooting-star-2"></div>
+        <div className="shooting-star shooting-star-3"></div>
+        <div className="shooting-star shooting-star-4"></div>
+      </div>
+
       {/* Galaxies with parallax */}
       <div 
         className="galaxy galaxy-1" 

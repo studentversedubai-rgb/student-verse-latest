@@ -108,15 +108,15 @@ export default function DownloadCTA() {
                 <span>App Store</span>
               </div>
             </StoreBtn>
-            <DisabledStoreBtn>
+            <StoreBtn href="https://play.google.com/store/apps/details?id=com.studentverse.app" target="_blank" rel="noopener noreferrer" data-color="#34A853">
               <svg width="22" height="22" viewBox="0 0 512 512" fill="currentColor">
                 <path d="M70.667 499.429c-4.114 0-8.093-1.209-11.527-3.499L275.925 279.145l56.21 56.21L98.648 493.228c-8.404 4.131-18.59 6.201-27.981 6.201zM30.118 468.715c-2.731-5.042-4.118-10.731-4.118-16.572V59.857c0-5.731 1.34-11.31 3.97-16.279l196.452 196.452-196.304 228.685zM468.098 219.08l-53.913-30.913-61.938 61.938 61.938 61.938 54.569-31.267c15.496-8.88 24.765-25.077 24.765-42.848s-9.926-33.968-25.421-18.848zM59.14 16.07C62.574 13.78 66.553 12.571 70.667 12.571c9.391 0 19.577 2.07 27.981 6.201l233.787 157.873-56.21 56.21L59.14 16.07z"/>
               </svg>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', lineHeight: 1.2 }}>
-                <span style={{ fontSize: '0.65rem', opacity: 0.75, fontWeight: 400 }}>Coming Soon</span>
+                <span style={{ fontSize: '0.65rem', opacity: 0.75, fontWeight: 400 }}>Get it now on</span>
                 <span>Google Play</span>
               </div>
-            </DisabledStoreBtn>
+            </StoreBtn>
           </motion.div>
 
           <motion.p 

@@ -36,7 +36,7 @@ const WHY_CARDS = [
   {
     title: 'Student Audience',
     body: 'Connect directly with university students looking for new places, deals, and experiences.',
-    icon: <GraduationCap size={32} color="#00f0ff" fill="#00f0ff" />,
+    icon: <GraduationCap size={32} color="#2962ff" fill="#2962ff" />,
   },
   {
     title: 'More Foot Traffic',
@@ -51,7 +51,7 @@ const WHY_CARDS = [
   {
     title: 'Easy Partnership',
     body: 'Simple onboarding, clear offers, and a smooth experience for you and your customers.',
-    icon: <Handshake size={32} color="#2962ff" />,
+    icon: <Handshake size={32} color="#7b2cbf" />,
   },
 ];
 
@@ -363,25 +363,31 @@ export default function ContactHero() {
           <motion.div
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.7 }}
-            style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem) clamp(4rem, 8vw, 6rem)', position: 'relative', zIndex: 1 }}
+            className="business-signal-section"
           >
-            <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 700, marginBottom: '0.75rem', background: 'linear-gradient(315deg, #999, #fff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+            <div className="business-signal-header">
+              <span className="business-signal-kicker">Merchant Network</span>
+              <h2>
                 Why Businesses Choose StudentVerse
               </h2>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem' }}>
+              <p>
                 Everything you need to reach the student market, in one place.
               </p>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
+            <div className="business-signal-board">
+              <div className="business-signal-axis" />
               {WHY_CARDS.map((card, i) => (
                 <motion.div key={card.title}
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
-                  style={{ padding: '0.5rem 0' }}>
-                  <div style={{ marginBottom: '1rem' }}>{card.icon}</div>
-                  <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'white', marginBottom: '0.5rem' }}>{card.title}</h4>
-                  <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.88rem', lineHeight: 1.6, margin: 0 }}>{card.body}</p>
+                  className="business-signal-tile"
+                  style={{ '--signal-accent': ['#2962ff', '#ff9800', '#ffb800', '#7b2cbf'][i] }}>
+                  <span className="business-signal-node" />
+                  <div className="business-signal-icon">{card.icon}</div>
+                  <div className="business-signal-copy">
+                    <h4>{card.title}</h4>
+                    <p>{card.body}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -404,7 +410,6 @@ export default function ContactHero() {
                 <div className="sv-pricing-card">
                   <div className="pricing-block-content">
                     <p className="pricing-plan">1 Month</p>
-                    <div className="price-value"><p className="price-number">N/A</p></div>
                     <div className="pricing-note">billed monthly</div>
                     <ul className="check-list" role="list">
                       {['Featured listing in app', 'Student discount offers', 'Basic analytics', 'Email support', 'Brand profile page'].map(item => (
@@ -418,8 +423,7 @@ export default function ContactHero() {
                 <div className="sv-pricing-card sv-pricing-card--featured">
                   <div className="pricing-block-content">
                     <p className="pricing-plan">3 Months</p>
-                    <div className="price-value"><p className="price-number">N/A</p></div>
-                    <div className="pricing-note" style={{ color: '#664eff' }}>save ~16%</div>
+                    <div className="pricing-note" style={{ color: '#664eff' }}>one time payment</div>
                     <ul className="check-list" role="list">
                       {['Everything in 1 Month', 'Priority placement', 'Advanced analytics', 'Dedicated account manager', 'Custom campaign support'].map(item => (
                         <li key={item} className="check-list-item"><CheckSVG />{item}</li>
@@ -434,46 +438,293 @@ export default function ContactHero() {
       )}
 
       <style>{`
-        /* Pricing cards — Neo Brutalism style (dark blue) */
+        /* Business signal board */
+        .business-signal-section {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 clamp(1.5rem, 4vw, 3rem) clamp(4rem, 8vw, 6rem);
+          position: relative;
+          z-index: 1;
+        }
+
+        .business-signal-header {
+          text-align: center;
+          margin-bottom: 3rem;
+        }
+
+        .business-signal-kicker {
+          display: inline-flex;
+          margin-bottom: 0.9rem;
+          color: #ffb800;
+          font-size: 0.72rem;
+          font-weight: 900;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+        }
+
+        .business-signal-header h2 {
+          margin: 0 0 0.75rem;
+          font-size: clamp(1.9rem, 4vw, 2.7rem);
+          font-weight: 850;
+          line-height: 1.05;
+          letter-spacing: 0;
+          background: linear-gradient(315deg, #ffffff, #d6dceb 55%, #8f98ad);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .business-signal-header p {
+          margin: 0;
+          color: rgba(232,238,255,0.58);
+          font-size: 1rem;
+        }
+
+        .business-signal-board {
+          position: relative;
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 0;
+          --signal-rail-y: 92px;
+          --signal-node-x: calc(1.35rem + 24px);
+          border-top: 1px solid rgba(255,255,255,0.1);
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+          background:
+            linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px),
+            rgba(8,12,31,0.34);
+          background-size: 25% 100%, 100% 100%;
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+
+        .business-signal-axis {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: var(--signal-rail-y);
+          height: 1px;
+          background: linear-gradient(90deg, transparent, rgba(0,240,255,0.34), rgba(255,184,0,0.3), rgba(123,44,191,0.34), transparent);
+          box-shadow: 0 0 18px rgba(0,240,255,0.18);
+          pointer-events: none;
+        }
+
+        .business-signal-tile {
+          position: relative;
+          min-height: 230px;
+          padding: 1.35rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          border-left: 1px solid rgba(255,255,255,0.08);
+          overflow: hidden;
+          transition: background 220ms ease, transform 220ms ease;
+        }
+
+        .business-signal-tile:first-of-type {
+          border-left: 0;
+        }
+
+        .business-signal-tile::before,
+        .business-signal-tile::after {
+          content: '';
+          position: absolute;
+          width: 24px;
+          height: 24px;
+          border-color: color-mix(in srgb, var(--signal-accent) 46%, rgba(255,255,255,0.12));
+          pointer-events: none;
+          opacity: 0.85;
+        }
+
+        .business-signal-tile::before {
+          left: 12px;
+          top: 12px;
+          border-left: 1px solid;
+          border-top: 1px solid;
+        }
+
+        .business-signal-tile::after {
+          right: 12px;
+          bottom: 12px;
+          border-right: 1px solid;
+          border-bottom: 1px solid;
+        }
+
+        .business-signal-tile:hover {
+          transform: translateY(-4px);
+          background:
+            radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--signal-accent) 16%, transparent), transparent 58%),
+            rgba(255,255,255,0.025);
+        }
+
+        .business-signal-node {
+          position: absolute;
+          top: calc(var(--signal-rail-y) - 5px);
+          left: var(--signal-node-x);
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: var(--signal-accent);
+          box-shadow: 0 0 16px color-mix(in srgb, var(--signal-accent) 70%, transparent);
+          transform: translateX(-50%);
+        }
+
+        .business-signal-icon {
+          width: 48px;
+          height: 48px;
+          display: grid;
+          place-items: center;
+          border-radius: 50%;
+          border: 1px solid color-mix(in srgb, var(--signal-accent) 36%, rgba(255,255,255,0.12));
+          background: color-mix(in srgb, var(--signal-accent) 10%, transparent);
+          filter: drop-shadow(0 0 10px color-mix(in srgb, var(--signal-accent) 28%, transparent));
+        }
+
+        .business-signal-icon svg {
+          width: 25px;
+          height: 25px;
+        }
+
+        .business-signal-copy h4 {
+          margin: 3.6rem 0 0.55rem;
+          color: #fff;
+          font-size: 1.05rem;
+          font-weight: 800;
+          letter-spacing: 0;
+        }
+
+        .business-signal-copy p {
+          margin: 0;
+          color: rgba(232,238,255,0.58);
+          font-size: 0.88rem;
+          line-height: 1.58;
+        }
+
+        /* Partnership plan cards */
         .sv-pricing-card {
-          width: 240px;
-          background: transparent;
-          padding: 1.25rem;
-          border-radius: 1rem;
-          border: 0.5vmin solid rgba(255,255,255,0.15);
-          box-shadow: 0.4rem 0.4rem rgba(41,98,255,0.4);
+          position: relative;
+          width: 260px;
+          min-height: 300px;
+          background:
+            radial-gradient(circle at 20% 0%, rgba(255,145,0,0.16), transparent 42%),
+            linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+            rgba(8,12,31,0.66);
+          padding: 1.35rem;
+          border-radius: 20px;
+          border: 1px solid rgba(255,255,255,0.12);
+          box-shadow:
+            0 24px 64px rgba(0,0,0,0.38),
+            0 0 28px rgba(255,145,0,0.12),
+            inset 0 1px 0 rgba(255,255,255,0.16);
           overflow: hidden;
           color: white;
+          backdrop-filter: blur(18px) saturate(1.25);
+          -webkit-backdrop-filter: blur(18px) saturate(1.25);
+          transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+        }
+        .sv-pricing-card::before {
+          content: '';
+          position: absolute;
+          inset: -1px;
+          border-radius: inherit;
+          padding: 1px;
+          background: linear-gradient(135deg, rgba(255,145,0,0.62), rgba(255,255,255,0.1), transparent 72%);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          pointer-events: none;
+        }
+        .sv-pricing-card::after {
+          content: '';
+          position: absolute;
+          right: -46px;
+          top: -50px;
+          width: 132px;
+          height: 132px;
+          border-radius: 50%;
+          border: 1px solid rgba(255,145,0,0.26);
+          box-shadow: inset 0 0 32px rgba(255,145,0,0.1);
+          opacity: 0.75;
+          pointer-events: none;
+        }
+        .sv-pricing-card:hover {
+          transform: translateY(-6px);
+          border-color: rgba(255,145,0,0.38);
+          box-shadow:
+            0 30px 78px rgba(0,0,0,0.46),
+            0 0 38px rgba(255,145,0,0.18),
+            inset 0 1px 0 rgba(255,255,255,0.2);
         }
         .sv-pricing-card--featured {
-          border-color: #664eff;
-          box-shadow: 0.4rem 0.4rem #664eff;
-          background: transparent;
+          background:
+            radial-gradient(circle at 20% 0%, rgba(123,44,191,0.22), transparent 42%),
+            radial-gradient(circle at 82% 18%, rgba(0,240,255,0.12), transparent 38%),
+            linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.025)),
+            rgba(8,12,31,0.7);
+          border-color: rgba(123,44,191,0.34);
+          box-shadow:
+            0 28px 76px rgba(0,0,0,0.44),
+            0 0 40px rgba(123,44,191,0.2),
+            inset 0 1px 0 rgba(255,255,255,0.18);
+        }
+        .sv-pricing-card--featured::before {
+          background: linear-gradient(135deg, rgba(123,44,191,0.7), rgba(0,240,255,0.18), transparent 72%);
+        }
+        .sv-pricing-card--featured::after {
+          border-color: rgba(123,44,191,0.34);
+          box-shadow: inset 0 0 34px rgba(123,44,191,0.14);
+        }
+        .sv-pricing-card--featured:hover {
+          border-color: rgba(123,44,191,0.5);
+          box-shadow:
+            0 32px 84px rgba(0,0,0,0.5),
+            0 0 48px rgba(123,44,191,0.26),
+            inset 0 1px 0 rgba(255,255,255,0.22);
         }
         .sv-pricing-header-card {
           width: auto;
           min-width: 240px;
           max-width: 520px;
           text-align: center;
-          box-shadow: none;
+          min-height: auto;
+          box-shadow:
+            0 20px 56px rgba(0,0,0,0.3),
+            inset 0 1px 0 rgba(255,255,255,0.12);
           border-color: rgba(255,255,255,0.12);
           padding: 1.5rem 2.5rem;
-          background: transparent;
+          background:
+            radial-gradient(circle at 50% 0%, rgba(0,240,255,0.1), transparent 48%),
+            rgba(8,12,31,0.54);
+        }
+        .sv-pricing-header-card::after {
+          display: none;
         }
         .pricing-block-content {
+          position: relative;
+          z-index: 1;
           display: flex;
           height: 100%;
           flex-direction: column;
           gap: 0.5rem;
         }
         .pricing-plan {
-          color: rgba(255,255,255,0.6);
-          font-size: 0.7rem;
+          display: inline-flex;
+          align-self: flex-start;
+          padding: 0.48rem 0.78rem;
+          border-radius: 999px;
+          border: 1px solid rgba(255,145,0,0.28);
+          background: rgba(255,145,0,0.08);
+          color: #ffb800;
+          font-size: 0.72rem;
           line-height: 1;
-          font-weight: 600;
+          font-weight: 900;
           letter-spacing: 0.12em;
           text-transform: uppercase;
           margin: 0 0 0.75rem;
+        }
+        .sv-pricing-card--featured .pricing-plan {
+          border-color: rgba(123,44,191,0.36);
+          background: rgba(123,44,191,0.12);
+          color: #a855f7;
         }
         .price-value {
           display: flex;
@@ -501,11 +752,18 @@ export default function ContactHero() {
           padding-bottom: 2px;
         }
         .pricing-note {
-          font-size: 0.75rem;
-          font-weight: 500;
-          color: rgba(255,255,255,0.4);
-          letter-spacing: 0.02em;
+          display: inline-flex;
+          align-self: flex-start;
+          margin-top: 0.35rem;
           margin-bottom: 0.25rem;
+          padding: 0.62rem 0.8rem;
+          border-radius: 12px;
+          border: 1px solid rgba(255,255,255,0.1);
+          background: rgba(255,255,255,0.045);
+          color: rgba(255,255,255,0.72);
+          font-size: 0.8rem;
+          font-weight: 800;
+          letter-spacing: 0;
         }
         .check-list {
           display: flex;
@@ -514,7 +772,7 @@ export default function ContactHero() {
           margin-top: 1rem;
           padding: 0;
           list-style: none;
-          border-top: 1px solid rgba(255,255,255,0.08);
+          border-top: 1px solid rgba(255,255,255,0.09);
           padding-top: 1rem;
         }
         .check-list-item {
@@ -527,9 +785,46 @@ export default function ContactHero() {
           line-height: 1.4;
           letter-spacing: 0.01em;
         }
+        .check-list-item svg {
+          flex: 0 0 auto;
+          filter: drop-shadow(0 0 8px rgba(102,78,255,0.42));
+        }
 
         @media (max-width: 768px) {
           .contact-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
+
+          .business-signal-board {
+            grid-template-columns: 1fr;
+            gap: 0;
+            --signal-rail-x: calc(4.25rem + 24px);
+            background-size: 100% 25%, 100% 100%;
+          }
+
+          .business-signal-axis {
+            top: 0;
+            bottom: 0;
+            left: var(--signal-rail-x);
+            right: auto;
+            width: 1px;
+            height: auto;
+            background: linear-gradient(180deg, transparent, rgba(0,240,255,0.34), rgba(255,184,0,0.3), rgba(123,44,191,0.34), transparent);
+          }
+
+          .business-signal-tile {
+            min-height: 190px;
+            border-left: 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-left: 4.25rem;
+          }
+
+          .business-signal-tile:first-of-type {
+            border-top: 0;
+          }
+
+          .business-signal-node {
+            left: calc(var(--signal-rail-x) - 5px);
+            top: 50%;
+          }
         }
         input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.2); }
         select option { background: #0d1117; }

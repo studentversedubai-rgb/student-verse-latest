@@ -75,10 +75,6 @@ function HeroSection() {
     zIndex: 2,
   }} className="about-card-1">
     <div style={{ flex: 1 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
-        <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#EC4899", boxShadow: "0 0 12px #EC4899" }} />
-        <span style={{ color: "#EC4899", fontSize: "0.65rem", fontWeight: 900, textTransform: "uppercase", letterSpacing: 1.5 }}>Verify. Discover. Redeem.</span>
-      </div>
       <h2 style={{ color: "#fff", fontSize: "1.8rem", fontWeight: 800, margin: "0 0 10px 0", letterSpacing: "-0.04em" }}>Flash & Verify</h2>
       <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.9rem", lineHeight: 1.5 }}>
         Instant verification secured at the system level with Flash & Verify, making every redemption fast and reliable.
@@ -161,24 +157,21 @@ function HeroSection() {
         boxShadow: "inset 0 2px 4px rgba(0,0,0,0.5)"
       }}>
         <span style={{ color: "#3B82F6", fontWeight: 900, fontSize: "0.8rem" }}>&gt;</span>
-        <input 
-          type="text" 
-          placeholder="Chat & Save Money..." 
-          style={{ 
+        <span
+          style={{
             background: "none", 
             border: "none", 
-            color: "#fff", 
+            color: "rgba(255,255,255,0.78)", 
             fontSize: "0.8rem", 
             padding: "10px 0",
             width: "100%",
             outline: "none",
             fontFamily: "monospace"
-          }} 
-        />
+          }}
+        >
+          Chat & Save Money...
+        </span>
         <div style={{ width: 6, height: 12, background: "#3B82F6", opacity: 0.6 }}></div> {/* Cursor effect */}
-      </div>
-      <div style={{ color: "rgba(255,255,255,0.2)", fontSize: "0.55rem", marginTop: 8, textAlign: "center", letterSpacing: 1 }}>
-        PRESS ENTER TO BEGIN
       </div>
     </div>
   </div>
@@ -225,20 +218,16 @@ const TEAM_ITEMS = [
   { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Mohamed Elkhouly</span> },
   { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.5)", whiteSpace:"nowrap" }}>Sara Carla Kader</span> },
   { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Mohammed Ayaan Khan</span> },
-  { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.5)", whiteSpace:"nowrap" }}>Muhammad Finan</span> },
   { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Muhammad Moiz</span> },
   { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.5)", whiteSpace:"nowrap" }}>Hadi Wehbe</span> },
   { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Arshia Najafi</span> },
   { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Arina Mashkova</span> },
-  { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Suwathi Rajasekar</span> },
+  { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Marwa Khot</span> },
   { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Mohamed Amin</span> },
   { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.5)", whiteSpace:"nowrap" }}>Dwayne Dcruz</span> },
   { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.5)", whiteSpace:"nowrap" }}>Arina Zhutaeva</span> },
-  { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.5)", whiteSpace:"nowrap" }}>Khadija El Janati</span> },
   { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Luqman Ghazanfar</span> },
-  { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Aman Sivad</span> },
-  { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Aryan Narayanan</span> },
-  { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Summer Rex</span> },
+  { node: <span style={{ fontSize:"1rem", fontWeight:400, color:"rgba(255,255,255,0.35)", whiteSpace:"nowrap" }}>Mohamed Amin AlManet</span> },
 ];
 const TEAM_ITEMS_R = [...TEAM_ITEMS].reverse();
 
