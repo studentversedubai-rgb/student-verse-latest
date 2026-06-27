@@ -10,6 +10,7 @@ import './styles/contact.css'
 import './styles/home.css'
 import './styles/navbar.css'
 import './styles/react-fixes.css'
+import './styles/uiverse-system.css'
 import './styles/overrides.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(

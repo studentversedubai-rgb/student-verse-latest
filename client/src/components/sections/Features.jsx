@@ -1,10 +1,14 @@
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 export default function Features() {
+  const trackRef = useRef(null);
+
   const features = [
     {
       id: 'cyan',
       step: '01',
+      eyebrow: 'FLASH VERIFY',
       title: 'Verify Your Student ID',
       description: 'Forget the plastic card. Carry your official student status with a dynamic, animated ID. Just Flash & Verify to earn your rewards.',
       color: '#00f0ff',
@@ -18,6 +22,7 @@ export default function Features() {
     {
       id: 'yellow',
       step: '02',
+      eyebrow: 'LIVE DEALS',
       title: 'Discover Instant Rewards',
       description: 'Unlock exclusive perks at your favorite spots. From coffee runs to cinema nights, just show your StudentVerse ID to save instantly.',
       color: '#ffb800',
@@ -36,6 +41,7 @@ export default function Features() {
     {
       id: 'purple',
       step: '03',
+      eyebrow: 'SV ORBIT',
       title: 'SV Orbit AI',
       description: 'Your personal AI companion that learns and adapts to your needs, understanding your mood, preferences, and epic weekend adventures',
       color: '#c42878',
@@ -48,15 +54,55 @@ export default function Features() {
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.2 } }
-  };
+  useEffect(() => {
+    const track = trackRef.current;
+    const cards = ['hiw-card0', 'hiw-card1', 'hiw-card2'].map((id) => document.getElementById(id));
+    const fill = document.getElementById('hiw-conn-fill');
+    const timers = [];
 
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: 'easeOut' } }
-  };
+    if (!track || !fill || cards.some((card) => !card)) {
+      return undefined;
+    }
+
+    function runAnimation() {
+      cards[0].classList.add('visible');
+
+      timers.push(window.setTimeout(() => {
+        fill.style.width = '50%';
+      }, 400));
+
+      timers.push(window.setTimeout(() => {
+        cards[1].classList.add('visible');
+      }, 800));
+
+      timers.push(window.setTimeout(() => {
+        fill.style.width = '100%';
+      }, 900));
+
+      timers.push(window.setTimeout(() => {
+        cards[2].classList.add('visible');
+      }, 1300));
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          runAnimation();
+          observer.disconnect();
+        }
+      });
+    }, {
+      threshold: 0.2,
+      rootMargin: '0px 0px -80px 0px'
+    });
+
+    observer.observe(track);
+
+    return () => {
+      observer.disconnect();
+      timers.forEach((timer) => window.clearTimeout(timer));
+    };
+  }, []);
 
   return (
     <div id="Features-homepage">
@@ -94,23 +140,23 @@ export default function Features() {
             </motion.p>
 
             <div className="process-section">
-              <motion.div
+              <div
+                id="hiw-track"
+                ref={trackRef}
                 className="process-container"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: '-100px' }}
               >
-                {features.map((feature, index) => (
-                  <motion.div
-                    key={feature.id}
-                    variants={itemVariants}
-                    className="process-item"
-                  >
-                    <div className="process-connector">
-                      {index < features.length - 1 && <div className="connector-line"></div>}
-                    </div>
+                <div className="hiw-connector-wrap" aria-hidden="true">
+                  <div className="hiw-connector-bg"></div>
+                  <div className="hiw-connector-fill" id="hiw-conn-fill"></div>
+                </div>
 
+                {features.map((feature, index) => (
+                  <div
+                    key={feature.id}
+                    className="process-item"
+                    id={`hiw-card${index}`}
+                    style={{ '--feature-accent': feature.color }}
+                  >
                     <div className="process-content">
                       <div className="process-icon-wrapper" style={{ color: feature.color }}>
                         {feature.icon}
@@ -120,12 +166,16 @@ export default function Features() {
                         {feature.step}
                       </div>
 
+                      <div className="process-eyebrow" style={{ color: feature.color }}>
+                        {feature.eyebrow}
+                      </div>
+
                       <h3 className="process-title">{feature.title}</h3>
                       <p className="process-description">{feature.description}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>

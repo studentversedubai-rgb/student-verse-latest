@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import InstagramButton from "../ui/InstagramButton";
 import LinkedInButton from "../ui/LinkedInButton";
+import StaggeredMenu from "../ui/StaggeredMenu";
 
 // Add swipe animation keyframes
 const style = document.createElement('style');
@@ -88,6 +89,23 @@ export default function Navbar() {
       </svg>
     )}
   ];
+
+  const menuItems = navLinks.map((link) => ({
+    label: link.label,
+    ariaLabel: `Go to ${link.label} page`,
+    link: link.href
+  }));
+
+  const socialItems = [
+    { label: 'Instagram', link: 'https://www.instagram.com/studentverse.ae/' },
+    { label: 'LinkedIn', link: 'https://www.linkedin.com/company/studentverseofficial/posts/?feedView=all' }
+  ];
+
+  const activeAccent = location.pathname === '/about'
+    ? '#ff9800'
+    : location.pathname === '/contact'
+      ? '#9c27b0'
+      : '#2962ff';
 
   const isActiveLink = (href) => {
     if (href === "/") {
@@ -329,41 +347,23 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="hidden-desktop show-mobile"
-            onClick={toggleMenu}
-            style={{
-              zIndex: 1003,
-              background: "rgba(255, 255, 255, 0.05)",
-              border: "1px solid rgba(41, 98, 255, 0.3)",
-              cursor: "pointer",
-              padding: "0.6rem",
-              borderRadius: "0.5rem",
-              position: "relative",
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              transition: 'all 0.3s ease'
-            }}
-            aria-label="Toggle mobile menu"
-          >
-            <div
-              style={{
-                transition: "transform 0.3s ease"
-              }}
-            >
-              {isMenuOpen ? (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18 6L6 18M6 6L18 18" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              ) : (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 12H21M3 6H21M3 18H21" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              )}
-            </div>
-          </button>
+          {/* Mobile Staggered Menu */}
+          <StaggeredMenu
+            className="sv-mobile-staggered"
+            position="right"
+            items={menuItems}
+            socialItems={socialItems}
+            displaySocials={true}
+            displayItemNumbering={false}
+            menuButtonColor="#ffffff"
+            openMenuButtonColor="#ffffff"
+            changeMenuColorOnOpen={true}
+            colors={['#080C1F', '#2962FF', '#FFB800', '#7B2CBF']}
+            logoUrl="/assets/svlogo.png"
+            accentColor={activeAccent}
+            isFixed={true}
+            closeOnClickAway={true}
+          />
         </div>
       </div>
 

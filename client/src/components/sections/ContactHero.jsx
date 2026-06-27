@@ -1,30 +1,30 @@
 ﻿import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { getApiUrl_v2 } from '../../config/api';
-import { GraduationCap, MapPin, Sparkles, Handshake, CheckCircle } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import SubmitButton from '../ui/SubmitButton';
 
 const underlineInput = {
   width: '100%',
-  padding: '0.75rem 0',
-  background: 'transparent',
-  border: 'none',
-  borderBottom: '1px solid rgba(255,255,255,0.2)',
-  borderRadius: 0,
+  padding: '0.75rem 1rem',
+  background: 'rgba(255,255,255,0.04)',
+  border: '1px solid rgba(255,255,255,0.1)',
+  borderRadius: '10px',
   color: 'white',
   fontSize: '1rem',
   outline: 'none',
-  transition: 'border-color 0.3s ease',
+  transition: 'border-color 0.2s',
+  boxSizing: 'border-box',
 };
 
 const underlineLabel = {
   display: 'block',
-  color: 'rgba(255,255,255,0.4)',
-  marginBottom: '0.25rem',
-  fontSize: '0.75rem',
-  fontWeight: '500',
+  color: 'rgba(255,255,255,0.5)',
+  marginBottom: '0.4rem',
+  fontSize: '0.8rem',
+  fontWeight: '600',
   textTransform: 'uppercase',
-  letterSpacing: '1.5px',
+  letterSpacing: '1px',
 };
 
 const itemVariants = {
@@ -35,23 +35,23 @@ const itemVariants = {
 const WHY_CARDS = [
   {
     title: 'Student Audience',
-    body: 'Connect directly with university students looking for new places, deals, and experiences.',
-    icon: <GraduationCap size={32} color="#00f0ff" fill="#00f0ff" />,
+    body: 'Reach students when they are actively choosing where to eat, shop, study, and spend time.',
+    color: '#2962ff',
   },
   {
     title: 'More Foot Traffic',
-    body: 'Bring more people through your door with targeted offers and local discovery.',
-    icon: <MapPin size={32} color="#ff9800" />,
+    body: 'Turn student-only offers into real visits, repeat customers, and stronger local awareness.',
+    color: '#ff9800',
   },
   {
     title: 'Brand Visibility',
-    body: 'Get featured listings, trending placements, and real exposure inside the app.',
-    icon: <Sparkles size={32} color="#FFD700" fill="#FFD700" />,
+    body: 'Show up inside a student-focused experience instead of competing for attention on generic channels.',
+    color: '#7b2cbf',
   },
   {
     title: 'Easy Partnership',
-    body: 'Simple onboarding, clear offers, and a smooth experience for you and your customers.',
-    icon: <Handshake size={32} color="#2962ff" />,
+    body: 'Keep onboarding, offer setup, and communication straightforward from the first conversation.',
+    color: '#2962ff',
   },
 ];
 
@@ -143,26 +143,26 @@ export default function ContactHero() {
 
   // Toggle pill
   const Toggle = (
-    <div style={{ display: 'flex', justifyContent: 'center', padding: '7rem 0 0' }}>
-      <div style={{ display: 'inline-flex', background: 'transparent', borderRadius: '999px', padding: '4px', border: '1px solid rgba(255,255,255,0.1)', position: 'relative', gap: '2px' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '9rem clamp(1rem, 4vw, 2rem) 0' }}>
+      <div className="sv-segmented" role="tablist" aria-label="Contact type">
         {[
           { key: 'business', label: 'Business', color: '#ff9800' },
           { key: 'student', label: 'Support', color: '#9c27b0' },
-        ].map(m => (
+        ].map(m => {
+          return (
           <motion.button
             key={m.key}
             onClick={() => setMode(m.key)}
-            whileHover={{ x: 4 }}
-            whileTap={{ x: -4, scale: 0.98 }}
-            style={{
-              position: 'relative', zIndex: 1, padding: '10px 32px', borderRadius: '999px', border: 'none', cursor: 'pointer', fontSize: '0.9rem', fontWeight: 600, letterSpacing: '0.3px',
-              background: mode === m.key ? m.color : 'transparent',
-              color: mode === m.key ? '#fff' : 'rgba(255,255,255,0.5)',
-              transition: 'all 0.25s ease',
-            }}>
+            whileTap={{ scale: 0.98 }}
+            className={`sv-segmented-button ${mode === m.key ? 'is-active' : ''}`}
+            style={{ '--accent': m.color }}
+            role="tab"
+            aria-selected={mode === m.key}
+            type="button">
             {m.label}
           </motion.button>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -197,17 +197,18 @@ export default function ContactHero() {
 
       {mode === 'student' ? (
         /* SUPPORT MODE — Ticket Form */
-        <div style={{ maxWidth: '680px', margin: '0 auto', padding: 'clamp(3rem,6vw,5rem) clamp(1.5rem,4vw,3rem) 4rem', position: 'relative', zIndex: 1 }}>
+        <div style={{ maxWidth: '680px', margin: '0 auto', padding: 'clamp(1rem,2vw,2rem) clamp(1.5rem,4vw,3rem) 4rem', position: 'relative', zIndex: 1 }}>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <h1 style={{ fontSize: 'clamp(2rem,5vw,3rem)', fontWeight: 800, background: 'linear-gradient(315deg, #0055aa, #007AFF)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text', margin: '0 0 0.75rem' }}>
-              Support Center
-            </h1>
-            <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '1.05rem', marginBottom: '2.5rem', lineHeight: 1.7 }}>
-              Having an issue? Submit a ticket and we'll get back to you.
-            </p>
+            <div className="sv-section-header" style={{ marginBottom: '2.5rem' }}>
+              <p className="sv-kicker">Student Help Desk</p>
+              <h1 className="sv-heading"><span className="sv-heading-gradient">Support Center</span></h1>
+              <p className="sv-lead">
+                Having an issue? Submit a ticket and we will route it to the right place.
+              </p>
+            </div>
 
             {supportSubmitted ? (
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} style={{ textAlign: 'center', padding: '3rem', background: 'rgba(0,240,255,0.05)', border: '1px solid rgba(0,240,255,0.2)', borderRadius: '20px' }}>
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="sv-form-card sv-form-transparent" style={{ textAlign: 'center', '--accent': '#00f0ff' }}>
                 <CheckCircle size={56} color="#00f0ff" style={{ marginBottom: '1rem' }} />
                 <h2 style={{ color: '#fff', fontSize: '1.6rem', fontWeight: 700, marginBottom: '0.75rem' }}>Ticket Submitted!</h2>
                 <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.7 }}>
@@ -219,7 +220,7 @@ export default function ContactHero() {
                 </button>
               </motion.div>
             ) : (
-              <form onSubmit={handleSupportSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <form onSubmit={handleSupportSubmit} className="sv-form-card sv-form-transparent" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', '--accent': '#9c27b0' }}>
                 <div>
                   <label style={{ display: 'block', color: 'rgba(255,255,255,0.5)', fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.4rem' }}>Your Name</label>
                   <input style={{ width: '100%', padding: '0.75rem 1rem', background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '10px', color: 'white', fontSize: '1rem', outline: 'none', boxSizing: 'border-box', transition: 'border-color 0.2s' }}
@@ -270,7 +271,7 @@ export default function ContactHero() {
         <>
           <div style={{
             maxWidth: '1200px', margin: '0 auto',
-            padding: 'clamp(6rem, 10vw, 9rem) clamp(1.5rem, 4vw, 3rem) 4rem',
+            padding: 'clamp(2rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem) 4rem',
             display: 'grid', gridTemplateColumns: '1fr 1fr',
             gap: 'clamp(3rem, 8vw, 8rem)', alignItems: 'start',
             position: 'relative', zIndex: 1,
@@ -282,8 +283,8 @@ export default function ContactHero() {
               style={{ paddingTop: '2rem' }}>
               <motion.p variants={itemVariants} style={{ fontSize: '0.75rem', letterSpacing: '3px', textTransform: 'uppercase', color: '#00f0ff', marginBottom: '2rem', fontWeight: 600 }} />
               <motion.h1 variants={itemVariants} style={{ fontSize: 'clamp(3rem, 9vw, 6rem)', fontWeight: 800, lineHeight: 1.05, marginBottom: '2.5rem', letterSpacing: '-0.025em' }}>
-                <span style={{ background: 'linear-gradient(315deg, #ff9800, #ffb74d)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Want to partner</span><br />
-                <span style={{ background: 'linear-gradient(315deg, #ff9800, #ffb74d)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>with us?</span>
+                <span style={{ background: 'linear-gradient(135deg, #ff6a00 0%, #ff9800 50%, #ffb74d 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Want to partner</span><br />
+                <span style={{ background: 'linear-gradient(135deg, #ffb74d 0%, #ff9800 50%, #ff6a00 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>with us?</span>
               </motion.h1>
               <motion.p variants={itemVariants} style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.55)', lineHeight: 1.8, marginBottom: '3rem', maxWidth: '420px' }}>
                 Looking to get your brand in front of thousands of students? Fill out the form and we'll take it from there.
@@ -306,7 +307,7 @@ export default function ContactHero() {
               viewport={{ once: true, margin: '-80px' }}
               transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
               style={{ paddingTop: '2rem' }}>
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+              <form onSubmit={handleSubmit} className="sv-form-card sv-form-transparent" style={{ display: 'flex', flexDirection: 'column', gap: '2rem', '--accent': '#ff9800' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
                   <div>
                     <label style={underlineLabel}>Business Name</label>
@@ -332,7 +333,7 @@ export default function ContactHero() {
                     <label style={underlineLabel}>Business Type</label>
                     <select name="businessType" value={formData.businessType} onChange={handleInputChange}
                       onFocus={() => setFocusedField('businessType')} onBlur={() => setFocusedField(null)}
-                      style={{ ...fieldStyle('businessType'), background: 'transparent', appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'none', border: 'none', borderBottom: `1px solid ${focusedField === 'businessType' ? '#ff9800' : 'rgba(255,255,255,0.2)'}`, borderRadius: 0, cursor: 'pointer' }}>
+                      style={{ ...underlineInput, cursor: 'pointer' }}>
                       <option value="" style={{ background: '#0d1117', color: 'white' }}>Select type</option>
                       {['Restaurant / Cafe', 'Entertainment', 'Fitness', 'Retail', 'Services', 'Education', 'Beauty / Wellness', 'Other'].map(opt => (
                         <option key={opt} value={opt} style={{ background: '#0d1117', color: 'white' }}>{opt}</option>
@@ -366,70 +367,30 @@ export default function ContactHero() {
             style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem) clamp(4rem, 8vw, 6rem)', position: 'relative', zIndex: 1 }}
           >
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-              <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', fontWeight: 700, marginBottom: '0.75rem', background: 'linear-gradient(315deg, #999, #fff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
+              <p className="sv-kicker">For Partners</p>
+              <h2 style={{ fontSize: 'clamp(2.2rem, 5vw, 3.4rem)', fontWeight: 800, lineHeight: 1.05, marginBottom: '0.9rem', background: 'linear-gradient(315deg, #d5d9e8, #fff)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
                 Why Businesses Choose StudentVerse
               </h2>
-              <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem' }}>
-                Everything you need to reach the student market, in one place.
+              <p style={{ color: 'rgba(255,255,255,0.58)', fontSize: '1rem', lineHeight: 1.75, maxWidth: 620, margin: '0 auto' }}>
+                A focused way to reach verified students with offers that are easy to understand, easy to redeem, and built around local discovery.
               </p>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
-              {WHY_CARDS.map((card, i) => (
+              {WHY_CARDS.map((card, i) => {
+                  return (
                 <motion.div key={card.title}
                   initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.1 }}
-                  style={{ padding: '0.5rem 0' }}>
-                  <div style={{ marginBottom: '1rem' }}>{card.icon}</div>
-                  <h4 style={{ fontSize: '1.05rem', fontWeight: 600, color: 'white', marginBottom: '0.5rem' }}>{card.title}</h4>
-                  <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.88rem', lineHeight: 1.6, margin: 0 }}>{card.body}</p>
+                  className="sv-surface-card"
+                  style={{ '--accent': card.color, minHeight: 235, textAlign: 'center' }}>
+                  <div style={{ width: 34, height: 3, borderRadius: 999, background: card.color, margin: '0 auto 1.1rem' }} />
+                  <h4 className="sv-card-title" style={{ fontSize: '1.08rem' }}>{card.title}</h4>
+                  <p className="sv-card-copy" style={{ fontSize: '0.92rem' }}>{card.body}</p>
                 </motion.div>
-              ))}
+                );
+              })}
             </div>
           </motion.div>
-
-          {/* Partnership Plans — Pricing Cards */}
-          <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 3rem) clamp(4rem, 8vw, 6rem)', position: 'relative', zIndex: 1 }}>
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
-              <div className="sv-pricing-card sv-pricing-header-card">
-                <h2 style={{ fontSize: 'clamp(1.75rem,4vw,2.5rem)', fontWeight: 600, lineHeight: 1.3, letterSpacing: '-0.02em', color: '#ffffff', margin: '0 0 0.4rem' }}>
-                  Partnership Plans
-                </h2>
-                <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.95rem', lineHeight: 1.7, fontWeight: 400, margin: 0 }}>
-                  Choose the plan that works best for your business.
-                </p>
-              </div>
-            </div>
-            <div style={{ display: 'flex', gap: '2rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
-                <div className="sv-pricing-card">
-                  <div className="pricing-block-content">
-                    <p className="pricing-plan">1 Month</p>
-                    <div className="price-value"><p className="price-number">N/A</p></div>
-                    <div className="pricing-note">billed monthly</div>
-                    <ul className="check-list" role="list">
-                      {['Featured listing in app', 'Student discount offers', 'Basic analytics', 'Email support', 'Brand profile page'].map(item => (
-                        <li key={item} className="check-list-item"><CheckSVG />{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </motion.div>
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}>
-                <div className="sv-pricing-card sv-pricing-card--featured">
-                  <div className="pricing-block-content">
-                    <p className="pricing-plan">3 Months</p>
-                    <div className="price-value"><p className="price-number">N/A</p></div>
-                    <div className="pricing-note" style={{ color: '#664eff' }}>save ~16%</div>
-                    <ul className="check-list" role="list">
-                      {['Everything in 1 Month', 'Priority placement', 'Advanced analytics', 'Dedicated account manager', 'Custom campaign support'].map(item => (
-                        <li key={item} className="check-list-item"><CheckSVG />{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
         </>
       )}
 

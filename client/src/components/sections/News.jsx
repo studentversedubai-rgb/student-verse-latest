@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { Newspaper, Sparkles, Smartphone } from 'lucide-react';
 
 const svNews = [
   {
@@ -86,6 +87,11 @@ export default function News() {
   const [platform, setPlatform] = useState('ios');
 
   const news = platform === 'ios' ? iosNews : platform === 'android' ? androidNews : svNews;
+  const tabs = [
+    { key: 'sv', label: 'SV', color: '#7b2cbf', icon: Sparkles },
+    { key: 'android', label: 'Android', color: '#34A853', icon: Smartphone },
+    { key: 'ios', label: 'iOS', color: '#007AFF', icon: Newspaper }
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -98,70 +104,44 @@ export default function News() {
   };
 
   return (
-    <section style={{ padding: '80px 20px', position: 'relative', overflow: 'hidden' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+    <section className="sv-ui-section" aria-labelledby="latest-news-title">
+      <div className="sv-ui-shell">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5 }}
-          style={{ textAlign: 'center', marginBottom: '3rem' }}
+          className="sv-section-header"
         >
-          <h2 style={{
-            fontSize: 'clamp(2rem, 5vw, 3rem)',
-            fontWeight: 800,
-            background: 'linear-gradient(315deg, #999, #fff)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            marginBottom: '1rem'
-          }}>
-            Latest News
+          <p className="sv-kicker">Product Updates</p>
+          <h2 id="latest-news-title" className="sv-heading">
+            <span className="sv-heading-gradient">Latest News</span>
           </h2>
 
-          <p style={{
-            fontSize: '1.1rem',
-            color: 'rgba(255, 255, 255, 0.7)',
-            maxWidth: '600px',
-            margin: '0 auto 2rem auto',
-            lineHeight: 1.6
-          }}>
+          <p className="sv-lead">
             Stay updated with the latest from StudentVerse
           </p>
 
-          <div style={{
-            display: 'inline-flex',
-            background: 'rgba(255, 255, 255, 0.06)',
-            borderRadius: '999px',
-            padding: '4px',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            gap: '2px'
-          }}>
-            {[
-              { key: 'sv', label: 'SV', color: '#7b2cbf' },
-              { key: 'android', label: 'Android', color: '#10B981' },
-              { key: 'ios', label: 'iOS', color: '#007AFF' }
-            ].map((p) => (
+          <div className="sv-segmented" role="tablist" aria-label="News platform filter">
+            {tabs.map((p) => {
+              const Icon = p.icon;
+              const active = platform === p.key;
+              return (
               <motion.button
                 key={p.key}
                 onClick={() => setPlatform(p.key)}
-                whileHover={{ x: 4 }}
-                whileTap={{ x: -4, scale: 0.98 }}
-                style={{
-                  background: platform === p.key ? p.color : 'transparent',
-                  border: 'none',
-                  padding: '0.6rem 1.5rem',
-                  borderRadius: '999px',
-                  color: '#fff',
-                  fontSize: '0.9rem',
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease'
-                }}
+                whileTap={{ scale: 0.98 }}
+                className={`sv-segmented-button ${active ? 'is-active' : ''}`}
+                style={{ '--accent': p.color }}
+                role="tab"
+                aria-selected={active}
+                type="button"
               >
+                <Icon size={15} aria-hidden="true" />
                 {p.label}
               </motion.button>
-            ))}
+              );
+            })}
           </div>
         </motion.div>
 
@@ -170,84 +150,36 @@ export default function News() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-100px' }}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '2rem'
-          }}
+          className="sv-card-grid"
         >
           {news.map((article) => (
             <motion.div
               key={article.id}
               variants={itemVariants}
-              style={{
-                background: 'rgba(255, 255, 255, 0.03)',
-                borderRadius: '16px',
-                padding: '1.5rem',
-                border: `1px solid ${article.color}30`,
-                cursor: 'pointer',
-                transition: 'all 0.3s ease'
-              }}
-              whileHover={{
-                borderColor: article.color,
-                transform: 'translateY(-4px)',
-                boxShadow: `0 8px 30px ${article.color}15`
-              }}
+              className="sv-surface-card"
+              style={{ '--accent': article.color }}
             >
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '1rem'
-              }}>
-                <span style={{
-                  fontSize: '0.75rem',
-                  fontWeight: 600,
-                  textTransform: 'uppercase',
-                  letterSpacing: '1px',
-                  color: article.color
-                }}>
+              <div className="sv-card-meta">
+                <span className="sv-pill">
                   {article.category}
                 </span>
 
-                <span style={{
-                  fontSize: '0.8rem',
-                  color: 'rgba(255, 255, 255, 0.4)'
-                }}>
+                <span className="sv-card-date">
                   {article.date}
                 </span>
               </div>
 
-              <h3 style={{
-                fontSize: '1.25rem',
-                fontWeight: 700,
-                color: '#fff',
-                marginBottom: '0.75rem',
-                lineHeight: 1.3
-              }}>
+              <h3 className="sv-card-title">
                 {article.title}
               </h3>
 
-              <p style={{
-                fontSize: '0.95rem',
-                color: 'rgba(255, 255, 255, 0.6)',
-                lineHeight: 1.6,
-                margin: 0
-              }}>
+              <p className="sv-card-copy">
                 {article.excerpt}
               </p>
             </motion.div>
           ))}
         </motion.div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          section {
-            padding: 60px 15px !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }
