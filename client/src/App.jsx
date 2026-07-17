@@ -7,6 +7,7 @@ import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import Contact from "./pages/Contact.jsx";
 import Business from "./pages/Business.jsx";
+import Survey from "./pages/Survey.jsx";
 import Waitlist from "./pages/Waitlist";
 import Terms from "./pages/Terms.jsx";
 import Privacy from "./pages/Privacy.jsx";
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/business" element={<Business />} />
+          <Route path="/survey" element={<Survey />} />
           <Route path="/waitlist" element={<Navigate to="/" replace />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />

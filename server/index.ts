@@ -1,7 +1,18 @@
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const envPath = path.resolve(__dirname, "..", "..", ".env");
+const dotenvResult = dotenv.config({ path: envPath });
+if (dotenvResult.error) {
+  console.warn(`Warning: failed to load .env from ${envPath}`);
+}
 
 const app = express();
 const httpServer = createServer(app);
