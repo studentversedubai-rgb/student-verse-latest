@@ -378,8 +378,10 @@
 </div>
 
 <script>
-  // ===== Submit survey responses to the local backend endpoint =====
-  const SCRIPT_URL = "/api/survey";
+  // ===== Submit survey responses to the backend endpoint =====
+  const RAILWAY_BACKEND_URL = "https://website-backend-production-fda7.up.railway.app";
+  const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+  const SCRIPT_URL = isLocalhost ? "/api/survey" : `${RAILWAY_BACKEND_URL}/api/survey`;
   // =======================================================================================
 
   const answers = {};
